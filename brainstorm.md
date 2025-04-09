@@ -22,38 +22,14 @@ Despite the prevalence of factorial experiments in the primary literature, **the
 
 ## Methodological background
 
-minter is inspired by and builds upon established work, including:
+- Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction between competition and predation: a meta-analysis of field experiments. The American Naturalist, 155(4), 435-453.
 
-- **Gurevitch et al. (2000)** – Hedges’ *d* for interaction effects.
-- **Morris (2007)** – Log response ratio (LRR) for interactions.
-- **McCartney (2022)** – Application of interaction-focused meta-analysis in ecology.
-- **Nature (2023)** – Study of synergistic pesticide effects on pollinators, highlighting the importance of considering interactions.
+- Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A., Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive effects of enemies and mutualists on plant performance: a meta‐analysis. Ecology, 88(4), 1021-1029.
 
-## Package Components
+- Macartney, E. L., Lagisz, M., & Nakagawa, S. (2022). The relative benefits of environmental enrichment on learning and memory are greater when stressed: A meta-analysis of interactions in rodents. Neuroscience & Biobehavioral Reviews, 135, 104554.
 
-### Core functions
+- Siviter, H., Bailes, E. J., Martin, C. D., Oliver, T. R., Koricheva, J., Leadbeater, E., & Brown, M. J. (2021). Agrochemicals interact synergistically to increase bee mortality. Nature, 596(7872), 389-392.
 
-- `interaction_d()` – Calculates Hedges’ *d* for interaction.
-- `interaction_lrr()` – Calculates log response ratio for interaction.
-- `interaction_lnCVR()` – Effect size for change in variability.
-- `meta_interaction()` – Performs meta-analysis on interaction effects.
+- Borowicz, V. A. (2001). Do arbuscular mycorrhizal fungi alter plant–pathogen relations?. Ecology, 82(11), 3057-3068.
 
-### Visualization tools
-
-- `plot_interaction_forest()` – Forest plot for interaction effects.
-- `plot_interaction_surface()` – Optional 3D visualization (context-specific).
-
-### Documentation
-
-- A full **vignette/tutorial** will walk users through:
-  - Input data structure,
-  - Effect size calculation,
-  - Meta-analysis model,
-  - Interpretation and visualization.
-
-## Availability
-
-- The package will be hosted on **GitHub** for accessibility and collaboration.
-- It will be accompanied by a paper submitted to **Methods in Ecology and Evolution**.
-
-
+- Hechtel, L. J., & Juliano, S. A. (1997). Effects of a predator on prey metamorphosis: plastic responses by prey or selective mortality?. Ecology, 78(3), 838-851.
