@@ -1,3 +1,22 @@
+#' Simple effect: log response ratio
+#' 
+#' Computes the log of the response ratio
+#' @param Ctrl_mean Mean outcome from the Control treatment
+#' @param Ctrl_sd Standard deviation from the control treatment
+#' @param Ctrl_n Sample size from the control streatment
+#' @param A_mean Mean outcome from the treatment
+#' @param A_sd Standard deviation from the treatment
+#' @param A_n Sample size from the treatment
+
+simple_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n, A_mean, A_sd, A_n) {
+  simple_lnRR <- log(A_mean / Ctrl_mean)
+
+  simple_lnRR_var <- Ctrl_sd^2 / (Ctrl_n * Ctrl_mean^2) + A_sd^2 / (A_n * A_mean^2)
+
+  return(data.frame(simple_lnRR, simple_lnRR_var))
+}
+
+
 #' Overall effect: log response ratio 
 #'
 #' Computes the overral effect of a treatment in a 2-by-2 factorial design.
@@ -38,12 +57,12 @@ overall_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
                          B_mean   , B_sd   , B_n,
                          AB_mean  , AB_sd  , AB_n) {
   # From Morris et al. 2007, formulas B.9 and B.10 from Appendix B:
-  lnrr <- log(A_mean + AB_mean) - log(Ctrl_mean + B_mean)
+  overall_lnRR <- log(A_mean + AB_mean) - log(Ctrl_mean + B_mean)
 
-  lnrr_var <- (1 / A_mean    + AB_mean)^2 * (A_sd^2    / A_n    + AB_sd^2 / AB_n) +
-	      (1 / Ctrl_mean + B_mean )^2 * (Ctrl_sd^2 / Ctrl_n + B_sd^2  / B_n)
+  overall_lnRR_var <- (1 / A_mean    + AB_mean)^2 * (A_sd^2    / A_n    + AB_sd^2 / AB_n) +
+	              (1 / Ctrl_mean + B_mean )^2 * (Ctrl_sd^2 / Ctrl_n + B_sd^2  / B_n)
   
-  return(cbind(lnrr, lnrr_var)) 
+  return(data.frame(overall_lnRR, overall_lnRR_var)) 
 }	
 
 
@@ -88,51 +107,12 @@ interaction_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
                              B_mean   , B_sd   , B_n,
                              AB_mean  , AB_sd  , AB_n) {
   # From Morris et al. 2007, formulas B.11 and B.12 from Appendix B:
-  lnrr <- log(AB_mean) - log(A_mean) - log(B_mean) + log(Ctrl_mean)
+  inter_lnRR <- log(AB_mean / B_mean) - log(A_mean / Ctrl_mean)
 
-  lnrr_var <- (AB_sd^2   / (AB_mean^2   * AB_n  )) +
-              (A_sd^2    / (A_mean^2    * A_n   )) +
-              (B_sd^2    / (B_mean^2    * B_n   )) +
-              (Ctrl_sd^2 / (Ctrl_mean^2 * Ctrl_n)) 
+  inter_lnRR_var <- (AB_sd^2   / (AB_mean^2   * AB_n  )) +
+                          (A_sd^2    / (A_mean^2    * A_n   )) +
+                          (B_sd^2    / (B_mean^2    * B_n   )) +
+                          (Ctrl_sd^2 / (Ctrl_mean^2 * Ctrl_n)) 
 
-  return(lnrr, lnrr_var)
-}
-
-
-# TODO: Write this. Must compute overall effect for A, B and their interaction
-factorial_lnRR  <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
-                             A_mean   , A_sd   , A_n,
-                             B_mean   , B_sd   , B_n,
-                             AB_mean  , AB_sd  , AB_n) {
-}
-
-
-#' Overall effect: Hedges' g
-#' 
-#' TODO: this
-#' 
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from the A treatment
-#' @param A_sd Standard deviation from the A treatment
-#' @param A_n Sample size from the A treatment
-#' @param B_mean Mean outcome from the B treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_mean Mean outcome from the interaction AxB treatment
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
-#' 
-#' @references 
-#'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
-#'     between competition and predation: a meta-analysis of field experiments.
-#'     The American Naturalist, 155(4), 435-453.
-overall_d <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
-                         A_mean   , A_sd   , A_n,
-                         B_mean   , B_sd   , B_n,
-                         AB_mean  , AB_sd  , AB_n) {
-
-  # From Gurevitch et al. 2000, see appendix:
-
+  return(data.frame(inter_lnRR, inter_lnRR_var))
 }

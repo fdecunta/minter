@@ -1,0 +1,137 @@
+---
+title: "Test minter"
+author: "fd"
+date: "2025-05-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# The idea
+
+## Compute effect size for interactions
+
+This function computes the effect sizes for a 2x2 factorial experiments.
+
+Returns a data frame with the computed effect sizes.
+
+NOTE: How do the user append the effect sizes to the data frame?
+
+```{r, eval=FALSE}
+
+inter_effsize(effsize = "lnrr",
+              ...,
+              data = dat)
+```
+
+## Compute variance covariance matrix for the factorial
+
+Returns a list with the computed variance covariance matrix. Each element 
+of the list is named like the effect size. Thus, you can pass it to the model
+by doing:
+
+```{r, eval=FALSE}
+res <- rma.mv(lnrr_A, VCV$A, ...)
+```
+
+
+```{r, eval=FALSE}
+inter_vcv(sampling_vars = c("lnrr_v_a",
+                            "lnrr_v_a",
+                            "lnrr_v_A",
+                            "lnrr_v_B",
+                            "lnrr_v_AB",),
+          cluster = "study_id",
+          obs = "es_id",
+          rho = 0.5,
+          data = dat)
+```
+
+
+## How to run the models?
+
+todo.
+
+## Visualize the results
+
+You can pass the models to the visualization functions as a list.
+
+`orchaRd::submerge` can append a list of models. This should work like that.
+
+```{r, eval=FALSE}
+inter_orchard_plot(models, ...)
+
+inter_dist_plot(models, ...)
+```
+
+
+# MVP: compute effect size and compare them with some published study
+
+## Effect size: lnRR
+
+```{r}
+library(tidyverse)
+library(metafor)
+library(clubSandwich)
+```
+
+```{r}
+dat <- read_csv("Data/Macartney2022_raw.csv")
+```
+
+
+```{r}
+# removing study with negative values as these are unable to be used for lnRR
+dat <- droplevels(dat[!dat$First_author == 'Wang',])
+
+#rounding down sample sizes
+dat$CC_n <- floor(dat$CC_n)
+dat$EC_n <- floor(dat$EC_n)
+dat$CS_n <- floor(dat$CS_n)
+dat$ES_n <- floor(dat$CS_n)
+```
+
+
+```{r}
+source("Macarney_Functions.R")
+```
+
+
+```{r}
+# 'Focal' effect_size 
+effect_size <- with(dat, mapply(effect_set, 
+                      CC_n ,
+                      CC_mean, 
+                      CC_SD,
+                      EC_n, 
+                      EC_mean, 
+                      EC_SD,
+                      CS_n, 
+                      CS_mean, 
+                      CS_SD,
+                      ES_n, 
+                      ES_mean, 
+                      ES_SD,
+                      percent = "no",
+                      SIMPLIFY = FALSE))
+
+# map_dfr is here because the previous function returns a list.
+# Is a little weird because the function returns a list of data frames,
+# one df for each effect size.
+
+effect_size <- map_dfr(effect_size, I)
+```
+
+
+```{r}
+library(devtools)
+load_all()
+
+my_eff <- with(dat, inter_effsize(effsize = "lnrr",
+                        CC_mean, CC_SD, CC_n ,
+                        EC_mean, EC_SD, EC_n, 
+                        CS_mean, CS_SD, CS_n, 
+                        ES_mean, ES_SD, ES_n))
+```
