@@ -46,54 +46,30 @@ fake_data <- inter_effsize(
   AB_n = HxF_n
 )
 
-summary(fake_data)
-#>     Study               C_mean            C_sd            C_n       
-#>  Length:9           Min.   : 8.198   Min.   :1.265   Min.   :20.00  
-#>  Class :character   1st Qu.: 8.744   1st Qu.:1.321   1st Qu.:23.00  
-#>  Mode  :character   Median : 9.022   Median :1.565   Median :25.00  
-#>                     Mean   : 9.518   Mean   :1.592   Mean   :24.67  
-#>                     3rd Qu.:10.413   3rd Qu.:1.902   3rd Qu.:27.00  
-#>                     Max.   :11.327   Max.   :1.986   Max.   :28.00  
-#>    Herb_mean        Herb_sd          Herb_n        Fert_mean     
-#>  Min.   :10.11   Min.   :1.058   Min.   :20.00   Min.   : 9.076  
-#>  1st Qu.:10.88   1st Qu.:1.428   1st Qu.:24.00   1st Qu.:10.155  
-#>  Median :12.90   Median :1.542   Median :27.00   Median :11.082  
-#>  Mean   :12.49   Mean   :1.522   Mean   :25.78   Mean   :11.032  
-#>  3rd Qu.:13.05   3rd Qu.:1.618   3rd Qu.:27.00   3rd Qu.:11.471  
-#>  Max.   :15.53   Max.   :1.916   Max.   :29.00   Max.   :13.889  
-#>     Fert_sd          Fert_n         HxF_mean         HxF_sd     
-#>  Min.   :1.006   Min.   :23.00   Min.   :10.80   Min.   :1.008  
-#>  1st Qu.:1.072   1st Qu.:26.00   1st Qu.:11.08   1st Qu.:1.390  
-#>  Median :1.503   Median :28.00   Median :12.94   Median :1.465  
-#>  Mean   :1.457   Mean   :27.67   Mean   :13.54   Mean   :1.421  
-#>  3rd Qu.:1.770   3rd Qu.:29.00   3rd Qu.:15.54   3rd Qu.:1.492  
-#>  Max.   :1.972   Max.   :30.00   Max.   :18.20   Max.   :1.713  
-#>      HxF_n       EffectSize_ID Herb_simple_lnRR Herb_simple_lnRR_var
-#>  Min.   :20.00   Min.   :1     Min.   :0.1283   Min.   :0.0009205   
-#>  1st Qu.:22.00   1st Qu.:3     1st Qu.:0.1446   1st Qu.:0.0016026   
-#>  Median :23.00   Median :5     Median :0.2515   Median :0.0019407   
-#>  Mean   :23.78   Mean   :5     Mean   :0.2683   Mean   :0.0018350   
-#>  3rd Qu.:25.00   3rd Qu.:7     3rd Qu.:0.3512   3rd Qu.:0.0021480   
-#>  Max.   :28.00   Max.   :9     Max.   :0.5429   Max.   :0.0025133   
-#>  Fert_simple_lnRR  Fert_simple_lnRR_var Herb_overall_lnRR Herb_overall_lnRR_var
-#>  Min.   :-0.2216   Min.   :0.0009554    Min.   :0.0334    Min.   :0.0004653    
-#>  1st Qu.: 0.1338   1st Qu.:0.0013764    1st Qu.:0.1615    1st Qu.:0.0006822    
-#>  Median : 0.1496   Median :0.0017009    Median :0.1987    Median :0.0007442    
-#>  Mean   : 0.1467   Mean   :0.0018761    Mean   :0.2313    Mean   :0.0007373    
-#>  3rd Qu.: 0.2710   3rd Qu.:0.0025882    3rd Qu.:0.2813    3rd Qu.:0.0008385    
-#>  Max.   : 0.3137   Max.   :0.0027368    Max.   :0.4363    Max.   :0.0009038    
-#>  Fert_overall_lnRR  Fert_overall_lnRR_var Herb_x_Fert_lnRR  
-#>  Min.   :-0.18431   Min.   :0.0005495     Min.   :-0.39215  
-#>  1st Qu.: 0.06604   1st Qu.:0.0006826     1st Qu.:-0.20258  
-#>  Median : 0.10348   Median :0.0007098     Median :-0.11527  
-#>  Mean   : 0.10676   Mean   :0.0007046     Mean   :-0.07350  
-#>  3rd Qu.: 0.16821   3rd Qu.:0.0007439     3rd Qu.: 0.06885  
-#>  Max.   : 0.39171   Max.   :0.0009038     Max.   : 0.14200  
-#>  Herb_x_Fert_lnRR_var
-#>  Min.   :0.002219    
-#>  1st Qu.:0.002803    
-#>  Median :0.003077    
-#>  Mean   :0.003016    
-#>  3rd Qu.:0.003455    
-#>  Max.   :0.003838
+str(fake_data)
+#> 'data.frame':    9 obs. of  24 variables:
+#>  $ Study                : chr  "Study_1" "Study_1" "Study_2" "Study_3" ...
+#>  $ C_mean               : num  8.46 8.75 8.2 11.33 10.6 ...
+#>  $ C_sd                 : num  1.48 1.27 1.56 1.91 1.9 ...
+#>  $ C_n                  : int  23 26 23 20 27 23 28 27 25
+#>  $ Herb_mean            : num  10.9 10.1 10.7 12.9 13.1 ...
+#>  $ Herb_sd              : num  1.4 1.48 1.56 1.7 1.92 ...
+#>  $ Herb_n               : int  27 29 23 24 26 20 27 27 29
+#>  $ Fert_mean            : num  9.7 11.47 11.16 9.08 10.86 ...
+#>  $ Fert_sd              : num  1.02 1.5 1.87 1.01 1.07 ...
+#>  $ Fert_n               : int  30 30 28 23 29 26 28 26 29
+#>  $ HxF_mean             : num  11 10.8 12.9 11.1 15.4 ...
+#>  $ HxF_sd               : num  1.63 1.48 1.16 1.01 1.45 ...
+#>  $ HxF_n                : int  28 23 25 21 20 24 28 23 22
+#>  $ EffectSize_ID        : int  1 2 3 4 5 6 7 8 9
+#>  $ Herb_simple_lnRR     : num  0.251 0.145 0.263 0.13 0.208 ...
+#>  $ Herb_simple_lnRR_var : num  0.00194 0.00154 0.00251 0.00215 0.00202 ...
+#>  $ Fert_simple_lnRR     : num  0.136 0.271 0.308 -0.2216 0.0239 ...
+#>  $ Fert_simple_lnRR_var : num  0.0017 0.00138 0.00259 0.00196 0.00153 ...
+#>  $ Herb_overall_lnRR    : num  0.1852 0.0334 0.1987 0.1615 0.2813 ...
+#>  $ Herb_overall_lnRR_var: num  0.000744 0.000725 0.000904 0.000839 0.000682 ...
+#>  $ Fert_overall_lnRR    : num  0.066 0.166 0.245 -0.184 0.103 ...
+#>  $ Fert_overall_lnRR_var: num  0.000751 0.000729 0.000904 0.000744 0.000703 ...
+#>  $ Herb_x_Fert_lnRR     : num  -0.128 -0.2051 -0.1153 0.0688 0.1398 ...
+#>  $ Herb_x_Fert_lnRR_var : num  0.0031 0.00293 0.00384 0.00308 0.0028 ...
 ```

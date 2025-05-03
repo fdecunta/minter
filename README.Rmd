@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 
 Helper functions to conduct **m**eta-analysis of **inter**actions with data from 2x2 factorial experiments. 
 
+
 ## Installation
 
 You can install the development version of minter from [GitHub](https://github.com/) with:
@@ -57,6 +58,6 @@ fake_data <- inter_effsize(
   AB_n = HxF_n
 )
 
-summary(fake_data)
+str(fake_data)
 ```
 
