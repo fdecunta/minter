@@ -111,6 +111,63 @@
 <span><span class="co">#&gt;  $ Fert_overall_lnRR_var: num  0.000751 0.000729 0.000904 0.000744 0.000703 ...</span></span>
 <span><span class="co">#&gt;  $ Herb_x_Fert_lnRR     : num  -0.128 -0.2051 -0.1153 0.0688 0.1398 ...</span></span>
 <span><span class="co">#&gt;  $ Herb_x_Fert_lnRR_var : num  0.0031 0.00293 0.00384 0.00308 0.0028 ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vi_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Herb_simple_lnRR_var"</span>,</span>
+<span>  <span class="st">"Fert_simple_lnRR_var"</span>,</span>
+<span>  <span class="st">"Herb_overall_lnRR_var"</span>,</span>
+<span>  <span class="st">"Fert_overall_lnRR_var"</span>,</span>
+<span>  <span class="st">"Herb_x_Fert_lnRR_var"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">VCVs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/inter_vcv.html">inter_vcv</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">vi_cols</span>,</span>
+<span>                  cluster <span class="op">=</span> <span class="st">"Study"</span>,</span>
+<span>                  obs <span class="op">=</span> <span class="st">"EffectSize_ID"</span>,</span>
+<span>                  rho <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>                  data <span class="op">=</span> <span class="va">fake_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">VCVs</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 5</span></span>
+<span><span class="co">#&gt;  $ Herb_simple_lnRR_var : num [1:9, 1:9] 0.001941 0.000865 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ Fert_simple_lnRR_var : num [1:9, 1:9] 0.001701 0.000765 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ Herb_overall_lnRR_var: num [1:9, 1:9] 0.000744 0.000367 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ Fert_overall_lnRR_var: num [1:9, 1:9] 0.000751 0.00037 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ Herb_x_Fert_lnRR_var : num [1:9, 1:9] 0.0031 0.00151 0 0 0 ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.metafor-project.org" class="external-link">metafor</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Loading required package: Matrix</span></span>
+<span><span class="co">#&gt; Loading required package: metadat</span></span>
+<span><span class="co">#&gt; Loading required package: numDeriv</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Loading the 'metafor' package (version 4.8-0). For an</span></span>
+<span><span class="co">#&gt; introduction to the package please type: help(metafor)</span></span>
+<span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://wviechtb.github.io/metafor/reference/rma.mv.html" class="external-link">rma.mv</a></span><span class="op">(</span></span>
+<span>  yi <span class="op">=</span> <span class="va">Herb_x_Fert_lnRR</span>,</span>
+<span>  V  <span class="op">=</span> <span class="va">VCVs</span><span class="op">$</span><span class="va">Herb_x_Fert_lnRR_var</span>,</span>
+<span>  random <span class="op">=</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">|</span> <span class="va">Study</span>,</span>
+<span>  test <span class="op">=</span> <span class="st">"t"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">fake_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Multivariate Meta-Analysis Model (k = 9; method: REML)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Variance Components:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;             estim    sqrt  nlvls  fixed  factor </span></span>
+<span><span class="co">#&gt; sigma^2    0.0329  0.1814      5     no   Study </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Test for Heterogeneity:</span></span>
+<span><span class="co">#&gt; Q(df = 8) = 89.2014, p-val &lt; .0001</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Model Results:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; estimate      se     tval  df    pval    ci.lb   ci.ub    </span></span>
+<span><span class="co">#&gt;  -0.1266  0.0842  -1.5036   8  0.1711  -0.3207  0.0675    </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
