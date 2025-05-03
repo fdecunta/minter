@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 
-minter provies helper functions to conduct **m**eta-analysis of **inter**actions using data from 2x2 fatorial experiments. 
+minter provdies helper functions to conduct **m**eta-analysis of **inter**actions using data from 2x2 factorial experiments. 
 
 ## Installation
 
@@ -35,6 +35,28 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(minter)
-## basic example code
+
+data(fake_data)
+
+# Compute the effect sizes
+fake_data <- inter_effsize(
+  effsize = "lnrr",
+  colnames = c("Herb", "Fert"),
+  data = fake_data,
+  Ctrl_mean = C_mean,
+  Ctrl_sd = C_sd,
+  Ctrl_n = C_n,
+  A_mean = Herb_mean,
+  A_sd = Herb_sd,
+  A_n = Herb_n,
+  B_mean = Fert_mean,
+  B_sd = Fert_sd,
+  B_n = Fert_n,
+  AB_mean = HxF_mean,
+  AB_sd = HxF_sd,
+  AB_n = HxF_n
+)
+
+summary(fake_data)
 ```
 

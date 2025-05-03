@@ -109,9 +109,9 @@ interaction_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
   inter_lnRR <- log(AB_mean / B_mean) - log(A_mean / Ctrl_mean)
 
   inter_lnRR_var <- (AB_sd^2   / (AB_mean^2   * AB_n  )) +
-                          (A_sd^2    / (A_mean^2    * A_n   )) +
-                          (B_sd^2    / (B_mean^2    * B_n   )) +
-                          (Ctrl_sd^2 / (Ctrl_mean^2 * Ctrl_n)) 
+                    (A_sd^2    / (A_mean^2    * A_n   )) +
+                    (B_sd^2    / (B_mean^2    * B_n   )) +
+                    (Ctrl_sd^2 / (Ctrl_mean^2 * Ctrl_n)) 
 
   return(data.frame(inter_lnRR, inter_lnRR_var))
 }

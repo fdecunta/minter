@@ -1,4 +1,5 @@
-- Test lnrr_var
+
+- Tests
 
 - Functions for computing VCV matrixes
 - Functions for handling multiple models
