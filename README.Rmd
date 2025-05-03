@@ -61,3 +61,36 @@ fake_data <- inter_effsize(
 str(fake_data)
 ```
 
+
+```{r}
+vi_cols <- c(
+  "Herb_simple_lnRR_var",
+  "Fert_simple_lnRR_var",
+  "Herb_overall_lnRR_var",
+  "Fert_overall_lnRR_var",
+  "Herb_x_Fert_lnRR_var"
+)
+
+VCVs <- inter_vcv(cols = vi_cols,
+                  cluster = "Study",
+                  obs = "EffectSize_ID",
+                  rho = 0.5,
+                  data = fake_data)
+
+str(VCVs)
+```
+
+```{r}
+library(metafor)
+
+res <- rma.mv(
+  yi = Herb_x_Fert_lnRR,
+  V  = VCVs$Herb_x_Fert_lnRR_var,
+  random = ~ 1 | Study,
+  test = "t",
+  data = fake_data)
+
+res
+```
+
+

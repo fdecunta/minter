@@ -9,3 +9,4 @@
 \description{
 Get columns with values for computing effect sizes
 }
+\keyword{internal}

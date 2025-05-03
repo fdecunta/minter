@@ -73,3 +73,64 @@ str(fake_data)
 #>  $ Herb_x_Fert_lnRR     : num  -0.128 -0.2051 -0.1153 0.0688 0.1398 ...
 #>  $ Herb_x_Fert_lnRR_var : num  0.0031 0.00293 0.00384 0.00308 0.0028 ...
 ```
+
+``` r
+vi_cols <- c(
+  "Herb_simple_lnRR_var",
+  "Fert_simple_lnRR_var",
+  "Herb_overall_lnRR_var",
+  "Fert_overall_lnRR_var",
+  "Herb_x_Fert_lnRR_var"
+)
+
+VCVs <- inter_vcv(cols = vi_cols,
+                  cluster = "Study",
+                  obs = "EffectSize_ID",
+                  rho = 0.5,
+                  data = fake_data)
+
+str(VCVs)
+#> List of 5
+#>  $ Herb_simple_lnRR_var : num [1:9, 1:9] 0.001941 0.000865 0 0 0 ...
+#>  $ Fert_simple_lnRR_var : num [1:9, 1:9] 0.001701 0.000765 0 0 0 ...
+#>  $ Herb_overall_lnRR_var: num [1:9, 1:9] 0.000744 0.000367 0 0 0 ...
+#>  $ Fert_overall_lnRR_var: num [1:9, 1:9] 0.000751 0.00037 0 0 0 ...
+#>  $ Herb_x_Fert_lnRR_var : num [1:9, 1:9] 0.0031 0.00151 0 0 0 ...
+```
+
+``` r
+library(metafor)
+#> Loading required package: Matrix
+#> Loading required package: metadat
+#> Loading required package: numDeriv
+#> 
+#> Loading the 'metafor' package (version 4.8-0). For an
+#> introduction to the package please type: help(metafor)
+
+res <- rma.mv(
+  yi = Herb_x_Fert_lnRR,
+  V  = VCVs$Herb_x_Fert_lnRR_var,
+  random = ~ 1 | Study,
+  test = "t",
+  data = fake_data)
+
+res
+#> 
+#> Multivariate Meta-Analysis Model (k = 9; method: REML)
+#> 
+#> Variance Components:
+#> 
+#>             estim    sqrt  nlvls  fixed  factor 
+#> sigma^2    0.0329  0.1814      5     no   Study 
+#> 
+#> Test for Heterogeneity:
+#> Q(df = 8) = 89.2014, p-val < .0001
+#> 
+#> Model Results:
+#> 
+#> estimate      se     tval  df    pval    ci.lb   ci.ub    
+#>  -0.1266  0.0842  -1.5036   8  0.1711  -0.3207  0.0675    
+#> 
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
