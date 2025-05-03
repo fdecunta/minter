@@ -58,8 +58,8 @@ overall_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
   # From Morris et al. 2007, formulas B.9 and B.10 from Appendix B:
   overall_lnRR <- log(A_mean + AB_mean) - log(Ctrl_mean + B_mean)
 
-  overall_lnRR_var <- (1 / A_mean    + AB_mean)^2 * (A_sd^2    / A_n    + AB_sd^2 / AB_n) +
-	              (1 / Ctrl_mean + B_mean )^2 * (Ctrl_sd^2 / Ctrl_n + B_sd^2  / B_n)
+  overall_lnRR_var <- (1 / (A_mean    + AB_mean))^2 * (A_sd^2    / A_n    + AB_sd^2 / AB_n) +
+	              (1 / (Ctrl_mean + B_mean ))^2 * (Ctrl_sd^2 / Ctrl_n + B_sd^2  / B_n)
   
   return(data.frame(overall_lnRR, overall_lnRR_var)) 
 }	

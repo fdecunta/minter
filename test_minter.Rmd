@@ -144,8 +144,10 @@ my_eff <- with(dat,
 round(my_eff$Env_overall_lnRR - effect_size$lnRR_E, 4)
 ```
 
+Check the same but for the var
+
 ```{r}
-hist(my_eff$Env_overall_lnRR_var - effect_size$lnRRV_E)
+my_eff$Env_overall_lnRR_var - effect_size$lnRRV_E
 ```
 
 
