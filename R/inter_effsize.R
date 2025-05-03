@@ -242,6 +242,9 @@ inter_effsize <- function(
 
 #' Rename columns with factor names
 #' 
+#' @param df
+#' @param factor_names
+#'
 #' @keywords internal
 .name_columns <- function(df, factor_names) {
   fctr_a <- factor_names[1]
