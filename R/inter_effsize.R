@@ -1,9 +1,39 @@
-#' Computes effect size for interactions
+#' Compute interaction effect sizes
 #'
-#' @param factor_names A list with
+#' TODO: !
+#'
+#' @param effsize   Character. Effect‐size metric to compute. Supported: \code{"lnrr"}.
+#' @param colnames  Character vector of length 2 giving the names to use for the
+#'   factors A and B
+#' @param Ctrl_mean,Ctrl_sd,Ctrl_n,
+#'        A_mean,A_sd,A_n,
+#'        B_mean,B_sd,B_n,
+#'        AB_mean,AB_sd,AB_n
+#'        Unquoted column names identifying group means, SDs, and sample sizes
+#'        for the control (Ctrl), single-factor treatments A and B, and the
+#'        combined treatment AB.
+#' @param data      A data frame containing all columns listed above.
+#'
+#' @return The original \code{data} with the effect size and its variance
+#'   appended, named as in \code{colnames}.
+#'
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
 #' 
-#' TODO: docs
-#' 
+#' @examples
+#' \dontrun{
+#' # This example won't be run during R CMD check
+#' result <- inter_effsize(
+#'   effsize   = "lnrr",
+#'   colnames  = c("yi", "vi"),
+#'   Ctrl_mean = ctrl_mean, Ctrl_sd = ctrl_sd, Ctrl_n = ctrl_n,
+#'   A_mean    = a_mean,    A_sd    = a_sd,    A_n    = a_n,
+#'   B_mean    = b_mean,    B_sd    = b_sd,    B_n    = b_n,
+#'   AB_mean   = ab_mean,   AB_sd   = ab_sd,   AB_n   = ab_n,
+#'   data      = df
+#' )
+#' }
+#'
+#' @export
 inter_effsize <- function(
   effsize,
   colnames,
@@ -18,32 +48,26 @@ inter_effsize <- function(
   B_n,
   AB_mean,
   AB_sd,
-  AB_n
-#  data
+  AB_n,
+  data
 ) {
+  # Get all the arguments as strings 
+  args <- as.list(match.call())
 
-  eff_args <- list(
-    Ctrl_mean = Ctrl_mean,
-    Ctrl_sd   = Ctrl_sd,
-    Ctrl_n    = Ctrl_n,
-    A_mean    = A_mean,
-    A_sd      = A_sd,
-    A_n       = A_n,
-    B_mean    = B_mean,
-    B_sd      = B_sd,
-    B_n       = B_n,
-    AB_mean   = AB_mean,
-    AB_sd     = AB_sd,
-    AB_n      = AB_n
-  )
+  # Get a list with the vectors of the columns
+  # in the data that are going to be used for  
+  # computing the effect sizes
+  effsize_args <- .get_columns(data, args)
 
+  # Compute the effect sizes
   if (effsize == "lnrr") {
-    df = do.call(inter_effsize.lnRR, eff_args)
+    df = do.call(inter_effsize.lnRR, effsize_args)
   }
 
+  # Name the columns  
   df <- .name_columns(df, colnames)
 
-  return(df)
+  return(cbind(data, df))
 }
 
 
@@ -62,6 +86,8 @@ inter_effsize <- function(
 #' @param AB_sd Standard deviation from the interaction AxB treatment
 #' @param AB_n Sample size from the interaction AxB treatment
 #'
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
+#' 
 #' @references 
 #'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
 #'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
@@ -100,6 +126,7 @@ inter_effsize.lnRR <- function(
 			         A_mean   , A_sd   , A_n,
 				 B_mean   , B_sd   , B_n,
                                  AB_mean  , AB_sd  , AB_n)
+
   overall_lnRR_B <- overall_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
 			         B_mean   , B_sd   , B_n,
 				 A_mean   , A_sd   , A_n,
@@ -144,4 +171,31 @@ inter_effsize.lnRR <- function(
     paste0(fctr_a, "_x_", fctr_b, "_lnRR_var")
   )
   return(df)
+}
+
+
+#' Get columns with values for computing effect sizes
+#'
+#' 
+.get_columns <- function(data, args) {
+
+  # Names used in functions to refer to data columns
+  args_names <- c(
+    "Ctrl_mean", "Ctrl_sd", "Ctrl_n",
+    "A_mean", "A_sd", "A_n",
+    "B_mean", "B_sd", "B_n",
+    "AB_mean", "AB_sd", "AB_n"
+  )
+
+  # From the args passed take only those with column names
+  # args is a list, so just subset it.
+  column_names <- args[args_names]
+
+  # Use those names to get the actual vectors of values from the data
+  eff_args <- lapply(column_names, function(c) data[[as.character(c)]])
+
+  # Name the elements in eff_args with 
+  names(eff_args) <- args_names
+
+  return(eff_args)    
 }

@@ -129,38 +129,49 @@ effect_size <- map_dfr(effect_size, I)
 library(devtools)
 load_all()
 
-my_eff <- with(dat,
-               inter_effsize(effsize = "lnrr",
-                             c("Env", "Str"),
+my_eff <- inter_effsize(effsize = "lnrr",
+                        c("Env", "Str"),
                         CC_mean, CC_SD, CC_n ,
                         EC_mean, EC_SD, EC_n, 
                         CS_mean, CS_SD, CS_n, 
-                        ES_mean, ES_SD, ES_n))
+                        ES_mean, ES_SD, ES_n,
+                        data = dat)
 ```
 
-### Test overall effect stress
+Test for overall environment
 
 ```{r}
-round(my_eff$Env_overall_lnRR - effect_size$lnRR_E, 4)
-```
-
-Check the same but for the var
-
-```{r}
-my_eff$Env_overall_lnRR_var - effect_size$lnRRV_E
+# Environment lnRR
+round(my_eff$Env_overall_lnRR - effect_size$lnRR_E, 7)
 ```
 
 
-### Test overall effect environment?
+```{r}
+# Environment lnRR var
+round(my_eff$Env_overall_lnRR_var - effect_size$lnRRV_E, 7)
+```
+
+Test overall effect stress
 
 ```{r}
-round(my_eff$Str_overall_lnRR - effect_size$lnRR_S, 4)
+# Stress lnRR
+round(my_eff$Str_overall_lnRR - effect_size$lnRR_S, 7)
+```
+
+
+```{r}
+# Stress lnRR var
+round(my_eff$Str_overall_lnRR_var - effect_size$lnRRV_S, 7)
 ```
 
 
 ### Test interaction
 
 ```{r}
-round(my_eff$inter_lnRR - effect_size$lnRR_ES, 4)
+round(my_eff$Env_x_Str_lnRR - effect_size$lnRR_ES, 7)
+```
+
+```{r}
+round(my_eff$Env_x_Str_lnRR_var - effect_size$lnRRV_ES, 7)
 ```
 
