@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<img src="man/figures/minter_logo.png" align="right" alt="" width="160" />
+<img src="man/figures/minter_logo.png" style="float: right; margin-left: 20px;" width="160"/>
 
 # minter
 
