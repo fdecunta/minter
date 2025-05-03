@@ -22,6 +22,7 @@ jobs:
           packages: |
             any::devtools
             any::rcmdcheck
+          extra-packages: metafor
 
       - name: Run tests
         run: |
