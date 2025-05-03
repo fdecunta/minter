@@ -6,8 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-Helper functions to conduct **m**eta-analysis of **inter**actions with
-data from 2x2 factorial experiments.
+Helper functions to conduct meta-analysis of interactions with data from
+2x2 factorial experiments.
 
 ## Installation
 
