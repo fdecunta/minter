@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# minter <img src="man/figures/minter_logo.png" align="right" alt="" width="150" />
+# minter <img src="man/figures/minter_logo.png" align="right" alt="" width="170" />
 
 <!-- badges: start -->
 <!-- badges: end -->
