@@ -1,6 +1,6 @@
 Package: minter
 Title: Meta-analysis of interactions
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person("Facundo", "Decunta", , "fdecunta@agro.uba.ar", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0004-5774-1085"))
