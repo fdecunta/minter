@@ -1,9 +1,12 @@
 #' Computes effect size for interactions
 #'
+#' @param factor_names A list with
+#' 
 #' TODO: docs
 #' 
 inter_effsize <- function(
   effsize,
+  colnames,
   Ctrl_mean,
   Ctrl_sd,
   Ctrl_n,
@@ -16,7 +19,7 @@ inter_effsize <- function(
   AB_mean,
   AB_sd,
   AB_n
-  ## data
+#  data
 ) {
 
   eff_args <- list(
@@ -35,10 +38,12 @@ inter_effsize <- function(
   )
 
   if (effsize == "lnrr") {
-    f = do.call(inter_effsize.lnRR, eff_args)
+    df = do.call(inter_effsize.lnRR, eff_args)
   }
 
-  f
+  df <- .name_columns(df, colnames)
+
+  return(df)
 }
 
 
@@ -84,36 +89,59 @@ inter_effsize.lnRR <- function(
   AB_sd,
   AB_n
 ) {
-  # Simple effects for A and B
-  simple_lnrr_A <- simple_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
+  # Simple effects for factors A and B
+  simple_lnRR_A <- simple_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
 			       A_mean   , A_sd   , A_n)
-
-  simple_lnrr_B <- simple_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
+  simple_lnRR_B <- simple_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
 			       B_mean   , B_sd   , B_n)
 
-  # Overall effects for A and B
-  overall_lnrr_A <- overall_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
+  # Overall effects for factors A and B
+  overall_lnRR_A <- overall_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
 			         A_mean   , A_sd   , A_n,
 				 B_mean   , B_sd   , B_n,
                                  AB_mean  , AB_sd  , AB_n)
-
-  overall_lnrr_B <- overall_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
+  overall_lnRR_B <- overall_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
 			         B_mean   , B_sd   , B_n,
 				 A_mean   , A_sd   , A_n,
                                  AB_mean  , AB_sd  , AB_n)
 
   # Interaction
-  interaction_lnrr <- interaction_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
+  interaction_lnRR <- interaction_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
 			               B_mean   , B_sd   , B_n,
 				       A_mean   , A_sd   , A_n,
                                        AB_mean  , AB_sd  , AB_n)
 
 
-  return(interaction_lnrr)
+  data.frame(
+    "s_lnRR_A"     = simple_lnRR_A[, 1],
+    "s_lnRR_var_A" = simple_lnRR_A[, 2],
+    "s_lnRR_B"     = simple_lnRR_B[, 1],
+    "s_lnRR_var_B" = simple_lnRR_B[, 2],
+    "o_lnRR_A"     = overall_lnRR_A[, 1],
+    "o_lnRR_var_A" = overall_lnRR_A[, 2],
+    "o_lnRR_B"     = overall_lnRR_B[, 1],
+    "o_lnRR_var_B" = overall_lnRR_B[, 2],
+    "inter_lnRR"   = interaction_lnRR[, 1],
+    "inter_lnRR_var" = interaction_lnRR[, 2]
+    )
 }
 
 
-#' TODO
-#inter_effsize.hedgesg <- function(...) {
-#
-#} 
+.name_columns <- function(df, factor_names) {
+  fctr_a <- factor_names[1]
+  fctr_b <- factor_names[2]
+
+  colnames(df) <- c(
+    paste0(fctr_a, "_simple_lnRR"),
+    paste0(fctr_a, "_simple_lnRR_var"),
+    paste0(fctr_b, "_simple_lnRR"),
+    paste0(fctr_b, "_simple_lnRR_var"),
+    paste0(fctr_a, "_overall_lnRR"),
+    paste0(fctr_a, "_overall_lnRR_var"),
+    paste0(fctr_b, "_overall_lnRR"),
+    paste0(fctr_b, "_overall_lnRR_var"),
+    paste0(fctr_a, "_x_", fctr_b, "_lnRR"),
+    paste0(fctr_a, "_x_", fctr_b, "_lnRR_var")
+  )
+  return(df)
+}

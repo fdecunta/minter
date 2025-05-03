@@ -129,9 +129,36 @@ effect_size <- map_dfr(effect_size, I)
 library(devtools)
 load_all()
 
-my_eff <- with(dat, inter_effsize(effsize = "lnrr",
+my_eff <- with(dat,
+               inter_effsize(effsize = "lnrr",
+                             c("Env", "Str"),
                         CC_mean, CC_SD, CC_n ,
                         EC_mean, EC_SD, EC_n, 
                         CS_mean, CS_SD, CS_n, 
                         ES_mean, ES_SD, ES_n))
 ```
+
+### Test overall effect stress
+
+```{r}
+round(my_eff$Env_overall_lnRR - effect_size$lnRR_E, 4)
+```
+
+```{r}
+hist(my_eff$Env_overall_lnRR_var - effect_size$lnRRV_E)
+```
+
+
+### Test overall effect environment?
+
+```{r}
+round(my_eff$Str_overall_lnRR - effect_size$lnRR_S, 4)
+```
+
+
+### Test interaction
+
+```{r}
+round(my_eff$inter_lnRR - effect_size$lnRR_ES, 4)
+```
+

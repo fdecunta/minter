@@ -10,7 +10,6 @@
 
 simple_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n, A_mean, A_sd, A_n) {
   simple_lnRR <- log(A_mean / Ctrl_mean)
-
   simple_lnRR_var <- Ctrl_sd^2 / (Ctrl_n * Ctrl_mean^2) + A_sd^2 / (A_n * A_mean^2)
 
   return(data.frame(simple_lnRR, simple_lnRR_var))
