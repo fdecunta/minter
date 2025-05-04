@@ -4,7 +4,10 @@
 \alias{.name_columns}
 \title{Rename columns with factor names}
 \usage{
-.name_columns(df, factor_names)
+.name_columns(effsize, df, factor_names)
+}
+\arguments{
+\item{factor_names}{}
 }
 \description{
 Rename columns with factor names

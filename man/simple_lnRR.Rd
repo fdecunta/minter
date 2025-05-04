@@ -22,3 +22,4 @@ simple_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n, A_mean, A_sd, A_n)
 \description{
 Computes the log of the response ratio
 }
+\keyword{internal}

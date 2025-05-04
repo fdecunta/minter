@@ -4,6 +4,9 @@
 # minter <img src="man/figures/minter_logo.png" align="right" alt="" width="130" />
 
 <!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/fdecunta/minter/graph/badge.svg)](https://app.codecov.io/gh/fdecunta/minter)
 <!-- badges: end -->
 
 Helper functions for conducting meta-analyses of interactions in 2×2
