@@ -62,10 +62,12 @@ inter_effsize <- function(
   # Compute the effect sizes
   if (effsize == "lnrr") {
     df = do.call(.inter_effsize.lnRR, effsize_args)
+  } else if (effsize == "smd") {
+    df = do.call(.inter_effsize.SMD, effsize_args) 
   }
 
   # Name the columns  
-  df <- .name_columns(df, colnames)
+  df <- .name_columns(effsize, df, colnames)
 
   return(cbind(data, df))
 }
@@ -238,29 +240,36 @@ inter_effsize <- function(
 }
 
 
-
-
 #' Rename columns with factor names
 #' 
 #' @param df
 #' @param factor_names
 #'
 #' @keywords internal
-.name_columns <- function(df, factor_names) {
+.name_columns <- function(effsize, df, factor_names) {
+
   fctr_a <- factor_names[1]
   fctr_b <- factor_names[2]
 
+  if (effsize == "lnrr") {
+    effsize <- "lnRR"
+  } else if (effsize == "smd") {
+    effsize <- "SMD"
+  } else {
+    stop("Error in .name_columns. Bad effect size name")
+  }
+
   colnames(df) <- c(
-    paste0(fctr_a, "_simple_lnRR"),
-    paste0(fctr_a, "_simple_lnRR_var"),
-    paste0(fctr_b, "_simple_lnRR"),
-    paste0(fctr_b, "_simple_lnRR_var"),
-    paste0(fctr_a, "_overall_lnRR"),
-    paste0(fctr_a, "_overall_lnRR_var"),
-    paste0(fctr_b, "_overall_lnRR"),
-    paste0(fctr_b, "_overall_lnRR_var"),
-    paste0(fctr_a, "_x_", fctr_b, "_lnRR"),
-    paste0(fctr_a, "_x_", fctr_b, "_lnRR_var")
+    paste(fctr_a, "simple", effsize, sep = "_"),
+    paste(fctr_a, "simple", effsize, "var", sep = "_"),
+    paste(fctr_b, "simple", effsize, sep = "_"),
+    paste(fctr_b, "simple", effsize, "var", sep = "_"),
+    paste(fctr_a, "overall", effsize, sep = "_"),
+    paste(fctr_a, "overall", effsize, "var", sep = "_"),
+    paste(fctr_b, "overall", effsize, sep = "_"),
+    paste(fctr_b, "overall", effsize, "var", sep = "_"),
+    paste(fctr_a, "x", fctr_b, effsize, sep = "_"),
+    paste(fctr_a, "x", fctr_b, effsize, "var", sep = "_")
   )
   return(df)
 }

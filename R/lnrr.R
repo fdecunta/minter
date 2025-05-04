@@ -7,7 +7,8 @@
 #' @param A_mean Mean outcome from the treatment
 #' @param A_sd Standard deviation from the treatment
 #' @param A_n Sample size from the treatment
-
+#'
+#' @keywords internal
 simple_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n, A_mean, A_sd, A_n) {
   simple_lnRR <- log(A_mean / Ctrl_mean)
   simple_lnRR_var <- Ctrl_sd^2 / (Ctrl_n * Ctrl_mean^2) + A_sd^2 / (A_n * A_mean^2)
@@ -50,7 +51,7 @@ simple_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n, A_mean, A_sd, A_n) {
 #'     stressed: A meta-analysis of interactions in rodents.
 #'     Neuroscience & Biobehavioral Reviews, 135, 104554.
 #'     https://doi.org/10.1016/j.neubiorev.2022.104554 
-
+#' @keywords internal
 overall_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
                          A_mean   , A_sd   , A_n,
                          B_mean   , B_sd   , B_n,
@@ -100,7 +101,7 @@ overall_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
 #'     stressed: A meta-analysis of interactions in rodents.
 #'     Neuroscience & Biobehavioral Reviews, 135, 104554.
 #'     https://doi.org/10.1016/j.neubiorev.2022.104554 
-
+#' @keywords internal
 interaction_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
                              A_mean   , A_sd   , A_n,
                              B_mean   , B_sd   , B_n,

@@ -24,10 +24,10 @@ simple_SMD <- function(
 		    X_sd = X_sd,
 		    X_n = X_n)
     
-  v <- .compute_var_smd(d = d, Ctrl_n = Ctrl_n, X_n)
+  v <- .compute_var_smd(d = d, Ctrl_n = Ctrl_n, X_n = X_n)
 
   # 'd' is slightly biased in small sample sizes. It can be corrected:
-  # J: correction factor. Equation 12.15 from Borenstein, pag 227
+  # J: correction factor. Equation 12.15 from Borenstein, pag 226
   df <- Ctrl_n + X_n - 2
   J <- 1 - (3 / (4 * df - 1))
 
@@ -58,8 +58,8 @@ simple_SMD <- function(
 ) {
   # Within group standard deviation
   # Equation 12.12 from Borenstein's chapter, pag 226
-  S_within <- sqrt( ( (Ctrl_n - 1) * Ctrl_sd^2 + (X_n - 1) * X_sd^2 ) / 
-		   (Ctrl_n + X_n - 2) )
+  S_within <- sqrt(((Ctrl_n - 1) * Ctrl_sd^2 + (X_n - 1) * X_sd^2 ) / 
+		   (Ctrl_n + X_n - 2))
 
   # Difference between treatment and control
   # Equation 12.11 from Borenstein's chapter, pag 226
@@ -109,6 +109,7 @@ simple_SMD <- function(
 #'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 #'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+#' @keywords internal
 overall_SMD <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
                         A_mean   , A_sd   , A_n,
                         B_mean   , B_sd   , B_n,
@@ -144,6 +145,7 @@ overall_SMD <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
 #'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 #'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+#' @keywords internal
 interaction_SMD <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
                             A_mean   , A_sd   , A_n,
                             B_mean   , B_sd   , B_n,
