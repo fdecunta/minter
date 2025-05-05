@@ -8,11 +8,10 @@ on:
 
 jobs:
   build:
-
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: ubuntu-latest
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
@@ -25,9 +24,14 @@ jobs:
           extra-packages: metafor
 
       - name: Install LaTeX
-        run: sudo apt-get install -y texlive-latex-base
+        run: |
+          if [[ "$(uname)" == "Linux" ]]; then
+            sudo apt-get install -y texlive-latex-base
+          elif [[ "$(uname)" == "Darwin" ]]; then
+            brew install --cask mactex
+          fi
 
-      - name: Install Tiny Text
+      - name: Install TinyTeX
         run: |
           Rscript -e 'install.packages("tinytex")'
           Rscript -e 'tinytex::install_tinytex()'
@@ -36,4 +40,3 @@ jobs:
         run: |
           rcmdcheck::rcmdcheck(error_on = "warning")
         shell: Rscript {0}
-
