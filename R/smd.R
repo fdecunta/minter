@@ -8,6 +8,16 @@
 #' @param X_n Sample size from treatment
 #' @param pooled_sd Pooled standard deviation
 #'
+#' @references
+#'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
+#'     between competition and predation: a meta-analysis of field experiments.
+#'     The American Naturalist, 155(4), 435-453.
+#' 
+#'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
+#'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
+#'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
+#'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+#'
 #' @keywords internal
 simple_SMD <- function(
   Ctrl_mean,
@@ -18,14 +28,12 @@ simple_SMD <- function(
   X_n,
   pooled_sd
 ) {
-
   # Compute the effect size using correction for small-sample bias.
-  # Equation B.1 from Morris et al. 2007 appendix B
+  # Equation from Gurevitch et al. 2000 and Morris et al. 2007
   j <- .j_correction(X_n + Ctrl_n - 2)
   d <- ((X_mean - Ctrl_mean) / pooled_sd) * j
 
-  v <- ((X_n + Ctrl_n) / (N_x * Ctrl_n)) + 
-    (d^2 / (2 * (X_n + Ctrl_n)))
+  v <- 1/X_n + 1/Ctrl_n + (d^2 / (2 * (X_n + Ctrl_n)))
 
   return(data.frame(simple_SMD = d, simple_SMD_var = v))
 }
@@ -79,7 +87,9 @@ overall_SMD <- function(
   j <- .j_correction(A_n + B_n + AB_n + Ctrl_n - 4)
   d_A <- (((A_mean + AB_mean) - (B_mean + Ctrl_mean)) / 2 * pooled_sd) * j
 
-  # Sampling variance. Formula from Gurevitch et al. 2000 
+  # Sampling variance. Formula from Gurevitch et al. 2000.
+  # The 1/4 is missing in Morris et al 2007 appendix, but can be found in 
+  # their Matlab code (https://dx.doi.org/10.6084/m9.figshare.c.3299699)
   v_A <- (1/4) * (
     1/A_n + 1/B_n + 1/AB_n + 1/Ctrl_n + 
     (d_A^2 / (2 * (A_n + B_n + AB_n + Ctrl_n)))
@@ -135,22 +145,23 @@ interaction_SMD <- function(
 ) {
   # Overral effect size of factor A
   j <- .j_correction(A_n + B_n + AB_n + Ctrl_n - 4)
-  d_AB <- (((AB_mean - B_mean) - (A_mean - Ctrl_mean)) * pooled_sd) * j
+  d_Inter <- (((AB_mean - B_mean) - (A_mean - Ctrl_mean)) * pooled_sd) * j
 
-  # Sampling variance. Formula from Gurevitch et al. 2000 
+  # Sampling variance. Formula from Gurevitch et al. 2000, Morris et al 2007 
   v <-  1/A_n + 1/B_n + 1/AB_n + 1/Ctrl_n + 
-    (d_a^2 / (2 * (A_n + B_n + AB_n + Ctrl_n)))
+    (d_Inter^2 / (2 * (A_n + B_n + AB_n + Ctrl_n)))
 
-  return(data.frame(interaction_SMD = d, interaction_SMD_var = v))
+  return(data.frame(interaction_SMD = d_Inter, interaction_SMD_var = v))
 }
 
 
 #' Pooled Standard Deviation for SMD in factorial experiments
 #'
-#' TODO: 
+#' The pooled standrd deviation is comptuted as:
 #'
-#' @references
+#'
 #' 
+#' @references
 #'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
 #'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 #'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
@@ -170,10 +181,10 @@ interaction_SMD <- function(
   # Equation B.2 from Morris et al. appendix B
   pooled_sd <- sqrt(
     (
-      ((A_n - 1) * (A_sd^2)) + 
-      ((B_n - 1) * (B_sd^2)) + 
-      ((AB_n - 1) * (AB_sd^2)) +
-      ((Ctrl_n - 1) * (Ctrl_sd^2))
+      ((A_n - 1) * A_sd^2) + 
+      ((B_n - 1) * B_sd^2) + 
+      ((AB_n - 1) * AB_sd^2) +
+      ((Ctrl_n - 1) * Ctrl_sd^2)
     ) /
     (A_n + B_n + AB_n + Ctrl_n - 4)
   )

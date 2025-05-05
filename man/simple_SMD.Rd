@@ -24,4 +24,14 @@ simple_SMD(Ctrl_mean, Ctrl_sd, Ctrl_n, X_mean, X_sd, X_n, pooled_sd)
 \description{
 Simple effect: Standardized Mean Difference Hedges' g
 }
+\references{
+Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
+between competition and predation: a meta-analysis of field experiments.
+The American Naturalist, 155(4), 435-453.
+
+Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
+Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
+effects of enemies and mutualists on plant performance: a meta‐analysis.
+Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+}
 \keyword{internal}

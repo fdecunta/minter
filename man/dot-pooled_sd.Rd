@@ -7,7 +7,7 @@
 .pooled_sd(Ctrl_sd, Ctrl_n, A_sd, A_n, B_sd, B_n, AB_n, AB_sd)
 }
 \description{
-TODO:
+The pooled standrd deviation is comptuted as:
 }
 \references{
 Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,

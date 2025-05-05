@@ -45,13 +45,14 @@
 \item{AB_n}{Sample size from the interaction AxB treatment}
 }
 \description{
-Standardized Mean Difference for 2x2 interactions
+TODO:
 }
 \references{
 Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
 Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 effects of enemies and mutualists on plant performance: a meta‐analysis.
 Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+
 Macartney, E. L., Lagisz, M., & Nakagawa, S. (2022). The relative benefits
 of environmental enrichment on learning and memory are greater when
 stressed: A meta-analysis of interactions in rodents.

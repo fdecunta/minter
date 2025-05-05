@@ -120,28 +120,38 @@ inter_effsize <- function(
   AB_n
 ) {
   # Simple effects for factors A and B
-  simple_lnRR_A <- simple_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
-			       A_mean   , A_sd   , A_n)
-  simple_lnRR_B <- simple_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
-			       B_mean   , B_sd   , B_n)
+  simple_lnRR_A <- simple_lnRR(
+    Ctrl_mean, Ctrl_sd, Ctrl_n,
+	  A_mean, A_sd, A_n
+  )
+  simple_lnRR_B <- simple_lnRR(
+    Ctrl_mean, Ctrl_sd, Ctrl_n,
+	  B_mean, B_sd, B_n)
 
-  # Overall effects for factors A and B
-  overall_lnRR_A <- overall_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
-			         A_mean   , A_sd   , A_n,
-				 B_mean   , B_sd   , B_n,
-                                 AB_mean  , AB_sd  , AB_n)
+  # Overral effect for Factor B
+  overall_lnRR_A <- overall_lnRR(
+    Ctrl_mean, Ctrl_sd, Ctrl_n,
+  	A_mean, A_sd, A_n,
+    B_mean, B_sd, B_n,
+    AB_mean, AB_sd, AB_n
+  )
 
-  overall_lnRR_B <- overall_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
-			         B_mean   , B_sd   , B_n,
-				 A_mean   , A_sd   , A_n,
-                                 AB_mean  , AB_sd  , AB_n)
+  # Overral effect for Factor B
+  # Note that the order of A and B are changed here.
+  overall_lnRR_B <- overall_lnRR(
+    Ctrl_mean, Ctrl_sd, Ctrl_n,
+    B_mean, B_sd, B_n,
+    A_mean, A_sd, A_n,
+    AB_mean, AB_sd, AB_n
+  )
 
-  # Interaction
-  interaction_lnRR <- interaction_lnRR(Ctrl_mean, Ctrl_sd, Ctrl_n,
-			               B_mean   , B_sd   , B_n,
-				       A_mean   , A_sd   , A_n,
-                                       AB_mean  , AB_sd  , AB_n)
-
+  # Interaction effect between A and B
+  interaction_lnRR <- interaction_lnRR(
+    Ctrl_mean, Ctrl_sd, Ctrl_n,
+    A_mean, A_sd, A_n,
+    B_mean, B_sd, B_n,
+    AB_mean, AB_sd, AB_n
+  )
 
   data.frame(
     "s_lnRR_A"     = simple_lnRR_A[, 1],
@@ -158,8 +168,9 @@ inter_effsize <- function(
 }
 
 
-
 #' Standardized Mean Difference for 2x2 interactions
+#'
+#' TODO:
 #'
 #' @param Ctrl_mean Mean outcome from the Control treatment
 #' @param Ctrl_sd Standard deviation from the control treatment
@@ -181,6 +192,7 @@ inter_effsize <- function(
 #'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 #'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+#'
 #'   Macartney, E. L., Lagisz, M., & Nakagawa, S. (2022). The relative benefits
 #'     of environmental enrichment on learning and memory are greater when 
 #'     stressed: A meta-analysis of interactions in rodents.
@@ -216,27 +228,51 @@ inter_effsize <- function(
   )
 
   # Simple effects for factors A and B
-  simple_SMD_A <- simple_SMD(Ctrl_mean, Ctrl_sd, Ctrl_n,
-			     A_mean   , A_sd   , A_n)
-  simple_SMD_B <- simple_SMD(Ctrl_mean, Ctrl_sd, Ctrl_n,
-			     B_mean   , B_sd   , B_n)
+  simple_SMD_A <- simple_SMD(
+    Ctrl_mean = Ctrl_mean,
+    Ctrl_sd = Ctrl_sd,
+    Ctrl_n  = Ctrl_n,
+    X_mean = A_mean,
+    X_sd = A_sd,
+    X_n = A_n,
+    pooled_sd
+  )
+  simple_SMD_B <- simple_SMD(
+    Ctrl_mean = Ctrl_mean,
+    Ctrl_sd = Ctrl_sd, 
+    Ctrl_n = Ctrl_n,
+    X_mean = B_mean,
+    X_sd = B_sd,
+    X_n = B_n,
+    pooled_sd
+  )
 
-  # Overall effects for factors A and B
-  overall_SMD_A <- overall_SMD(Ctrl_mean, Ctrl_sd, Ctrl_n,
-			       A_mean   , A_sd   , A_n,
-			       B_mean   , B_sd   , B_n,
-                               AB_mean  , AB_sd  , AB_n)
+  # Overall SMD for Factor A 
+  overall_SMD_A <- overall_SMD(
+    Ctrl_mean, Ctrl_sd, Ctrl_n,
+    A_mean, A_sd, A_n,
+    B_mean, B_sd, B_n,
+    AB_mean, AB_sd, AB_n,
+    pooled_sd
+  )
 
-  overall_SMD_B <- overall_SMD(Ctrl_mean, Ctrl_sd, Ctrl_n,
-			       B_mean   , B_sd   , B_n,
-			       A_mean   , A_sd   , A_n,
-                               AB_mean  , AB_sd  , AB_n)
+  # Overall SMD for Factor B: note that the order of A and B are changed
+  overall_SMD_B <- overall_SMD(
+    Ctrl_mean, Ctrl_sd, Ctrl_n,
+    B_mean, B_sd, B_n,
+    A_mean, A_sd, A_n,
+    AB_mean, AB_sd, AB_n,
+    pooled_sd
+  )
 
   # Interaction
-  interaction_SMD <- interaction_SMD(Ctrl_mean, Ctrl_sd, Ctrl_n,
-			             B_mean   , B_sd   , B_n,
-				     A_mean   , A_sd   , A_n,
-                                     AB_mean  , AB_sd  , AB_n)
+  interaction_SMD <- interaction_SMD(
+    Ctrl_mean, Ctrl_sd, Ctrl_n,
+    B_mean, B_sd, B_n,
+    A_mean, A_sd, A_n,
+    AB_mean, AB_sd, AB_n,
+    pooled_sd
+  )
 
   data.frame(
     "s_SMD_A"     = simple_SMD_A[, 1],
