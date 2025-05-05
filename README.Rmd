@@ -73,9 +73,9 @@ vi_cols <- c(
   "Herb_x_Fert_lnRR_var"
 )
 
-VCVs <- inter_vcv(cols = vi_cols,
-                  cluster = Study,
-                  obs = EffectSize_ID,
+VCVs <- inter_vcv(vi_cols = vi_cols,
+                  cluster = "Study",
+                  obs = "EffectSize_ID",
                   rho = 0.5,
                   data = fake_data)
 
@@ -83,9 +83,7 @@ str(VCVs)
 ```
 
 ```{r}
-library(metafor)
-
-res <- rma.mv(
+res <- metafor::rma.mv(
   yi = Herb_x_Fert_lnRR,
   V  = VCVs$Herb_x_Fert_lnRR_var,
   random = ~ 1 | Study,

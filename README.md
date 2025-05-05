@@ -87,7 +87,7 @@ vi_cols <- c(
   "Herb_x_Fert_lnRR_var"
 )
 
-VCVs <- inter_vcv(cols = vi_cols,
+VCVs <- inter_vcv(vi_cols = vi_cols,
                   cluster = "Study",
                   obs = "EffectSize_ID",
                   rho = 0.5,
@@ -103,15 +103,7 @@ str(VCVs)
 ```
 
 ``` r
-library(metafor)
-#> Loading required package: Matrix
-#> Loading required package: metadat
-#> Loading required package: numDeriv
-#> 
-#> Loading the 'metafor' package (version 4.8-0). For an
-#> introduction to the package please type: help(metafor)
-
-res <- rma.mv(
+res <- metafor::rma.mv(
   yi = Herb_x_Fert_lnRR,
   V  = VCVs$Herb_x_Fert_lnRR_var,
   random = ~ 1 | Study,
