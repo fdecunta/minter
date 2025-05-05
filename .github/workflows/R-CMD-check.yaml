@@ -24,6 +24,11 @@ jobs:
             any::rcmdcheck
           extra-packages: metafor
 
+      - name: Install Tiny Text
+        run: |
+          Rscript -e 'install.packages("tinytex")'
+          Rscript -e 'tinytex::install_tinytex()'
+
       - name: Run tests
         run: |
           rcmdcheck::rcmdcheck(error_on = "warning")
