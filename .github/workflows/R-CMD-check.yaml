@@ -24,6 +24,9 @@ jobs:
             any::rcmdcheck
           extra-packages: metafor
 
+      - name: Install LaTeX
+        run: sudo apt-get install -y texlive-latex-base
+
       - name: Install Tiny Text
         run: |
           Rscript -e 'install.packages("tinytex")'
