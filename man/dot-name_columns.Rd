@@ -7,6 +7,8 @@
 .name_columns(effsize, df, factor_names)
 }
 \arguments{
+\item{df}{Data frame with computed effect sizes}
+
 \item{factor_names}{}
 }
 \description{

@@ -2,9 +2,9 @@
 % Please edit documentation in R/smd.R
 \name{simple_SMD}
 \alias{simple_SMD}
-\title{Simple Standardized Mean Difference}
+\title{Simple effect: Standardized Mean Difference Hedges' g}
 \usage{
-simple_SMD(Ctrl_mean, Ctrl_sd, Ctrl_n, X_mean, X_sd, X_n)
+simple_SMD(Ctrl_mean, Ctrl_sd, Ctrl_n, X_mean, X_sd, X_n, pooled_sd)
 }
 \arguments{
 \item{Ctrl_mean}{Mean outcome from the Control treatment}
@@ -18,8 +18,10 @@ simple_SMD(Ctrl_mean, Ctrl_sd, Ctrl_n, X_mean, X_sd, X_n)
 \item{X_sd}{Standard deviation from treatment}
 
 \item{X_n}{Sample size from treatment}
+
+\item{pooled_sd}{Pooled standard deviation}
 }
 \description{
-Simple Standardized Mean Difference
+Simple effect: Standardized Mean Difference Hedges' g
 }
 \keyword{internal}

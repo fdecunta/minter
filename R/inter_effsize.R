@@ -202,6 +202,19 @@ inter_effsize <- function(
   AB_sd,
   AB_n
 ) {
+
+  # Get the pooled sampling variance for the SMD
+  pooled_sd <- .pooled_sd(
+    Ctrl_sd,
+    Ctrl_n,
+    A_sd,
+    A_n,
+    B_sd,
+    B_n,
+    AB_n,
+    AB_sd
+  )
+
   # Simple effects for factors A and B
   simple_SMD_A <- simple_SMD(Ctrl_mean, Ctrl_sd, Ctrl_n,
 			     A_mean   , A_sd   , A_n)
@@ -242,7 +255,7 @@ inter_effsize <- function(
 
 #' Rename columns with factor names
 #' 
-#' @param df
+#' @param df Data frame with computed effect sizes
 #' @param factor_names
 #'
 #' @keywords internal

@@ -16,7 +16,8 @@ interaction_SMD(
   B_n,
   AB_mean,
   AB_sd,
-  AB_n
+  AB_n,
+  pooled_sd
 )
 }
 \arguments{
@@ -43,6 +44,8 @@ interaction_SMD(
 \item{AB_sd}{Standard deviation from the interaction AxB treatment}
 
 \item{AB_n}{Sample size from the interaction AxB treatment}
+
+\item{pooled_sd}{Pooled standard deviation}
 }
 \description{
 TODO: this
@@ -51,6 +54,7 @@ TODO: this
 Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
 between competition and predation: a meta-analysis of field experiments.
 The American Naturalist, 155(4), 435-453.
+
 Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
 Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 effects of enemies and mutualists on plant performance: a meta‐analysis.

@@ -1,4 +1,4 @@
-#' Simple Standardized Mean Difference 
+#' Simple effect: Standardized Mean Difference Hedges' g
 #' 
 #' @param Ctrl_mean Mean outcome from the Control treatment
 #' @param Ctrl_sd Standard deviation from the control treatment
@@ -6,6 +6,7 @@
 #' @param X_mean Mean outcome from treatment
 #' @param X_sd Standard deviation from treatment
 #' @param X_n Sample size from treatment
+#' @param pooled_sd Pooled standard deviation
 #'
 #' @keywords internal
 simple_SMD <- function(
@@ -14,77 +15,23 @@ simple_SMD <- function(
   Ctrl_n,
   X_mean,
   X_sd,
-  X_n
+  X_n,
+  pooled_sd
 ) {
 
-  d <- .compute_smd(Ctrl_mean = Ctrl_mean,
-		    Ctrl_sd = Ctrl_sd,
-		    Ctrl_n = Ctrl_n,
-		    X_mean = X_mean,
-		    X_sd = X_sd,
-		    X_n = X_n)
-    
-  v <- .compute_var_smd(d = d, Ctrl_n = Ctrl_n, X_n = X_n)
+  # Compute the effect size using correction for small-sample bias.
+  # Equation B.1 from Morris et al. 2007 appendix B
+  j <- .j_correction(X_n + Ctrl_n - 2)
+  d <- ((X_mean - Ctrl_mean) / pooled_sd) * j
 
-  # 'd' is slightly biased in small sample sizes. It can be corrected:
-  # J: correction factor. Equation 12.15 from Borenstein, pag 226
-  df <- Ctrl_n + X_n - 2
-  J <- 1 - (3 / (4 * df - 1))
+  v <- ((X_n + Ctrl_n) / (N_x * Ctrl_n)) + 
+    (d^2 / (2 * (X_n + Ctrl_n)))
 
-  simple_SMD <- d * J
-  simple_SMD_var <- v * J^2 
-
-  return(data.frame(simple_SMD, simple_SMD_var))
+  return(data.frame(simple_SMD = d, simple_SMD_var = v))
 }
 
 
-#' Computes 'd' for Standardized mean difference
-#'
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param X_mean Mean outcome from treatment
-#' @param X_sd Standard deviation from treatment
-#' @param X_n Sample size from treatment
-#'
-#' @keywords internal
-.compute_smd <- function(
-  Ctrl_mean,
-  Ctrl_sd,
-  Ctrl_n,
-  X_mean,
-  X_sd,
-  X_n
-) {
-  # Within group standard deviation
-  # Equation 12.12 from Borenstein's chapter, pag 226
-  S_within <- sqrt(((Ctrl_n - 1) * Ctrl_sd^2 + (X_n - 1) * X_sd^2 ) / 
-		   (Ctrl_n + X_n - 2))
-
-  # Difference between treatment and control
-  # Equation 12.11 from Borenstein's chapter, pag 226
-  d <- (X_mean - Ctrl_mean) / S_within
-
-  return(d)
-}
-
-
-#' Computes sampling variance for Standardized Mean Difference
-#'
-#' @param d Mean difference previously calculated
-#' @param Ctrl_n Sample size from the control streatment
-#' @param X_n Sample size from treatment
-#'
-#' @keywords internal
-.compute_var_smd <- function(d, Ctrl_n, X_n) {
-  # Variance for Standardized Mean Difference 
-  # Equation 12.13 from Borensetin
-  v <- ((Ctrl_n + X_n) / (Ctrl_n * X_n)) + d^2 / (2 * (Ctrl_n + X_n))
-  return(v)
-}
-
-
-#' Overall effect: Standardized mean difference Hedges' g
+#' Overall effect: Standardized Mean Difference Hedges' g
 #' 
 #' TODO: this
 #' 
@@ -100,23 +47,45 @@ simple_SMD <- function(
 #' @param AB_mean Mean outcome from the interaction AxB treatment
 #' @param AB_sd Standard deviation from the interaction AxB treatment
 #' @param AB_n Sample size from the interaction AxB treatment
+#' @param pooled_sd Pooled standard deviation
 #' 
 #' @references 
 #'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
 #'     between competition and predation: a meta-analysis of field experiments.
 #'     The American Naturalist, 155(4), 435-453.
+#' 
 #'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
 #'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 #'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+#'
 #' @keywords internal
-overall_SMD <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
-                        A_mean   , A_sd   , A_n,
-                        B_mean   , B_sd   , B_n,
-                        AB_mean  , AB_sd  , AB_n) {
+overall_SMD <- function(
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  A_mean,
+  A_sd,
+  A_n,
+  B_mean,
+  B_sd,
+  B_n,
+  AB_mean,
+  AB_sd,
+  AB_n,
+  pooled_sd
+) {
+  # Overral effect size of factor A
+  j <- .j_correction(A_n + B_n + AB_n + Ctrl_n - 4)
+  d_A <- (((A_mean + AB_mean) - (B_mean + Ctrl_mean)) / 2 * pooled_sd) * j
 
-  # TODO: !!!
+  # Sampling variance. Formula from Gurevitch et al. 2000 
+  v_A <- (1/4) * (
+    1/A_n + 1/B_n + 1/AB_n + 1/Ctrl_n + 
+    (d_A^2 / (2 * (A_n + B_n + AB_n + Ctrl_n)))
+  )
 
+  return(data.frame(overall_SMD = d_A, overall_SMD_var = v_A))
 }
 
 
@@ -136,24 +105,89 @@ overall_SMD <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
 #' @param AB_mean Mean outcome from the interaction AxB treatment
 #' @param AB_sd Standard deviation from the interaction AxB treatment
 #' @param AB_n Sample size from the interaction AxB treatment
+#' @param pooled_sd Pooled standard deviation
 #' 
 #' @references 
 #'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
 #'     between competition and predation: a meta-analysis of field experiments.
 #'     The American Naturalist, 155(4), 435-453.
+#'
 #'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
 #'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 #'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+#'
 #' @keywords internal
-interaction_SMD <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
-                            A_mean   , A_sd   , A_n,
-                            B_mean   , B_sd   , B_n,
-                            AB_mean  , AB_sd  , AB_n) {
-  # From Gurevitch et al. 2000, see appendix:
+interaction_SMD <- function(
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  A_mean, 
+  A_sd,
+  A_n,
+  B_mean,
+  B_sd,
+  B_n,
+  AB_mean,
+  AB_sd,
+  AB_n,
+  pooled_sd
+) {
+  # Overral effect size of factor A
+  j <- .j_correction(A_n + B_n + AB_n + Ctrl_n - 4)
+  d_AB <- (((AB_mean - B_mean) - (A_mean - Ctrl_mean)) * pooled_sd) * j
+
+  # Sampling variance. Formula from Gurevitch et al. 2000 
+  v <-  1/A_n + 1/B_n + 1/AB_n + 1/Ctrl_n + 
+    (d_a^2 / (2 * (A_n + B_n + AB_n + Ctrl_n)))
+
+  return(data.frame(interaction_SMD = d, interaction_SMD_var = v))
 }
 
 
+#' Pooled Standard Deviation for SMD in factorial experiments
+#'
+#' TODO: 
+#'
+#' @references
+#' 
+#'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
+#'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
+#'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
+#'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+#'
+#' @keywords internal
+.pooled_sd <- function(
+  Ctrl_sd,
+  Ctrl_n,
+  A_sd,
+  A_n,
+  B_sd,
+  B_n,
+  AB_n,
+  AB_sd
+) {
+  # Equation B.2 from Morris et al. appendix B
+  pooled_sd <- sqrt(
+    (
+      ((A_n - 1) * (A_sd^2)) + 
+      ((B_n - 1) * (B_sd^2)) + 
+      ((AB_n - 1) * (AB_sd^2)) +
+      ((Ctrl_n - 1) * (Ctrl_sd^2))
+    ) /
+    (A_n + B_n + AB_n + Ctrl_n - 4)
+  )
+
+  return(pooled_sd)
+}
 
 
-
+#' Correction for small-sample bias
+#'
+#' @param m Degrees of freedom. They change between individual and overall effects.
+#' 
+#' @keywords internal
+.j_correction <- function(m) {
+  j <- 1 - (3 / ((4 * m) - 1))
+  return(j)
+}
