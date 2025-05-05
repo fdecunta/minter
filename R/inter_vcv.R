@@ -31,19 +31,18 @@ inter_vcv <- function(vi_cols, cluster, obs, rho, data, ...) {
     stop("Some column names do not exist in the data.")
   }
 
-  # TODO: Remove that data[[foo]]. They should be passsed as symbols
-
-  vcv_list <- lapply(vi_cols, function(c) {
+  compute_vcv <- function(c, ...) {
     metafor::vcalc(
       vi = data[[c]],
-	    cluster = data[[cluster]],
+      cluster = data[[cluster]],
       obs = data[[obs]],
-	    rho = rho,
+      rho = rho,
       data = data,
-		   ...
+      ...
     )
-  })
+  }
 
+  vcv_list <- lapply(vi_cols, compute_vcv, ...)
   names(vcv_list) <- vi_cols
-  return(vcv_list) 
+  return(vcv_list)
 }
