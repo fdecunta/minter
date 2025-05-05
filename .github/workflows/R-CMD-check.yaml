@@ -44,12 +44,16 @@ jobs:
           Rscript -e 'install.packages("tinytex")'
           Rscript -e 'tinytex::install_tinytex()'
 
-      - name: Install LaTeX
+      - name: Install LaTeX (including inconsolata)
         run: |
           if [[ "$(uname)" == "Linux" ]]; then
-            sudo apt-get install -y texlive-latex-base
+            sudo apt-get install -y texlive-latex-base \
+                                     texlive-fonts-recommended \
+                                     texlive-latex-extra \
+                                     texlive-fonts-extra
           elif [[ "$(uname)" == "Darwin" ]]; then
             brew install --cask mactex
+            sudo tlmgr install inconsolata
           fi
 
       - name: Run tests
