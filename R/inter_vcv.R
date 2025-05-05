@@ -27,6 +27,8 @@
 #' 
 #' @export
 inter_vcv <- function(vi_cols, cluster, obs, rho, data, ...) {
+  checkmate::assert_data_frame(data, null.ok = FALSE)
+
   if (!all(vi_cols %in% names(data))) {
     stop("Some column names do not exist in the data.")
   }

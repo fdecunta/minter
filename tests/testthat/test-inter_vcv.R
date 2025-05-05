@@ -19,3 +19,16 @@ test_that("inter_vcv is calculating the right matrices", {
 
   expect_equal(res_VCVs$C_sd, test_VCV)
 })
+
+
+test_that("inter_vcv fails when data is not found", {
+  expect_error(
+    inter_vcv(
+      vi_cols = c("Herb_sd", "C_sd", "Fert_sd"),
+      cluster = "Study",
+      obs = "EffectSize_ID",
+      rho = 0.5,
+      data = foo
+    )
+  )
+})
