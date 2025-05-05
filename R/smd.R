@@ -145,7 +145,7 @@ interaction_SMD <- function(
 ) {
   # Overral effect size of factor A
   j <- .j_correction(A_n + B_n + AB_n + Ctrl_n - 4)
-  d_Inter <- (((AB_mean - B_mean) - (A_mean - Ctrl_mean)) * pooled_sd) * j
+  d_Inter <- (((AB_mean - B_mean) - (A_mean - Ctrl_mean)) / pooled_sd) * j
 
   # Sampling variance. Formula from Gurevitch et al. 2000, Morris et al 2007 
   v <-  1/A_n + 1/B_n + 1/AB_n + 1/Ctrl_n + 
