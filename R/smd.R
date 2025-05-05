@@ -85,7 +85,7 @@ overall_SMD <- function(
 ) {
   # Overral effect size of factor A
   j <- .j_correction(A_n + B_n + AB_n + Ctrl_n - 4)
-  d_A <- (((A_mean + AB_mean) - (B_mean + Ctrl_mean)) / 2 * pooled_sd) * j
+  d_A <- (((A_mean + AB_mean) - (B_mean + Ctrl_mean)) / (2 * pooled_sd)) * j
 
   # Sampling variance. Formula from Gurevitch et al. 2000.
   # The 1/4 is missing in Morris et al 2007 appendix, but can be found in 
