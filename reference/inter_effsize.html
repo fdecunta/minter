@@ -69,17 +69,56 @@
 factors A and B</p></dd>
 
 
-<dt id="arg-ctrl-mean-ctrl-sd-ctrl-n-">Ctrl_mean, Ctrl_sd, Ctrl_n, <a class="anchor" aria-label="anchor" href="#arg-ctrl-mean-ctrl-sd-ctrl-n-"></a></dt>
-<dd><p>A_mean,A_sd,A_n,
-B_mean,B_sd,B_n,
-AB_mean,AB_sd,AB_n
-Unquoted column names identifying group means, SDs, and sample sizes
-for the control (Ctrl), single-factor treatments A and B, and the
-combined treatment AB.</p></dd>
+<dt id="arg-ctrl-mean">Ctrl_mean<a class="anchor" aria-label="anchor" href="#arg-ctrl-mean"></a></dt>
+<dd><p>Mean outcome from the Control treatment</p></dd>
+
+
+<dt id="arg-ctrl-sd">Ctrl_sd<a class="anchor" aria-label="anchor" href="#arg-ctrl-sd"></a></dt>
+<dd><p>Standard deviation from the control treatment</p></dd>
+
+
+<dt id="arg-ctrl-n">Ctrl_n<a class="anchor" aria-label="anchor" href="#arg-ctrl-n"></a></dt>
+<dd><p>Sample size from the control streatment</p></dd>
+
+
+<dt id="arg-a-mean">A_mean<a class="anchor" aria-label="anchor" href="#arg-a-mean"></a></dt>
+<dd><p>Mean outcome from the A treatment</p></dd>
+
+
+<dt id="arg-a-sd">A_sd<a class="anchor" aria-label="anchor" href="#arg-a-sd"></a></dt>
+<dd><p>Standard deviation from the A treatment</p></dd>
+
+
+<dt id="arg-a-n">A_n<a class="anchor" aria-label="anchor" href="#arg-a-n"></a></dt>
+<dd><p>Sample size from the A treatment</p></dd>
+
+
+<dt id="arg-b-mean">B_mean<a class="anchor" aria-label="anchor" href="#arg-b-mean"></a></dt>
+<dd><p>Mean outcome from the B treatment</p></dd>
+
+
+<dt id="arg-b-sd">B_sd<a class="anchor" aria-label="anchor" href="#arg-b-sd"></a></dt>
+<dd><p>Standard deviation from the B treatment</p></dd>
+
+
+<dt id="arg-b-n">B_n<a class="anchor" aria-label="anchor" href="#arg-b-n"></a></dt>
+<dd><p>Sample size from the B treatment</p></dd>
+
+
+<dt id="arg-ab-mean">AB_mean<a class="anchor" aria-label="anchor" href="#arg-ab-mean"></a></dt>
+<dd><p>Mean outcome from the interaction AxB treatment</p></dd>
+
+
+<dt id="arg-ab-sd">AB_sd<a class="anchor" aria-label="anchor" href="#arg-ab-sd"></a></dt>
+<dd><p>Standard deviation from the interaction AxB treatment</p></dd>
+
+
+<dt id="arg-ab-n">AB_n<a class="anchor" aria-label="anchor" href="#arg-ab-n"></a></dt>
+<dd><p>Sample size from the interaction AxB treatment</p></dd>
 
 
 <dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>A data frame containing all columns listed above.</p></dd>
+<dd><p>Data fram with the data.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -95,15 +134,14 @@ appended, named as in <code>colnames</code>.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="co"># This example won't be run during R CMD check</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">inter_effsize</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  effsize   <span class="op">=</span> <span class="st">"lnrr"</span>,</span></span>
+<span class="r-in"><span>  data      <span class="op">=</span> <span class="va">df</span>,</span></span>
 <span class="r-in"><span>  colnames  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yi"</span>, <span class="st">"vi"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  Ctrl_mean <span class="op">=</span> <span class="va">ctrl_mean</span>, Ctrl_sd <span class="op">=</span> <span class="va">ctrl_sd</span>, Ctrl_n <span class="op">=</span> <span class="va">ctrl_n</span>,</span></span>
 <span class="r-in"><span>  A_mean    <span class="op">=</span> <span class="va">a_mean</span>,    A_sd    <span class="op">=</span> <span class="va">a_sd</span>,    A_n    <span class="op">=</span> <span class="va">a_n</span>,</span></span>
 <span class="r-in"><span>  B_mean    <span class="op">=</span> <span class="va">b_mean</span>,    B_sd    <span class="op">=</span> <span class="va">b_sd</span>,    B_n    <span class="op">=</span> <span class="va">b_n</span>,</span></span>
 <span class="r-in"><span>  AB_mean   <span class="op">=</span> <span class="va">ab_mean</span>,   AB_sd   <span class="op">=</span> <span class="va">ab_sd</span>,   AB_n   <span class="op">=</span> <span class="va">ab_n</span>,</span></span>
-<span class="r-in"><span>  data      <span class="op">=</span> <span class="va">df</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
