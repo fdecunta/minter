@@ -3,16 +3,21 @@
 #' TODO: !
 #'
 #' @param effsize   Character. Effect‐size metric to compute. Supported: \code{"lnrr"}.
+#' @param data      Data fram with the data.
 #' @param colnames  Character vector of length 2 giving the names to use for the
 #'   factors A and B
-#' @param Ctrl_mean,Ctrl_sd,Ctrl_n,
-#'        A_mean,A_sd,A_n,
-#'        B_mean,B_sd,B_n,
-#'        AB_mean,AB_sd,AB_n
-#'        Unquoted column names identifying group means, SDs, and sample sizes
-#'        for the control (Ctrl), single-factor treatments A and B, and the
-#'        combined treatment AB.
-#' @param data      A data frame containing all columns listed above.
+#' @param Ctrl_mean Mean outcome from the Control treatment
+#' @param Ctrl_sd Standard deviation from the control treatment
+#' @param Ctrl_n Sample size from the control streatment
+#' @param A_mean Mean outcome from the A treatment
+#' @param A_sd Standard deviation from the A treatment
+#' @param A_n Sample size from the A treatment
+#' @param B_mean Mean outcome from the B treatment
+#' @param B_sd Standard deviation from the B treatment 
+#' @param B_n Sample size from the B treatment 
+#' @param AB_mean Mean outcome from the interaction AxB treatment
+#' @param AB_sd Standard deviation from the interaction AxB treatment
+#' @param AB_n Sample size from the interaction AxB treatment
 #'
 #' @return The original \code{data} with the effect size and its variance
 #'   appended, named as in \code{colnames}.
@@ -21,15 +26,14 @@
 #' 
 #' @examples
 #' \dontrun{
-#' # This example won't be run during R CMD check
 #' result <- inter_effsize(
 #'   effsize   = "lnrr",
+#'   data      = df,
 #'   colnames  = c("yi", "vi"),
 #'   Ctrl_mean = ctrl_mean, Ctrl_sd = ctrl_sd, Ctrl_n = ctrl_n,
 #'   A_mean    = a_mean,    A_sd    = a_sd,    A_n    = a_n,
 #'   B_mean    = b_mean,    B_sd    = b_sd,    B_n    = b_n,
 #'   AB_mean   = ab_mean,   AB_sd   = ab_sd,   AB_n   = ab_n,
-#'   data      = df
 #' )
 #' }
 #'

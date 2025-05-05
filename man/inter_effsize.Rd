@@ -28,14 +28,31 @@ inter_effsize(
 \item{colnames}{Character vector of length 2 giving the names to use for the
 factors A and B}
 
-\item{Ctrl_mean, Ctrl_sd, Ctrl_n, }{A_mean,A_sd,A_n,
-B_mean,B_sd,B_n,
-AB_mean,AB_sd,AB_n
-Unquoted column names identifying group means, SDs, and sample sizes
-for the control (Ctrl), single-factor treatments A and B, and the
-combined treatment AB.}
+\item{Ctrl_mean}{Mean outcome from the Control treatment}
 
-\item{data}{A data frame containing all columns listed above.}
+\item{Ctrl_sd}{Standard deviation from the control treatment}
+
+\item{Ctrl_n}{Sample size from the control streatment}
+
+\item{A_mean}{Mean outcome from the A treatment}
+
+\item{A_sd}{Standard deviation from the A treatment}
+
+\item{A_n}{Sample size from the A treatment}
+
+\item{B_mean}{Mean outcome from the B treatment}
+
+\item{B_sd}{Standard deviation from the B treatment}
+
+\item{B_n}{Sample size from the B treatment}
+
+\item{AB_mean}{Mean outcome from the interaction AxB treatment}
+
+\item{AB_sd}{Standard deviation from the interaction AxB treatment}
+
+\item{AB_n}{Sample size from the interaction AxB treatment}
+
+\item{data}{Data fram with the data.}
 }
 \value{
 The original \code{data} with the effect size and its variance
@@ -46,15 +63,14 @@ TODO: !
 }
 \examples{
 \dontrun{
-# This example won't be run during R CMD check
 result <- inter_effsize(
   effsize   = "lnrr",
+  data      = df,
   colnames  = c("yi", "vi"),
   Ctrl_mean = ctrl_mean, Ctrl_sd = ctrl_sd, Ctrl_n = ctrl_n,
   A_mean    = a_mean,    A_sd    = a_sd,    A_n    = a_n,
   B_mean    = b_mean,    B_sd    = b_sd,    B_n    = b_n,
   AB_mean   = ab_mean,   AB_sd   = ab_sd,   AB_n   = ab_n,
-  data      = df
 )
 }
 

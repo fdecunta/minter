@@ -2,10 +2,41 @@
 % Please edit documentation in R/inter_vcv.R
 \name{inter_vcv}
 \alias{inter_vcv}
-\title{Variance covariance matrices for non-independence}
+\title{Compute variance–covariance matrices for correlated sampling variances}
 \usage{
-inter_vcv(cols, cluster, obs, rho, data, ...)
+inter_vcv(vi_cols, cluster, obs, rho, data, ...)
+}
+\arguments{
+\item{vi_cols}{Character vector. Names of the sampling-variance columns
+(e.g., \code{"vi"}) for which the VCV matrices should be
+computed.}
+
+\item{cluster}{Character string. Name of the column in \code{data} that
+identifies the clustering unit (for example, the study ID).}
+
+\item{obs}{Character string. Name of the column indexing individual
+observations (effect sizes) within each \code{cluster}.}
+
+\item{rho}{Numeric. Assumed intra-class correlation (between 0 and 1)
+used by \code{metafor::vcalc} to fill the off-diagonals.}
+
+\item{data}{A \link[base:data.frame]{data.frame} containing
+\code{cols}, \code{cluster}, and \code{obs}.}
+
+\item{...}{Additional arguments passed straight to
+\code{metafor::vcalc}.}
 }
 \description{
-Variance covariance matrices for non-independence
+Get multiple VCV matrices at once.
+}
+\details{
+Quickly obtain one or more variance–covariance matrices that account
+for non-independence coming from the same study,
+experiment, or other clustering unit.
+The function is a thin wrapper around
+\code{\link[metafor]{vcalc}}, looping over the columns listed in
+\code{cols} and returning the resulting VCV matrices in a named list.
+}
+\author{
+Facundo Decunta - fdecunta@agro.uba.ar
 }
