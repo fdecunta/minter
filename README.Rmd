@@ -125,6 +125,9 @@ Aggregate the results from the three models into a single table.
 
 
 ```{r}
+# factorial_mod_results() uses orchaRd::mod_results() internally
+# library(orchaRd) 
+
 models <- list(
   "Insect herbivory" = res_herb,
   "Fertilization" = res_fert,
@@ -132,8 +135,8 @@ models <- list(
 )
 
 res_table <- factorial_mod_results(
-  models_list = models,
-  group = "Study_ID",
+  models = models,
+  group = "Study"
 )
 
 res_table
@@ -147,7 +150,7 @@ The output from `factorial_mod_results` follows the format used by `orchaRd`, an
 ```{r}
 orchaRd::orchard_plot(
   res_table,
-  group = "Study_ID",
+  group = "Study",
   xlab = "lnRR"
 )
 ```
