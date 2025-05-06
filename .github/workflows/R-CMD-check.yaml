@@ -31,7 +31,9 @@ jobs:
           packages: |
             any::devtools
             any::rcmdcheck
-          extra-packages: metafor
+          extra-packages: |
+            metafor
+            checkmate
 
       - name: Cache TinyTeX
         uses: actions/cache@v3
