@@ -35,6 +35,11 @@ jobs:
             metafor
             checkmate
 
+      - name: Install orchaRd from GitHub
+        run: |
+          Rscript -e 'install.packages("remotes")'
+          Rscript -e 'remotes::install_github("daniel1noble/orchaRd")'
+
       - name: Cache TinyTeX
         uses: actions/cache@v3
         with:
@@ -57,11 +62,6 @@ jobs:
             brew install --cask mactex
             sudo tlmgr install inconsolata
           fi
-
-      - name: Install orchaRd from GitHub
-        run: |
-          Rscript -e 'install.packages("remotes")'
-          Rscript -e 'remotes::install_github("daniel1noble/orchaRd")' 
 
       - name: Run tests
         run: |
