@@ -26,7 +26,7 @@ Helper functions for conducting meta-analyses of interactions in 2×2 factorial 
 
 ## Installation
 
-You can install the development version of minter from [GitHub](https://github.com/) with:
+You can install the development version of minter from [GitHub](https://github.com/fdecunta/minter):
 
 ``` r
 devtools::install_github("fdecunta/minter", force = TRUE)

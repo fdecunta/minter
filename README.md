@@ -16,7 +16,7 @@ factorial experiments.
 ## Installation
 
 You can install the development version of minter from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/fdecunta/minter):
 
 ``` r
 devtools::install_github("fdecunta/minter", force = TRUE)
