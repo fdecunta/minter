@@ -64,10 +64,13 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fdecunta.github.io/minter/">minter</a></span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># Load fake data from a 2-by-2 factorial experiment:</span></span>
+<span><span class="co"># - Insect herbivory (Herb)</span></span>
+<span><span class="co"># - Fertilization (Fert)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">fake_data</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Compute the effect sizes</span></span>
-<span><span class="va">fake_data</span> <span class="op">&lt;-</span> <span class="fu">inter_effsize</span><span class="op">(</span></span>
+<span><span class="va">fake_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/factorial_effsize.html">factorial_effsize</a></span><span class="op">(</span></span>
 <span>  effsize <span class="op">=</span> <span class="st">"lnrr"</span>,</span>
 <span>  colnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Herb"</span>, <span class="st">"Fert"</span><span class="op">)</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">fake_data</span>,</span>
@@ -122,7 +125,7 @@
 <span>  <span class="st">"Herb_x_Fert_lnRR_var"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">VCVs</span> <span class="op">&lt;-</span> <span class="fu">inter_vcv</span><span class="op">(</span></span>
+<span><span class="va">VCVs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/factorial_vcv.html">factorial_vcv</a></span><span class="op">(</span></span>
 <span>  vi_cols <span class="op">=</span> <span class="va">vi_cols</span>,</span>
 <span>  cluster <span class="op">=</span> <span class="va">Study</span>,</span>
 <span>  obs <span class="op">=</span> <span class="va">EffectSize_ID</span>,</span>
@@ -137,34 +140,61 @@
 <span><span class="co">#&gt;  $ Herb_overall_lnRR_var: num [1:9, 1:9] 0.000744 0.000367 0 0 0 ...</span></span>
 <span><span class="co">#&gt;  $ Fert_overall_lnRR_var: num [1:9, 1:9] 0.000751 0.00037 0 0 0 ...</span></span>
 <span><span class="co">#&gt;  $ Herb_x_Fert_lnRR_var : num [1:9, 1:9] 0.0031 0.00151 0 0 0 ...</span></span></code></pre></div>
-<p>To use one of the matrices, reference it using ‘$’:</p>
+<p>Use a specific VCV matrix by referencing it using ‘$’:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">metafor</span><span class="fu">::</span><span class="fu"><a href="https://wviechtb.github.io/metafor/reference/rma.mv.html" class="external-link">rma.mv</a></span><span class="op">(</span></span>
-<span>  yi <span class="op">=</span> <span class="va">Herb_x_Fert_lnRR</span>,</span>
-<span>  V  <span class="op">=</span> <span class="va">VCVs</span><span class="op">$</span><span class="va">Herb_x_Fert_lnRR_var</span>,</span>
+<code class="sourceCode R"><span><span class="co"># Overall effect of Insect Herbivores</span></span>
+<span><span class="va">res_herb</span> <span class="op">&lt;-</span> <span class="fu">metafor</span><span class="fu">::</span><span class="fu"><a href="https://wviechtb.github.io/metafor/reference/rma.mv.html" class="external-link">rma.mv</a></span><span class="op">(</span></span>
+<span>  yi <span class="op">=</span> <span class="va">Herb_overall_lnRR</span>,</span>
+<span>  V  <span class="op">=</span> <span class="va">VCVs</span><span class="op">$</span><span class="va">Herb_overall_lnRR_var</span>,</span>
 <span>  random <span class="op">=</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">|</span> <span class="va">Study</span>,</span>
 <span>  test <span class="op">=</span> <span class="st">"t"</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">fake_data</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">res</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Multivariate Meta-Analysis Model (k = 9; method: REML)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Variance Components:</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;             estim    sqrt  nlvls  fixed  factor </span></span>
-<span><span class="co">#&gt; sigma^2    0.0329  0.1814      5     no   Study </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Test for Heterogeneity:</span></span>
-<span><span class="co">#&gt; Q(df = 8) = 89.2014, p-val &lt; .0001</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Model Results:</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; estimate      se     tval  df    pval    ci.lb   ci.ub    </span></span>
-<span><span class="co">#&gt;  -0.1266  0.0842  -1.5036   8  0.1711  -0.3207  0.0675    </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ---</span></span>
-<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
+<span><span class="co"># Overall effect of Fertilization</span></span>
+<span><span class="va">res_fert</span> <span class="op">&lt;-</span> <span class="fu">metafor</span><span class="fu">::</span><span class="fu"><a href="https://wviechtb.github.io/metafor/reference/rma.mv.html" class="external-link">rma.mv</a></span><span class="op">(</span></span>
+<span>  yi <span class="op">=</span> <span class="va">Fert_overall_lnRR</span>,</span>
+<span>  V  <span class="op">=</span> <span class="va">VCVs</span><span class="op">$</span><span class="va">Fert_overall_lnRR_var</span>,</span>
+<span>  random <span class="op">=</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">|</span> <span class="va">Study</span>,</span>
+<span>  test <span class="op">=</span> <span class="st">"t"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">fake_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Interaction effect </span></span>
+<span><span class="va">res_intr</span> <span class="op">&lt;-</span> <span class="fu">metafor</span><span class="fu">::</span><span class="fu"><a href="https://wviechtb.github.io/metafor/reference/rma.mv.html" class="external-link">rma.mv</a></span><span class="op">(</span></span>
+<span>  yi <span class="op">=</span> <span class="va">Herb_x_Fert_lnRR</span>,</span>
+<span>  V  <span class="op">=</span> <span class="va">VCVs</span><span class="op">$</span><span class="va">Herb_x_Fert_lnRR_var</span>,</span>
+<span>  random <span class="op">=</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">|</span> <span class="va">Study</span>,</span>
+<span>  test <span class="op">=</span> <span class="st">"t"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">fake_data</span><span class="op">)</span></span></code></pre></div>
+<p>Aggregate the results from the three models into a single table.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># factorial_mod_results() uses orchaRd::mod_results() internally</span></span>
+<span><span class="co"># library(orchaRd) </span></span>
+<span></span>
+<span><span class="va">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Insect herbivory"</span> <span class="op">=</span> <span class="va">res_herb</span>,</span>
+<span>  <span class="st">"Fertilization"</span> <span class="op">=</span> <span class="va">res_fert</span>,</span>
+<span>  <span class="st">"Interaction"</span> <span class="op">=</span> <span class="va">res_intr</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/factorial_mod_results.html">factorial_mod_results</a></span><span class="op">(</span></span>
+<span>  models <span class="op">=</span> <span class="va">models</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"Study"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res_table</span></span>
+<span><span class="co">#&gt;               name   estimate      lowerCL    upperCL     lowerPR   upperPR</span></span>
+<span><span class="co">#&gt; 1      Interaction -0.1265575 -0.320658852 0.06754378 -0.58768793 0.3345729</span></span>
+<span><span class="co">#&gt; 2    Fertilization  0.1149527 -0.007502029 0.23740741 -0.17970732 0.4096127</span></span>
+<span><span class="co">#&gt; 3 Insect herbivory  0.2229779  0.098505410 0.34745043 -0.07655605 0.5225119</span></span></code></pre></div>
+<p>You may want to visualize this results, and <code>orchaRd</code> package has great visualization tools for meta-analyses. So <code>minter</code> is designed to work with it.</p>
+<p>The output from <code>factorial_mod_results</code> follows the format used by <code>orchaRd</code>, and can be directly used in <code>orchaRd:orchard_plot()</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">orchaRd</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/orchaRd/man/orchard_plot.html" class="external-link">orchard_plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">res_table</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"Study"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"lnRR"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
