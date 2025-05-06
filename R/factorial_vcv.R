@@ -1,4 +1,4 @@
-#' Compute variance–covariance matrices for correlated sampling variances
+#' Compute variance–covariance matrices for non-independent sampling variances
 #'
 #' Get multiple VCV matrices at once.
 #'
@@ -26,7 +26,7 @@
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #' 
 #' @export
-inter_vcv <- function(vi_cols, cluster, obs, rho, data, ...) {
+factorial_vcv <- function(vi_cols, cluster, obs, rho, data, ...) {
   checkmate::assert_data_frame(data)
   checkmate::assert_number(rho)
   checkmate::assert_character(vi_cols, any.missing = FALSE, min.len = 1)

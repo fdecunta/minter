@@ -5,7 +5,7 @@ fdata_test <- readRDS(testthat::test_path("test-data/fake_data_test.rds"))
 data(fake_data)
 fdata <- fake_data
 
-fdata <- inter_effsize(
+fdata <- factorial_effsize(
   effsize = "smd",
   colnames = c("Herb", "Fert"),
   data = fdata,

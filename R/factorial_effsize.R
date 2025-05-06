@@ -26,7 +26,7 @@
 #' 
 #' @examples
 #' \dontrun{
-#' result <- inter_effsize(
+#' result <- factorial_effsize(
 #'   effsize   = "lnrr",
 #'   data      = df,
 #'   colnames  = c("yi", "vi"),
@@ -38,7 +38,7 @@
 #' }
 #'
 #' @export
-inter_effsize <- function(
+factorial_effsize <- function(
   effsize,
   colnames,
   Ctrl_mean,
@@ -78,9 +78,9 @@ inter_effsize <- function(
   effsize_args <- lapply(vars, function(x) eval(x, data))
 
   if (effsize == "lnrr") {
-    df = do.call(.inter_effsize.lnRR, effsize_args)
+    df = do.call(.factorial_effsize.lnRR, effsize_args)
   } else if (effsize == "smd") {
-    df = do.call(.inter_effsize.SMD, effsize_args) 
+    df = do.call(.factorial_effsize.SMD, effsize_args) 
   }
 
   # Name the columns  
@@ -122,7 +122,7 @@ inter_effsize <- function(
 #'     https://doi.org/10.1016/j.neubiorev.2022.104554 
 #' 
 #' @keywords internal
-.inter_effsize.lnRR <- function(
+.factorial_effsize.lnRR <- function(
   Ctrl_mean,
   Ctrl_sd,
   Ctrl_n,
@@ -218,7 +218,7 @@ inter_effsize <- function(
 #'     https://doi.org/10.1016/j.neubiorev.2022.104554 
 #' 
 #' @keywords internal
-.inter_effsize.SMD <- function(
+.factorial_effsize.SMD <- function(
   Ctrl_mean,
   Ctrl_sd,
   Ctrl_n,
