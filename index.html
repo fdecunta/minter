@@ -60,7 +60,7 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<p>You can compute a bunch of effect sizes with one function:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fdecunta.github.io/minter/">minter</a></span><span class="op">)</span></span>
 <span></span>
@@ -111,6 +111,8 @@
 <span><span class="co">#&gt;  $ Fert_overall_lnRR_var: num  0.000751 0.000729 0.000904 0.000744 0.000703 ...</span></span>
 <span><span class="co">#&gt;  $ Herb_x_Fert_lnRR     : num  -0.128 -0.2051 -0.1153 0.0688 0.1398 ...</span></span>
 <span><span class="co">#&gt;  $ Herb_x_Fert_lnRR_var : num  0.0031 0.00293 0.00384 0.00308 0.0028 ...</span></span></code></pre></div>
+<p>When non-independence of sampling variances exists, you may use an estimated variance-covariance matrix.</p>
+<p>For multiple effect sizes you need multiple matrices. You can do it with one call:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vi_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Herb_simple_lnRR_var"</span>,</span>
@@ -120,11 +122,13 @@
 <span>  <span class="st">"Herb_x_Fert_lnRR_var"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">VCVs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/inter_vcv.html">inter_vcv</a></span><span class="op">(</span>vi_cols <span class="op">=</span> <span class="va">vi_cols</span>,</span>
-<span>                  cluster <span class="op">=</span> <span class="va">Study</span>,</span>
-<span>                  obs <span class="op">=</span> <span class="va">EffectSize_ID</span>,</span>
-<span>                  rho <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>                  data <span class="op">=</span> <span class="va">fake_data</span><span class="op">)</span></span>
+<span><span class="va">VCVs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/inter_vcv.html">inter_vcv</a></span><span class="op">(</span></span>
+<span>  vi_cols <span class="op">=</span> <span class="va">vi_cols</span>,</span>
+<span>  cluster <span class="op">=</span> <span class="va">Study</span>,</span>
+<span>  obs <span class="op">=</span> <span class="va">EffectSize_ID</span>,</span>
+<span>  rho <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">fake_data</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">VCVs</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 5</span></span>
@@ -133,6 +137,7 @@
 <span><span class="co">#&gt;  $ Herb_overall_lnRR_var: num [1:9, 1:9] 0.000744 0.000367 0 0 0 ...</span></span>
 <span><span class="co">#&gt;  $ Fert_overall_lnRR_var: num [1:9, 1:9] 0.000751 0.00037 0 0 0 ...</span></span>
 <span><span class="co">#&gt;  $ Herb_x_Fert_lnRR_var : num [1:9, 1:9] 0.0031 0.00151 0 0 0 ...</span></span></code></pre></div>
+<p>To use one of the matrices, reference it using ‘$’:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">metafor</span><span class="fu">::</span><span class="fu"><a href="https://wviechtb.github.io/metafor/reference/rma.mv.html" class="external-link">rma.mv</a></span><span class="op">(</span></span>
 <span>  yi <span class="op">=</span> <span class="va">Herb_x_Fert_lnRR</span>,</span>
