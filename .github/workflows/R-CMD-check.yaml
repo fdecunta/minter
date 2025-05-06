@@ -19,7 +19,7 @@ jobs:
       - name: Cache R packages
         uses: actions/cache@v3
         with:
-          path: ${{ env.R_LIBS_USER }}
+          path: ~/.R/library  # Correctly specifying the cache path for R packages
           key: ${{ runner.os }}-R-${{ hashFiles('**/*.lock') }}
           restore-keys: |
             ${{ runner.os }}-R-
@@ -42,7 +42,7 @@ jobs:
       - name: Install TinyTeX
         run: |
           Rscript -e 'install.packages("tinytex")'
-          Rscript -e 'tinytex::install_tinytex()'
+          Rscript -e 'tinytex::install_tinytex(force = TRUE)'  # Force installation to avoid conflicts
 
       - name: Install LaTeX (including inconsolata)
         run: |
