@@ -29,10 +29,13 @@ You can compute a bunch of effect sizes with one function:
 ``` r
 library(minter)
 
+# Load fake data from a 2-by-2 factorial experiment:
+# - Insect herbivory (Herb)
+# - Fertilization (Fert)
 data(fake_data)
 
 # Compute the effect sizes
-fake_data <- inter_effsize(
+fake_data <- factorial_effsize(
   effsize = "lnrr",
   colnames = c("Herb", "Fert"),
   data = fake_data,
@@ -93,7 +96,7 @@ vi_cols <- c(
   "Herb_x_Fert_lnRR_var"
 )
 
-VCVs <- inter_vcv(
+VCVs <- factorial_vcv(
   vi_cols = vi_cols,
   cluster = Study,
   obs = EffectSize_ID,
@@ -110,33 +113,71 @@ str(VCVs)
 #>  $ Herb_x_Fert_lnRR_var : num [1:9, 1:9] 0.0031 0.00151 0 0 0 ...
 ```
 
-To use one of the matrices, reference it using ‘\$’:
+Use a specific VCV matrix by referencing it using ‘\$’:
 
 ``` r
-res <- metafor::rma.mv(
+# Overall effect of Insect Herbivores
+res_herb <- metafor::rma.mv(
+  yi = Herb_overall_lnRR,
+  V  = VCVs$Herb_overall_lnRR_var,
+  random = ~ 1 | Study,
+  test = "t",
+  data = fake_data)
+
+# Overall effect of Fertilization
+res_fert <- metafor::rma.mv(
+  yi = Fert_overall_lnRR,
+  V  = VCVs$Fert_overall_lnRR_var,
+  random = ~ 1 | Study,
+  test = "t",
+  data = fake_data)
+
+# Interaction effect 
+res_intr <- metafor::rma.mv(
   yi = Herb_x_Fert_lnRR,
   V  = VCVs$Herb_x_Fert_lnRR_var,
   random = ~ 1 | Study,
   test = "t",
   data = fake_data)
-
-res
-#> 
-#> Multivariate Meta-Analysis Model (k = 9; method: REML)
-#> 
-#> Variance Components:
-#> 
-#>             estim    sqrt  nlvls  fixed  factor 
-#> sigma^2    0.0329  0.1814      5     no   Study 
-#> 
-#> Test for Heterogeneity:
-#> Q(df = 8) = 89.2014, p-val < .0001
-#> 
-#> Model Results:
-#> 
-#> estimate      se     tval  df    pval    ci.lb   ci.ub    
-#>  -0.1266  0.0842  -1.5036   8  0.1711  -0.3207  0.0675    
-#> 
-#> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
+
+Aggregate the results from the three models into a single table.
+
+``` r
+# factorial_mod_results() uses orchaRd::mod_results() internally
+# library(orchaRd) 
+
+models <- list(
+  "Insect herbivory" = res_herb,
+  "Fertilization" = res_fert,
+  "Interaction" = res_intr
+)
+
+res_table <- factorial_mod_results(
+  models = models,
+  group = "Study"
+)
+
+res_table
+#>               name   estimate      lowerCL    upperCL     lowerPR   upperPR
+#> 1      Interaction -0.1265575 -0.320658852 0.06754378 -0.58768793 0.3345729
+#> 2    Fertilization  0.1149527 -0.007502029 0.23740741 -0.17970732 0.4096127
+#> 3 Insect herbivory  0.2229779  0.098505410 0.34745043 -0.07655605 0.5225119
+```
+
+You may want to visualize this results, and `orchaRd` package has great
+visualization tools for meta-analyses. So `minter` is designed to work
+with it.
+
+The output from `factorial_mod_results` follows the format used by
+`orchaRd`, and can be directly used in `orchaRd:orchard_plot()`:
+
+``` r
+orchaRd::orchard_plot(
+  res_table,
+  group = "Study",
+  xlab = "lnRR"
+)
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
