@@ -2,3 +2,8 @@ url: https://fdecunta.github.io/minter/
 template:
   bootstrap: 5
 
+repo:
+  url: https://github.com/fdecunta/minter
+  branch: main
+
+
