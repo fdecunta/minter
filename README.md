@@ -46,7 +46,6 @@ library(minter)
 # - Fertilization (Fert)
 data(fake_data)
 
-# Compute the effect sizes
 fake_data <- factorial_effsize(
   effsize = "lnrr",
   colnames = c("Herb", "Fert"),
@@ -163,9 +162,6 @@ To visualize the results of multiple modles you need to aggregate them.
 `factorial_mod_results()` do this:
 
 ``` r
-# factorial_mod_results() uses orchaRd::mod_results() internally
-# library(orchaRd) 
-
 models <- list(
   "Insect herbivory" = res_herb,
   "Fertilization" = res_fert,
