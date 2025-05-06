@@ -34,7 +34,7 @@ devtools::install_github("fdecunta/minter", force = TRUE)
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+You can compute a bunch of effect sizes with one function:
 
 ```{r example}
 library(minter)
@@ -64,6 +64,10 @@ str(fake_data)
 ```
 
 
+When non-independence of sampling variances exists, you may use an estimated variance-covariance matrix.
+
+For multiple effect sizes you need multiple matrices. You can do it with one call:
+
 ```{r}
 vi_cols <- c(
   "Herb_simple_lnRR_var",
@@ -73,14 +77,18 @@ vi_cols <- c(
   "Herb_x_Fert_lnRR_var"
 )
 
-VCVs <- inter_vcv(vi_cols = vi_cols,
-                  cluster = Study,
-                  obs = EffectSize_ID,
-                  rho = 0.5,
-                  data = fake_data)
+VCVs <- inter_vcv(
+  vi_cols = vi_cols,
+  cluster = Study,
+  obs = EffectSize_ID,
+  rho = 0.5,
+  data = fake_data
+)
 
 str(VCVs)
 ```
+
+To use one of the matrices, reference it using '$':
 
 ```{r}
 res <- metafor::rma.mv(
