@@ -34,7 +34,7 @@ devtools::install_github("fdecunta/minter", force = TRUE)
 
 ## Example
 
-### Effect Sizes for factorial meta-analysis
+### Effect Sizes For Factorial Meta-Analysis
 
 The function `factorial_effsize()` computes five effect sizes from the data of a factorial experiment:
 
@@ -80,7 +80,7 @@ fake_data <- factorial_effsize(
 str(fake_data)
 ```
 
-### Multiple VCVs for non-independence
+### Multiple VCVs For Non-Independence
 
 Effect sizes are often not independent. In such cases, it is useful to use an estimated variance-covariance matrix to account for the non-independence among sampling variances.
 
@@ -106,7 +106,7 @@ VCVs <- factorial_vcv(
 str(VCVs)
 ```
 
-To use a specific VCV matrix, just reference it using '$':
+To use a specific variance-covariance matrix, just reference it using '$':
 
 ```{r}
 # Overall effect of Insect Herbivores
@@ -133,6 +133,8 @@ res_intr <- metafor::rma.mv(
   test = "t",
   data = fake_data)
 ```
+
+### Aggregate Model Results and Visualize
 
 To visualize the results of multiple modles you need to aggregate them. `factorial_mod_results()` do this:
 
