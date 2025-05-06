@@ -24,7 +24,19 @@ devtools::install_github("fdecunta/minter", force = TRUE)
 
 ## Example
 
-You can compute a bunch of effect sizes with one function:
+### Effect Sizes for factorial meta-analysis
+
+The function `factorial_effsize()` computes five effect sizes from the
+data of a factorial experiment:
+
+- **Two simple effects**:
+  - The effect of Factor A relative to the Control  
+  - The effect of Factor B relative to the Control
+- **Two overall effects**:
+  - The overall effect of Factor A across levels of Factor B  
+  - The overall effect of Factor B across levels of Factor A
+- **One interaction effect**:
+  - The effect size of the interaction between Factors A and B
 
 ``` r
 library(minter)
@@ -81,11 +93,14 @@ str(fake_data)
 #>  $ Herb_x_Fert_lnRR_var : num  0.0031 0.00293 0.00384 0.00308 0.0028 ...
 ```
 
-When non-independence of sampling variances exists, you may use an
-estimated variance-covariance matrix.
+### Multiple VCVs for non-independence
 
-For multiple effect sizes you need multiple matrices. You can do it with
-one call:
+Effect sizes are often not independent. In such cases, it is useful to
+use an estimated variance-covariance matrix to account for the
+non-independence among sampling variances.
+
+For multiple effect sizes you need multiple matrices. The function
+`factorial_vcv()` helps to calculate all of them at once:
 
 ``` r
 vi_cols <- c(
@@ -113,7 +128,7 @@ str(VCVs)
 #>  $ Herb_x_Fert_lnRR_var : num [1:9, 1:9] 0.0031 0.00151 0 0 0 ...
 ```
 
-Use a specific VCV matrix by referencing it using ‘\$’:
+To use a specific VCV matrix, just reference it using ‘\$’:
 
 ``` r
 # Overall effect of Insect Herbivores
@@ -141,7 +156,8 @@ res_intr <- metafor::rma.mv(
   data = fake_data)
 ```
 
-Aggregate the results from the three models into a single table.
+To visualize the results of multiple modles you need to aggregate them.
+`factorial_mod_results()` do this:
 
 ``` r
 # factorial_mod_results() uses orchaRd::mod_results() internally
@@ -165,12 +181,12 @@ res_table
 #> 3 Insect herbivory  0.2229779  0.098505410 0.34745043 -0.07655605 0.5225119
 ```
 
-You may want to visualize this results, and `orchaRd` package has great
-visualization tools for meta-analyses. So `minter` is designed to work
-with it.
+You may want to visualize these results, and the `orchaRd` package
+provides excellent tools for this. To support this, `minter` is designed
+to work seamlessly with `orchaRd`.
 
-The output from `factorial_mod_results` follows the format used by
-`orchaRd`, and can be directly used in `orchaRd:orchard_plot()`:
+The function `factorial_mod_results()` returns an object of class
+`orchaRd`, which can be used directly with `orchaRd::orchard_plot()`:
 
 ``` r
 orchaRd::orchard_plot(
@@ -178,8 +194,8 @@ orchaRd::orchard_plot(
   group = "Study",
   xlab = "lnRR",
   legend.pos = "top.out",
-  angle = 45
+  angle = 0
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="80%" height="90%" />

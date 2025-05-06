@@ -34,7 +34,21 @@ devtools::install_github("fdecunta/minter", force = TRUE)
 
 ## Example
 
-You can compute a bunch of effect sizes with one function:
+### Effect Sizes for factorial meta-analysis
+
+The function `factorial_effsize()` computes five effect sizes from the data of a factorial experiment:
+
+- **Two simple effects**:  
+  - The effect of Factor A relative to the Control  
+  - The effect of Factor B relative to the Control  
+
+- **Two overall effects**:  
+  - The overall effect of Factor A across levels of Factor B  
+  - The overall effect of Factor B across levels of Factor A  
+
+- **One interaction effect**:  
+  - The effect size of the interaction between Factors A and B
+
 
 ```{r example}
 library(minter)
@@ -66,10 +80,11 @@ fake_data <- factorial_effsize(
 str(fake_data)
 ```
 
+### Multiple VCVs for non-independence
 
-When non-independence of sampling variances exists, you may use an estimated variance-covariance matrix.
+Effect sizes are often not independent. In such cases, it is useful to use an estimated variance-covariance matrix to account for the non-independence among sampling variances.
 
-For multiple effect sizes you need multiple matrices. You can do it with one call:
+For multiple effect sizes you need multiple matrices. The function `factorial_vcv()` helps to calculate all of them at once:
 
 ```{r}
 vi_cols <- c(
@@ -91,8 +106,7 @@ VCVs <- factorial_vcv(
 str(VCVs)
 ```
 
-
-Use a specific VCV matrix by referencing it using '$':
+To use a specific VCV matrix, just reference it using '$':
 
 ```{r}
 # Overall effect of Insect Herbivores
@@ -120,8 +134,7 @@ res_intr <- metafor::rma.mv(
   data = fake_data)
 ```
 
-
-Aggregate the results from the three models into a single table.
+To visualize the results of multiple modles you need to aggregate them. `factorial_mod_results()` do this:
 
 
 ```{r}
@@ -142,9 +155,11 @@ res_table <- factorial_mod_results(
 res_table
 ```
 
-You may want to visualize this results, and `orchaRd` package has great visualization tools for meta-analyses. So `minter` is designed to work with it. 
 
-The output from `factorial_mod_results` follows the format used by `orchaRd`, and can be directly used in `orchaRd:orchard_plot()`:
+You may want to visualize these results, and the `orchaRd` package provides excellent tools for this.
+To support this, `minter` is designed to work seamlessly with `orchaRd`.
+
+The function `factorial_mod_results()` returns an object of class `orchaRd`, which can be used directly with `orchaRd::orchard_plot()`:
 
 
 ```{r, fig.width=6}
@@ -153,13 +168,6 @@ orchaRd::orchard_plot(
   group = "Study",
   xlab = "lnRR",
   legend.pos = "top.out",
-  angle = 45
+  angle = 0
 )
 ```
-
-
-
-
-
-
-
