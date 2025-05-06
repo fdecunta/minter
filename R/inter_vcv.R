@@ -27,17 +27,25 @@
 #' 
 #' @export
 inter_vcv <- function(vi_cols, cluster, obs, rho, data, ...) {
-  checkmate::assert_data_frame(data, null.ok = FALSE)
+  checkmate::assert_data_frame(data)
+  checkmate::assert_number(rho)
+  checkmate::assert_character(vi_cols, any.missing = FALSE, min.len = 1)
 
   if (!all(vi_cols %in% names(data))) {
-    stop("Some column names do not exist in the data.")
+    missing_vi <- setdiff(vi_cols, names(data))
+    stop("The following `vi_cols` are not in `data`: ",
+         paste(missing_vi, collapse = ", "))
   }
 
-  compute_vcv <- function(c, ...) {
+  cluster <- eval(substitute(cluster), data)
+  obs <- eval(substitute(obs), data)
+
+  # Inner function to use with lapply. Run vcalc on every column from vi_cols
+  compute_vcv <- function(vi, ...) {
     metafor::vcalc(
-      vi = data[[c]],
-      cluster = data[[cluster]],
-      obs = data[[obs]],
+      vi = data[[vi]],
+      cluster = cluster,
+      obs = obs,
       rho = rho,
       data = data,
       ...
@@ -46,5 +54,6 @@ inter_vcv <- function(vi_cols, cluster, obs, rho, data, ...) {
 
   vcv_list <- lapply(vi_cols, compute_vcv, ...)
   names(vcv_list) <- vi_cols
+
   return(vcv_list)
 }

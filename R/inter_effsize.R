@@ -55,15 +55,28 @@ inter_effsize <- function(
   AB_n,
   data
 ) {
-  # Get all the arguments as strings 
-  args <- as.list(match.call())
+  checkmate::assert_choice(effsize, choices = c("lnrr", "smd"))
+  checkmate::assert_character(colnames, len = 2, any.missing = FALSE)
+  checkmate::assert_data_frame(data)
 
-  # Get a list with the vectors of the columns
-  # in the data that are going to be used for  
-  # computing the effect sizes
-  effsize_args <- .get_columns(data, args)
+  # Get args as symbosls and then evaluate them in the context of 'data' to get columns
+  vars <- list(
+    Ctrl_mean = substitute(Ctrl_mean),
+    Ctrl_sd   = substitute(Ctrl_sd),
+    Ctrl_n    = substitute(Ctrl_n),
+    A_mean    = substitute(A_mean),
+    A_sd      = substitute(A_sd),
+    A_n       = substitute(A_n),
+    B_mean    = substitute(B_mean),
+    B_sd      = substitute(B_sd),
+    B_n       = substitute(B_n),
+    AB_mean   = substitute(AB_mean),
+    AB_sd     = substitute(AB_sd),
+    AB_n      = substitute(AB_n)
+  )
+  # Get a named list with the columns to be used for computing the effect size
+  effsize_args <- lapply(vars, function(x) eval(x, data))
 
-  # Compute the effect sizes
   if (effsize == "lnrr") {
     df = do.call(.inter_effsize.lnRR, effsize_args)
   } else if (effsize == "smd") {
@@ -126,16 +139,17 @@ inter_effsize <- function(
   # Simple effects for factors A and B
   simple_lnRR_A <- simple_lnRR(
     Ctrl_mean, Ctrl_sd, Ctrl_n,
-	  A_mean, A_sd, A_n
+    A_mean, A_sd, A_n
   )
   simple_lnRR_B <- simple_lnRR(
     Ctrl_mean, Ctrl_sd, Ctrl_n,
-	  B_mean, B_sd, B_n)
+    B_mean, B_sd, B_n
+  )
 
   # Overral effect for Factor B
   overall_lnRR_A <- overall_lnRR(
     Ctrl_mean, Ctrl_sd, Ctrl_n,
-  	A_mean, A_sd, A_n,
+    A_mean, A_sd, A_n,
     B_mean, B_sd, B_n,
     AB_mean, AB_sd, AB_n
   )
@@ -327,29 +341,3 @@ inter_effsize <- function(
   return(df)
 }
 
-
-#' Get columns with values for computing effect sizes
-#'
-#' @keywords internal
-.get_columns <- function(data, args) {
-
-  # Names used in functions to refer to data columns
-  args_names <- c(
-    "Ctrl_mean", "Ctrl_sd", "Ctrl_n",
-    "A_mean", "A_sd", "A_n",
-    "B_mean", "B_sd", "B_n",
-    "AB_mean", "AB_sd", "AB_n"
-  )
-
-  # From the args passed take only those with column names
-  # args is a list, so just subset it.
-  column_names <- args[args_names]
-
-  # Use those names to get the actual vectors of values from the data
-  eff_args <- lapply(column_names, function(c) data[[as.character(c)]])
-
-  # Name the elements in eff_args with 
-  names(eff_args) <- args_names
-
-  return(eff_args)    
-}

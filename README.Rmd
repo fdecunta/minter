@@ -74,8 +74,8 @@ vi_cols <- c(
 )
 
 VCVs <- inter_vcv(vi_cols = vi_cols,
-                  cluster = "Study",
-                  obs = "EffectSize_ID",
+                  cluster = Study,
+                  obs = EffectSize_ID,
                   rho = 0.5,
                   data = fake_data)
 
