@@ -67,7 +67,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">fake_data</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Compute the effect sizes</span></span>
-<span><span class="va">fake_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/inter_effsize.html">inter_effsize</a></span><span class="op">(</span></span>
+<span><span class="va">fake_data</span> <span class="op">&lt;-</span> <span class="fu">inter_effsize</span><span class="op">(</span></span>
 <span>  effsize <span class="op">=</span> <span class="st">"lnrr"</span>,</span>
 <span>  colnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Herb"</span>, <span class="st">"Fert"</span><span class="op">)</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">fake_data</span>,</span>
@@ -122,7 +122,7 @@
 <span>  <span class="st">"Herb_x_Fert_lnRR_var"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">VCVs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/inter_vcv.html">inter_vcv</a></span><span class="op">(</span></span>
+<span><span class="va">VCVs</span> <span class="op">&lt;-</span> <span class="fu">inter_vcv</span><span class="op">(</span></span>
 <span>  vi_cols <span class="op">=</span> <span class="va">vi_cols</span>,</span>
 <span>  cluster <span class="op">=</span> <span class="va">Study</span>,</span>
 <span>  obs <span class="op">=</span> <span class="va">EffectSize_ID</span>,</span>
