@@ -36,6 +36,8 @@ jobs:
             checkmate
 
       - name: Install orchaRd from GitHub
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
           Rscript -e 'install.packages("remotes")'
           Rscript -e 'remotes::install_github("daniel1noble/orchaRd")'
