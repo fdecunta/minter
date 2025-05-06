@@ -322,9 +322,7 @@ inter_effsize <- function(
     effsize <- "lnRR"
   } else if (effsize == "smd") {
     effsize <- "SMD"
-  } else {
-    stop("Error in .name_columns. Bad effect size name")
-  }
+  } 
 
   colnames(df) <- c(
     paste(fctr_a, "simple", effsize, sep = "_"),

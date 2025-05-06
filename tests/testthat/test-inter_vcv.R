@@ -32,3 +32,16 @@ test_that("inter_vcv fails when data is not found", {
     )
   )
 })
+
+test_that("Explain the error when columns from vi_cols are not in data", {
+  expect_error(
+    inter_vcv(
+	vi_cols = c("Herb_sd", "foo"),
+	cluster = Study,
+	obs = EffectSize_ID,
+	rho = 0.5,
+	data = fake_data
+    ),
+    regexp = "The following"
+  )
+})
