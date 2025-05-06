@@ -147,11 +147,13 @@ You may want to visualize this results, and `orchaRd` package has great visualiz
 The output from `factorial_mod_results` follows the format used by `orchaRd`, and can be directly used in `orchaRd:orchard_plot()`:
 
 
-```{r}
+```{r, fig.width=6}
 orchaRd::orchard_plot(
   res_table,
   group = "Study",
-  xlab = "lnRR"
+  xlab = "lnRR",
+  legend.pos = "top.out",
+  angle = 45
 )
 ```
 

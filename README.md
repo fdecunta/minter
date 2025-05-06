@@ -176,7 +176,9 @@ The output from `factorial_mod_results` follows the format used by
 orchaRd::orchard_plot(
   res_table,
   group = "Study",
-  xlab = "lnRR"
+  xlab = "lnRR",
+  legend.pos = "top.out",
+  angle = 45
 )
 ```
 
