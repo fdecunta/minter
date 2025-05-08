@@ -39,7 +39,7 @@ simple_SMD <- function(
 }
 
 
-#' Overall effect: Standardized Mean Difference Hedges' g
+#' Main effect: Standardized Mean Difference Hedges' g
 #' 
 #' TODO: this
 #' 
@@ -68,7 +68,7 @@ simple_SMD <- function(
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
 #'
 #' @keywords internal
-overall_SMD <- function(
+main_SMD <- function(
   Ctrl_mean,
   Ctrl_sd,
   Ctrl_n,
@@ -95,7 +95,7 @@ overall_SMD <- function(
     (d_A^2 / (2 * (A_n + B_n + AB_n + Ctrl_n)))
   )
 
-  return(data.frame(overall_SMD = d_A, overall_SMD_var = v_A))
+  return(data.frame(main_SMD = d_A, main_SMD_var = v_A))
 }
 
 
@@ -195,7 +195,7 @@ interaction_SMD <- function(
 
 #' Correction for small-sample bias
 #'
-#' @param m Degrees of freedom. They change between individual and overall effects.
+#' @param m Degrees of freedom. They change between individual and main effects.
 #' 
 #' @keywords internal
 .j_correction <- function(m) {

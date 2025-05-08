@@ -7,7 +7,7 @@
 .j_correction(m)
 }
 \arguments{
-\item{m}{Degrees of freedom. They change between individual and overall effects.}
+\item{m}{Degrees of freedom. They change between individual and main effects.}
 }
 \description{
 Correction for small-sample bias

@@ -23,7 +23,7 @@ factorial_effsize(
 )
 }
 \arguments{
-\item{effsize}{Character. Effect‐size metric to compute. Supported: \code{"lnrr"}.}
+\item{effsize}{Character. Effect‐size metric to compute. Supported: \code{"lnrr"} or \code{"smd"}.}
 
 \item{colnames}{Character vector of length 2 giving the names to use for the
 factors A and B}
@@ -63,14 +63,22 @@ TODO: !
 }
 \examples{
 \dontrun{
-result <- factorial_effsize(
-  effsize   = "lnrr",
-  data      = df,
-  colnames  = c("yi", "vi"),
-  Ctrl_mean = ctrl_mean, Ctrl_sd = ctrl_sd, Ctrl_n = ctrl_n,
-  A_mean    = a_mean,    A_sd    = a_sd,    A_n    = a_n,
-  B_mean    = b_mean,    B_sd    = b_sd,    B_n    = b_n,
-  AB_mean   = ab_mean,   AB_sd   = ab_sd,   AB_n   = ab_n,
+fake_data <- factorial_effsize(
+  effsize = "lnrr",
+  colnames = c("Herb", "Fert"),
+  data = fake_data,
+  Ctrl_mean = C_mean,
+  Ctrl_sd = C_sd,
+  Ctrl_n = C_n,
+  A_mean = Herb_mean,
+  A_sd = Herb_sd,
+  A_n = Herb_n,
+  B_mean = Fert_mean,
+  B_sd = Fert_sd,
+  B_n = Fert_n,
+  AB_mean = HxF_mean,
+  AB_sd = HxF_sd,
+  AB_n = HxF_n
 )
 }
 

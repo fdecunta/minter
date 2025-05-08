@@ -55,12 +55,12 @@ test_that("Simple lnRR sampling variance is working fine", {
 
 test_that("Overall lnRR is working fine", {
   expect_equal(
-	       fdata$Fert_overall_lnRR,
+	       fdata$Fert_main_lnRR,
 	       fdata_test$Fert_overall_lnRR,
 	       tolerance = 1e-8)
 
   expect_equal(
-	       fdata$Herb_overall_lnRR,
+	       fdata$Herb_main_lnRR,
 	       fdata_test$Herb_overall_lnRR,
 	       tolerance = 1e-8)
 })
@@ -68,7 +68,7 @@ test_that("Overall lnRR is working fine", {
 
 test_that("Overall lnRR sampling variance is working fine", {
   expect_equal(
-	       fdata$Herb_overall_lnRR_var,
+	       fdata$Herb_main_lnRR_var,
 	       fdata_test$Herb_overall_lnRR_var,
 	       tolerance = 1e-8)
 })

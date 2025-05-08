@@ -17,12 +17,12 @@ simple_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n, A_mean, A_sd, A_n) {
 }
 
 
-#' Overall effect: log response ratio 
+#' Main effect: log response ratio 
 #'
 #' Computes the overral effect of a treatment in a 2-by-2 factorial design.
 #' 
 #' Given a full factorial design with factors A x B
-#' The overall effect of A is quantified as the log of the ratio of the average
+#' The main effect of A is quantified as the log of the ratio of the average
 #' outcome in the two treatments where A is present. That is, treatments A-and-B, A-and-Control.
 #'
 #' @param Ctrl_mean Mean outcome from the Control treatment
@@ -52,17 +52,17 @@ simple_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n, A_mean, A_sd, A_n) {
 #'     Neuroscience & Biobehavioral Reviews, 135, 104554.
 #'     https://doi.org/10.1016/j.neubiorev.2022.104554 
 #' @keywords internal
-overall_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
+main_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
                          A_mean   , A_sd   , A_n,
                          B_mean   , B_sd   , B_n,
                          AB_mean  , AB_sd  , AB_n) {
   # From Morris et al. 2007, formulas B.9 and B.10 from Appendix B:
-  overall_lnRR <- log(A_mean + AB_mean) - log(Ctrl_mean + B_mean)
+  main_lnRR <- log(A_mean + AB_mean) - log(Ctrl_mean + B_mean)
 
-  overall_lnRR_var <- (1 / (A_mean    + AB_mean))^2 * (A_sd^2    / A_n    + AB_sd^2 / AB_n) +
+  main_lnRR_var <- (1 / (A_mean    + AB_mean))^2 * (A_sd^2    / A_n    + AB_sd^2 / AB_n) +
 	              (1 / (Ctrl_mean + B_mean ))^2 * (Ctrl_sd^2 / Ctrl_n + B_sd^2  / B_n)
   
-  return(data.frame(overall_lnRR, overall_lnRR_var)) 
+  return(data.frame(main_lnRR, main_lnRR_var)) 
 }	
 
 

@@ -155,7 +155,7 @@ factorial_effsize <- function(
   )
 
   # Overral effect for Factor B
-  overall_lnRR_A <- overall_lnRR(
+  main_lnRR_A <- main_lnRR(
     Ctrl_mean, Ctrl_sd, Ctrl_n,
     A_mean, A_sd, A_n,
     B_mean, B_sd, B_n,
@@ -164,7 +164,7 @@ factorial_effsize <- function(
 
   # Overral effect for Factor B
   # Note that the order of A and B are changed here.
-  overall_lnRR_B <- overall_lnRR(
+  main_lnRR_B <- main_lnRR(
     Ctrl_mean, Ctrl_sd, Ctrl_n,
     B_mean, B_sd, B_n,
     A_mean, A_sd, A_n,
@@ -184,10 +184,10 @@ factorial_effsize <- function(
     "s_lnRR_var_A" = simple_lnRR_A[, 2],
     "s_lnRR_B"     = simple_lnRR_B[, 1],
     "s_lnRR_var_B" = simple_lnRR_B[, 2],
-    "o_lnRR_A"     = overall_lnRR_A[, 1],
-    "o_lnRR_var_A" = overall_lnRR_A[, 2],
-    "o_lnRR_B"     = overall_lnRR_B[, 1],
-    "o_lnRR_var_B" = overall_lnRR_B[, 2],
+    "o_lnRR_A"     = main_lnRR_A[, 1],
+    "o_lnRR_var_A" = main_lnRR_A[, 2],
+    "o_lnRR_B"     = main_lnRR_B[, 1],
+    "o_lnRR_var_B" = main_lnRR_B[, 2],
     "inter_lnRR"   = interaction_lnRR[, 1],
     "inter_lnRR_var" = interaction_lnRR[, 2]
     )
@@ -273,8 +273,8 @@ factorial_effsize <- function(
     pooled_sd
   )
 
-  # Overall SMD for Factor A 
-  overall_SMD_A <- overall_SMD(
+  # Main SMD for Factor A 
+  main_SMD_A <- main_SMD(
     Ctrl_mean, Ctrl_sd, Ctrl_n,
     A_mean, A_sd, A_n,
     B_mean, B_sd, B_n,
@@ -282,8 +282,8 @@ factorial_effsize <- function(
     pooled_sd
   )
 
-  # Overall SMD for Factor B: note that the order of A and B are changed
-  overall_SMD_B <- overall_SMD(
+  # Main SMD for Factor B: note that the order of A and B are changed
+  main_SMD_B <- main_SMD(
     Ctrl_mean, Ctrl_sd, Ctrl_n,
     B_mean, B_sd, B_n,
     A_mean, A_sd, A_n,
@@ -305,10 +305,10 @@ factorial_effsize <- function(
     "s_SMD_var_A" = simple_SMD_A[, 2],
     "s_SMD_B"     = simple_SMD_B[, 1],
     "s_SMD_var_B" = simple_SMD_B[, 2],
-    "o_SMD_A"     = overall_SMD_A[, 1],
-    "o_SMD_var_A" = overall_SMD_A[, 2],
-    "o_SMD_B"     = overall_SMD_B[, 1],
-    "o_SMD_var_B" = overall_SMD_B[, 2],
+    "o_SMD_A"     = main_SMD_A[, 1],
+    "o_SMD_var_A" = main_SMD_A[, 2],
+    "o_SMD_B"     = main_SMD_B[, 1],
+    "o_SMD_var_B" = main_SMD_B[, 2],
     "inter_SMD"   = interaction_SMD[, 1],
     "inter_SMD_var" = interaction_SMD[, 2]
     )
@@ -337,13 +337,12 @@ factorial_effsize <- function(
     paste(fctr_a, "simple", effsize, "var", sep = "_"),
     paste(fctr_b, "simple", effsize, sep = "_"),
     paste(fctr_b, "simple", effsize, "var", sep = "_"),
-    paste(fctr_a, "overall", effsize, sep = "_"),
-    paste(fctr_a, "overall", effsize, "var", sep = "_"),
-    paste(fctr_b, "overall", effsize, sep = "_"),
-    paste(fctr_b, "overall", effsize, "var", sep = "_"),
+    paste(fctr_a, "main", effsize, sep = "_"),
+    paste(fctr_a, "main", effsize, "var", sep = "_"),
+    paste(fctr_b, "main", effsize, sep = "_"),
+    paste(fctr_b, "main", effsize, "var", sep = "_"),
     paste(fctr_a, "x", fctr_b, effsize, sep = "_"),
     paste(fctr_a, "x", fctr_b, effsize, "var", sep = "_")
   )
   return(df)
 }
-
