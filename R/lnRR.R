@@ -9,9 +9,27 @@
 #' @param A_sd Standard deviation from the treatment
 #' @param A_n Sample size from the treatment
 #'
+#' @references 
+#'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
+#'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
+#'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
+#'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+#'
+#'   Lajeunesse, M. J. (2011). On the meta‐analysis of response ratios for
+#'     studies with correlated and multi‐group designs. Ecology, 92(11), 2049-2055.
+#'     https://doi.org/10.1890/11-0423.1
+#'
 #' @keywords internal
-.simple_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n, A_mean, A_sd, A_n) {
+.simple_lnRR <- function(
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  A_mean,
+  A_sd,
+  A_n
+) {
   simple_lnRR <- log(A_mean / Ctrl_mean)
+
   simple_lnRRv <- Ctrl_sd^2 / (Ctrl_n * Ctrl_mean^2) + A_sd^2 / (A_n * A_mean^2)
 
   return(data.frame(simple_lnRR, simple_lnRRv))
@@ -45,19 +63,32 @@
 #'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 #'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+#'
 #'   Lajeunesse, M. J. (2011). On the meta‐analysis of response ratios for
 #'     studies with correlated and multi‐group designs. Ecology, 92(11), 2049-2055.
 #'     https://doi.org/10.1890/11-0423.1
+#'
 #'   Macartney, E. L., Lagisz, M., & Nakagawa, S. (2022). The relative benefits
 #'     of environmental enrichment on learning and memory are greater when 
 #'     stressed: A meta-analysis of interactions in rodents.
 #'     Neuroscience & Biobehavioral Reviews, 135, 104554.
 #'     https://doi.org/10.1016/j.neubiorev.2022.104554 
+#'
 #' @keywords internal
-.main_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
-                         A_mean   , A_sd   , A_n,
-                         B_mean   , B_sd   , B_n,
-                         AB_mean  , AB_sd  , AB_n) {
+.main_lnRR <- function(
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  A_mean,
+  A_sd,
+  A_n,
+  B_mean, 
+  B_sd, 
+  B_n,
+  AB_mean, 
+  AB_sd,
+  AB_n
+) {
   # From Morris et al. 2007, formulas B.9 and B.10 from Appendix B:
   main_lnRR <- log(A_mean + AB_mean) - log(Ctrl_mean + B_mean)
 
@@ -67,7 +98,7 @@
   return(data.frame(main_lnRR, main_lnRRv)) 
 }
 
-#' Main Log Response Ratio
+#' Main Log Response Ratio: method by Nakagawa
 #'
 #' Computes the main effect of a treatment in a 2-by-2 factorial design using
 #' the method proposed by Nakagawa (in prep.)
