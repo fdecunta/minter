@@ -4,18 +4,14 @@ Version: 0.0.1
 Authors@R: 
     person("Facundo", "Decunta", , "fdecunta@agro.uba.ar", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0004-5774-1085"))
-Description: Provide functions for compute effect sizes for interactions from factorial experiments and visualization tools for those effects.
+Description: Compute effect sizes for interactions from factorial experiments.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 URL: https://fdecunta.github.io/minter/
 Imports:
-    checkmate,
-    metafor,
-    orchaRd
-Remotes:
-    daniel1noble/orchaRd
+    checkmate
 Depends: 
     R (>= 3.5)
 LazyData: true

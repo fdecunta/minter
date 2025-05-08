@@ -1,6 +1,7 @@
-#' Simple effect: log response ratio
+#' Simple Log Response Ratio
 #' 
 #' Computes the log of the response ratio
+#'
 #' @param Ctrl_mean Mean outcome from the Control treatment
 #' @param Ctrl_sd Standard deviation from the control treatment
 #' @param Ctrl_n Sample size from the control streatment
@@ -9,7 +10,7 @@
 #' @param A_n Sample size from the treatment
 #'
 #' @keywords internal
-simple_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n, A_mean, A_sd, A_n) {
+.simple_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n, A_mean, A_sd, A_n) {
   simple_lnRR <- log(A_mean / Ctrl_mean)
   simple_lnRR_var <- Ctrl_sd^2 / (Ctrl_n * Ctrl_mean^2) + A_sd^2 / (A_n * A_mean^2)
 
@@ -17,9 +18,10 @@ simple_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n, A_mean, A_sd, A_n) {
 }
 
 
-#' Main effect: log response ratio 
+#' Main Log Response Ratio
 #'
-#' Computes the overral effect of a treatment in a 2-by-2 factorial design.
+#' Computes the main effect of a treatment in a 2-by-2 factorial design using
+#' the method proposed by Nakagawa (in prep.)
 #' 
 #' Given a full factorial design with factors A x B
 #' The main effect of A is quantified as the log of the ratio of the average
@@ -39,42 +41,41 @@ simple_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n, A_mean, A_sd, A_n) {
 #' @param AB_n Sample size from the interaction AxB treatment
 #' 
 #' @references 
-#'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
-#'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
-#'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
-#'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
-#'   Lajeunesse, M. J. (2011). On the meta‐analysis of response ratios for
-#'     studies with correlated and multi‐group designs. Ecology, 92(11), 2049-2055.
-#'     https://doi.org/10.1890/11-0423.1
-#'   Macartney, E. L., Lagisz, M., & Nakagawa, S. (2022). The relative benefits
-#'     of environmental enrichment on learning and memory are greater when 
-#'     stressed: A meta-analysis of interactions in rodents.
-#'     Neuroscience & Biobehavioral Reviews, 135, 104554.
-#'     https://doi.org/10.1016/j.neubiorev.2022.104554 
+#'   Not published yet.
+#'
 #' @keywords internal
-main_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
-                         A_mean   , A_sd   , A_n,
-                         B_mean   , B_sd   , B_n,
-                         AB_mean  , AB_sd  , AB_n) {
-  # From Morris et al. 2007, formulas B.9 and B.10 from Appendix B:
-  main_lnRR <- log(A_mean + AB_mean) - log(Ctrl_mean + B_mean)
+.main_lnRR <- function(
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  A_mean,
+  A_sd, 
+  A_n,
+  B_mean,
+  B_sd, 
+  B_n,
+  AB_mean,
+  AB_sd,
+  AB_n
+) {
+  main_lnRR <- 0.5 * log((A_mean * AB_mean) / (Ctrl_mean * B_mean))
 
-  main_lnRR_var <- (1 / (A_mean    + AB_mean))^2 * (A_sd^2    / A_n    + AB_sd^2 / AB_n) +
-	              (1 / (Ctrl_mean + B_mean ))^2 * (Ctrl_sd^2 / Ctrl_n + B_sd^2  / B_n)
-  
+  main_lnRR_var <- 0.25 * (
+    (AB_sd^2   / (AB_n   * AB_mean^2)) +
+    (A_sd^2    / (A_n    * A_mean^2)) +
+    (B_sd^2    / (B_n    * B_mean^2)) +
+    (Ctrl_sd^2 / (Ctrl_n * Ctrl_mean^2))
+  )
+
   return(data.frame(main_lnRR, main_lnRR_var)) 
 }	
 
 
-#' Interaction effect: log of response ratio
+#' Interaction Log Response Ratio
 #'
-#' Computes the interaction effect of a treatment in a 2-by-2 factorial design.
+#' Computes the interaction effect of a treatment in a 2-by-2 factorial design
+#' using the method proposed in Morris et al. 2007.
 #' 
-#' Given a full factorial design with factors A x B
-#' The interacion effect of A x B is quantified as the 
-#'
-#' TODO: Complete this!!!
-#'
 #' @param Ctrl_mean Mean outcome from the Control treatment
 #' @param Ctrl_sd Standard deviation from the control treatment
 #' @param Ctrl_n Sample size from the control streatment
@@ -93,19 +94,21 @@ main_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
 #'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 #'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
-#'   Lajeunesse, M. J. (2011). On the meta‐analysis of response ratios for
-#'     studies with correlated and multi‐group designs. Ecology, 92(11), 2049-2055.
-#'     https://doi.org/10.1890/11-0423.1
-#'   Macartney, E. L., Lagisz, M., & Nakagawa, S. (2022). The relative benefits
-#'     of environmental enrichment on learning and memory are greater when 
-#'     stressed: A meta-analysis of interactions in rodents.
-#'     Neuroscience & Biobehavioral Reviews, 135, 104554.
-#'     https://doi.org/10.1016/j.neubiorev.2022.104554 
 #' @keywords internal
-interaction_lnRR <- function(Ctrl_mean, Ctrl_sd, Ctrl_n,
-                             A_mean   , A_sd   , A_n,
-                             B_mean   , B_sd   , B_n,
-                             AB_mean  , AB_sd  , AB_n) {
+.interaction_lnRR <- function(
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  A_mean,
+  A_sd,
+  A_n,
+  B_mean,
+  B_sd,
+  B_n,
+  AB_mean,
+  AB_sd,
+  AB_n
+) {
   # From Morris et al. 2007, formulas B.11 and B.12 from Appendix B:
   inter_lnRR <- log(AB_mean / B_mean) - log(A_mean / Ctrl_mean)
 
