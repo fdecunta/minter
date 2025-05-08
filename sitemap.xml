@@ -4,6 +4,7 @@
 <url><loc>https://fdecunta.github.io/minter/LICENSE.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/authors.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/index.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/compute_effsize.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/dot-factorial_effsize.SMD.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/dot-factorial_effsize.lnRR.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/dot-j_correction.html</loc></url>
@@ -15,10 +16,12 @@
 <url><loc>https://fdecunta.github.io/minter/reference/factorial_vcv.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/fake_data.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/index.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/inter_lnVR.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/interaction_SMD.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/interaction_lnRR.html</loc></url>
-<url><loc>https://fdecunta.github.io/minter/reference/overall_SMD.html</loc></url>
-<url><loc>https://fdecunta.github.io/minter/reference/overall_lnRR.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/main_SMD.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/main_lnRR.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/main_lnVR.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/simple_SMD.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/simple_lnRR.html</loc></url>
 </urlset>
