@@ -91,8 +91,6 @@ lnCVR <- function(
 }
 
 
-
-
 #' Simple Log Coefficient Of Variation Ratio
 #'
 #' TODO:
@@ -211,8 +209,8 @@ lnCVR <- function(
   main_lnCVR <- 0.5 * log((AB_CV * A_CV) / (B_CV * Ctrl_CV)) +
     0.5 * (
            (1 / (2 * (AB_n - 1))) +
-           (1 / (2 * (A_n - 1))) +
-           (1 / (2 * (B_n - 1))) +
+           (1 / (2 * (A_n - 1))) -
+           (1 / (2 * (B_n - 1))) -
            (1 / (2 * (Ctrl_n - 1)))
     )
 
