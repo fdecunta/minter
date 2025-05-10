@@ -9,9 +9,9 @@
 #' @param Ctrl_mean Mean outcome from the Control treatment
 #' @param Ctrl_sd Standard deviation from the control treatment
 #' @param Ctrl_n Sample size from the control streatment
-#' @param X_mean Mean outcome from treatment
-#' @param X_sd Standard deviation from treatment
-#' @param X_n Sample size from treatment
+#' @param A_mean Mean outcome from experimental treatment
+#' @param A_sd Standard deviation from experimental treatment
+#' @param A_n Sample size from experimental treatment
 #'
 #' @references
 #'
@@ -25,21 +25,21 @@
   Ctrl_mean,
   Ctrl_sd,
   Ctrl_n,
-  X_mean,
-  X_sd,
-  X_n
+  A_mean,
+  A_sd,
+  A_n
 ) {
   # First compute the coefficients of variation 
   Ctrl_CV <- Ctrl_sd / Ctrl_mean
-  X_CV <- X_sd / X_mean
+  A_CV <- A_sd / A_mean
 
-  simple_lnCVR <- log(X_CV / Ctrl_CV) +
-    (1 / (2 * (X_n - 1))) -
+  simple_lnCVR <- log(A_CV / Ctrl_CV) +
+    (1 / (2 * (A_n - 1))) -
     (1 / (2 * (Ctrl_n - 1))) 
 
   # Assumes no correlation between mean and variance (see Nakagawa et al. 2015)
   simple_lnCVRv <- (Ctrl_sd^2 / (Ctrl_n * Ctrl_mean^2)) + (1 / (2 * (Ctrl_n - 1))) + 
-    (X_sd^2 / (X_n * X_mean^2)) + (1 / (2 * (X_n - 1)))
+    (A_sd^2 / (A_n * A_mean^2)) + (1 / (2 * (A_n - 1)))
 
   return(data.frame(simple_lnCVR, simple_lnCVRv))
 }

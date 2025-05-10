@@ -3,6 +3,7 @@
 #' @param type Type of effect size: "ind", "main", or "inter"
 #' @param data Data frame with the data
 #' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
+#' @param append Logical. Append the results to \code{data}. Default is TRUE
 #' @param Ctrl_mean Mean outcome from the Control treatment
 #' @param Ctrl_sd Standard deviation from the control treatment
 #' @param Ctrl_n Sample size from the control streatment
@@ -16,7 +17,6 @@
 #' @param AB_sd Standard deviation from the interaction AxB treatment
 #' @param AB_n Sample size from the interaction AxB treatment
 #'
-#'
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
 #' @export
@@ -24,6 +24,7 @@ lnRR <- function(
   type,
   data,
   col_names = c("yi", "vi"),
+  append = TRUE,
   Ctrl_mean,
   Ctrl_sd,
   Ctrl_n,
@@ -39,18 +40,19 @@ lnRR <- function(
 ) {
   checkmate::assert_choice(type, choices = c("ind", "main", "inter"))
   checkmate::assert_character(col_names, len = 2)
+  checkmate::assert_logical(append, len = 1)
   checkmate::assert_data_frame(data)
   
-  # Define columns needed and evaluate in context of 'data' to
-  # get the column values, not the string name
+  # Define columns needed and evaluate them using 'data' to
+  # get the column vectors
   if (type == "ind") {
     vars <- list(
       Ctrl_mean = substitute(Ctrl_mean),
       Ctrl_sd   = substitute(Ctrl_sd),
       Ctrl_n    = substitute(Ctrl_n),
-      X_mean    = substitute(A_mean),
-      X_sd      = substitute(A_sd),
-      X_n       = substitute(A_n)
+      A_mean    = substitute(A_mean),
+      A_sd      = substitute(A_sd),
+      A_n       = substitute(A_n)
     )
   } else {
     vars <- list(
@@ -81,6 +83,10 @@ lnRR <- function(
   # Rename columns 
   colnames(df) <- col_names
 
+  if (append) {
+    df <- cbind(data, df)
+  }
+
   return(df)
 }
 
@@ -91,9 +97,9 @@ lnRR <- function(
 #' @param Ctrl_mean Mean outcome from the Control treatment
 #' @param Ctrl_sd Standard deviation from the control treatment
 #' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from the treatment
-#' @param A_sd Standard deviation from the treatment
-#' @param A_n Sample size from the treatment
+#' @param A_mean Mean outcome from the experimental treatment
+#' @param A_sd Standard deviation from the experimental treatment
+#' @param A_n Sample size from the experimental treatment
 #'
 #' @references 
 #'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,

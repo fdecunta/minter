@@ -4,10 +4,38 @@
 \alias{.pooled_sd}
 \title{Pooled Standard Deviation for SMD in factorial experiments}
 \usage{
-.pooled_sd(Ctrl_sd, Ctrl_n, A_sd, A_n, B_sd, B_n, AB_n, AB_sd)
+.pooled_sd(
+  Ctrl_sd,
+  Ctrl_n,
+  A_sd,
+  A_n,
+  B_sd = NULL,
+  B_n = NULL,
+  AB_n = NULL,
+  AB_sd = NULL
+)
+}
+\arguments{
+\item{Ctrl_sd}{Standard deviation from the control treatment}
+
+\item{Ctrl_n}{Sample size from the control streatment}
+
+\item{A_sd}{Standard deviation from the A treatment}
+
+\item{A_n}{Sample size from the A treatment}
+
+\item{B_sd}{Standard deviation from the B treatment}
+
+\item{B_n}{Sample size from the B treatment}
+
+\item{AB_n}{Sample size from the interaction AxB treatment}
+
+\item{AB_sd}{Standard deviation from the interaction AxB treatment}
 }
 \description{
-The pooled standard deviation is comptuted as:
+Compute the pooled standard deviation for SMD. It computes the pooled SD
+for 2 or 4 groups depending on the arguments passed.
+Simple SMD has only 2 groups, while main and interactions had 4 groups.
 }
 \references{
 Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,

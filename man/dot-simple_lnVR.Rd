@@ -4,24 +4,27 @@
 \alias{.simple_lnVR}
 \title{Simple Log Variability ratio}
 \usage{
-.simple_lnVR(Ctrl_sd, Ctrl_n, X_sd, X_n)
+.simple_lnVR(Ctrl_sd, Ctrl_n, A_sd, A_n)
 }
 \arguments{
 \item{Ctrl_sd}{Standard deviation from the control treatment}
 
-\item{Ctrl_n}{Sample size from the control streatment}
+\item{Ctrl_n}{Sample size from the control treatment}
 
-\item{X_sd}{Standard deviation from the treatment}
+\item{A_sd}{Standard deviation from the experimental treatment}
 
-\item{X_n}{Sample size from the treatment}
+\item{A_n}{Sample size from the experimental treatment}
 }
 \description{
-Simple Log Variability ratio
+This is computed using formulas from Nakagawa et al. 2015
 }
 \references{
 Nakagawa, S., Poulin, R., Mengersen, K., Reinhold, K., Engqvist,
 L., Lagisz, M., & Senior, A. M. (2015). Meta‐analysis of variation:
 ecological and evolutionary applications and beyond. Methods in
 Ecology and Evolution, 6(2), 143-152.
+}
+\author{
+Facundo Decunta - fdecunta@agro.uba.ar
 }
 \keyword{internal}

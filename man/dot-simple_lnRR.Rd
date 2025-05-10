@@ -13,11 +13,11 @@
 
 \item{Ctrl_n}{Sample size from the control streatment}
 
-\item{A_mean}{Mean outcome from the treatment}
+\item{A_mean}{Mean outcome from the experimental treatment}
 
-\item{A_sd}{Standard deviation from the treatment}
+\item{A_sd}{Standard deviation from the experimental treatment}
 
-\item{A_n}{Sample size from the treatment}
+\item{A_n}{Sample size from the experimental treatment}
 }
 \description{
 Computes the log of the response ratio

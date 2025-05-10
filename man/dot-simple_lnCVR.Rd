@@ -4,7 +4,7 @@
 \alias{.simple_lnCVR}
 \title{Simple Log Coefficient Of Variation Ratio}
 \usage{
-.simple_lnCVR(Ctrl_mean, Ctrl_sd, Ctrl_n, X_mean, X_sd, X_n)
+.simple_lnCVR(Ctrl_mean, Ctrl_sd, Ctrl_n, A_mean, A_sd, A_n)
 }
 \arguments{
 \item{Ctrl_mean}{Mean outcome from the Control treatment}
@@ -13,11 +13,11 @@
 
 \item{Ctrl_n}{Sample size from the control streatment}
 
-\item{X_mean}{Mean outcome from treatment}
+\item{A_mean}{Mean outcome from experimental treatment}
 
-\item{X_sd}{Standard deviation from treatment}
+\item{A_sd}{Standard deviation from experimental treatment}
 
-\item{X_n}{Sample size from treatment}
+\item{A_n}{Sample size from experimental treatment}
 }
 \description{
 TODO:

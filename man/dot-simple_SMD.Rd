@@ -8,9 +8,9 @@
   Ctrl_mean,
   Ctrl_sd,
   Ctrl_n,
-  X_mean,
-  X_sd,
-  X_n,
+  A_mean,
+  A_sd,
+  A_n,
   pooled_sd,
   hedges_correction = TRUE
 )
@@ -22,11 +22,11 @@
 
 \item{Ctrl_n}{Sample size from the control streatment}
 
-\item{X_mean}{Mean outcome from treatment}
+\item{A_mean}{Mean outcome from experimental treatment}
 
-\item{X_sd}{Standard deviation from treatment}
+\item{A_sd}{Standard deviation from experimental treatment}
 
-\item{X_n}{Sample size from treatment}
+\item{A_n}{Sample size from experimental treatment}
 
 \item{pooled_sd}{Pooled standard deviation}
 

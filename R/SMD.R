@@ -3,9 +3,9 @@
 #' @param Ctrl_mean Mean outcome from the Control treatment
 #' @param Ctrl_sd Standard deviation from the control treatment
 #' @param Ctrl_n Sample size from the control streatment
-#' @param X_mean Mean outcome from treatment
-#' @param X_sd Standard deviation from treatment
-#' @param X_n Sample size from treatment
+#' @param A_mean Mean outcome from experimental treatment
+#' @param A_sd Standard deviation from experimental treatment
+#' @param A_n Sample size from experimental treatment
 #' @param pooled_sd Pooled standard deviation
 #' @param hedges_correction Boolean. If TRUE correct for small-sample bias. Default is TRUE.
 #'
@@ -24,16 +24,16 @@
   Ctrl_mean,
   Ctrl_sd,
   Ctrl_n,
-  X_mean,
-  X_sd,
-  X_n,
+  A_mean,
+  A_sd,
+  A_n,
   pooled_sd,
   hedges_correction = TRUE
 ) {
   # Compute the effect size using correction for small-sample bias if needed.
   # Equation from Gurevitch et al. 2000 and Morris et al. 2007
   if (hedges_correction) {
-    j <- .j_correction(X_n + Ctrl_n - 2)
+    j <- .j_correction(A_n + Ctrl_n - 2)
   } else {
     j <- 1
   }
@@ -41,12 +41,12 @@
   pooled_sd <- .pooled_sd(
     Ctrl_sd = Ctrl_sd,
     Ctrl_n = Ctrl_n,
-    A_sd = X_sd,
-    A_n = X_n
+    A_sd = A_sd,
+    A_n = A_n
   )
 
-  d <- ((X_mean - Ctrl_mean) / pooled_sd) * j
-  v <- 1/X_n + 1/Ctrl_n + (d^2 / (2 * (X_n + Ctrl_n)))
+  d <- ((A_mean - Ctrl_mean) / pooled_sd) * j
+  v <- 1/A_n + 1/Ctrl_n + (d^2 / (2 * (A_n + Ctrl_n)))
 
   return(data.frame(simple_SMD = d, simple_SMDv = v))
 }

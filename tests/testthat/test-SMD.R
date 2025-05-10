@@ -39,9 +39,9 @@ test_that("Simple SMD (Cohen's d) is working fine", {
   Ctrl_mean <- 2.5
   Ctrl_sd <- 1.5
   Ctrl_n <- 10
-  X_mean <- 4
-  X_sd <- 4.3
-  X_n <- 10
+  A_mean <- 4
+  A_sd <- 4.3
+  A_n <- 10
 
   # Computed with metafor::escalc
   test_SMD <- 0.4658026
@@ -51,9 +51,9 @@ test_that("Simple SMD (Cohen's d) is working fine", {
     Ctrl_mean = Ctrl_mean,
     Ctrl_sd = Ctrl_sd,
     Ctrl_n = Ctrl_n,
-    X_mean = X_mean,
-    X_sd = X_sd,
-    X_n = X_n,
+    A_mean = A_mean,
+    A_sd = A_sd,
+    A_n = A_n,
     hedges_correction = FALSE
   )
 
@@ -66,9 +66,9 @@ test_that("Simple SMD (Hedges' g) is working fine", {
   Ctrl_mean <- 2.5
   Ctrl_sd <- 1.5
   Ctrl_n <- 10
-  X_mean <- 4
-  X_sd <- 4.3
-  X_n <- 10
+  A_mean <- 4
+  A_sd <- 4.3
+  A_n <- 10
 
   # Computed with metafor::escalc
   test_SMD <- 0.44601
@@ -78,9 +78,9 @@ test_that("Simple SMD (Hedges' g) is working fine", {
     Ctrl_mean = Ctrl_mean,
     Ctrl_sd = Ctrl_sd,
     Ctrl_n = Ctrl_n,
-    X_mean = X_mean,
-    X_sd = X_sd,
-    X_n = X_n,
+    A_mean = A_mean,
+    A_sd = A_sd,
+    A_n = A_n,
     hedges_correction = TRUE
   )
 
