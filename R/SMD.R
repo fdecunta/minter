@@ -186,14 +186,14 @@
 #' for 2 or 4 groups depending on the arguments passed. 
 #' Simple SMD has only 2 groups, while main and interactions had 4 groups.
 #'
-#' @param Ctrl_sd
-#' @param Ctrl_n
-#' @param A_sd
-#' @param A_n
-#' @param B_sd
-#' @param B_n
-#' @param AB_n
-#' @param AB_sd
+#' @param Ctrl_sd Standard deviation from the control treatment
+#' @param Ctrl_n Sample size from the control streatment
+#' @param A_sd Standard deviation from the A treatment
+#' @param A_n Sample size from the A treatment
+#' @param B_sd Standard deviation from the B treatment 
+#' @param B_n Sample size from the B treatment 
+#' @param AB_sd Standard deviation from the interaction AxB treatment
+#' @param AB_n Sample size from the interaction AxB treatment
 #'
 #' @references
 #'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
