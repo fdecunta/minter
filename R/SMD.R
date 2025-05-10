@@ -38,8 +38,14 @@
     j <- 1
   }
 
-  d <- ((X_mean - Ctrl_mean) / pooled_sd) * j
+  pooled_sd <- .pooled_sd(
+    Ctrl_sd = Ctrl_sd,
+    Ctrl_n = Ctrl_n,
+    A_sd = X_sd,
+    A_n = X_n
+  )
 
+  d <- ((X_mean - Ctrl_mean) / pooled_sd) * j
   v <- 1/X_n + 1/Ctrl_n + (d^2 / (2 * (X_n + Ctrl_n)))
 
   return(data.frame(simple_SMD = d, simple_SMDv = v))
@@ -176,8 +182,18 @@
 
 #' Pooled Standard Deviation for SMD in factorial experiments
 #'
-#' The pooled standard deviation is comptuted as:
+#' Compute the pooled standard deviation for SMD. It computes the pooled SD
+#' for 2 or 4 groups depending on the arguments passed. 
+#' Simple SMD has only 2 groups, while main and interactions had 4 groups.
 #'
+#' @param Ctrl_sd
+#' @param Ctrl_n
+#' @param A_sd
+#' @param A_n
+#' @param B_sd
+#' @param B_n
+#' @param AB_n
+#' @param AB_sd
 #'
 #' @references
 #'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
@@ -191,11 +207,21 @@
   Ctrl_n,
   A_sd,
   A_n,
-  B_sd,
-  B_n,
-  AB_n,
-  AB_sd
+  B_sd = NULL,
+  B_n = NULL,
+  AB_n = NULL,
+  AB_sd = NULL
 ) {
+
+  # If only Ctrl and A are passed, set all the other params to 0.
+  # This way the pooled sd is for only 2 groups.
+  if (is.null(B_sd) && is.null(AB_sd)) {
+    n_groups <- 2
+    B_sd <- B_n <- AB_n <- AB_sd <- 0
+  } else {
+    n_groups <- 4
+  }
+
   # Equation B.2 from Morris et al. appendix B
   pooled_sd <- sqrt(
     (
@@ -204,7 +230,7 @@
       ((AB_n - 1) * AB_sd^2) +
       ((Ctrl_n - 1) * Ctrl_sd^2)
     ) /
-    (A_n + B_n + AB_n + Ctrl_n - 4)
+    (A_n + B_n + AB_n + Ctrl_n - n_groups)
   )
 
   return(pooled_sd)

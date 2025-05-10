@@ -1,9 +1,8 @@
 data(testing_data)
 
 test_that("Pooled sampling variance is computed correctly", {
-  test_S <- 8.276473   # Manually calculated
-
-  res_S <- .pooled_sd(
+  test_S1 <- 8.276473   # Manually calculated
+  res_S1 <- .pooled_sd(
     Ctrl_sd = 5,
     Ctrl_n = 5,
     A_sd = 10,
@@ -14,15 +13,79 @@ test_that("Pooled sampling variance is computed correctly", {
     AB_n = 5
   )
 
-  expect_equal(res_S, test_S, tolerance = 1e-6)
+  test_S2 <- 5.0249  # Page 227 from The Handbook of Meta Analysis ... Borensetin et al. 2009
+  res_S2 <- .pooled_sd(
+    Ctrl_sd = 4.5,
+    Ctrl_n = 50,
+    A_sd = 5.5,
+    A_n = 50
+  )
+
+  expect_equal(res_S1, test_S1, tolerance = 1e-6)
+  expect_equal(res_S2, test_S2, tolerance = 1e-4)
+
 })
 
 
 test_that(".j_correction is working fine", {
-  test_j <- 0.9923  # From page 227 
+  test_j <- 0.9923  # From page 227 of The Handbook of Meta Analysis (Borenstein et al. 2009)
   res_j <- .j_correction(50 + 50 - 2)
 
   expect_equal(res_j, test_j, tolerance = 1e-4)
+})
+
+
+test_that("Simple SMD (Cohen's d) is working fine", {
+  Ctrl_mean <- 2.5
+  Ctrl_sd <- 1.5
+  Ctrl_n <- 10
+  X_mean <- 4
+  X_sd <- 4.3
+  X_n <- 10
+
+  # Computed with metafor::escalc
+  test_SMD <- 0.4658026
+  test_SMDv <- 0.2054243
+
+  res <- .simple_SMD(
+    Ctrl_mean = Ctrl_mean,
+    Ctrl_sd = Ctrl_sd,
+    Ctrl_n = Ctrl_n,
+    X_mean = X_mean,
+    X_sd = X_sd,
+    X_n = X_n,
+    hedges_correction = FALSE
+  )
+
+  expect_equal(res$simple_SMD, test_SMD, tolerance = 1e-6)
+  expect_equal(res$simple_SMDv, test_SMDv, tolerance = 1e-6)
+})
+
+
+test_that("Simple SMD (Hedges' g) is working fine", {
+  Ctrl_mean <- 2.5
+  Ctrl_sd <- 1.5
+  Ctrl_n <- 10
+  X_mean <- 4
+  X_sd <- 4.3
+  X_n <- 10
+
+  # Computed with metafor::escalc
+  test_SMD <- 0.44601
+  test_SMDv <- 0.20497
+
+  res <- .simple_SMD(
+    Ctrl_mean = Ctrl_mean,
+    Ctrl_sd = Ctrl_sd,
+    Ctrl_n = Ctrl_n,
+    X_mean = X_mean,
+    X_sd = X_sd,
+    X_n = X_n,
+    hedges_correction = TRUE
+  )
+
+  expect_equal(res$simple_SMD, test_SMD, tolerance = 1e-3)
+  expect_equal(res$simple_SMDv, test_SMDv, tolerance = 1e-3)
 })
 
 
