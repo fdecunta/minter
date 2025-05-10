@@ -159,7 +159,6 @@
   pooled_sd,
   hedges_correction = TRUE
 ) {
-  # Correction for small-sample bias
   if (hedges_correction) {
     j <- .j_correction(A_n + B_n + AB_n + Ctrl_n - 4)
   } else {
@@ -168,7 +167,6 @@
 
   d_Inter <- (((AB_mean - B_mean) - (A_mean - Ctrl_mean)) / pooled_sd) * j
 
-  # Sampling variance. Formula from Gurevitch et al. 2000, Morris et al 2007 
   v <-  1/A_n + 1/B_n + 1/AB_n + 1/Ctrl_n + 
     (d_Inter^2 / (2 * (A_n + B_n + AB_n + Ctrl_n)))
 

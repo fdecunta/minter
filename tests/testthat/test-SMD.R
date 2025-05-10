@@ -75,7 +75,7 @@ test_that("The interaction SMD (Cohen's d) is correctly computed", {
   ))
 
   # This computes the main SMD for Factor A
-  res_A <- with(testing_data, .main_SMD(
+  res <- with(testing_data, .interaction_SMD(
     Ctrl_mean = C_mean,
     Ctrl_sd = C_sd,
     Ctrl_n = C_n,
@@ -92,6 +92,6 @@ test_that("The interaction SMD (Cohen's d) is correctly computed", {
     hedges_correction = FALSE
   ))
 
-  expect_equal(res_A$main_SMD, testing_data$A_main_SMD, tolerance = 1e-6)
-  expect_equal(res_A$main_SMDv, testing_data$A_main_SMDv, tolerance = 1e-6)
+  expect_equal(res$inter_SMD, testing_data$AB_main_SMD, tolerance = 1e-6)
+  expect_equal(res$inter_SMDv, testing_data$AB_main_SMDv, tolerance = 1e-6)
 })
