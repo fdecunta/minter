@@ -1,10 +1,14 @@
 #' Simple Log Variability ratio
 #'
+#' This is computed using formulas from Nakagawa et al. 2015
+#'
 #' @param Ctrl_sd Standard deviation from the control treatment
 #' @param Ctrl_n Sample size from the control streatment
 #' @param X_sd Standard deviation from the treatment
 #' @param X_n Sample size from the treatment
 #' 
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
+#'
 #' @references
 #' Nakagawa, S., Poulin, R., Mengersen, K., Reinhold, K., Engqvist,
 #'     L., Lagisz, M., & Senior, A. M. (2015). Meta‐analysis of variation: 
@@ -22,9 +26,9 @@
     (1 / (2 * (X_n - 1))) -
     (1 / (2 * (Ctrl_n - 1)))
 
-  simple_lnVR_v <- (1 / (2 * (X_n - 1))) + (1 / (2 * (Ctrl_n - 1)))
+  simple_lnVRv <- (1 / (2 * (X_n - 1))) + (1 / (2 * (Ctrl_n - 1)))
 
-  return(data.frame(simple_lnVR, simple_lnVR_v))
+  return(data.frame(simple_lnVR, simple_lnVRv))
 }
 
 
@@ -59,14 +63,14 @@
             (1 / (2 * (Ctrl_n - 1))) 
           )
 
-  main_lnVR_v <- 0.25 * (
+  main_lnVRv <- 0.25 * (
 	      (1 / (2 * (AB_n - 1))) +
               (1 / (2 * (A_n - 1))) +
               (1 / (2 * (B_n - 1))) +
               (1 / (2 * (Ctrl_n - 1))) 
             )
 
-  return(data.frame(main_lnVR, main_lnVR_v))
+  return(data.frame(main_lnVR, main_lnVRv))
 }
 
 
@@ -99,10 +103,10 @@
             (1 / (2 * (B_n - 1))) +
             (1 / (2 * (Ctrl_n - 1))) 
 
-  inter_lnVR_v <- (1 / (2 * (AB_n - 1))) +
+  inter_lnVRv <- (1 / (2 * (AB_n - 1))) +
             (1 / (2 * (A_n - 1))) +
             (1 / (2 * (B_n - 1))) +
             (1 / (2 * (Ctrl_n - 1)))
 
-  return(data.frame(inter_lnVR, inter_lnVR_v))
+  return(data.frame(inter_lnVR, inter_lnVRv))
 }

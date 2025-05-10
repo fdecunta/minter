@@ -33,11 +33,11 @@
     (1 / (2 * (X_n - 1))) -
     (1 / (2 * (Ctrl_n - 1))) 
 
-  # Assume no correlation between mean and variance (see Nakagawa et al. 2015)
-  simple_lnCVR_v <- (Ctrl_sd / (Ctrl_n * Ctrl_mean^2)) + (1 / (2 * (Ctrl_n - 1))) + 
-    (X_sd / (X_n * X_mean^2)) + (1 / (2 * (X_n - 1)))
+  # Assumes no correlation between mean and variance (see Nakagawa et al. 2015)
+  simple_lnCVRv <- (Ctrl_sd^2 / (Ctrl_n * Ctrl_mean^2)) + (1 / (2 * (Ctrl_n - 1))) + 
+    (X_sd^2 / (X_n * X_mean^2)) + (1 / (2 * (X_n - 1)))
 
-  return(data.frame(simple_lnCVR, simple_lnCVR_v))
+  return(data.frame(simple_lnCVR, simple_lnCVRv))
 }
 
 
@@ -123,9 +123,9 @@
 
   # This is the sum of the variances of each
   # Uses '[, 2]' becuase the second column is their sampling variance
-  main_lnCVR_v <- main_lnRR[, 2] + main_lnVR[, 2]
+  main_lnCVRv <- main_lnRR[, 2] + main_lnVR[, 2]
 
-  return(data.frame(main_lnCVR, main_lnCVR_v))
+  return(data.frame(main_lnCVR, main_lnCVRv))
 }
 
 
@@ -202,7 +202,7 @@
 
   # This is the sum of the variances of each
   # Uses '[, 2]' becuase the second column is their sampling variance
-  inter_lnCVR_v <- inter_lnRR[, 2] + inter_lnVR[, 2]
+  inter_lnCVRv <- inter_lnRR[, 2] + inter_lnVR[, 2]
 
-  return(data.frame(inter_lnCVR, inter_lnCVR_v))
+  return(data.frame(inter_lnCVR, inter_lnCVRv))
 }
