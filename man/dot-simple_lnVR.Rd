@@ -11,17 +11,9 @@
 
 \item{Ctrl_n}{Sample size from the control streatment}
 
-\item{A_sd}{Standard deviation from the A treatment}
+\item{X_sd}{Standard deviation from the treatment}
 
-\item{A_n}{Sample size from the A treatment}
-
-\item{B_sd}{Standard deviation from the B treatment}
-
-\item{B_n}{Sample size from the B treatment}
-
-\item{AB_sd}{Standard deviation from the interaction AxB treatment}
-
-\item{AB_n}{Sample size from the interaction AxB treatment}
+\item{X_n}{Sample size from the treatment}
 }
 \description{
 Simple Log Variability ratio

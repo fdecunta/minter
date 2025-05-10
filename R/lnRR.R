@@ -140,14 +140,14 @@
 ) {
   main_lnRR <- 0.5 * log((A_mean * AB_mean) / (Ctrl_mean * B_mean))
 
-  main_lnRR_var <- 0.25 * (
+  main_lnRRv <- 0.25 * (
     (AB_sd^2   / (AB_n   * AB_mean^2)) +
     (A_sd^2    / (A_n    * A_mean^2)) +
     (B_sd^2    / (B_n    * B_mean^2)) +
     (Ctrl_sd^2 / (Ctrl_n * Ctrl_mean^2))
   )
 
-  return(data.frame(main_lnRR, main_lnRR_var)) 
+  return(data.frame(main_lnRR, main_lnRRv)) 
 }	
 
 
@@ -192,10 +192,10 @@
   # From Morris et al. 2007, formulas B.11 and B.12 from Appendix B:
   inter_lnRR <- log(AB_mean / B_mean) - log(A_mean / Ctrl_mean)
 
-  inter_lnRR_var <- (AB_sd^2   / (AB_mean^2   * AB_n  )) +
+  inter_lnRRv <- (AB_sd^2   / (AB_mean^2   * AB_n  )) +
                     (A_sd^2    / (A_mean^2    * A_n   )) +
                     (B_sd^2    / (B_mean^2    * B_n   )) +
                     (Ctrl_sd^2 / (Ctrl_mean^2 * Ctrl_n)) 
 
-  return(data.frame(inter_lnRR, inter_lnRR_var))
+  return(data.frame(inter_lnRR, inter_lnRRv))
 }

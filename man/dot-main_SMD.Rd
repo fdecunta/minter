@@ -2,7 +2,7 @@
 % Please edit documentation in R/SMD.R
 \name{.main_SMD}
 \alias{.main_SMD}
-\title{Main effect: Standardized Mean Difference}
+\title{Main effect: Standardized Mean Difference Hedges' g}
 \usage{
 .main_SMD(
   Ctrl_mean,
@@ -17,7 +17,8 @@
   AB_mean,
   AB_sd,
   AB_n,
-  pooled_sd
+  pooled_sd,
+  hedges_correction = TRUE
 )
 }
 \arguments{
@@ -46,11 +47,10 @@
 \item{AB_n}{Sample size from the interaction AxB treatment}
 
 \item{pooled_sd}{Pooled standard deviation}
+
+\item{hedges_correction}{Boolean. If TRUE correct for small-sample bias. Default is TRUE.}
 }
 \description{
-Without small-sample bias
-}
-\details{
 TODO: this
 }
 \references{

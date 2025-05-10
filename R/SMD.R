@@ -1,12 +1,4 @@
-# Standardized Mean Difference
-#
-# There are functions for two kinds: 
-#   - Without small-sample bias correction (Cohen's d)
-#   - With small-sample bias correction (Hedges' g)
-
-#' Simple effect: Standardized Mean Difference 
-#'
-#' This is without correction for small-sample bias.
+#' Simple effect: Standardized Mean Difference Hedges' g
 #' 
 #' @param Ctrl_mean Mean outcome from the Control treatment
 #' @param Ctrl_sd Standard deviation from the control treatment
@@ -15,6 +7,7 @@
 #' @param X_sd Standard deviation from treatment
 #' @param X_n Sample size from treatment
 #' @param pooled_sd Pooled standard deviation
+#' @param hedges_correction Boolean. If TRUE correct for small-sample bias. Default is TRUE.
 #'
 #' @references
 #'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
@@ -34,18 +27,26 @@
   X_mean,
   X_sd,
   X_n,
-  pooled_sd
+  pooled_sd,
+  hedges_correction = TRUE
 ) {
-  d <- ((X_mean - Ctrl_mean) / pooled_sd) 
+  # Compute the effect size using correction for small-sample bias if needed.
+  # Equation from Gurevitch et al. 2000 and Morris et al. 2007
+  if (hedges_correction) {
+    j <- .j_correction(X_n + Ctrl_n - 2)
+  } else {
+    j <- 1
+  }
+
+  d <- ((X_mean - Ctrl_mean) / pooled_sd) * j
+
   v <- 1/X_n + 1/Ctrl_n + (d^2 / (2 * (X_n + Ctrl_n)))
 
-  return(data.frame(simple_SMD = d, simple_SMD_var = v))
+  return(data.frame(simple_SMD = d, simple_SMDv = v))
 }
 
 
-#' Main effect: Standardized Mean Difference 
-#' 
-#' Without small-sample bias
+#' Main effect: Standardized Mean Difference Hedges' g
 #' 
 #' TODO: this
 #' 
@@ -62,6 +63,7 @@
 #' @param AB_sd Standard deviation from the interaction AxB treatment
 #' @param AB_n Sample size from the interaction AxB treatment
 #' @param pooled_sd Pooled standard deviation
+#' @param hedges_correction Boolean. If TRUE correct for small-sample bias. Default is TRUE.
 #' 
 #' @references 
 #'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
@@ -87,24 +89,31 @@
   AB_mean,
   AB_sd,
   AB_n,
-  pooled_sd
+  pooled_sd,
+  hedges_correction = TRUE
 ) {
   # Overral effect size of factor A
-  d_A <- (((A_mean + AB_mean) - (B_mean + Ctrl_mean)) / (2 * pooled_sd))
+  if (hedges_correction) {
+    j <- .j_correction(A_n + B_n + AB_n + Ctrl_n - 4)
+  } else {
+    j <- 1
+  }
+
+  d_A <- (((A_mean + AB_mean) - (B_mean + Ctrl_mean)) / (2 * pooled_sd)) * j
 
   # Sampling variance. Formula from Gurevitch et al. 2000.
+  # The 1/4 is missing in Morris et al 2007 appendix, but can be found in 
+  # their Matlab code (https://dx.doi.org/10.6084/m9.figshare.c.3299699)
   v_A <- (1/4) * (
     1/A_n + 1/B_n + 1/AB_n + 1/Ctrl_n + 
     (d_A^2 / (2 * (A_n + B_n + AB_n + Ctrl_n)))
   )
 
-  return(data.frame(main_SMD = d_A, main_SMD_var = v_A))
+  return(data.frame(main_SMD = d_A, main_SMDv = v_A))
 }
 
 
-#' Interaction effect: Standardized mean difference
-#'
-#' No correction for small-sample
+#' Interaction effect: Standardized mean difference Hedges' g
 #' 
 #' TODO: this
 #' 
@@ -121,6 +130,7 @@
 #' @param AB_sd Standard deviation from the interaction AxB treatment
 #' @param AB_n Sample size from the interaction AxB treatment
 #' @param pooled_sd Pooled standard deviation
+#' @param hedges_correction Boolean. If TRUE correct for small-sample bias. Default is TRUE.
 #' 
 #' @references 
 #'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
@@ -146,172 +156,23 @@
   AB_mean,
   AB_sd,
   AB_n,
-  pooled_sd
+  pooled_sd,
+  hedges_correction = TRUE
 ) {
-  d_Inter <- (((AB_mean - B_mean) - (A_mean - Ctrl_mean)) / pooled_sd) 
+  # Correction for small-sample bias
+  if (hedges_correction) {
+    j <- .j_correction(A_n + B_n + AB_n + Ctrl_n - 4)
+  } else {
+    j <- 1
+  }
 
-  # Sampling variance. Formula from Gurevitch et al. 2000, Morris et al 2007 
-  v <-  1/A_n + 1/B_n + 1/AB_n + 1/Ctrl_n + 
-    (d_Inter^2 / (2 * (A_n + B_n + AB_n + Ctrl_n)))
-
-  return(data.frame(interaction_SMD = d_Inter, interaction_SMD_var = v))
-}
-
-
-#' Simple effect: Standardized Mean Difference Hedges' g
-#' 
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param X_mean Mean outcome from treatment
-#' @param X_sd Standard deviation from treatment
-#' @param X_n Sample size from treatment
-#' @param pooled_sd Pooled standard deviation
-#'
-#' @references
-#'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
-#'     between competition and predation: a meta-analysis of field experiments.
-#'     The American Naturalist, 155(4), 435-453.
-#' 
-#'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
-#'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
-#'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
-#'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
-#'
-#' @keywords internal
-.simple_hedges_g <- function(
-  Ctrl_mean,
-  Ctrl_sd,
-  Ctrl_n,
-  X_mean,
-  X_sd,
-  X_n,
-  pooled_sd
-) {
-  # Compute the effect size using correction for small-sample bias.
-  # Equation from Gurevitch et al. 2000 and Morris et al. 2007
-  j <- .j_correction(X_n + Ctrl_n - 2)
-  d <- ((X_mean - Ctrl_mean) / pooled_sd) * j
-
-  v <- 1/X_n + 1/Ctrl_n + (d^2 / (2 * (X_n + Ctrl_n)))
-
-  return(data.frame(simple_SMD = d, simple_SMD_var = v))
-}
-
-
-#' Main effect: Standardized Mean Difference Hedges' g
-#' 
-#' TODO: this
-#' 
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from the A treatment
-#' @param A_sd Standard deviation from the A treatment
-#' @param A_n Sample size from the A treatment
-#' @param B_mean Mean outcome from the B treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_mean Mean outcome from the interaction AxB treatment
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
-#' @param pooled_sd Pooled standard deviation
-#' 
-#' @references 
-#'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
-#'     between competition and predation: a meta-analysis of field experiments.
-#'     The American Naturalist, 155(4), 435-453.
-#' 
-#'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
-#'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
-#'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
-#'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
-#'
-#' @keywords internal
-.main_hedges_g <- function(
-  Ctrl_mean,
-  Ctrl_sd,
-  Ctrl_n,
-  A_mean,
-  A_sd,
-  A_n,
-  B_mean,
-  B_sd,
-  B_n,
-  AB_mean,
-  AB_sd,
-  AB_n,
-  pooled_sd
-) {
-  # Overral effect size of factor A
-  j <- .j_correction(A_n + B_n + AB_n + Ctrl_n - 4)
-  d_A <- (((A_mean + AB_mean) - (B_mean + Ctrl_mean)) / (2 * pooled_sd)) * j
-
-  # Sampling variance. Formula from Gurevitch et al. 2000.
-  # The 1/4 is missing in Morris et al 2007 appendix, but can be found in 
-  # their Matlab code (https://dx.doi.org/10.6084/m9.figshare.c.3299699)
-  v_A <- (1/4) * (
-    1/A_n + 1/B_n + 1/AB_n + 1/Ctrl_n + 
-    (d_A^2 / (2 * (A_n + B_n + AB_n + Ctrl_n)))
-  )
-
-  return(data.frame(main_SMD = d_A, main_SMD_var = v_A))
-}
-
-
-#' Interaction effect: Standardized mean difference Hedges' g
-#' 
-#' TODO: this
-#' 
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from the A treatment
-#' @param A_sd Standard deviation from the A treatment
-#' @param A_n Sample size from the A treatment
-#' @param B_mean Mean outcome from the B treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_mean Mean outcome from the interaction AxB treatment
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
-#' @param pooled_sd Pooled standard deviation
-#' 
-#' @references 
-#'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
-#'     between competition and predation: a meta-analysis of field experiments.
-#'     The American Naturalist, 155(4), 435-453.
-#'
-#'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
-#'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
-#'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
-#'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
-#'
-#' @keywords internal
-.interaction_hedges_g <- function(
-  Ctrl_mean,
-  Ctrl_sd,
-  Ctrl_n,
-  A_mean, 
-  A_sd,
-  A_n,
-  B_mean,
-  B_sd,
-  B_n,
-  AB_mean,
-  AB_sd,
-  AB_n,
-  pooled_sd
-) {
-  # Overral effect size of factor A
-  j <- .j_correction(A_n + B_n + AB_n + Ctrl_n - 4)
   d_Inter <- (((AB_mean - B_mean) - (A_mean - Ctrl_mean)) / pooled_sd) * j
 
   # Sampling variance. Formula from Gurevitch et al. 2000, Morris et al 2007 
   v <-  1/A_n + 1/B_n + 1/AB_n + 1/Ctrl_n + 
     (d_Inter^2 / (2 * (A_n + B_n + AB_n + Ctrl_n)))
 
-  return(data.frame(interaction_SMD = d_Inter, interaction_SMD_var = v))
+  return(data.frame(inter_SMD = d_Inter, inter_SMDv = v))
 }
 
 

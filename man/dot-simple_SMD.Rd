@@ -2,9 +2,18 @@
 % Please edit documentation in R/SMD.R
 \name{.simple_SMD}
 \alias{.simple_SMD}
-\title{Simple effect: Standardized Mean Difference}
+\title{Simple effect: Standardized Mean Difference Hedges' g}
 \usage{
-.simple_SMD(Ctrl_mean, Ctrl_sd, Ctrl_n, X_mean, X_sd, X_n, pooled_sd)
+.simple_SMD(
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  X_mean,
+  X_sd,
+  X_n,
+  pooled_sd,
+  hedges_correction = TRUE
+)
 }
 \arguments{
 \item{Ctrl_mean}{Mean outcome from the Control treatment}
@@ -20,9 +29,11 @@
 \item{X_n}{Sample size from treatment}
 
 \item{pooled_sd}{Pooled standard deviation}
+
+\item{hedges_correction}{Boolean. If TRUE correct for small-sample bias. Default is TRUE.}
 }
 \description{
-This is without correction for small-sample bias.
+Simple effect: Standardized Mean Difference Hedges' g
 }
 \references{
 Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction

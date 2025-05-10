@@ -22,4 +22,14 @@
 \description{
 Computes the log of the response ratio
 }
+\references{
+Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
+Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
+effects of enemies and mutualists on plant performance: a meta‐analysis.
+Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+
+Lajeunesse, M. J. (2011). On the meta‐analysis of response ratios for
+studies with correlated and multi‐group designs. Ecology, 92(11), 2049-2055.
+https://doi.org/10.1890/11-0423.1
+}
 \keyword{internal}

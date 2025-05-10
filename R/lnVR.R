@@ -2,12 +2,8 @@
 #'
 #' @param Ctrl_sd Standard deviation from the control treatment
 #' @param Ctrl_n Sample size from the control streatment
-#' @param A_sd Standard deviation from the A treatment
-#' @param A_n Sample size from the A treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
+#' @param X_sd Standard deviation from the treatment
+#' @param X_n Sample size from the treatment
 #' 
 #' @references
 #' Nakagawa, S., Poulin, R., Mengersen, K., Reinhold, K., Engqvist,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/SMD.R
 \name{.interaction_SMD}
 \alias{.interaction_SMD}
-\title{Interaction effect: Standardized mean difference}
+\title{Interaction effect: Standardized mean difference Hedges' g}
 \usage{
 .interaction_SMD(
   Ctrl_mean,
@@ -17,7 +17,8 @@
   AB_mean,
   AB_sd,
   AB_n,
-  pooled_sd
+  pooled_sd,
+  hedges_correction = TRUE
 )
 }
 \arguments{
@@ -46,11 +47,10 @@
 \item{AB_n}{Sample size from the interaction AxB treatment}
 
 \item{pooled_sd}{Pooled standard deviation}
+
+\item{hedges_correction}{Boolean. If TRUE correct for small-sample bias. Default is TRUE.}
 }
 \description{
-No correction for small-sample
-}
-\details{
 TODO: this
 }
 \references{
