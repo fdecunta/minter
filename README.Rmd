@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/fdecunta/minter/graph/badge.svg)](https://app.codecov.io/gh/fdecunta/minter)
 <!-- badges: end -->
 
-Functions for calculating effect sizes for meta-analyses of interactions in 2×2 factorial experiments.
+A collection of functions for computing effect sizes of interactions for meta-analysis.
 
 ## Installation
 

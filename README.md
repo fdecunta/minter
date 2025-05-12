@@ -10,8 +10,8 @@
 coverage](https://codecov.io/gh/fdecunta/minter/graph/badge.svg)](https://app.codecov.io/gh/fdecunta/minter)
 <!-- badges: end -->
 
-Helper functions for conducting meta-analyses of interactions in 2×2
-factorial experiments.
+A collection of functions for computing effect sizes of interactions for
+meta-analysis.
 
 ## Installation
 
