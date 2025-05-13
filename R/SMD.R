@@ -99,12 +99,7 @@ SMD <- function(
 
 #' Simple effect: Standardized Mean Difference 
 #' 
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from experimental treatment
-#' @param A_sd Standard deviation from experimental treatment
-#' @param A_n Sample size from experimental treatment
+#' @inheritParams .simple_lnRR
 #' @param hedges_correction Boolean. If TRUE correct for small-sample bias. Default is TRUE.
 #'
 #' @references
@@ -153,18 +148,7 @@ SMD <- function(
 #' 
 #' TODO: this
 #' 
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from the A treatment
-#' @param A_sd Standard deviation from the A treatment
-#' @param A_n Sample size from the A treatment
-#' @param B_mean Mean outcome from the B treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_mean Mean outcome from the interaction AxB treatment
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
+#' @inheritParams .main_lnRR
 #' @param hedges_correction Boolean. If TRUE correct for small-sample bias. Default is TRUE.
 #' 
 #' @references 
@@ -229,18 +213,7 @@ SMD <- function(
 #' 
 #' TODO: this
 #' 
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from the A treatment
-#' @param A_sd Standard deviation from the A treatment
-#' @param A_n Sample size from the A treatment
-#' @param B_mean Mean outcome from the B treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_mean Mean outcome from the interaction AxB treatment
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
+#' @inheritParams .interaction_lnRR
 #' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE
 #' 
 #' @references 

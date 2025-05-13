@@ -1,21 +1,6 @@
 #' Log Coefficient Of Variation Ratio (lnCVR)
 #' 
-#' @param type Type of effect size: "ind", "main", or "inter"
-#' @param data Data frame with the data
-#' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
-#' @param append Logical. Append the results to \code{data}. Default is TRUE
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from the treatment
-#' @param A_sd Standard deviation from the treatment
-#' @param A_n Sample size from the treatment
-#' @param B_mean Mean outcome from the B treatment
-#' @param B_sd Standard deviation from the B treatment
-#' @param B_n Sample size from the B treatment
-#' @param AB_mean Mean outcome from the interaction AxB treatment
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
+#' @inheritParams lnRR
 #'
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
@@ -95,13 +80,7 @@ lnCVR <- function(
 #'
 #' TODO:
 #'
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from experimental treatment
-#' @param A_sd Standard deviation from experimental treatment
-#' @param A_n Sample size from experimental treatment
-#'
+#' @inheritParams .simple_lnRR
 #' @references
 #'
 #' Nakagawa, S., Poulin, R., Mengersen, K., Reinhold, K., Engqvist,
@@ -140,19 +119,8 @@ lnCVR <- function(
 #' 
 #' TODO: this
 #' 
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from the A treatment
-#' @param A_sd Standard deviation from the A treatment
-#' @param A_n Sample size from the A treatment
-#' @param B_mean Mean outcome from the B treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_mean Mean outcome from the interaction AxB treatment
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
-#' 
+#' @inheritParams .main_lnRR
+#'
 #' @references 
 #' 
 #'   Nakagawa S. in prep.
@@ -226,18 +194,7 @@ lnCVR <- function(
 #'
 #' Method by Nakagawa (in prep.)
 #'
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from the A treatment
-#' @param A_sd Standard deviation from the A treatment
-#' @param A_n Sample size from the A treatment
-#' @param B_mean Mean outcome from the B treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_mean Mean outcome from the interaction AxB treatment
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
+#' @inheritParams .main_lnRR
 #' 
 #' @references 
 #' 
