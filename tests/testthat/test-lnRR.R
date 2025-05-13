@@ -21,6 +21,7 @@ test_that("Simple lnRR is correctly computed", {
   expect_equal(res$simple_lnRRv, test_lnRRv, tolerance = 1e-6)
 })
 
+
 test_that("The main lnRR is correctly computed", {
   res <- with(testing_data, .main_lnRR(
     Ctrl_mean = C_mean,
@@ -39,6 +40,31 @@ test_that("The main lnRR is correctly computed", {
 
   expect_equal(res$main_lnRR, testing_data$A_main_lnRR, tolerance = 1e-6)
   expect_equal(res$main_lnRRv, testing_data$A_main_lnRRv, tolerance = 1e-6)
+})
+
+
+test_that("The main lnRR using Nakagawa's method is correctly computed", {
+  res <- .main_lnRR_Nakagawa(
+    Ctrl_mean = 10,
+    Ctrl_sd = 2,
+    Ctrl_n = 10,
+    A_mean = 12,
+    A_sd = 2.5,
+    A_n = 10,
+    B_mean = 8,
+    B_sd = 1.5,
+    B_n = 10,
+    AB_mean = 15,
+    AB_sd = 3,
+    AB_n = 10
+  )
+
+  # Manually computed for testing
+  test_lnRR <- 0.405465108
+  test_lnRRv <- 0.003963975
+
+  expect_equal(res$main_lnRR, test_lnRR, tolerance = 1e-6)
+  expect_equal(res$main_lnRRv, test_lnRRv, tolerance = 1e-6)
 })
 
 
