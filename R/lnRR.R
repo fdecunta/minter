@@ -199,18 +199,7 @@ lnRR <- function(
 #' The main effect of A is quantified as the log of the ratio of the average
 #' outcome in the two treatments where A is present. That is, treatments A-and-B, A-and-Control.
 #'
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from the A treatment
-#' @param A_sd Standard deviation from the A treatment
-#' @param A_n Sample size from the A treatment
-#' @param B_mean Mean outcome from the B treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_mean Mean outcome from the interaction AxB treatment
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
+#' @inheritParams .main_lnRR
 #' 
 #' @references 
 #'   Not published yet.
@@ -248,24 +237,14 @@ lnRR <- function(
 #' Computes the interaction effect of a treatment in a 2-by-2 factorial design
 #' using the method proposed in Morris et al. 2007.
 #' 
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from the A treatment
-#' @param A_sd Standard deviation from the A treatment
-#' @param A_n Sample size from the A treatment
-#' @param B_mean Mean outcome from the B treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_mean Mean outcome from the interaction AxB treatment
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
-#' 
+#' @inheritParams .main_lnRR
+#'
 #' @references 
 #'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
 #'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 #'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+
 #' @keywords internal
 .interaction_lnRR <- function(
   Ctrl_mean,
@@ -285,9 +264,9 @@ lnRR <- function(
   inter_lnRR <- log(AB_mean / B_mean) - log(A_mean / Ctrl_mean)
 
   inter_lnRRv <- (AB_sd^2   / (AB_mean^2   * AB_n  )) +
-                    (A_sd^2    / (A_mean^2    * A_n   )) +
-                    (B_sd^2    / (B_mean^2    * B_n   )) +
-                    (Ctrl_sd^2 / (Ctrl_mean^2 * Ctrl_n)) 
+                 (A_sd^2    / (A_mean^2    * A_n   )) +
+                 (B_sd^2    / (B_mean^2    * B_n   )) +
+                 (Ctrl_sd^2 / (Ctrl_mean^2 * Ctrl_n)) 
 
   return(data.frame(inter_lnRR, inter_lnRRv))
 }
