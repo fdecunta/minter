@@ -28,8 +28,7 @@ lnVR <- function(
   B_sd = NULL,
   B_n = NULL,
   AB_sd = NULL,
-  AB_n = NULL,
-  ...
+  AB_n = NULL
 ) {
   checkmate::assert_choice(type, choices = c("ind", "main", "inter"))
   checkmate::assert_character(col_names, len = 2)

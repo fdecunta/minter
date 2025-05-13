@@ -13,11 +13,11 @@
 
 \item{Ctrl_n}{Sample size from the control streatment}
 
-\item{A_mean}{Mean outcome from experimental treatment}
+\item{A_mean}{Mean outcome from the experimental treatment}
 
-\item{A_sd}{Standard deviation from experimental treatment}
+\item{A_sd}{Standard deviation from the experimental treatment}
 
-\item{A_n}{Sample size from experimental treatment}
+\item{A_n}{Sample size from the experimental treatment}
 }
 \description{
 TODO:
