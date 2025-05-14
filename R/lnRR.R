@@ -1,5 +1,44 @@
 #' Log Response Ratio (lnRR)
+#'
+#' @details 
+#' **Main Log Response Ratio**
+#'
+#' The main effect of factor A is computed as:
+#'
+#' \deqn{
+#' lnRR_{A} = \
+#'   \ln \left( 
+#'     \frac{
+#'       \bar{x}_{AB} + \bar{x}_{A}
+#'     }{
+#'       \bar{x}_{B} + \bar{x}_{Ctrl}
+#'     }
+#'   \right)
+#' }
 #' 
+#'
+#' \deqn{
+#' s^2_{A} = \
+#'   \left( \frac{1} {\bar{x}_{AB} + \bar{x}_{A}} \right)^2 \
+#'   \left(
+#'      \frac{sd_{AB}^2} {n_{AB}} + \frac{sd_{A}^2} {n_{A}}
+#'   \right)
+#'   \left( \frac{1} {\bar{x}_{B} + \bar{x}_{Ctrl}} \right)^2 \
+#'   \left(
+#'      \frac{sd_{B}^2} {n_{B}} + \frac{sd_{Ctrl}^2} {n_{Ctrl}}
+#'   \right)
+#' }
+#'
+#' 
+#' **Interaction Log Response Ratio**
+#'
+#' 
+#' \deqn{
+#' lnRR_{AB} = \left( \ln \bar{x}_{AB} - \ln \bar{x}_{B} \right) -
+#'             \left( \ln \bar{x}_{A} - \ln \bar{x}_{Ctrl} \right)
+#' }
+#'
+#'
 #' @param type Type of effect size: "ind", "main", or "inter"
 #' @param data Data frame with the data
 #' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
