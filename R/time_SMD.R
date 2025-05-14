@@ -1,5 +1,6 @@
 #' Standardized Mean Difference for the interaction between Experimental Treatment and Time
 
+# TODO: Implement the wrapper fn
 # TODO: The cor (r) should be one number or a vector of the length nrow(df).
 
 
