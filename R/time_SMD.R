@@ -1,24 +1,7 @@
 #' Standardized Mean Difference for the interaction between Experimental Treatment and Time
-
-# TODO: Implement the wrapper fn
-# TODO: The cor (r) should be one number or a vector of the length nrow(df).
-
-
-#' SMD for the interaction between Experimental x Time
 #'
-#' @param t0_Ctrl_mean 
-#' @param t0_Ctrl_sd
-#' @param t1_Ctrl_mean 
-#' @param t1_Ctrl_sd
-#' @param Ctrl_n
-#' @param Ctrl_cor
-#' @param t0_Exp_mean 
-#' @param t0_Exp_sd
-#' @param t1_Exp_mean 
-#' @param t1_Exp_sd
-#' @param Exp_n
-#' @param Exp_cor
-#' @param hedges_correction 
+#' @inheritParams .time_interaction_lnRR
+#' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE.
 #'
 #' @references 
 #'   Shinichi Nakagawa in prep.

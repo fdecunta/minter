@@ -1,5 +1,17 @@
-#' Experimental x Time lnRR
+#' Log Response Ratio: Interaction Between Experimental Treatment and Time
 #'
+#' @param t0_Ctrl_mean Sample mean from the control group at time 0
+#' @param t0_Ctrl_sd Standard deviation from the control group at time 0
+#' @param t1_Ctrl_mean Sample mean from the control group at time 1
+#' @param t1_Ctrl_sd Standard deviation from the control group at time 1
+#' @param Ctrl_n Sample size of the control group
+#' @param Ctrl_cor Correlation between the means of the control group at t0 and t1
+#' @param t0_Exp_mean Sample mean from the experimental group at time 0
+#' @param t0_Exp_sd Standard deviation from the experimental group at time 0
+#' @param t1_Exp_mean Sample mean from the experimental group at time 1
+#' @param t1_Exp_sd Standard deviation from the experimental group at time 1
+#' @param Exp_n Sample size of the experimental group
+#' @param Exp_cor Correlation between the means of the experimental group at t0 and t1
 #'
 #' @keywords internal
 .time_interaction_lnRR <- function(
