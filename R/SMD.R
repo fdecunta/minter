@@ -50,8 +50,8 @@ SMD <- function(
   call_args <- as.list(match.call())[-1]
 
   req_cols <- switch(type, 
-    ind   = .SMD_requirements$ind,
-    main  = .SMD_requirements$main,
+    ind = .SMD_requirements$ind,
+    main = .SMD_requirements$main,
     inter = .SMD_requirements$main   # Needs same variables than 'main'
   )
   effsize_args <- .get_columns(call_args[req_cols], data)
@@ -59,13 +59,12 @@ SMD <- function(
   effsize_args$hedges_correction <- hedges_correction
 
   fn <- switch(type,
-    ind   = ".simple_SMD",
-    main  = ".main_SMD",
+    ind = ".simple_SMD",
+    main = ".main_SMD",
     inter = ".interaction_SMD"
   )
   df <- do.call(fn, effsize_args)
 
-  # Rename columns 
   colnames(df) <- col_names
 
   if (append) {

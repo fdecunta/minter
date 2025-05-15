@@ -42,37 +42,17 @@ lnRR <- function(
   checkmate::assert_character(col_names, len = 2)
   checkmate::assert_logical(append, len = 1)
   checkmate::assert_data_frame(data)
-  
-  # Define columns needed and evaluate them using 'data' to
-  # get the column vectors
-  if (type == "ind") {
-    vars <- list(
-      Ctrl_mean = substitute(Ctrl_mean),
-      Ctrl_sd   = substitute(Ctrl_sd),
-      Ctrl_n    = substitute(Ctrl_n),
-      A_mean    = substitute(A_mean),
-      A_sd      = substitute(A_sd),
-      A_n       = substitute(A_n)
-    )
-  } else {
-    vars <- list(
-      Ctrl_mean = substitute(Ctrl_mean),
-      Ctrl_sd   = substitute(Ctrl_sd),
-      Ctrl_n    = substitute(Ctrl_n),
-      A_mean    = substitute(A_mean),
-      A_sd      = substitute(A_sd),
-      A_n       = substitute(A_n),
-      B_mean    = substitute(B_mean),
-      B_sd      = substitute(B_sd),
-      B_n       = substitute(B_n),
-      AB_mean   = substitute(AB_mean),
-      AB_sd     = substitute(AB_sd),
-      AB_n      = substitute(AB_n)
-    )
-  }
-  effsize_args <- lapply(vars, function(x) eval(x, data))
 
-  # Pass arguments to the type of effect size to compute
+  # Get args
+  call_args <- as.list(match.call())[-1]
+
+  req_cols <- switch(type,
+    ind = .lnRR_requirements$ind,
+    main = .lnRR_requirements$main,
+    inter = .lnRR_requirements$main    # Use same columns as 'main'
+  )
+  effsize_args <- .get_columns(call_args[req_cols], data)
+
   fn <- switch(type,
     ind = ".simple_lnRR",
     main = ".main_lnRR",
@@ -270,3 +250,33 @@ lnRR <- function(
 
   return(data.frame(inter_lnRR, inter_lnRRv))
 }
+
+
+#' Columns required for computing different lnRR effect sizes
+#'
+#' @keywords internal
+.lnRR_requirements <- list(
+  ind = c(
+    "Ctrl_mean",
+    "Ctrl_sd", 
+    "Ctrl_n",
+    "A_mean",   
+    "A_sd",
+    "A_n"
+  ),
+  main = c(
+    "Ctrl_mean",
+    "Ctrl_sd", 
+    "Ctrl_n",
+    "A_mean",   
+    "A_sd",
+    "A_n", 
+    "B_mean",   
+    "B_sd",
+    "B_n",
+    "AB_mean",
+    "AB_sd",
+    "AB_n"
+  )
+)
+
