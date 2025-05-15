@@ -46,42 +46,21 @@ SMD <- function(
   checkmate::assert_logical(hedges_correction, len = 1)
   checkmate::assert_data_frame(data)
   
-  # Define columns needed and evaluate them using 'data' to
-  # get the column vectors
-  if (type == "ind") {
-    vars <- list(
-      Ctrl_mean = substitute(Ctrl_mean),
-      Ctrl_sd   = substitute(Ctrl_sd),
-      Ctrl_n    = substitute(Ctrl_n),
-      A_mean    = substitute(A_mean),
-      A_sd      = substitute(A_sd),
-      A_n       = substitute(A_n)
-    )
-  } else {
-    vars <- list(
-      Ctrl_mean = substitute(Ctrl_mean),
-      Ctrl_sd   = substitute(Ctrl_sd),
-      Ctrl_n    = substitute(Ctrl_n),
-      A_mean    = substitute(A_mean),
-      A_sd      = substitute(A_sd),
-      A_n       = substitute(A_n),
-      B_mean    = substitute(B_mean),
-      B_sd      = substitute(B_sd),
-      B_n       = substitute(B_n),
-      AB_mean   = substitute(AB_mean),
-      AB_sd     = substitute(AB_sd),
-      AB_n      = substitute(AB_n)
-    )
-  }
-  effsize_args <- lapply(vars, function(x) eval(x, data))
+  # Get args as a list
+  call_args <- as.list(match.call())[-1]
 
-  # Add hedges' correction to arguments 
+  req_cols <- switch(type, 
+    ind   = .SMD_requirements$ind,
+    main  = .SMD_requirements$main,
+    inter = .SMD_requirements$main   # Needs same variables than 'main'
+  )
+  effsize_args <- .get_columns(call_args[req_cols], data)
+
   effsize_args$hedges_correction <- hedges_correction
 
-  # Pass arguments to the type of effect size to compute
   fn <- switch(type,
-    ind = ".simple_SMD",
-    main = ".main_SMD",
+    ind   = ".simple_SMD",
+    main  = ".main_SMD",
     inter = ".interaction_SMD"
   )
   df <- do.call(fn, effsize_args)
@@ -336,3 +315,30 @@ SMD <- function(
   j <- 1 - (3 / ((4 * m) - 1))
   return(j)
 }
+
+
+#' @keywords internal
+.SMD_requirements <- list(
+  ind = c(
+    "Ctrl_mean",
+    "Ctrl_sd",  
+    "Ctrl_n",   
+    "A_mean",   
+    "A_sd",     
+    "A_n"
+  ),
+  main = c(
+    "Ctrl_mean",
+    "Ctrl_sd",  
+    "Ctrl_n",   
+    "A_mean",   
+    "A_sd",     
+    "A_n",
+    "B_mean",
+    "B_sd",
+    "B_n",
+    "AB_mean",
+    "AB_sd",
+    "AB_n"
+  )
+)
