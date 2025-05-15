@@ -30,48 +30,25 @@ lnVR <- function(
   AB_sd = NULL,
   AB_n = NULL
 ) {
-  checkmate::assert_choice(type, choices = c("ind", "main", "inter"))
-  checkmate::assert_character(col_names, len = 2)
-  checkmate::assert_logical(append, len = 1)
-  checkmate::assert_data_frame(data)
-  
-  # Define columns needed and evaluate them using 'data' to
-  # get the column vectors
-  if (type == "ind") {
-    vars <- list(
-      Ctrl_sd   = substitute(Ctrl_sd),
-      Ctrl_n    = substitute(Ctrl_n),
-      A_sd      = substitute(A_sd),
-      A_n       = substitute(A_n)
-    )
-  } else {
-    vars <- list(
-      Ctrl_sd   = substitute(Ctrl_sd),
-      Ctrl_n    = substitute(Ctrl_n),
-      A_sd      = substitute(A_sd),
-      A_n       = substitute(A_n),
-      B_sd      = substitute(B_sd),
-      B_n       = substitute(B_n),
-      AB_sd     = substitute(AB_sd),
-      AB_n      = substitute(AB_n)
-    )
-  }
-  effsize_args <- lapply(vars, function(x) eval(x, data))
+  .assert_args(type, col_names, append, data)
+  call_args <- as.list(match.call())[-1]
 
-  # Pass arguments to the type of effect size to compute
-  fn <- switch(type,
-    ind = ".simple_lnVR",
-    main = ".main_lnVR",
-    inter = ".interaction_lnVR"
+  lnvr <- switch(type,
+    ind   = list(func = ".simple_lnVR", 
+                 args = .get_columns(call_args[.lnVR_args$ind], data)),
+    main  = list(func = ".main_lnVR", 
+                 args = .get_columns(call_args[.lnVR_args$main], data)),
+    inter = list(func = ".interaction_lnVR",
+                 args = .get_columns(call_args[.lnVR_args$main], data))
   )
-  df <- do.call(fn, effsize_args)
 
-  # Rename columns 
-  colnames(df) <- col_names
-
-  if (append) {
-    df <- cbind(data, df)
-  }
+  df <- .compute_and_format(
+    data = data,
+    effsize_func = lnvr$func,
+    effsize_args = lnvr$args,
+    col_names = col_names,
+    append = append
+  )
 
   return(df)
 }
@@ -189,3 +166,26 @@ lnVR <- function(
 
   return(data.frame(inter_lnVR, inter_lnVRv))
 }
+
+
+#' Required columns for computing lnVR
+#'
+#' @keywords internal
+.lnVR_args <- list(
+  ind = c(
+    "Ctrl_sd",
+    "Ctrl_n",
+    "A_sd",
+    "A_n"
+  ),
+  main = c(
+    "Ctrl_sd",
+    "Ctrl_n",
+    "A_sd",
+    "A_n",
+    "B_sd",
+    "B_n",
+    "AB_sd",
+    "AB_n"
+  )
+)

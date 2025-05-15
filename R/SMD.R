@@ -1,22 +1,7 @@
 #' Standardized Mean Difference (SMD)
 #' 
-#' @param type Type of effect size: "ind", "main", or "inter"
-#' @param data Data frame with the data
-#' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
-#' @param append Logical. Append the results to \code{data}. Default is TRUE
+#' @inheritParams lnRR
 #' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE
-#' @param Ctrl_mean Mean outcome from the Control treatment
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_mean Mean outcome from the treatment
-#' @param A_sd Standard deviation from the treatment
-#' @param A_n Sample size from the treatment
-#' @param B_mean Mean outcome from the B treatment
-#' @param B_sd Standard deviation from the B treatment
-#' @param B_n Sample size from the B treatment
-#' @param AB_mean Mean outcome from the interaction AxB treatment
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
 #'
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
@@ -40,36 +25,29 @@ SMD <- function(
   AB_sd = NULL,
   AB_n = NULL
 ) {
-  checkmate::assert_choice(type, choices = c("ind", "main", "inter"))
-  checkmate::assert_character(col_names, len = 2)
-  checkmate::assert_logical(append, len = 1)
+  .assert_args(type, col_names, append, data)
   checkmate::assert_logical(hedges_correction, len = 1)
-  checkmate::assert_data_frame(data)
   
   # Get args as a list
   call_args <- as.list(match.call())[-1]
 
-  req_cols <- switch(type, 
-    ind = .SMD_requirements$ind,
-    main = .SMD_requirements$main,
-    inter = .SMD_requirements$main   # Needs same variables than 'main'
+  smd <- switch(type,
+    ind   = list(func = ".simple_SMD",
+                 args = .get_columns(call_args[.SMD_args$ind], data)),
+    main  = list(func = ".main_SMD",
+                 args = .get_columns(call_args[.SMD_args$main], data)),
+    inter = list(func = ".interaction_SMD",
+                 args = .get_columns(call_args[.SMD_args$main], data))  # Same args than 'main'
   )
-  effsize_args <- .get_columns(call_args[req_cols], data)
+  smd$args$hedges_correction <- hedges_correction
 
-  effsize_args$hedges_correction <- hedges_correction
-
-  fn <- switch(type,
-    ind = ".simple_SMD",
-    main = ".main_SMD",
-    inter = ".interaction_SMD"
+  df <- .compute_and_format(
+    data = data,
+    effsize_func = smd$func,
+    effsize_args = smd$args,
+    col_names = col_names,
+    append = append
   )
-  df <- do.call(fn, effsize_args)
-
-  colnames(df) <- col_names
-
-  if (append) {
-    df <- cbind(data, df)
-  }
 
   return(df)
 }
@@ -317,7 +295,7 @@ SMD <- function(
 
 
 #' @keywords internal
-.SMD_requirements <- list(
+.SMD_args <- list(
   ind = c(
     "Ctrl_mean",
     "Ctrl_sd",  

@@ -38,34 +38,25 @@ lnRR <- function(
   AB_sd = NULL,
   AB_n = NULL
 ) {
-  checkmate::assert_choice(type, choices = c("ind", "main", "inter"))
-  checkmate::assert_character(col_names, len = 2)
-  checkmate::assert_logical(append, len = 1)
-  checkmate::assert_data_frame(data)
-
-  # Get args
+  .assert_args(type, col_names, append, data)
   call_args <- as.list(match.call())[-1]
 
-  req_cols <- switch(type,
-    ind = .lnRR_requirements$ind,
-    main = .lnRR_requirements$main,
-    inter = .lnRR_requirements$main    # Use same columns as 'main'
+  lnrr <- switch(type,
+    ind   = list(func = ".simple_lnRR",
+                 args = .get_columns(call_args[.lnRR_requirements$ind], data)),
+    main  = list(func = ".main_lnRR",
+                 args = .get_columns(call_args[.lnRR_requirements$main], data)),
+    inter = list(func = ".interaction_lnRR",
+                 args = .get_columns(call_args[.lnRR_requirements$main], data))  # Same args than 'main'
   )
-  effsize_args <- .get_columns(call_args[req_cols], data)
 
-  fn <- switch(type,
-    ind = ".simple_lnRR",
-    main = ".main_lnRR",
-    inter = ".interaction_lnRR"
+  df <- .compute_and_format(
+    data = data,
+    effsize_func = lnrr$func,
+    effsize_args = lnrr$args,
+    col_names = col_names,
+    append = append
   )
-  df <- do.call(fn, effsize_args)
-
-  # Rename columns 
-  colnames(df) <- col_names
-
-  if (append) {
-    df <- cbind(data, df)
-  }
 
   return(df)
 }
