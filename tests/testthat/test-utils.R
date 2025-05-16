@@ -30,7 +30,7 @@ test_that(".get_columns works by passing column name as symbols", {
 })
 
 
-test_that(".get_columns throws erros when columns are not numeric", {
+test_that(".get_columns throws errors when columns are not numeric", {
   foo <- data.frame(aaa = c(1:5),
 		    ccc = LETTERS[1:5],
 		    eee = rep(TRUE, 5))
@@ -42,3 +42,28 @@ test_that(".get_columns throws erros when columns are not numeric", {
   expect_error(.get_columns(cols_logical, foo))
 })
 
+
+test_that(".assert_cor_value throws errors when values are not between -1 and 1", {
+  df <- data.frame(foo = c("a", "b", "c"))
+
+  good_vector <- c(0, 0.2, -0.3)
+  bad_vector <- c(0.2, 1, 3)
+
+  expect_error(.assert_cor_value(bad_vector, df))
+  expect_no_error(.assert_cor_value(good_vector, df))
+})
+
+
+test_that(".assert_cor_value throws error when length is not 1 or equal to len(data)", {
+  df <- data.frame(foo = c("a", "b", "c"))
+
+  good_vector <- c(0, 0.2, -0.3)
+  bad_vector <- c(0.2, 1)
+  another_good <- 0.5
+
+  expect_error(.assert_cor_value(bad_vector, df))
+  expect_no_error(.assert_cor_value(good_vector, df))
+  expect_no_error(.assert_cor_value(another_good, df))
+
+
+})

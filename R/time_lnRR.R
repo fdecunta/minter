@@ -16,12 +16,14 @@ time_lnRR <- function(
   Exp_cor
 ) {
   .assert_args(type = "inter", col_names, append, data)
+  .assert_cor_value(Ctrl_cor, data)
+  .assert_cor_value(Exp_cor, data)
+
   call_args <- as.list(match.call())[-1]
 
   time_lnrr_func <- ".time_interaction_lnRR"
   time_lnrr_args <-.get_columns(call_args[.time_lnCVR_requirements], data)
 
-  # TODO: assert that Ctrl_cor and Exp_cor are a number or a numeric vector of len(data)
   time_lnrr_args$Ctrl_cor <- Ctrl_cor
   time_lnrr_args$Exp_cor <- Exp_cor
 

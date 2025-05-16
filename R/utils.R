@@ -50,6 +50,7 @@
   return(df)
 }
 
+
 .get_columns <- function(columns_list, data) {
   # Validate each column. It must exist and be a numeric vector.
   # 'columns_list' is a named list:
@@ -92,4 +93,27 @@
   checkmate::assert_character(col_names, len = 2)
   checkmate::assert_logical(append, len = 1)
   checkmate::assert_data_frame(data)
+}
+
+#' Check if x is a valid correlation argument
+#'
+#' It is good if it's a numeric value between -1 and 1, and its
+#' length is 1 or the same as nrow(data)
+#' 
+#' @keywords internal
+.assert_cor_value <- function(x, data) {
+  if (!checkmate::test_numeric(x, lower = -1, upper = 1)) {
+    stop(sprintf(
+      "Correlation values must be between -1 and 1, but some values in %s are out of range.",
+      deparse(substitute(x))
+    ), call. = FALSE)
+  }
+
+  if (!(checkmate::test_numeric(x, len = nrow(data)) ||
+        checkmate::test_numeric(x, len = 1))) {
+    stop(sprintf(
+      "length of %s must be 1 or equal to data, but is %d",
+      deparse(substitute(x)), length(x)
+    ), call. = FALSE)
+  }
 }
