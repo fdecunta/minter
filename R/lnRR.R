@@ -41,25 +41,59 @@ lnRR <- function(
   .assert_args(type, col_names, append, data)
   call_args <- as.list(match.call())[-1]
 
-  lnrr <- switch(type,
-    ind   = list(func = ".simple_lnRR",
-                 args = .get_columns(call_args[.lnRR_requirements$ind], data)),
-    main  = list(func = ".main_lnRR",
-                 args = .get_columns(call_args[.lnRR_requirements$main], data)),
-    inter = list(func = ".interaction_lnRR",
-                 args = .get_columns(call_args[.lnRR_requirements$main], data))  # Same args than 'main'
+  lnrr_func <- switch(type,
+    ind = ".simple_lnRR",
+    main = ".main_lnRR",
+    inter = ".interaction_lnRR"
+  )
+
+  lnrr_args <- switch(type,
+    ind = .get_columns(call_args[.lnRR_requirements$ind], data),
+    main = .get_columns(call_args[.lnRR_requirements$main], data),
+    inter = .get_columns(call_args[.lnRR_requirements$main], data)  # Same args than 'main'
   )
 
   df <- .compute_and_format(
+    effsize_func = lnrr_func,
+    effsize_args = lnrr_args,
     data = data,
-    effsize_func = lnrr$func,
-    effsize_args = lnrr$args,
     col_names = col_names,
     append = append
   )
 
   return(df)
 }
+
+
+#' Columns required for computing different lnRR effect sizes
+#'
+#' @keywords internal
+.lnRR_requirements <- list(
+  ind = c(
+    "Ctrl_mean",
+    "Ctrl_sd", 
+    "Ctrl_n",
+    "A_mean",   
+    "A_sd",
+    "A_n"
+  ),
+  main = c(
+    "Ctrl_mean",
+    "Ctrl_sd", 
+    "Ctrl_n",
+    "A_mean",   
+    "A_sd",
+    "A_n", 
+    "B_mean",   
+    "B_sd",
+    "B_n",
+    "AB_mean",
+    "AB_sd",
+    "AB_n"
+  )
+)
+
+
 
 #' Simple Log Response Ratio
 #' 
@@ -243,31 +277,4 @@ lnRR <- function(
 }
 
 
-#' Columns required for computing different lnRR effect sizes
-#'
-#' @keywords internal
-.lnRR_requirements <- list(
-  ind = c(
-    "Ctrl_mean",
-    "Ctrl_sd", 
-    "Ctrl_n",
-    "A_mean",   
-    "A_sd",
-    "A_n"
-  ),
-  main = c(
-    "Ctrl_mean",
-    "Ctrl_sd", 
-    "Ctrl_n",
-    "A_mean",   
-    "A_sd",
-    "A_n", 
-    "B_mean",   
-    "B_sd",
-    "B_n",
-    "AB_mean",
-    "AB_sd",
-    "AB_n"
-  )
-)
 

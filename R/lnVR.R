@@ -33,19 +33,23 @@ lnVR <- function(
   .assert_args(type, col_names, append, data)
   call_args <- as.list(match.call())[-1]
 
-  lnvr <- switch(type,
-    ind   = list(func = ".simple_lnVR", 
-                 args = .get_columns(call_args[.lnVR_args$ind], data)),
-    main  = list(func = ".main_lnVR", 
-                 args = .get_columns(call_args[.lnVR_args$main], data)),
-    inter = list(func = ".interaction_lnVR",
-                 args = .get_columns(call_args[.lnVR_args$main], data))
+  lnvr_func <- switch(type,
+    ind = ".simple_lnVR",
+    main = ".main_lnVR",
+    inter = ".interaction_lnVR"
+  )
+                 
+
+  lnvr_args <- switch(type,
+    ind = .get_columns(call_args[.lnVR_args$ind], data),
+    main = .get_columns(call_args[.lnVR_args$main], data),
+    inter = .get_columns(call_args[.lnVR_args$main], data)
   )
 
   df <- .compute_and_format(
     data = data,
-    effsize_func = lnvr$func,
-    effsize_args = lnvr$args,
+    effsize_func = lnvr_func,
+    effsize_args = lnvr_args,
     col_names = col_names,
     append = append
   )

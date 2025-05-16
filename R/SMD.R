@@ -31,20 +31,23 @@ SMD <- function(
   # Get args as a list
   call_args <- as.list(match.call())[-1]
 
-  smd <- switch(type,
-    ind   = list(func = ".simple_SMD",
-                 args = .get_columns(call_args[.SMD_args$ind], data)),
-    main  = list(func = ".main_SMD",
-                 args = .get_columns(call_args[.SMD_args$main], data)),
-    inter = list(func = ".interaction_SMD",
-                 args = .get_columns(call_args[.SMD_args$main], data))  # Same args than 'main'
+  smd_func <- switch(type,
+    ind = ".simple_SMD",
+    main = ".main_SMD",
+    inter = ".interaction_SMD"
   )
-  smd$args$hedges_correction <- hedges_correction
+
+  smd_args <- switch(type,
+    ind = .get_columns(call_args[.SMD_args$ind], data),
+    main = .get_columns(call_args[.SMD_args$main], data),
+    inter = .get_columns(call_args[.SMD_args$main], data)  # Same args than 'main'
+  )
+  smd_args$hedges_correction <- hedges_correction
 
   df <- .compute_and_format(
+    effsize_func = smd_func,
+    effsize_args = smd_args,
     data = data,
-    effsize_func = smd$func,
-    effsize_args = smd$args,
     col_names = col_names,
     append = append
   )

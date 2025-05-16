@@ -26,26 +26,58 @@ lnCVR <- function(
   .assert_args(type, col_names, append, data)
   call_args <- as.list(match.call())[-1]
 
+  lncvr_func <- switch(type,
+    ind = ".simple_lnCVR",
+    main = ".main_lnCVR",
+    inter = ".interaction_lnCVR"
+  )
 
-  lncvr <- switch(type,
-    ind   = list(func = ".simple_lnCVR",
-                 args = .get_columns(call_args[.lnCVR_requirements$ind], data)),
-    main  = list(func = ".main_lnCVR",
-                 args = .get_columns(call_args[.lnCVR_requirements$main], data)),
-    inter = list(func = ".interaction_lnCVR",
-                 args = .get_columns(call_args[.lnCVR_requirements$main], data))   # Same args needed than main
+  lncvr_args <- switch(type,
+    ind = .get_columns(call_args[.lnCVR_requirements$ind], data),
+    main = .get_columns(call_args[.lnCVR_requirements$main], data),
+    inter = .get_columns(call_args[.lnCVR_requirements$main], data)   # Same args needed than main
   )
 
   df <- .compute_and_format(
     data = data,
-    effsize_func = lncvr$func,
-    effsize_args = lncvr$args,
+    effsize_func = lncvr_func,
+    effsize_args = lncvr_args,
     col_names = col_names,
     append = append
   )
 
   return(df)
 }
+
+
+#' Columns required for computing each lnCVR
+#'
+#' There is no 'inter' because uses the same args than 'main'
+#' @keywords internal
+.lnCVR_requirements <- list(
+  ind = c(
+    "Ctrl_mean",
+    "Ctrl_sd",
+    "Ctrl_n",
+    "A_mean",
+    "A_sd",
+    "A_n"
+  ),
+  main = c(
+    "Ctrl_mean",
+    "Ctrl_sd",
+    "Ctrl_n",
+    "A_mean",
+    "A_sd",
+    "A_n",
+    "B_mean",
+    "B_sd",
+    "B_n",
+    "AB_mean",
+    "AB_sd",
+    "AB_n"
+  )
+)
 
 
 #' Simple Log Coefficient Of Variation Ratio
@@ -231,31 +263,3 @@ lnCVR <- function(
 }
 
 
-#' Columns required for computing each lnCVR
-#'
-#' There is no 'inter' because uses the same args than 'main'
-#' @keywords internal
-.lnCVR_requirements <- list(
-  ind = c(
-    "Ctrl_mean",
-    "Ctrl_sd",
-    "Ctrl_n",
-    "A_mean",
-    "A_sd",
-    "A_n"
-  ),
-  main = c(
-    "Ctrl_mean",
-    "Ctrl_sd",
-    "Ctrl_n",
-    "A_mean",
-    "A_sd",
-    "A_n",
-    "B_mean",
-    "B_sd",
-    "B_n",
-    "AB_mean",
-    "AB_sd",
-    "AB_n"
-  )
-)

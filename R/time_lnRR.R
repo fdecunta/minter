@@ -1,3 +1,56 @@
+time_lnRR <- function(
+  data,
+  col_names = c("yi", "vi"),
+  append = TRUE,
+  t0_Ctrl_mean,
+  t0_Ctrl_sd,
+  t1_Ctrl_mean,
+  t1_Ctrl_sd,
+  Ctrl_n,
+  Ctrl_cor,
+  t0_Exp_mean,
+  t0_Exp_sd,
+  t1_Exp_mean,
+  t1_Exp_sd,
+  Exp_n,
+  Exp_cor
+) {
+  .assert_args(type = "inter", col_names, append, data)
+  call_args <- as.list(match.call())[-1]
+
+  time_lnrr_func <- ".time_interaction_lnRR"
+  time_lnrr_args <-.get_columns(call_args[.time_lnCVR_requirements], data)
+
+  # TODO: assert that Ctrl_cor and Exp_cor are a number or a numeric vector of len(data)
+  time_lnrr_args$Ctrl_cor <- Ctrl_cor
+  time_lnrr_args$Exp_cor <- Exp_cor
+
+  df <- .compute_and_format(
+    data = data,
+    effsize_func = time_lnrr_func,
+    effsize_args = time_lnrr_args,
+    col_names = col_names,
+    append = append
+  )
+
+  return(df)
+}
+
+
+.time_lnCVR_requirements <- c(
+   "t0_Ctrl_mean",
+   "t0_Ctrl_sd",
+   "t1_Ctrl_mean",
+   "t1_Ctrl_sd",
+   "Ctrl_n",
+   "t0_Exp_mean",
+   "t0_Exp_sd",
+   "t1_Exp_mean",
+   "t1_Exp_sd",
+   "Exp_n"
+)
+
+
 #' Log Response Ratio: Interaction Between Experimental Treatment and Time
 #'
 #' @param t0_Ctrl_mean Sample mean from the control group at time 0
