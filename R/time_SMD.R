@@ -4,7 +4,7 @@
 #' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE.
 #'
 #' @references 
-#'   Shinichi Nakagawa in prep.
+#'   Shinichi Nakagawa and Daniel Noble, personal communication.
 #' 
 .time_interaction_SMD <- function(
   t0_Ctrl_mean,

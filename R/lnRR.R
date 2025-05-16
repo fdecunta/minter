@@ -1,7 +1,7 @@
 #' Log Response Ratio (lnRR)
 #'
 #' @param type Type of effect size: "ind", "main", or "inter"
-#' @param data Data frame with the data
+#' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
 #' @param Ctrl_mean Mean outcome from the Control treatment

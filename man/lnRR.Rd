@@ -26,7 +26,7 @@ lnRR(
 \arguments{
 \item{type}{Type of effect size: "ind", "main", or "inter"}
 
-\item{data}{Data frame with the data}
+\item{data}{Data frame containing the variables used.}
 
 \item{col_names}{Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.}
 

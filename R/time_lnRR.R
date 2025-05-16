@@ -1,3 +1,27 @@
+#' Log Response Ratio: Interaction Between Experimental Treatment and Time
+#'
+#' @param data Data frame containing the variables used.
+#' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
+#' @param append Logical. Append the results to \code{data}. Default is TRUE
+#' @param t0_Ctrl_mean Sample mean from the control group at time 0
+#' @param t0_Ctrl_sd Standard deviation from the control group at time 0
+#' @param t1_Ctrl_mean Sample mean from the control group at time 1
+#' @param t1_Ctrl_sd Standard deviation from the control group at time 1
+#' @param Ctrl_n Sample size of the control group
+#' @param Ctrl_cor Number or numeric vector. Correlation between the means of the control group at t0 and t1
+#' @param t0_Exp_mean Sample mean from the experimental group at time 0
+#' @param t0_Exp_sd Standard deviation from the experimental group at time 0
+#' @param t1_Exp_mean Sample mean from the experimental group at time 1
+#' @param t1_Exp_sd Standard deviation from the experimental group at time 1
+#' @param Exp_n Sample size of the experimental group
+#' @param Exp_cor Number or numeric vector. Correlation between the means of the experimental group at t0 and t1
+#'
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
+#'
+#' @references 
+#'   Shinichi Nakagawa and Daniel Noble, personal communication.
+#'
+#' @export
 time_lnRR <- function(
   data,
   col_names = c("yi", "vi"),
@@ -22,7 +46,7 @@ time_lnRR <- function(
   call_args <- as.list(match.call())[-1]
 
   time_lnrr_func <- ".time_interaction_lnRR"
-  time_lnrr_args <-.get_columns(call_args[.time_lnCVR_requirements], data)
+  time_lnrr_args <-.get_columns(call_args[.time_lnRR_requirements], data)
 
   time_lnrr_args$Ctrl_cor <- Ctrl_cor
   time_lnrr_args$Exp_cor <- Exp_cor
@@ -39,7 +63,7 @@ time_lnRR <- function(
 }
 
 
-.time_lnCVR_requirements <- c(
+.time_lnRR_requirements <- c(
    "t0_Ctrl_mean",
    "t0_Ctrl_sd",
    "t1_Ctrl_mean",

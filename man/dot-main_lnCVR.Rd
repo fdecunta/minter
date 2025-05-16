@@ -51,6 +51,6 @@ From Nakagawa in prep.
 TODO: this
 }
 \references{
-Nakagawa S. in prep.
+Shinichi Nakagawa and Daniel Noble, personal communication.
 }
 \keyword{internal}

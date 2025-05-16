@@ -52,13 +52,12 @@
 
 
 .get_columns <- function(columns_list, data) {
-  # Validate each column. It must exist and be a numeric vector.
-  # 'columns_list' is a named list:
-  #   - The names are the names of the
-  #     arguments used in the calling function
-  #   - The elements are the column names that should 
-  #     be in 'data'. These are symbols, so must be 
-  #     transformed to chars
+  # Find and extract the columns from columns list in data
+  # Make some validation in the middle
+  if (any(is.na(names(columns_list)))) {
+    stop(sprintf(".get_columns(). Some required arguments were not in call_args"), call. = FALSE)
+  }
+  
   return_cols <- list()
 
   for (arg in names(columns_list)) {
@@ -87,7 +86,6 @@
 }
 
 
-#' Check some common arguments
 .assert_args <- function(type, col_names, append, data) {
   checkmate::assert_choice(type, choices = c("ind", "main", "inter"))
   checkmate::assert_character(col_names, len = 2)
@@ -95,13 +93,9 @@
   checkmate::assert_data_frame(data)
 }
 
-#' Check if x is a valid correlation argument
-#'
-#' It is good if it's a numeric value between -1 and 1, and its
-#' length is 1 or the same as nrow(data)
-#' 
-#' @keywords internal
+
 .assert_cor_value <- function(x, data) {
+  # Check if x is a valid correlation value that ranges between -1 and 1
   if (!checkmate::test_numeric(x, lower = -1, upper = 1)) {
     stop(sprintf(
       "Correlation values must be between -1 and 1, but some values in %s are out of range.",
@@ -109,6 +103,7 @@
     ), call. = FALSE)
   }
 
+  # Check if x is a number or a vector of length of data
   if (!(checkmate::test_numeric(x, len = nrow(data)) ||
         checkmate::test_numeric(x, len = 1))) {
     stop(sprintf(

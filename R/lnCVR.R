@@ -127,7 +127,7 @@ lnCVR <- function(
 #'
 #' @references 
 #' 
-#'   Nakagawa S. in prep.
+#'   Shinichi Nakagawa and Daniel Noble, personal communication.
 #' 
 #' @keywords internal
 .main_lnCVR <- function(
@@ -203,7 +203,7 @@ lnCVR <- function(
 #' 
 #' @references 
 #' 
-#'   Nakagawa S. in prep.
+#'   Shinichi Nakagawa and Daniel Noble, personal communication.
 #' 
 #' @keywords internal
 .interaction_lnCVR <- function(

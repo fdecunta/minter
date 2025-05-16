@@ -48,6 +48,6 @@
 Method by Nakagawa (in prep.)
 }
 \references{
-Nakagawa S. in prep.
+Shinichi Nakagawa and Daniel Noble, personal communication.
 }
 \keyword{internal}
