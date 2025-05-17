@@ -25,5 +25,7 @@
 #' in meta-analysis workflows involving factorial designs.
 #'
 #' @source Fake.
+#' 
+#' @keywords internal
 "testing_data"
 
