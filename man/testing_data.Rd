@@ -36,4 +36,4 @@ effects of A, B, and the interaction (AB).
 This dataset is intended for validating functions that compute or test effect sizes
 in meta-analysis workflows involving factorial designs.
 }
-\keyword{datasets}
+\keyword{internal}
