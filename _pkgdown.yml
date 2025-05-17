@@ -3,9 +3,7 @@ title: minter
 
 template:
   bootstrap: 5
-  bootswatch: flatly
-  bslib:
-    primary: "#3eb489"   # mint 
+  bootswatch: minty
 
 navbar:
   structure:
