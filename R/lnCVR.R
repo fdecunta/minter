@@ -1,3 +1,30 @@
+#' @rdname lnCVR
+#' @inherit lnCVR
+#' @param ... Extra arguments
+#' @export
+lnCVR_ind <- function(...) {
+  lnCVR(type = "ind", ...)
+}
+
+
+#' @rdname lnCVR
+#' @inherit lnCVR
+#' @param ... Extra arguments
+#' @export
+lnCVR_main <- function(...) {
+  lnCVR(type = "main", ...)
+}
+
+
+#' @rdname lnCVR
+#' @inherit lnCVR
+#' @param ... Extra arguments
+#' @export
+lnCVR_inter <- function(...) {
+  lnCVR(type = "inter", ...)
+}
+
+
 #' Log Coefficient Of Variation Ratio (lnCVR)
 #' 
 #' @inheritParams lnRR

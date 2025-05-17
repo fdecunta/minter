@@ -1,3 +1,30 @@
+#' @rdname SMD
+#' @inherit SMD
+#' @param ... Extra arguments
+#' @export
+SMD_ind <- function(...) {
+  SMD(type = "ind", ...)
+}
+
+
+#' @rdname SMD
+#' @inherit SMD
+#' @param ... Extra arguments
+#' @export
+SMD_main <- function(...) {
+  SMD(type = "main", ...)
+}
+
+
+#' @rdname SMD
+#' @inherit SMD
+#' @param ... Extra arguments
+#' @export
+SMD_inter <- function(...) {
+  SMD(type = "inter", ...)
+}
+
+
 #' Standardized Mean Difference (SMD)
 #' 
 #' @inheritParams lnRR

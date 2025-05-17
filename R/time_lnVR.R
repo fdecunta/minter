@@ -1,4 +1,4 @@
-#' Log of Variability Ratio: Interaction Between Experimental Treatment and Time
+#' Log of Variability Ratio: Interaction Between Treatment and Time
 #'
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.

@@ -1,3 +1,15 @@
 url: https://fdecunta.github.io/minter/
 template:
   bootstrap: 5
+
+reference:
+  - title: Independent groups
+    contents:
+      - lnRR
+      - lnVR
+      - lnCVR
+      - SMD
+
+  - title: Non-independent groups
+    contents:
+      - starts_with("time")

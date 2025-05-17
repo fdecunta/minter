@@ -1,4 +1,4 @@
-#' Standardized Mean Difference for the interaction between Experimental Treatment and Time
+#' Standardized Mean Difference: Interaction Between Treatment and Time
 #'
 #' @inheritParams time_lnRR
 #' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE.

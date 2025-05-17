@@ -1,3 +1,30 @@
+#' @rdname lnRR
+#' @inherit lnRR
+#' @param ... Extra arguments
+#' @export
+lnRR_ind <- function(...) {
+  lnRR(type = "ind", ...)
+}
+
+
+#' @rdname lnRR
+#' @inherit lnRR
+#' @param ... Extra arguments
+#' @export
+lnRR_main <- function(...) {
+  lnRR(type = "main", ...)
+}
+
+
+#' @rdname lnRR
+#' @inherit lnRR
+#' @param ... Extra arguments
+#' @export
+lnRR_inter <- function(...) {
+  lnRR(type = "inter", ...)
+}
+
+
 #' Log Response Ratio (lnRR)
 #'
 #' @param type Type of effect size: "ind", "main", or "inter"
@@ -19,7 +46,7 @@
 #'
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
-#' @export
+#' @keywords internal
 lnRR <- function(
   type,
   data,

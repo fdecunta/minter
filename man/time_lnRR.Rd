@@ -2,7 +2,7 @@
 % Please edit documentation in R/time_lnRR.R
 \name{time_lnRR}
 \alias{time_lnRR}
-\title{Log Response Ratio: Interaction Between Experimental Treatment and Time}
+\title{Log Response Ratio: Interaction Between Treatment and Time}
 \usage{
 time_lnRR(
   data,
@@ -54,7 +54,7 @@ time_lnRR(
 \item{Exp_cor}{Number or numeric vector. Correlation between the means of the experimental group at t0 and t1}
 }
 \description{
-Log Response Ratio: Interaction Between Experimental Treatment and Time
+Log Response Ratio: Interaction Between Treatment and Time
 }
 \references{
 Shinichi Nakagawa and Daniel Noble, personal communication.

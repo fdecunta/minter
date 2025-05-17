@@ -2,7 +2,7 @@
 % Please edit documentation in R/time_SMD.R
 \name{time_SMD}
 \alias{time_SMD}
-\title{Standardized Mean Difference for the interaction between Experimental Treatment and Time}
+\title{Standardized Mean Difference: Interaction Between Treatment and Time}
 \usage{
 time_SMD(
   data,
@@ -57,7 +57,7 @@ time_SMD(
 \item{Exp_cor}{Number or numeric vector. Correlation between the means of the experimental group at t0 and t1}
 }
 \description{
-Standardized Mean Difference for the interaction between Experimental Treatment and Time
+Standardized Mean Difference: Interaction Between Treatment and Time
 }
 \references{
 Shinichi Nakagawa and Daniel Noble, personal communication.

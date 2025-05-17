@@ -1,4 +1,4 @@
-#' Log Coefficient of Variation Ratio: Interaction Between Experimental Treatment and Time
+#' Log Coefficient of Variation Ratio: Interaction Between Treatment and Time
 #'
 #' @inheritParams time_lnRR
 #'

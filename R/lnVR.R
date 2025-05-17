@@ -1,3 +1,30 @@
+#' @rdname lnVR
+#' @inherit lnVR
+#' @param ... Extra arguments
+#' @export
+lnVR_ind <- function(...) {
+  lnVR(type = "ind", ...)
+}
+
+
+#' @rdname lnVR
+#' @inherit lnVR
+#' @param ... Extra arguments
+#' @export
+lnVR_main <- function(...) {
+  lnVR(type = "main", ...)
+}
+
+
+#' @rdname lnVR
+#' @inherit lnVR
+#' @param ... Extra arguments
+#' @export
+lnVR_inter <- function(...) {
+  lnVR(type = "inter", ...)
+}
+
+
 #' Log of Variation Ratio (lnVR)
 #' 
 #' @param type Type of effect size: "ind", "main", or "inter"

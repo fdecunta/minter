@@ -2,7 +2,7 @@
 % Please edit documentation in R/time_lnVR.R
 \name{time_lnVR}
 \alias{time_lnVR}
-\title{Log of Variability Ratio: Interaction Between Experimental Treatment and Time}
+\title{Log of Variability Ratio: Interaction Between Treatment and Time}
 \usage{
 time_lnVR(
   data,
@@ -42,7 +42,7 @@ time_lnVR(
 \item{Exp_cor}{Number or numeric vector. Correlation between the means of the experimental group at t0 and t1}
 }
 \description{
-Log of Variability Ratio: Interaction Between Experimental Treatment and Time
+Log of Variability Ratio: Interaction Between Treatment and Time
 }
 \references{
 Shinichi Nakagawa and Daniel Noble, personal communication.
