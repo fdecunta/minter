@@ -56,6 +56,33 @@ SMD <- function(
 }
 
 
+#' @keywords internal
+.SMD_args <- list(
+  ind = c(
+    "Ctrl_mean",
+    "Ctrl_sd",  
+    "Ctrl_n",   
+    "A_mean",   
+    "A_sd",     
+    "A_n"
+  ),
+  main = c(
+    "Ctrl_mean",
+    "Ctrl_sd",  
+    "Ctrl_n",   
+    "A_mean",   
+    "A_sd",     
+    "A_n",
+    "B_mean",
+    "B_sd",
+    "B_n",
+    "AB_mean",
+    "AB_sd",
+    "AB_n"
+  )
+)
+
+
 #' Simple effect: Standardized Mean Difference 
 #' 
 #' @inheritParams .simple_lnRR
@@ -259,7 +286,6 @@ SMD <- function(
   AB_n = NULL,
   AB_sd = NULL
 ) {
-
   # If only Ctrl and A are passed, set all the other params to 0.
   # This way the pooled sd is for only 2 groups.
   if (is.null(B_sd) && is.null(AB_sd)) {
@@ -295,30 +321,3 @@ SMD <- function(
   j <- 1 - (3 / ((4 * m) - 1))
   return(j)
 }
-
-
-#' @keywords internal
-.SMD_args <- list(
-  ind = c(
-    "Ctrl_mean",
-    "Ctrl_sd",  
-    "Ctrl_n",   
-    "A_mean",   
-    "A_sd",     
-    "A_n"
-  ),
-  main = c(
-    "Ctrl_mean",
-    "Ctrl_sd",  
-    "Ctrl_n",   
-    "A_mean",   
-    "A_sd",     
-    "A_n",
-    "B_mean",
-    "B_sd",
-    "B_n",
-    "AB_mean",
-    "AB_sd",
-    "AB_n"
-  )
-)

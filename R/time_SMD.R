@@ -37,7 +37,6 @@
   )
 
   d <- (((t1_Exp_mean - t1_Ctrl_mean) - (t0_Exp_mean - t0_Ctrl_mean)) / pooled_sd) * j
-
   v <- ((2 * (1 - Exp_cor)) / Exp_n) +
        ((2 * (1 - Ctrl_cor)) / Ctrl_n) +
        (d^2 / (2 * (Exp_n + Ctrl_n)))

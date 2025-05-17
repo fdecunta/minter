@@ -43,7 +43,7 @@ lnVR <- function(
   lnvr_args <- switch(type,
     ind = .get_columns(call_args[.lnVR_args$ind], data),
     main = .get_columns(call_args[.lnVR_args$main], data),
-    inter = .get_columns(call_args[.lnVR_args$main], data)
+    inter = .get_columns(call_args[.lnVR_args$main], data)  # Use same data than inter
   )
 
   df <- .compute_and_format(
@@ -56,6 +56,32 @@ lnVR <- function(
 
   return(df)
 }
+
+
+#' Required columns for computing lnVR
+#'
+#' 'inter' use the same arguments than 'main',
+#  so there only 'main'
+#'
+#' @keywords internal
+.lnVR_args <- list(
+  ind = c(
+    "Ctrl_sd",
+    "Ctrl_n",
+    "A_sd",
+    "A_n"
+  ),
+  main = c(
+    "Ctrl_sd",
+    "Ctrl_n",
+    "A_sd",
+    "A_n",
+    "B_sd",
+    "B_n",
+    "AB_sd",
+    "AB_n"
+  )
+)
 
 
 #' Simple Log Variability ratio
@@ -114,7 +140,6 @@ lnVR <- function(
   AB_sd,
   AB_n
 ) {
-
   main_lnVR <- 0.5 * log((AB_sd * A_sd) / (B_sd * Ctrl_sd)) +
 	  0.5 * (
             (1 / (2 * (AB_n - 1))) +
@@ -156,7 +181,6 @@ lnVR <- function(
   AB_sd,
   AB_n
 ) {
-
   inter_lnVR <- log((AB_sd / B_sd) / (A_sd / Ctrl_sd)) +
             (1 / (2 * (AB_n - 1))) -
             (1 / (2 * (A_n - 1))) -
@@ -170,26 +194,3 @@ lnVR <- function(
 
   return(data.frame(inter_lnVR, inter_lnVRv))
 }
-
-
-#' Required columns for computing lnVR
-#'
-#' @keywords internal
-.lnVR_args <- list(
-  ind = c(
-    "Ctrl_sd",
-    "Ctrl_n",
-    "A_sd",
-    "A_n"
-  ),
-  main = c(
-    "Ctrl_sd",
-    "Ctrl_n",
-    "A_sd",
-    "A_n",
-    "B_sd",
-    "B_n",
-    "AB_sd",
-    "AB_n"
-  )
-)

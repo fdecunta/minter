@@ -261,5 +261,3 @@ lnCVR <- function(
 
   return(data.frame(inter_lnCVR, inter_lnCVRv))
 }
-
-

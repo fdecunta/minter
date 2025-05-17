@@ -64,6 +64,7 @@ time_lnVR <- function(
    "Exp_n"
 )
 
+
 #' Log of Variability Ratio: Interaction Between Experimental Treatment and Time
 #'
 #' @param t0_Ctrl_sd Standard deviation from the control group at time 0

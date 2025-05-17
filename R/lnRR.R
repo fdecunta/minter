@@ -94,7 +94,6 @@ lnRR <- function(
 )
 
 
-
 #' Simple Log Response Ratio
 #' 
 #' Computes the log of the response ratio
@@ -131,7 +130,6 @@ lnRR <- function(
 
   return(data.frame(simple_lnRR, simple_lnRRv))
 }
-
 
 
 #' Main Log Response Ratio 
@@ -194,6 +192,7 @@ lnRR <- function(
   
   return(data.frame(main_lnRR, main_lnRRv)) 
 }
+
 
 #' Main Log Response Ratio: method by Nakagawa
 #'
@@ -275,6 +274,3 @@ lnRR <- function(
 
   return(data.frame(inter_lnRR, inter_lnRRv))
 }
-
-
-
