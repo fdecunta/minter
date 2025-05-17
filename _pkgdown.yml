@@ -1,15 +1,36 @@
 url: https://fdecunta.github.io/minter/
+title: minter
+
 template:
   bootstrap: 5
+  bootswatch: flatly
+  bslib:
+    primary: "#3eb489"   # mint 
+
+navbar:
+  structure:
+    left:  [home, reference, articles, news]
+    right: [github]
+  components:
+    github:
+      icon: fa-github
+      href: https://github.com/fdecunta/minter
+
+home:
+  title: "minter"
 
 reference:
-  - title: Independent groups
+  - title: "Effect sizes for 2-by-2 factorials"
     contents:
       - lnRR
       - lnVR
       - lnCVR
       - SMD
 
-  - title: Non-independent groups
-    contents:
-      - starts_with("time")
+  - title: "Effect sizes for repeated measures of a treatment"
+    contents: starts_with("time")
+
+
+news:
+  one_page: true
+
