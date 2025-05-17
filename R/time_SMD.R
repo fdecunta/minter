@@ -1,11 +1,68 @@
 #' Standardized Mean Difference for the interaction between Experimental Treatment and Time
 #'
+#' @inheritParams time_lnRR
+#' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE.
+#'
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
+#'
+#' @references 
+#'   Shinichi Nakagawa and Daniel Noble, personal communication.
+#' 
+#' @export
+time_SMD <- function(
+  data,
+  col_names = c("yi", "vi"),
+  append = TRUE,
+  hedges_correction = TRUE,
+  t0_Ctrl_mean,
+  t0_Ctrl_sd,
+  t1_Ctrl_mean,
+  t1_Ctrl_sd,
+  Ctrl_n,
+  Ctrl_cor,
+  t0_Exp_mean,
+  t0_Exp_sd,
+  t1_Exp_mean,
+  t1_Exp_sd,
+  Exp_n,
+  Exp_cor
+) {
+  .assert_args(type = "inter", col_names, append, data)
+  .assert_cor_value(Ctrl_cor, data)
+  .assert_cor_value(Exp_cor, data)
+
+  call_args <- as.list(match.call())[-1]
+
+  smd_func <- ".time_interaction_SMD"
+  smd_args <-.get_columns(call_args[.time_lnRR_requirements], data)
+
+  smd_args$Ctrl_cor <- Ctrl_cor
+  smd_args$Exp_cor <- Exp_cor
+
+  smd_args$hedges_correction <- hedges_correction
+
+  df <- .compute_and_format(
+    data = data,
+    effsize_func = smd_func,
+    effsize_args = smd_args,
+    col_names = col_names,
+    append = append
+  )
+
+  return(df)
+
+}
+
+
+#' Standardized Mean Difference for the interaction between Experimental Treatment and Time
+#'
 #' @inheritParams .time_interaction_lnRR
 #' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE.
 #'
 #' @references 
 #'   Shinichi Nakagawa and Daniel Noble, personal communication.
 #' 
+#' @keywords internal
 .time_interaction_SMD <- function(
   t0_Ctrl_mean,
   t0_Ctrl_sd,

@@ -64,6 +64,4 @@ test_that(".assert_cor_value throws error when length is not 1 or equal to len(d
   expect_error(.assert_cor_value(bad_vector, df))
   expect_no_error(.assert_cor_value(good_vector, df))
   expect_no_error(.assert_cor_value(another_good, df))
-
-
 })

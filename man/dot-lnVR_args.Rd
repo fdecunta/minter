@@ -11,6 +11,6 @@ An object of class \code{list} of length 2.
 .lnVR_args
 }
 \description{
-Required columns for computing lnVR
+'inter' use the same arguments than 'main',
 }
 \keyword{internal}
