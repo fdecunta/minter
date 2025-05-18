@@ -28,7 +28,10 @@ reference:
   - title: "Effect sizes for repeated measures of a treatment"
     contents: starts_with("time")
 
+articles:
+  - title: "Documentation"
+    contents:
+      - minter-documentation
 
 news:
   one_page: true
-
