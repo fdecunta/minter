@@ -29,7 +29,8 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="active nav-item"><a class="nav-link" href="../articles/minter-documentation.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="active nav-item"><a class="nav-link" href="../articles/minter-docs.html">Documentation</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -51,7 +52,7 @@
             
       
 
-      <div class="d-none name"><code>minter-documentation.Rmd</code></div>
+      <div class="d-none name"><code>minter-docs.Rmd</code></div>
     </div>
 
     
@@ -62,16 +63,6 @@
   margin-top: 1em;
   margin-bottom: 0.5em;
 }
-
-.function-description {
-  margin-bottom: 1em;
-}
-
-.effect-types {
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
 .formula-block {
   margin-top: 1em;
   margin-bottom: 1em;
@@ -115,7 +106,7 @@ Variance Ratio</a></li>
 </div>
 </div>
 <div class="section level2">
-<h2 id="introduction">Introduction to Effect Sizes<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<h2 id="introduction-to-effect-sizes">Introduction to Effect Sizes<a class="anchor" aria-label="anchor" href="#introduction-to-effect-sizes"></a>
 </h2>
 <p>Effect sizes quantify the magnitude of relationships between
 variables or the size of differences between groups. They are essential
@@ -145,19 +136,17 @@ factor depends on the level of another)</li>
 </ul>
 </div>
 <div class="section level2">
-<h2 id="effect-sizes-for-2-by-2-factorials">Factorial Design Effect Sizes<a class="anchor" aria-label="anchor" href="#effect-sizes-for-2-by-2-factorials"></a>
+<h2 id="factorial-design-effect-sizes-1">Factorial Design Effect Sizes<a class="anchor" aria-label="anchor" href="#factorial-design-effect-sizes-1"></a>
 </h2>
 <p>These functions calculate effect sizes for standard 2×2 factorial
 designs where two factors (A and B) are manipulated.</p>
 <div class="section level3">
 <h3 id="smd">SMD - Standardized Mean Difference<a class="anchor" aria-label="anchor" href="#smd"></a>
 </h3>
-<div class="function-description">
 <p>Calculates the standardized mean difference (Hedges’ g) for factorial
 designs, accounting for small-sample bias. This effect size is
 appropriate when comparing group means on the same scale or when you
 want to standardize the difference.</p>
-</div>
 <div class="section level4">
 <h4 id="effect-types">Effect Types<a class="anchor" aria-label="anchor" href="#effect-types"></a>
 </h4>
@@ -254,32 +243,46 @@ sample size for group AB (only for main/interaction effects)</li>
 <p><strong>Individual effect</strong> (compare treatment A to
 control):</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Simple effect with default values</span></span>
+<code class="sourceCode R"><span><span class="co"># Create a sample dataset</span></span>
+<span><span class="va">my_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  Control_mean <span class="op">=</span> <span class="fl">10.2</span>, Control_sd <span class="op">=</span> <span class="fl">2.1</span>, Control_n <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  TreatmentA_mean <span class="op">=</span> <span class="fl">15.7</span>, TreatmentA_sd <span class="op">=</span> <span class="fl">3.2</span>, TreatmentA_n <span class="op">=</span> <span class="fl">25</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Simple effect by referring to column names in the data frame</span></span>
 <span><span class="va">result_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SMD.html">SMD_ind</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
-<span>  Ctrl_mean <span class="op">=</span> <span class="fl">10.2</span>, Ctrl_sd <span class="op">=</span> <span class="fl">2.1</span>, Ctrl_n <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  A_mean <span class="op">=</span> <span class="fl">15.7</span>, A_sd <span class="op">=</span> <span class="fl">3.2</span>, A_n <span class="op">=</span> <span class="fl">25</span></span>
+<span>  Ctrl_mean <span class="op">=</span> <span class="st">"Control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
+<span>  A_mean <span class="op">=</span> <span class="st">"TreatmentA_mean"</span>, A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><strong>Main effect</strong> (average effect of factor A):</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Main effect with all groups specified</span></span>
+<code class="sourceCode R"><span><span class="co"># Create a sample dataset with all four treatment combinations</span></span>
+<span><span class="va">factorial_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  Control_mean <span class="op">=</span> <span class="fl">10.2</span>, Control_sd <span class="op">=</span> <span class="fl">2.1</span>, Control_n <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  TreatmentA_mean <span class="op">=</span> <span class="fl">15.7</span>, TreatmentA_sd <span class="op">=</span> <span class="fl">3.2</span>, TreatmentA_n <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  TreatmentB_mean <span class="op">=</span> <span class="fl">12.4</span>, TreatmentB_sd <span class="op">=</span> <span class="fl">2.5</span>, TreatmentB_n <span class="op">=</span> <span class="fl">24</span>,</span>
+<span>  TreatmentAB_mean <span class="op">=</span> <span class="fl">18.9</span>, TreatmentAB_sd <span class="op">=</span> <span class="fl">3.8</span>, TreatmentAB_n <span class="op">=</span> <span class="fl">26</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Main effect with all groups specified by column names</span></span>
 <span><span class="va">result_main</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SMD.html">SMD_main</a></span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
-<span>  Ctrl_mean <span class="op">=</span> <span class="fl">10.2</span>, Ctrl_sd <span class="op">=</span> <span class="fl">2.1</span>, Ctrl_n <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  A_mean <span class="op">=</span> <span class="fl">15.7</span>, A_sd <span class="op">=</span> <span class="fl">3.2</span>, A_n <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  B_mean <span class="op">=</span> <span class="fl">12.4</span>, B_sd <span class="op">=</span> <span class="fl">2.5</span>, B_n <span class="op">=</span> <span class="fl">24</span>,</span>
-<span>  AB_mean <span class="op">=</span> <span class="fl">18.9</span>, AB_sd <span class="op">=</span> <span class="fl">3.8</span>, AB_n <span class="op">=</span> <span class="fl">26</span></span>
+<span>  data <span class="op">=</span> <span class="va">factorial_data</span>,</span>
+<span>  Ctrl_mean <span class="op">=</span> <span class="st">"Control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
+<span>  A_mean <span class="op">=</span> <span class="st">"TreatmentA_mean"</span>, A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span>,</span>
+<span>  B_mean <span class="op">=</span> <span class="st">"TreatmentB_mean"</span>, B_sd <span class="op">=</span> <span class="st">"TreatmentB_sd"</span>, B_n <span class="op">=</span> <span class="st">"TreatmentB_n"</span>,</span>
+<span>  AB_mean <span class="op">=</span> <span class="st">"TreatmentAB_mean"</span>, AB_sd <span class="op">=</span> <span class="st">"TreatmentAB_sd"</span>, AB_n <span class="op">=</span> <span class="st">"TreatmentAB_n"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><strong>Interaction effect</strong> (A×B interaction):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Interaction effect without applying Hedges' correction</span></span>
 <span><span class="va">result_inter</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SMD.html">SMD_inter</a></span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">factorial_data</span>,</span>
 <span>  hedges_correction <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  Ctrl_mean <span class="op">=</span> <span class="fl">10.2</span>, Ctrl_sd <span class="op">=</span> <span class="fl">2.1</span>, Ctrl_n <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  A_mean <span class="op">=</span> <span class="fl">15.7</span>, A_sd <span class="op">=</span> <span class="fl">3.2</span>, A_n <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  B_mean <span class="op">=</span> <span class="fl">12.4</span>, B_sd <span class="op">=</span> <span class="fl">2.5</span>, B_n <span class="op">=</span> <span class="fl">24</span>,</span>
-<span>  AB_mean <span class="op">=</span> <span class="fl">20.9</span>, AB_sd <span class="op">=</span> <span class="fl">3.8</span>, AB_n <span class="op">=</span> <span class="fl">26</span></span>
+<span>  Ctrl_mean <span class="op">=</span> <span class="st">"Control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
+<span>  A_mean <span class="op">=</span> <span class="st">"TreatmentA_mean"</span>, A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span>,</span>
+<span>  B_mean <span class="op">=</span> <span class="st">"TreatmentB_mean"</span>, B_sd <span class="op">=</span> <span class="st">"TreatmentB_sd"</span>, B_n <span class="op">=</span> <span class="st">"TreatmentB_n"</span>,</span>
+<span>  AB_mean <span class="op">=</span> <span class="st">"TreatmentAB_mean"</span>, AB_sd <span class="op">=</span> <span class="st">"TreatmentAB_sd"</span>, AB_n <span class="op">=</span> <span class="st">"TreatmentAB_n"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -298,13 +301,11 @@ enemies and mutualists on plant performance: a meta‐analysis.
 <div class="section level3">
 <h3 id="lnrr">lnRR - Log Response Ratio<a class="anchor" aria-label="anchor" href="#lnrr"></a>
 </h3>
-<div class="function-description">
 <p>Calculates the natural logarithm of the response ratio for factorial
 designs. This effect size is appropriate when comparing the relative
 (proportional) differences between experimental groups, and is
 dimensionless, facilitating comparison across studies using different
 measurement scales.</p>
-</div>
 <div class="section level4">
 <h4 id="effect-types-1">Effect Types<a class="anchor" aria-label="anchor" href="#effect-types-1"></a>
 </h4>
@@ -394,33 +395,47 @@ sample size for group AB (only for main/interaction effects)</li>
 <p><strong>Individual effect</strong> (compare treatment A to
 control):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Simple log response ratio</span></span>
+<code class="sourceCode R"><span><span class="co"># Create a sample dataset</span></span>
+<span><span class="va">my_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  Control_mean <span class="op">=</span> <span class="fl">10.2</span>, Control_sd <span class="op">=</span> <span class="fl">2.1</span>, Control_n <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  TreatmentA_mean <span class="op">=</span> <span class="fl">15.7</span>, TreatmentA_sd <span class="op">=</span> <span class="fl">3.2</span>, TreatmentA_n <span class="op">=</span> <span class="fl">25</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Simple log response ratio using column names</span></span>
 <span><span class="va">result_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnRR.html">lnRR_ind</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
-<span>  Ctrl_mean <span class="op">=</span> <span class="fl">10.2</span>, Ctrl_sd <span class="op">=</span> <span class="fl">2.1</span>, Ctrl_n <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  A_mean <span class="op">=</span> <span class="fl">15.7</span>, A_sd <span class="op">=</span> <span class="fl">3.2</span>, A_n <span class="op">=</span> <span class="fl">25</span></span>
+<span>  Ctrl_mean <span class="op">=</span> <span class="st">"Control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
+<span>  A_mean <span class="op">=</span> <span class="st">"TreatmentA_mean"</span>, A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><strong>Main effect</strong> (average effect of factor A):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Main effect with all groups specified</span></span>
+<code class="sourceCode R"><span><span class="co"># Create a sample dataset with all four treatment combinations</span></span>
+<span><span class="va">factorial_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  Control_mean <span class="op">=</span> <span class="fl">10.2</span>, Control_sd <span class="op">=</span> <span class="fl">2.1</span>, Control_n <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  TreatmentA_mean <span class="op">=</span> <span class="fl">15.7</span>, TreatmentA_sd <span class="op">=</span> <span class="fl">3.2</span>, TreatmentA_n <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  TreatmentB_mean <span class="op">=</span> <span class="fl">12.4</span>, TreatmentB_sd <span class="op">=</span> <span class="fl">2.5</span>, TreatmentB_n <span class="op">=</span> <span class="fl">24</span>,</span>
+<span>  TreatmentAB_mean <span class="op">=</span> <span class="fl">18.9</span>, TreatmentAB_sd <span class="op">=</span> <span class="fl">3.8</span>, TreatmentAB_n <span class="op">=</span> <span class="fl">26</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Main effect with all groups specified by column names</span></span>
 <span><span class="va">result_main</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnRR.html">lnRR_main</a></span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
-<span>  Ctrl_mean <span class="op">=</span> <span class="fl">10.2</span>, Ctrl_sd <span class="op">=</span> <span class="fl">2.1</span>, Ctrl_n <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  A_mean <span class="op">=</span> <span class="fl">15.7</span>, A_sd <span class="op">=</span> <span class="fl">3.2</span>, A_n <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  B_mean <span class="op">=</span> <span class="fl">12.4</span>, B_sd <span class="op">=</span> <span class="fl">2.5</span>, B_n <span class="op">=</span> <span class="fl">24</span>,</span>
-<span>  AB_mean <span class="op">=</span> <span class="fl">18.9</span>, AB_sd <span class="op">=</span> <span class="fl">3.8</span>, AB_n <span class="op">=</span> <span class="fl">26</span></span>
+<span>  data <span class="op">=</span> <span class="va">factorial_data</span>,</span>
+<span>  Ctrl_mean <span class="op">=</span> <span class="st">"Control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
+<span>  A_mean <span class="op">=</span> <span class="st">"TreatmentA_mean"</span>, A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span>,</span>
+<span>  B_mean <span class="op">=</span> <span class="st">"TreatmentB_mean"</span>, B_sd <span class="op">=</span> <span class="st">"TreatmentB_sd"</span>, B_n <span class="op">=</span> <span class="st">"TreatmentB_n"</span>,</span>
+<span>  AB_mean <span class="op">=</span> <span class="st">"TreatmentAB_mean"</span>, AB_sd <span class="op">=</span> <span class="st">"TreatmentAB_sd"</span>, AB_n <span class="op">=</span> <span class="st">"TreatmentAB_n"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><strong>Interaction effect</strong> (A×B interaction):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Interaction effect for lnRR</span></span>
+<code class="sourceCode R"><span><span class="co"># Interaction effect with custom column names</span></span>
 <span><span class="va">result_inter</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnRR.html">lnRR_inter</a></span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
-<span>  col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"effect"</span>, <span class="st">"variance"</span><span class="op">)</span>,  <span class="co"># Custom column names</span></span>
+<span>  data <span class="op">=</span> <span class="va">factorial_data</span>,</span>
+<span>  col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"effect"</span>, <span class="st">"variance"</span><span class="op">)</span>,  <span class="co"># Custom column names for output</span></span>
 <span>  append <span class="op">=</span> <span class="cn">FALSE</span>,                      <span class="co"># Return a new data frame</span></span>
-<span>  Ctrl_mean <span class="op">=</span> <span class="fl">10.2</span>, Ctrl_sd <span class="op">=</span> <span class="fl">2.1</span>, Ctrl_n <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  A_mean <span class="op">=</span> <span class="fl">15.7</span>, A_sd <span class="op">=</span> <span class="fl">3.2</span>, A_n <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  B_mean <span class="op">=</span> <span class="fl">12.4</span>, B_sd <span class="op">=</span> <span class="fl">2.5</span>, B_n <span class="op">=</span> <span class="fl">24</span>,</span>
-<span>  AB_mean <span class="op">=</span> <span class="fl">20.9</span>, AB_sd <span class="op">=</span> <span class="fl">3.8</span>, AB_n <span class="op">=</span> <span class="fl">26</span></span>
+<span>  Ctrl_mean <span class="op">=</span> <span class="st">"Control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
+<span>  A_mean <span class="op">=</span> <span class="st">"TreatmentA_mean"</span>, A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span>,</span>
+<span>  B_mean <span class="op">=</span> <span class="st">"TreatmentB_mean"</span>, B_sd <span class="op">=</span> <span class="st">"TreatmentB_sd"</span>, B_n <span class="op">=</span> <span class="st">"TreatmentB_n"</span>,</span>
+<span>  AB_mean <span class="op">=</span> <span class="st">"TreatmentAB_mean"</span>, AB_sd <span class="op">=</span> <span class="st">"TreatmentAB_sd"</span>, AB_n <span class="op">=</span> <span class="st">"TreatmentAB_n"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -439,11 +454,9 @@ for studies with correlated and multi‐group designs. <em>Ecology</em>,
 <div class="section level3">
 <h3 id="lncvr">lnCVR - Log Coefficient of Variation Ratio<a class="anchor" aria-label="anchor" href="#lncvr"></a>
 </h3>
-<div class="function-description">
 <p>Calculates the natural logarithm of the coefficient of variation
 ratio for factorial designs. This effect size is appropriate when
 comparing the variability of groups relative to their means.</p>
-</div>
 <div class="section level4">
 <h4 id="effect-types-2">Effect Types<a class="anchor" aria-label="anchor" href="#effect-types-2"></a>
 </h4>
@@ -517,22 +530,26 @@ sample size for group AB (only for main/interaction effects)</li>
 <h4 id="examples-2">Examples<a class="anchor" aria-label="anchor" href="#examples-2"></a>
 </h4>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Individual effect</span></span>
+<code class="sourceCode R"><span><span class="co"># Create a sample dataset</span></span>
+<span><span class="va">my_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  Control_mean <span class="op">=</span> <span class="fl">10.2</span>, Control_sd <span class="op">=</span> <span class="fl">2.1</span>, Control_n <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  TreatmentA_mean <span class="op">=</span> <span class="fl">15.7</span>, TreatmentA_sd <span class="op">=</span> <span class="fl">3.2</span>, TreatmentA_n <span class="op">=</span> <span class="fl">25</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Individual effect using column names</span></span>
 <span><span class="va">result_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnCVR.html">lnCVR_ind</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
-<span>  Ctrl_mean <span class="op">=</span> <span class="fl">10.2</span>, Ctrl_sd <span class="op">=</span> <span class="fl">2.1</span>, Ctrl_n <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  A_mean <span class="op">=</span> <span class="fl">15.7</span>, A_sd <span class="op">=</span> <span class="fl">3.2</span>, A_n <span class="op">=</span> <span class="fl">25</span></span>
+<span>  Ctrl_mean <span class="op">=</span> <span class="st">"Control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
+<span>  A_mean <span class="op">=</span> <span class="st">"TreatmentA_mean"</span>, A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
 <h3 id="lnvr">lnVR - Log Variance Ratio<a class="anchor" aria-label="anchor" href="#lnvr"></a>
 </h3>
-<div class="function-description">
 <p>Calculates the natural logarithm of the variance ratio for factorial
 designs. This effect size is appropriate when comparing the variability
 of groups independent of their means.</p>
-</div>
 <div class="section level4">
 <h4 id="effect-types-3">Effect Types<a class="anchor" aria-label="anchor" href="#effect-types-3"></a>
 </h4>
@@ -602,11 +619,17 @@ group AB (only for main/interaction effects)</li>
 <h4 id="examples-3">Examples<a class="anchor" aria-label="anchor" href="#examples-3"></a>
 </h4>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Individual effect</span></span>
+<code class="sourceCode R"><span><span class="co"># Create a sample dataset</span></span>
+<span><span class="va">my_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  Control_sd <span class="op">=</span> <span class="fl">2.1</span>, Control_n <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  TreatmentA_sd <span class="op">=</span> <span class="fl">3.2</span>, TreatmentA_n <span class="op">=</span> <span class="fl">25</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Individual effect using column names</span></span>
 <span><span class="va">result_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnVR.html">lnVR_ind</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
-<span>  Ctrl_sd <span class="op">=</span> <span class="fl">2.1</span>, Ctrl_n <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  A_sd <span class="op">=</span> <span class="fl">3.2</span>, A_n <span class="op">=</span> <span class="fl">25</span></span>
+<span>  Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
+<span>  A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
@@ -619,11 +642,9 @@ are taken at two time points (e.g., before and after a treatment).</p>
 <div class="section level3">
 <h3 id="time_smd">time_SMD - Time-based Standardized Mean Difference<a class="anchor" aria-label="anchor" href="#time_smd"></a>
 </h3>
-<div class="function-description">
 <p>Calculates the standardized mean difference for repeated measures
 (treatment × time) designs, comparing the change in the experimental
 group to the change in the control group.</p>
-</div>
 <div class="section level4">
 <h4 id="formula-4">Formula<a class="anchor" aria-label="anchor" href="#formula-4"></a>
 </h4>
@@ -687,25 +708,34 @@ at t0 and t1</li>
 <h4 id="examples-4">Examples<a class="anchor" aria-label="anchor" href="#examples-4"></a>
 </h4>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/time_SMD.html">time_SMD</a></span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
-<span>  t0_Ctrl_mean <span class="op">=</span> <span class="fl">10.2</span>, t0_Ctrl_sd <span class="op">=</span> <span class="fl">2.1</span>, </span>
-<span>  t1_Ctrl_mean <span class="op">=</span> <span class="fl">10.5</span>, t1_Ctrl_sd <span class="op">=</span> <span class="fl">2.2</span>,</span>
-<span>  Ctrl_n <span class="op">=</span> <span class="fl">25</span>, Ctrl_cor <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>  t0_Exp_mean <span class="op">=</span> <span class="fl">10.1</span>, t0_Exp_sd <span class="op">=</span> <span class="fl">2.0</span>,</span>
-<span>  t1_Exp_mean <span class="op">=</span> <span class="fl">15.7</span>, t1_Exp_sd <span class="op">=</span> <span class="fl">3.2</span>,</span>
-<span>  Exp_n <span class="op">=</span> <span class="fl">25</span>, Exp_cor <span class="op">=</span> <span class="fl">0.7</span></span>
+<code class="sourceCode R"><span><span class="co"># Create a sample dataset for repeated measures design</span></span>
+<span><span class="va">time_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  t0_Control_mean <span class="op">=</span> <span class="fl">10.2</span>, t0_Control_sd <span class="op">=</span> <span class="fl">2.1</span>, </span>
+<span>  t1_Control_mean <span class="op">=</span> <span class="fl">10.5</span>, t1_Control_sd <span class="op">=</span> <span class="fl">2.2</span>,</span>
+<span>  Control_n <span class="op">=</span> <span class="fl">25</span>, Control_cor <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  t0_Experiment_mean <span class="op">=</span> <span class="fl">10.1</span>, t0_Experiment_sd <span class="op">=</span> <span class="fl">2.0</span>,</span>
+<span>  t1_Experiment_mean <span class="op">=</span> <span class="fl">15.7</span>, t1_Experiment_sd <span class="op">=</span> <span class="fl">3.2</span>,</span>
+<span>  Experiment_n <span class="op">=</span> <span class="fl">25</span>, Experiment_cor <span class="op">=</span> <span class="fl">0.7</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate time-based SMD using column names</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/time_SMD.html">time_SMD</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">time_data</span>,</span>
+<span>  t0_Ctrl_mean <span class="op">=</span> <span class="st">"t0_Control_mean"</span>, t0_Ctrl_sd <span class="op">=</span> <span class="st">"t0_Control_sd"</span>, </span>
+<span>  t1_Ctrl_mean <span class="op">=</span> <span class="st">"t1_Control_mean"</span>, t1_Ctrl_sd <span class="op">=</span> <span class="st">"t1_Control_sd"</span>,</span>
+<span>  Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>, Ctrl_cor <span class="op">=</span> <span class="st">"Control_cor"</span>,</span>
+<span>  t0_Exp_mean <span class="op">=</span> <span class="st">"t0_Experiment_mean"</span>, t0_Exp_sd <span class="op">=</span> <span class="st">"t0_Experiment_sd"</span>,</span>
+<span>  t1_Exp_mean <span class="op">=</span> <span class="st">"t1_Experiment_mean"</span>, t1_Exp_sd <span class="op">=</span> <span class="st">"t1_Experiment_sd"</span>,</span>
+<span>  Exp_n <span class="op">=</span> <span class="st">"Experiment_n"</span>, Exp_cor <span class="op">=</span> <span class="st">"Experiment_cor"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
 <h3 id="time_lnrr">time_lnRR - Time-based Log Response Ratio<a class="anchor" aria-label="anchor" href="#time_lnrr"></a>
 </h3>
-<div class="function-description">
 <p>Calculates the log response ratio for repeated measures designs,
 comparing the relative change in the experimental group to the relative
 change in the control group.</p>
-</div>
 <div class="section level4">
 <h4 id="parameters-5">Parameters<a class="anchor" aria-label="anchor" href="#parameters-5"></a>
 </h4>
@@ -747,33 +777,31 @@ at t0 and t1</li>
 <h4 id="examples-5">Examples<a class="anchor" aria-label="anchor" href="#examples-5"></a>
 </h4>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/time_lnRR.html">time_lnRR</a></span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
-<span>  t0_Ctrl_mean <span class="op">=</span> <span class="fl">10.2</span>, t0_Ctrl_sd <span class="op">=</span> <span class="fl">2.1</span>, </span>
-<span>  t1_Ctrl_mean <span class="op">=</span> <span class="fl">10.5</span>, t1_Ctrl_sd <span class="op">=</span> <span class="fl">2.2</span>,</span>
-<span>  Ctrl_n <span class="op">=</span> <span class="fl">25</span>, Ctrl_cor <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>  t0_Exp_mean <span class="op">=</span> <span class="fl">10.1</span>, t0_Exp_sd <span class="op">=</span> <span class="fl">2.0</span>,</span>
-<span>  t1_Exp_mean <span class="op">=</span> <span class="fl">15.7</span>, t1_Exp_sd <span class="op">=</span> <span class="fl">3.2</span>,</span>
-<span>  Exp_n <span class="op">=</span> <span class="fl">25</span>, Exp_cor <span class="op">=</span> <span class="fl">0.7</span></span>
+<code class="sourceCode R"><span><span class="co"># Using the same time-based dataset</span></span>
+<span><span class="co"># Calculate time-based log response ratio using column names</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/time_lnRR.html">time_lnRR</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">time_data</span>,</span>
+<span>  t0_Ctrl_mean <span class="op">=</span> <span class="st">"t0_Control_mean"</span>, t0_Ctrl_sd <span class="op">=</span> <span class="st">"t0_Control_sd"</span>, </span>
+<span>  t1_Ctrl_mean <span class="op">=</span> <span class="st">"t1_Control_mean"</span>, t1_Ctrl_sd <span class="op">=</span> <span class="st">"t1_Control_sd"</span>,</span>
+<span>  Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>, Ctrl_cor <span class="op">=</span> <span class="st">"Control_cor"</span>,</span>
+<span>  t0_Exp_mean <span class="op">=</span> <span class="st">"t0_Experiment_mean"</span>, t0_Exp_sd <span class="op">=</span> <span class="st">"t0_Experiment_sd"</span>,</span>
+<span>  t1_Exp_mean <span class="op">=</span> <span class="st">"t1_Experiment_mean"</span>, t1_Exp_sd <span class="op">=</span> <span class="st">"t1_Experiment_sd"</span>,</span>
+<span>  Exp_n <span class="op">=</span> <span class="st">"Experiment_n"</span>, Exp_cor <span class="op">=</span> <span class="st">"Experiment_cor"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
 <h3 id="time_lncvr">time_lnCVR - Time-based Log CV Ratio<a class="anchor" aria-label="anchor" href="#time_lncvr"></a>
 </h3>
-<div class="function-description">
 <p>Calculates the log coefficient of variation ratio for repeated
 measures designs, comparing the relative change in variability adjusted
 for means.</p>
 </div>
-</div>
 <div class="section level3">
 <h3 id="time_lnvr">time_lnVR - Time-based Log Variance Ratio<a class="anchor" aria-label="anchor" href="#time_lnvr"></a>
 </h3>
-<div class="function-description">
 <p>Calculates the log variance ratio for repeated measures designs,
 comparing the relative change in variability.</p>
-</div>
 </div>
 </div>
 <div class="section level2">

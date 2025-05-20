@@ -7,15 +7,28 @@ template:
 
 navbar:
   structure:
-    left:  [home, reference, articles, news]
+    left:  [home, reference, documentation, news]
     right: [github]
   components:
+    documentation:
+      text: Documentation
+      href: articles/minter-docs.html
+    reference:
+      text: Reference
+      href: reference/index.html
     github:
       icon: fa-github
       href: https://github.com/fdecunta/minter
 
 home:
   title: "minter"
+  sidebar:
+    structure: [links, license, community, citation, authors, dev]
+    components:
+      documentation:
+        title: Documentation
+        text: View the comprehensive documentation
+        href: articles/minter-docs.html
 
 reference:
   - title: "Effect sizes for 2-by-2 factorials"
@@ -28,10 +41,11 @@ reference:
   - title: "Effect sizes for repeated measures of a treatment"
     contents: starts_with("time")
 
+# Define the single article (our documentation) to be built
 articles:
-  - title: "Documentation"
+  - title: ~
     contents:
-      - minter-documentation
+      - minter-docs
 
 news:
   one_page: true
