@@ -32,7 +32,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="articles/index.html">Articles</a></li>
+<li class="nav-item"><a class="nav-link" href="articles/minter-docs.html">Documentation</a></li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -50,12 +50,57 @@
 <!-- badges: start -->
 
 <p>A collection of functions for computing effect sizes of interactions for meta-analysis.</p>
+<p>⚠️ <strong>This package is under active development and not yet stable. Use with caution.</strong></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version of minter from <a href="https://github.com/fdecunta/minter" class="external-link">GitHub</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"fdecunta/minter"</span>, force <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<p>Calculate the standardized mean difference (SMD) for the interaction between fertilization and CO2 enrichment:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(minter)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co"># Create sample data for a 2x2 factorial experiment</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Control: No fertilization, ambient CO2</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co"># Fertilization: Added nutrients</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co"># CO2: Elevated CO2</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># Fert_CO2: Both treatments combined</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>experiment_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  <span class="at">Ctrl_mean =</span> <span class="fl">10.2</span>, <span class="at">Ctrl_sd =</span> <span class="fl">2.1</span>, <span class="at">Ctrl_n =</span> <span class="dv">25</span>,  <span class="co"># Control: No treatment</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>  <span class="at">Fert_mean =</span> <span class="fl">15.7</span>, <span class="at">Fert_sd =</span> <span class="fl">3.2</span>, <span class="at">Fert_n =</span> <span class="dv">25</span>,  <span class="co"># Fertilization only</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>  <span class="at">CO2_mean =</span> <span class="fl">12.4</span>, <span class="at">CO2_sd =</span> <span class="fl">2.5</span>, <span class="at">CO2_n =</span> <span class="dv">24</span>,    <span class="co"># Elevated CO2 only</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>  <span class="at">Fert_CO2_mean =</span> <span class="fl">18.9</span>, <span class="at">Fert_CO2_sd =</span> <span class="fl">3.8</span>, <span class="at">Fert_CO2_n =</span> <span class="dv">26</span>  <span class="co"># Both treatments</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>)</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co"># Calculate SMD for interaction</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">SMD_inter</span>(</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  <span class="at">data =</span> experiment_data,</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"SMD"</span>, <span class="st">"SMDv"</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>  <span class="at">Ctrl_mean =</span> Ctrl_mean,</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>  <span class="at">Ctrl_sd =</span> Ctrl_sd,</span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>  <span class="at">Ctrl_n =</span> Ctrl_n,</span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>  <span class="at">A_mean =</span> Fert_mean,</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>  <span class="at">A_sd =</span> Fert_sd,</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>  <span class="at">A_n =</span> Fert_n,</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>  <span class="at">B_mean =</span> CO2_mean,</span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>  <span class="at">B_sd =</span> CO2_sd,</span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>  <span class="at">B_n =</span> CO2_n,</span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>  <span class="at">AB_mean =</span> Fert_CO2_mean,</span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>  <span class="at">AB_sd =</span> Fert_CO2_sd,</span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>  <span class="at">AB_n =</span> Fert_CO2_n</span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>)</span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a>result<span class="sc">$</span>inter_SMD</span>
+<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a><span class="co"># Model</span></span>
+<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">rma.mv</span>(SMD, SMDv, ..., <span class="at">data =</span> experiment_data)</span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
