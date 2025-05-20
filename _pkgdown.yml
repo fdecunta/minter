@@ -3,7 +3,7 @@ title: minter
 
 template:
   bootstrap: 5
-  bootswatch: lumen
+  bootswatch: spacelab
 
 reference:
   - title: "Effect sizes for 2-by-2 factorials"

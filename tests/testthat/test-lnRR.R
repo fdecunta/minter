@@ -90,8 +90,7 @@ test_that("The interaction lnRR is correctly computed", {
 
 
 test_that("lnRR function works fine with 'ind' effect size", {
-  res <- lnRR(
-    type = "ind",
+  res <- lnRR_ind(
     data = testing_data,
     col_names = c("simple_lnRR", "simple_lnRRv"),
     Ctrl_mean = C_mean,
@@ -116,8 +115,7 @@ test_that("lnRR function works fine with 'ind' effect size", {
 
 test_that("lnRR function works fine with 'main' effect size", {
   # This is main effect of factor A
-  res <- lnRR(
-    type = "main",
+  res <- lnRR_main(
     data = testing_data,
     col_names = c("main_lnRR", "main_lnRRv"),
     Ctrl_mean = C_mean,
@@ -140,8 +138,7 @@ test_that("lnRR function works fine with 'main' effect size", {
 
 
 test_that("lnRR function works fine with 'inter' effect size", {
-  res <- lnRR(
-    type = "inter",
+  res <- lnRR_inter(
     data = testing_data,
     col_names = c("inter_lnRR", "inter_lnRRv"),
     Ctrl_mean = C_mean,

@@ -100,8 +100,7 @@ test_that("lnVR works fine for 'ind' effect size", {
   test_lnVR <- log(A_sd / C_sd) + (1 / (2 * (A_n - 1))) - (1 / (2 * (C_n - 1)))
   test_lnVRv <- (1 / (2 * (A_n - 1))) + (1 / (2 * (C_n - 1)))
 
-  res <- lnVR(
-    type = "ind",
+  res <- lnVR_ind(
     data = df,
     col_names = c("simple_lnVR", "simple_lnVRv"),
     Ctrl_sd = C_sd, 
@@ -131,8 +130,7 @@ test_that("lnVR() works fine with 'main'", {
   main_lnVR <- 0.39925
   main_lnVRv <- 0.05556
 
-  res <- lnVR(
-    type = "main",
+  res <- lnVR_main(
     data = df,
     col_names = c("main_lnVR", "main_lnVRv"),
     Ctrl_sd = Ctrl_sd,
@@ -166,8 +164,7 @@ test_that("lnVR works fine with 'inter'", {
   inter_lnVR <- -0.22314
   inter_lnVRv <- 0.22222
 
-  res <- lnVR(
-    type = "inter",
+  res <- lnVR_inter(
     data = df,
     col_names = c("inter_lnVR", "inter_lnVRv"),
     Ctrl_sd = Ctrl_sd,

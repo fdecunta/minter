@@ -118,8 +118,7 @@ test_that("lnCVR works fine with 'ind' effects", {
   test_lnCVRv <- 0.2626736
 
   # Compute with function
-  res <- lnCVR(
-    type = "ind",
+  res <- lnCVR_ind(
     data = df,
     col_names = c("simple_lnCVR", "simple_lnCVRv"),
     Ctrl_mean = Ctrl_mean,
@@ -161,8 +160,7 @@ test_that("lnCVR works fine with 'main' effects", {
   test_lnCVRv <- 0.0855555
 
   # Compute with function
-  res <- lnCVR(
-    type = "main",
+  res <- lnCVR_main(
     data = df,
     col_names = c("main_lnCVR", "main_lnCVRv"),
     Ctrl_mean = Ctrl_mean,
@@ -205,8 +203,7 @@ test_that("lnCVR works fine with 'inter' effects", {
   test_lnCVRv <- 0.448784722
 
   # Compute with function
-  res <- lnCVR(
-    type = "inter",
+  res <- lnCVR_inter(
     data = df,
     col_names = c("inter_lnCVR", "inter_lnCVRv"),
     Ctrl_mean = Ctrl_mean,

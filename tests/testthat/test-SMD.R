@@ -151,8 +151,7 @@ test_that("SMD function works for 'ind' Cohen's d", {
   test_SMD <- 0.4658026
   test_SMDv <- 0.2054243
 
-  res <- SMD(
-    type = "ind",
+  res <- SMD_ind(
     data = df,
     append = FALSE,
     col_names = c("simple_SMD", "simple_SMDv"),
@@ -185,8 +184,7 @@ test_that("SMD function works for 'ind' Hedges' g", {
   test_SMD <- 0.44601
   test_SMDv <- 0.20497
 
-  res <- SMD(
-    type = "ind",
+  res <- SMD_ind(
     data = df,
     append = FALSE,
     col_names = c("simple_SMD", "simple_SMDv"),
@@ -206,8 +204,7 @@ test_that("SMD function works for 'ind' Hedges' g", {
 
 test_that("SMD function computes fine the main Cohen's d", {
   # This computes the main SMD for Factor A
-  res_A <- SMD(
-    type = "main",
+  res_A <- SMD_main(
     data = testing_data,
     col_names = c("main_SMD", "main_SMDv"),
     hedges_correction = FALSE,
@@ -232,8 +229,7 @@ test_that("SMD function computes fine the main Cohen's d", {
 
 test_that("SMD function computes fine the interaction Cohen's d", {
   # This computes the main SMD for Factor A
-  res <- SMD(
-    type = "inter",
+  res <- SMD_inter(
     data = testing_data,
     col_names = c("inter_SMD", "inter_SMDv"),
     hedges_correction = FALSE,
