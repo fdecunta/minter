@@ -33,6 +33,7 @@ between fertilization and CO2 enrichment:
 ``` r
 library(minter)
 
+
 # Create sample data for a 2x2 factorial experiment
 # Control: No fertilization, ambient CO2
 # Fertilization: Added nutrients
@@ -49,7 +50,7 @@ experiment_data <- data.frame(
 # Calculate SMD for interaction
 result <- SMD_inter(
   data = experiment_data,
-  col_names = c("SMD", "SMDv")
+  col_names = c("SMD", "SMDv"),
   Ctrl_mean = Ctrl_mean,
   Ctrl_sd = Ctrl_sd,
   Ctrl_n = Ctrl_n,
@@ -63,10 +64,6 @@ result <- SMD_inter(
   AB_sd = Fert_CO2_sd,
   AB_n = Fert_CO2_n
 )
-
-# View results
-result$inter_SMD
-
 
 # Model
 res <- rma.mv(SMD, SMDv, ..., data = experiment_data)

@@ -1,27 +1,78 @@
 #' @rdname SMD
 #' @inherit SMD
-#' @param ... Extra arguments
 #' @export
-SMD_ind <- function(...) {
-  SMD(type = "ind", ...)
+SMD_ind <- function(
+  data,
+  col_names = c("yi", "vi"),
+  append = TRUE,
+  hedges_correction = TRUE,
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  A_mean,
+  A_sd,
+  A_n
+) {
+  call <- match.call()
+  call[[1L]] <- quote(SMD)
+  call$type <- "ind"
+  eval(call, parent.frame())
 }
 
 
 #' @rdname SMD
 #' @inherit SMD
-#' @param ... Extra arguments
 #' @export
-SMD_main <- function(...) {
-  SMD(type = "main", ...)
+SMD_main <- function(
+  data,
+  col_names = c("yi", "vi"),
+  append = TRUE,
+  hedges_correction = TRUE,
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  A_mean,
+  A_sd,
+  A_n,
+  B_mean,
+  B_sd,
+  B_n,
+  AB_mean,
+  AB_sd,
+  AB_n
+) {
+  call <- match.call()
+  call[[1L]] <- quote(SMD)
+  call$type <- "main"
+  eval(call, parent.frame())
 }
 
 
 #' @rdname SMD
 #' @inherit SMD
-#' @param ... Extra arguments
 #' @export
-SMD_inter <- function(...) {
-  SMD(type = "inter", ...)
+SMD_inter <- function(
+  data,
+  col_names = c("yi", "vi"),
+  append = TRUE,
+  hedges_correction = TRUE,
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  A_mean,
+  A_sd,
+  A_n,
+  B_mean,
+  B_sd,
+  B_n,
+  AB_mean,
+  AB_sd,
+  AB_n
+) {
+  call <- match.call()
+  call[[1L]] <- quote(SMD)
+  call$type <- "inter"
+  eval(call, parent.frame())
 }
 
 
