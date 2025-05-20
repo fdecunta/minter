@@ -73,5 +73,6 @@ result <- SMD_inter(
 )
 
 # Model
+library(metafor)
 res <- rma.mv(SMD, SMDv, ..., data = experiment_data)
 ```
