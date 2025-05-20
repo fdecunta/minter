@@ -504,7 +504,3 @@ Calculates the log coefficient of variation ratio for repeated measures designs,
 ### time_lnVR - Time-based Log Variance Ratio {#time_lnvr}
 
 Calculates the log variance ratio for repeated measures designs, comparing the relative change in variability.
-
-## Author
-
-Facundo Decunta (fdecunta@agro.uba.ar)
