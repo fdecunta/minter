@@ -7,11 +7,43 @@
 \alias{lnVR}
 \title{Log of Variation Ratio (lnVR)}
 \usage{
-lnVR_ind(...)
+lnVR_ind(
+  data,
+  col_names = c("yi", "vi"),
+  append = TRUE,
+  Ctrl_sd,
+  Ctrl_n,
+  A_sd,
+  A_n
+)
 
-lnVR_main(...)
+lnVR_main(
+  data,
+  col_names = c("yi", "vi"),
+  append = TRUE,
+  Ctrl_sd,
+  Ctrl_n,
+  A_sd,
+  A_n,
+  B_sd,
+  B_n,
+  AB_sd,
+  AB_n
+)
 
-lnVR_inter(...)
+lnVR_inter(
+  data,
+  col_names = c("yi", "vi"),
+  append = TRUE,
+  Ctrl_sd,
+  Ctrl_n,
+  A_sd,
+  A_n,
+  B_sd,
+  B_n,
+  AB_sd,
+  AB_n
+)
 
 lnVR(
   type,
@@ -29,10 +61,6 @@ lnVR(
 )
 }
 \arguments{
-\item{...}{Extra arguments}
-
-\item{type}{Type of effect size: "ind", "main", or "inter"}
-
 \item{data}{Data frame containing the variables used.}
 
 \item{col_names}{Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.}
@@ -54,6 +82,8 @@ lnVR(
 \item{AB_sd}{Standard deviation from the interaction AxB treatment}
 
 \item{AB_n}{Sample size from the interaction AxB treatment}
+
+\item{type}{Type of effect size: "ind", "main", or "inter"}
 }
 \description{
 Log of Variation Ratio (lnVR)

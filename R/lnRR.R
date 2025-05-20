@@ -1,27 +1,114 @@
 #' @rdname lnRR
 #' @inherit lnRR
-#' @param ... Extra arguments
+#' @param data Data frame containing the variables used.
+#' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
+#' @param append Logical. Append the results to \code{data}. Default is TRUE
+#' @param Ctrl_mean Mean outcome from the Control treatment
+#' @param Ctrl_sd Standard deviation from the control treatment
+#' @param Ctrl_n Sample size from the control streatment
+#' @param A_mean Mean outcome from the treatment
+#' @param A_sd Standard deviation from the treatment
+#' @param A_n Sample size from the treatment
 #' @export
-lnRR_ind <- function(...) {
-  lnRR(type = "ind", ...)
+lnRR_ind <- function(
+  data,
+  col_names = c("yi", "vi"),
+  append = TRUE,
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  A_mean,
+  A_sd,
+  A_n
+) {
+  call <- match.call()
+  call[[1L]] <- quote(lnRR)
+  call$type <- "ind"
+  eval(call, parent.frame())
 }
 
 
 #' @rdname lnRR
 #' @inherit lnRR
-#' @param ... Extra arguments
+#' @param data Data frame containing the variables used.
+#' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
+#' @param append Logical. Append the results to \code{data}. Default is TRUE
+#' @param Ctrl_mean Mean outcome from the Control treatment
+#' @param Ctrl_sd Standard deviation from the control treatment
+#' @param Ctrl_n Sample size from the control streatment
+#' @param A_mean Mean outcome from the treatment
+#' @param A_sd Standard deviation from the treatment
+#' @param A_n Sample size from the treatment
+#' @param B_mean Mean outcome from the B treatment
+#' @param B_sd Standard deviation from the B treatment 
+#' @param B_n Sample size from the B treatment 
+#' @param AB_mean Mean outcome from the interaction AxB treatment
+#' @param AB_sd Standard deviation from the interaction AxB treatment
+#' @param AB_n Sample size from the interaction AxB treatment
 #' @export
-lnRR_main <- function(...) {
-  lnRR(type = "main", ...)
+lnRR_main <- function(
+  data,
+  col_names = c("yi", "vi"),
+  append = TRUE,
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  A_mean,
+  A_sd,
+  A_n,
+  B_mean,
+  B_sd,
+  B_n,
+  AB_mean,
+  AB_sd,
+  AB_n
+) {
+  call <- match.call()
+  call[[1L]] <- quote(lnRR)
+  call$type <- "main"
+  eval(call, parent.frame())
 }
 
 
 #' @rdname lnRR
 #' @inherit lnRR
-#' @param ... Extra arguments
+#' @param data Data frame containing the variables used.
+#' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
+#' @param append Logical. Append the results to \code{data}. Default is TRUE
+#' @param Ctrl_mean Mean outcome from the Control treatment
+#' @param Ctrl_sd Standard deviation from the control treatment
+#' @param Ctrl_n Sample size from the control streatment
+#' @param A_mean Mean outcome from the treatment
+#' @param A_sd Standard deviation from the treatment
+#' @param A_n Sample size from the treatment
+#' @param B_mean Mean outcome from the B treatment
+#' @param B_sd Standard deviation from the B treatment 
+#' @param B_n Sample size from the B treatment 
+#' @param AB_mean Mean outcome from the interaction AxB treatment
+#' @param AB_sd Standard deviation from the interaction AxB treatment
+#' @param AB_n Sample size from the interaction AxB treatment
 #' @export
-lnRR_inter <- function(...) {
-  lnRR(type = "inter", ...)
+lnRR_inter <- function(
+  data,
+  col_names = c("yi", "vi"),
+  append = TRUE,
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  A_mean,
+  A_sd,
+  A_n,
+  B_mean,
+  B_sd,
+  B_n,
+  AB_mean,
+  AB_sd,
+  AB_n
+) {
+  call <- match.call()
+  call[[1L]] <- quote(lnRR)
+  call$type <- "inter"
+  eval(call, parent.frame())
 }
 
 

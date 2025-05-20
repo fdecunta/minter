@@ -38,11 +38,53 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">lnRR_ind</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">lnRR_ind</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yi"</span>, <span class="st">"vi"</span><span class="op">)</span>,</span>
+<span>  append <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">Ctrl_mean</span>,</span>
+<span>  <span class="va">Ctrl_sd</span>,</span>
+<span>  <span class="va">Ctrl_n</span>,</span>
+<span>  <span class="va">A_mean</span>,</span>
+<span>  <span class="va">A_sd</span>,</span>
+<span>  <span class="va">A_n</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">lnRR_main</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">lnRR_main</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yi"</span>, <span class="st">"vi"</span><span class="op">)</span>,</span>
+<span>  append <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">Ctrl_mean</span>,</span>
+<span>  <span class="va">Ctrl_sd</span>,</span>
+<span>  <span class="va">Ctrl_n</span>,</span>
+<span>  <span class="va">A_mean</span>,</span>
+<span>  <span class="va">A_sd</span>,</span>
+<span>  <span class="va">A_n</span>,</span>
+<span>  <span class="va">B_mean</span>,</span>
+<span>  <span class="va">B_sd</span>,</span>
+<span>  <span class="va">B_n</span>,</span>
+<span>  <span class="va">AB_mean</span>,</span>
+<span>  <span class="va">AB_sd</span>,</span>
+<span>  <span class="va">AB_n</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">lnRR_inter</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">lnRR_inter</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yi"</span>, <span class="st">"vi"</span><span class="op">)</span>,</span>
+<span>  append <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">Ctrl_mean</span>,</span>
+<span>  <span class="va">Ctrl_sd</span>,</span>
+<span>  <span class="va">Ctrl_n</span>,</span>
+<span>  <span class="va">A_mean</span>,</span>
+<span>  <span class="va">A_sd</span>,</span>
+<span>  <span class="va">A_n</span>,</span>
+<span>  <span class="va">B_mean</span>,</span>
+<span>  <span class="va">B_sd</span>,</span>
+<span>  <span class="va">B_n</span>,</span>
+<span>  <span class="va">AB_mean</span>,</span>
+<span>  <span class="va">AB_sd</span>,</span>
+<span>  <span class="va">AB_n</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">lnRR</span><span class="op">(</span></span>
 <span>  <span class="va">type</span>,</span>
@@ -68,15 +110,7 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Extra arguments</p></dd>
-
-
-<dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
-<dd><p>Type of effect size: "ind", "main", or "inter"</p></dd>
-
-
-<dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
+<dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
 <dd><p>Data frame containing the variables used.</p></dd>
 
 
@@ -134,6 +168,10 @@
 
 <dt id="arg-ab-n">AB_n<a class="anchor" aria-label="anchor" href="#arg-ab-n"></a></dt>
 <dd><p>Sample size from the interaction AxB treatment</p></dd>
+
+
+<dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
+<dd><p>Type of effect size: "ind", "main", or "inter"</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -41,7 +41,6 @@ reference:
   - title: "Effect sizes for repeated measures of a treatment"
     contents: starts_with("time")
 
-# Define the single article (our documentation) to be built
 articles:
   - title: ~
     contents:
