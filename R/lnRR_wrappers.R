@@ -22,7 +22,7 @@ lnRR_ind <- function(
   A_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(lnRR)
+  call[[1L]] <- quote(minter:::lnRR)
   call$type <- "ind"
   eval(call, parent.frame())
 }
@@ -64,7 +64,7 @@ lnRR_main <- function(
   AB_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(lnRR)
+  call[[1L]] <- quote(minter:::lnRR)
   call$type <- "main"
   eval(call, parent.frame())
 }
@@ -106,7 +106,7 @@ lnRR_inter <- function(
   AB_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(lnRR)
+  call[[1L]] <- quote(minter:::lnRR)
   call$type <- "inter"
   eval(call, parent.frame())
 }

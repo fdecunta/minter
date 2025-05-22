@@ -14,7 +14,7 @@ SMD_ind <- function(
   A_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(SMD)
+  call[[1L]] <- quote(minter:::SMD)
   call$type <- "ind"
   eval(call, parent.frame())
 }
@@ -42,7 +42,7 @@ SMD_main <- function(
   AB_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(SMD)
+  call[[1L]] <- quote(minter:::SMD)
   call$type <- "main"
   eval(call, parent.frame())
 }
@@ -70,7 +70,7 @@ SMD_inter <- function(
   AB_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(SMD)
+  call[[1L]] <- quote(minter:::SMD)
   call$type <- "inter"
   eval(call, parent.frame())
 }
