@@ -1,10 +1,12 @@
 #' Simple effect: Log Response Ratio
+#'
+#' Computes the individual or simple effect of Factor A over the Control. 
 #' 
-#' Computes the Log of the Response Ratio between
-#' Factor A and the Control treatment.
+#' It is the classic Log Response Ratio (lnRR), which can also be computed
+#' with metafor's `escalc()` function using `measure = "ROM"`.
 #'
 #' See the package vignette for a detailed description of the formula.
-#'
+#' 
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
@@ -37,21 +39,30 @@ lnRR_ind <- function(
   A_sd,
   A_n
 ) {
-  call <- match.call()
-  call[[1L]] <- quote(.lnRR)
-  call$type <- "ind"
-  eval(call, parent.frame())
+  .assert_args(col_names, append, data)
+
+  call_args <- as.list(match.call())[-1]
+
+  lnrr_args <- .get_columns(call_args[.lnRR_args$ind], data)
+
+  df <- .compute_and_format(
+    effsize_func = ".simple_lnRR",
+    effsize_args = lnrr_args,
+    data = data,
+    col_names = col_names,
+    append = append
+  )
+
+  return(df)
 }
 
 
-#' Main Effect: Log Response Ratio 
-#'
-#' Computes the overral effect of Factor A across levels of Factor B
-#' in a 2-by-2 factorial design.
+#' Main effect: Log Response Ratio
 #' 
-#' The main effect of A is quantified as the log of the ratio of the average
-#' outcome in the two treatments where A is present. That is, treatments A-and-B, A-and-Control.
+#' Computes the main effect of Factor A across levels of Factor B, analogous
+#' to the main effect in a factorial ANOVA. 
 #'
+#' See the package vignette for a detailed description of the formula.
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
@@ -102,17 +113,30 @@ lnRR_main <- function(
   AB_sd,
   AB_n
 ) {
-  call <- match.call()
-  call[[1L]] <- quote(.lnRR)
-  call$type <- "main"
-  eval(call, parent.frame())
+  .assert_args(col_names, append, data)
+
+  call_args <- as.list(match.call())[-1]
+
+  lnrr_args <- .get_columns(call_args[.lnRR_args$main], data)
+
+  df <- .compute_and_format(
+    effsize_func = ".main_lnRR",
+    effsize_args = lnrr_args,
+    data = data,
+    col_names = col_names,
+    append = append
+  )
+
+  return(df)
 }
 
 
-#' Interaction Log Response Ratio
+#' Interaction effect: Log Response Ratio
+#' 
+#' Computes the interaction effect between factors A and B in factorial
+#' data.
 #'
-#' Computes the interaction effect of a treatment in a 2-by-2 factorial design
-#' using the method proposed in Morris et al. 2007.
+#' See the package vignette for a detailed description of the formula.
 #' 
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
@@ -154,49 +178,14 @@ lnRR_inter <- function(
   AB_sd,
   AB_n
 ) {
-  call <- match.call()
-  call[[1L]] <- quote(.lnRR)
-  call$type <- "inter"
-  eval(call, parent.frame())
-}
+  .assert_args(col_names, append, data)
 
-
-#' @keywords internal
-.lnRR <- function(
-  type,
-  data,
-  col_names = c("yi", "vi"),
-  append = TRUE,
-  Ctrl_mean,
-  Ctrl_sd,
-  Ctrl_n,
-  A_mean,
-  A_sd,
-  A_n,
-  B_mean = NULL,
-  B_sd = NULL,
-  B_n = NULL,
-  AB_mean = NULL,
-  AB_sd = NULL,
-  AB_n = NULL
-) {
-  .assert_args(type, col_names, append, data)
   call_args <- as.list(match.call())[-1]
 
-  lnrr_func <- switch(type,
-    ind = ".simple_lnRR",
-    main = ".main_lnRR",
-    inter = ".interaction_lnRR"
-  )
-
-  lnrr_args <- switch(type,
-    ind = .get_columns(call_args[.lnRR_requirements$ind], data),
-    main = .get_columns(call_args[.lnRR_requirements$main], data),
-    inter = .get_columns(call_args[.lnRR_requirements$main], data)  # Same args than 'main'
-  )
+  lnrr_args <- .get_columns(call_args[.lnRR_args$main], data)  # Same args as main
 
   df <- .compute_and_format(
-    effsize_func = lnrr_func,
+    effsize_func = ".interaction_lnRR",
     effsize_args = lnrr_args,
     data = data,
     col_names = col_names,
@@ -207,26 +196,24 @@ lnRR_inter <- function(
 }
 
 
-#' Columns required for computing different lnRR effect sizes
-#'
 #' @keywords internal
-.lnRR_requirements <- list(
+.lnRR_args <- list(
   ind = c(
     "Ctrl_mean",
-    "Ctrl_sd", 
-    "Ctrl_n",
+    "Ctrl_sd",  
+    "Ctrl_n",   
     "A_mean",   
-    "A_sd",
+    "A_sd",     
     "A_n"
   ),
   main = c(
     "Ctrl_mean",
-    "Ctrl_sd", 
-    "Ctrl_n",
+    "Ctrl_sd",  
+    "Ctrl_n",   
     "A_mean",   
-    "A_sd",
-    "A_n", 
-    "B_mean",   
+    "A_sd",     
+    "A_n",
+    "B_mean",
     "B_sd",
     "B_n",
     "AB_mean",

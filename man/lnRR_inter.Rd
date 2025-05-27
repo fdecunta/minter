@@ -2,7 +2,7 @@
 % Please edit documentation in R/lnRR_wrappers.R
 \name{lnRR_inter}
 \alias{lnRR_inter}
-\title{Interaction Log Response Ratio}
+\title{Interaction effect: Log Response Ratio}
 \usage{
 lnRR_inter(
   data,
@@ -54,8 +54,11 @@ lnRR_inter(
 \item{AB_n}{Sample size from the interaction AxB treatment}
 }
 \description{
-Computes the interaction effect of a treatment in a 2-by-2 factorial design
-using the method proposed in Morris et al. 2007.
+Computes the interaction effect between factors A and B in factorial
+data.
+}
+\details{
+See the package vignette for a detailed description of the formula.
 }
 \references{
 Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,

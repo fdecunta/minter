@@ -2,7 +2,7 @@
 % Please edit documentation in R/lnRR_wrappers.R
 \name{lnRR_main}
 \alias{lnRR_main}
-\title{Main Effect: Log Response Ratio}
+\title{Main effect: Log Response Ratio}
 \usage{
 lnRR_main(
   data,
@@ -54,12 +54,11 @@ lnRR_main(
 \item{AB_n}{Sample size from the interaction AxB treatment}
 }
 \description{
-Computes the overral effect of Factor A across levels of Factor B
-in a 2-by-2 factorial design.
+Computes the main effect of Factor A across levels of Factor B, analogous
+to the main effect in a factorial ANOVA.
 }
 \details{
-The main effect of A is quantified as the log of the ratio of the average
-outcome in the two treatments where A is present. That is, treatments A-and-B, A-and-Control.
+See the package vignette for a detailed description of the formula.
 }
 \references{
 Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,

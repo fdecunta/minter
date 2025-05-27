@@ -86,8 +86,7 @@
 }
 
 
-.assert_args <- function(type, col_names, append, data) {
-  checkmate::assert_choice(type, choices = c("ind", "main", "inter"))
+.assert_args <- function(col_names, append, data) {
   checkmate::assert_character(col_names, len = 2)
   checkmate::assert_logical(append, len = 1)
   checkmate::assert_data_frame(data)

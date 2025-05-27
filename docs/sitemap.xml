@@ -9,6 +9,9 @@
 <url><loc>https://fdecunta.github.io/minter/index.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/news/index.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/SMD.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/SMD_ind.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/SMD_inter.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/SMD_main.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/dot-compute_and_format.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/dot-interaction_SMD.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/dot-interaction_lnCVR.html</loc></url>
@@ -35,8 +38,17 @@
 <url><loc>https://fdecunta.github.io/minter/reference/dot-time_pooled_sd.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/index.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/lnCVR.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/lnCVR_ind.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/lnCVR_inter.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/lnCVR_main.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/lnRR.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/lnRR_ind.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/lnRR_inter.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/lnRR_main.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/lnVR.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/lnVR_ind.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/lnVR_inter.html</loc></url>
+<url><loc>https://fdecunta.github.io/minter/reference/lnVR_main.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/testing_data.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/time_SMD.html</loc></url>
 <url><loc>https://fdecunta.github.io/minter/reference/time_lnCVR.html</loc></url>
