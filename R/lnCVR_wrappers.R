@@ -14,12 +14,6 @@
 #' @param A_mean Mean outcome from the treatment
 #' @param A_sd Standard deviation from the treatment
 #' @param A_n Sample size from the treatment
-#' @param B_mean Mean outcome from the B treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_mean Mean outcome from the interaction AxB treatment
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
 #'
 #' @references
 #'
@@ -149,12 +143,6 @@ lnCVR_inter <- function(
 }
 
 
-#' Log Coefficient Of Variation Ratio (lnCVR)
-#' 
-#' @inheritParams lnRR
-#'
-#' @author Facundo Decunta - fdecunta@agro.uba.ar
-#'
 #' @keywords internal
 .lnCVR <- function(
   type,

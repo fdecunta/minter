@@ -122,23 +122,6 @@ lnVR_inter <- function(
 }
 
 
-#' Log of Variation Ratio (lnVR)
-#' 
-#' @param type Type of effect size: "ind", "main", or "inter"
-#' @param data Data frame containing the variables used.
-#' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
-#' @param append Logical. Append the results to \code{data}. Default is TRUE
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_sd Standard deviation from the treatment
-#' @param A_n Sample size from the treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
-#'
-#' @author Facundo Decunta - fdecunta@agro.uba.ar
-#'
 #' @keywords internal
 .lnVR <- function(
   type,

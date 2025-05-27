@@ -132,13 +132,6 @@ SMD_inter <- function(
 }
 
 
-#' Standardized Mean Difference (SMD)
-#' 
-#' @inheritParams lnRR
-#' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE
-#'
-#' @author Facundo Decunta - fdecunta@agro.uba.ar
-#'
 #' @keywords internal
 .SMD <- function(
   type,

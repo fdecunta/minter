@@ -34,18 +34,6 @@ lnCVR_ind(
 \item{A_sd}{Standard deviation from the treatment}
 
 \item{A_n}{Sample size from the treatment}
-
-\item{B_mean}{Mean outcome from the B treatment}
-
-\item{B_sd}{Standard deviation from the B treatment}
-
-\item{B_n}{Sample size from the B treatment}
-
-\item{AB_mean}{Mean outcome from the interaction AxB treatment}
-
-\item{AB_sd}{Standard deviation from the interaction AxB treatment}
-
-\item{AB_n}{Sample size from the interaction AxB treatment}
 }
 \description{
 Computes the Log of the Coefficient of Variation Ratio between Factor A

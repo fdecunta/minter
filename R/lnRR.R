@@ -40,20 +40,9 @@
 }
 
 
-#' Main Log Response Ratio: method by Nakagawa
-#'
-#' Computes the main effect of a treatment in a 2-by-2 factorial design using
-#' the method proposed by Nakagawa (in prep.)
-#' 
-#' Given a full factorial design with factors A x B
-#' The main effect of A is quantified as the log of the ratio of the average
-#' outcome in the two treatments where A is present. That is, treatments A-and-B, A-and-Control.
-#'
-#' @inheritParams .main_lnRR
-#' 
-#' @references 
-#'   Not published yet.
-#'
+# Main lnRR but using Shinichi Nakagawa's derivation.
+# It use geometric mean instead of arithmetic.
+
 #' @keywords internal
 .main_lnRR_Nakagawa <- function(
   Ctrl_mean,
