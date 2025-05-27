@@ -27,11 +27,11 @@
 
 \item{Ctrl_n}{Sample size from the control streatment}
 
-\item{A_mean}{Mean outcome from the A treatment}
+\item{A_mean}{Mean outcome from the treatment}
 
-\item{A_sd}{Standard deviation from the A treatment}
+\item{A_sd}{Standard deviation from the treatment}
 
-\item{A_n}{Sample size from the A treatment}
+\item{A_n}{Sample size from the treatment}
 
 \item{B_mean}{Mean outcome from the B treatment}
 
@@ -48,7 +48,11 @@
 \item{hedges_correction}{Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE}
 }
 \description{
-TODO: this
+Computes the interaction effect between factors A and B in factorial
+data.
+}
+\details{
+See the package vignette for a detailed description of the formula.
 }
 \references{
 Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction

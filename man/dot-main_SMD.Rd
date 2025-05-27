@@ -48,7 +48,11 @@
 \item{hedges_correction}{Boolean. If TRUE correct for small-sample bias. Default is TRUE.}
 }
 \description{
-TODO: this
+Computes the main effect of Factor A across levels of Factor B, analogous
+to the main effect in a factorial ANOVA.
+}
+\details{
+See the package vignette for a detailed description of the formula.
 }
 \references{
 Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction

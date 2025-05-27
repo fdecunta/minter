@@ -1,5 +1,10 @@
-#' @rdname lnVR
-#' @inherit lnVR
+#' Individual effect: Log of Variability Ratio
+#'
+#' Computes the Log of the Variability Ratio between
+#' a Factor A and the Control treatment in factorial experiments.
+#'
+#' See the package vignette for a detailed description of the formula.
+#'
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
@@ -7,6 +12,15 @@
 #' @param Ctrl_n Sample size from the control streatment
 #' @param A_sd Standard deviation from the treatment
 #' @param A_n Sample size from the treatment
+#'
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
+#'
+#' @references
+#' Nakagawa, S., Poulin, R., Mengersen, K., Reinhold, K., Engqvist,
+#'     L., Lagisz, M., & Senior, A. M. (2015). Meta‐analysis of variation: 
+#'     ecological and evolutionary applications and beyond. Methods in
+#'     Ecology and Evolution, 6(2), 143-152.
+#'
 #' @export
 lnVR_ind <- function(
   data,
@@ -18,14 +32,19 @@ lnVR_ind <- function(
   A_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(minter:::lnVR)
+  call[[1L]] <- quote(.lnVR)
   call$type <- "ind"
   eval(call, parent.frame())
 }
 
 
-#' @rdname lnVR
-#' @inherit lnVR
+#' Main Effect: Log of the Variability Ratio
+#'
+#' Computes the overral log of the variability ratio for Factor A
+#' across levels of Factor B. 
+#'
+#' See the package vignette for a detailed description of the formula.
+#' 
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
@@ -37,6 +56,9 @@ lnVR_ind <- function(
 #' @param B_n Sample size from the B treatment 
 #' @param AB_sd Standard deviation from the interaction AxB treatment
 #' @param AB_n Sample size from the interaction AxB treatment
+#'
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
+#'
 #' @export
 lnVR_main <- function(
   data,
@@ -52,14 +74,19 @@ lnVR_main <- function(
   AB_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(minter:::lnVR)
+  call[[1L]] <- quote(.lnVR)
   call$type <- "main"
   eval(call, parent.frame())
 }
 
 
-#' @rdname lnVR
-#' @inherit lnVR
+#' Interaction effect: Log Variability Ratio
+#'
+#' Computes the interaction of Factors A and B measured as 
+#' the log of the variability ratio.
+#'
+#' See the package vignette for a detailed description of the formula.
+#'
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
@@ -71,6 +98,9 @@ lnVR_main <- function(
 #' @param B_n Sample size from the B treatment 
 #' @param AB_sd Standard deviation from the interaction AxB treatment
 #' @param AB_n Sample size from the interaction AxB treatment
+#'
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
+#'
 #' @export
 lnVR_inter <- function(
   data,
@@ -86,31 +116,14 @@ lnVR_inter <- function(
   AB_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(minter:::lnVR)
+  call[[1L]] <- quote(.lnVR)
   call$type <- "inter"
   eval(call, parent.frame())
 }
 
 
-#' Log of Variation Ratio (lnVR)
-#' 
-#' @param type Type of effect size: "ind", "main", or "inter"
-#' @param data Data frame containing the variables used.
-#' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
-#' @param append Logical. Append the results to \code{data}. Default is TRUE
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_sd Standard deviation from the treatment
-#' @param A_n Sample size from the treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
-#'
-#' @author Facundo Decunta - fdecunta@agro.uba.ar
-#'
-#' @export
-lnVR <- function(
+#' @keywords internal
+.lnVR <- function(
   type,
   data,
   col_names = c("yi", "vi"),

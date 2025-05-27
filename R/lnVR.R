@@ -1,20 +1,3 @@
-#' Simple Log Variability ratio
-#'
-#' This is computed using formulas from Nakagawa et al. 2015
-#'
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control treatment
-#' @param A_sd Standard deviation from the experimental treatment
-#' @param A_n Sample size from the experimental treatment
-#' 
-#' @author Facundo Decunta - fdecunta@agro.uba.ar
-#'
-#' @references
-#' Nakagawa, S., Poulin, R., Mengersen, K., Reinhold, K., Engqvist,
-#'     L., Lagisz, M., & Senior, A. M. (2015). Meta‐analysis of variation: 
-#'     ecological and evolutionary applications and beyond. Methods in
-#'     Ecology and Evolution, 6(2), 143-152.
-#'
 #' @keywords internal
 .simple_lnVR <- function(
   Ctrl_sd,
@@ -32,17 +15,6 @@
 }
 
 
-#' Main Log Variability Ratio
-#'
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_sd Standard deviation from the A treatment
-#' @param A_n Sample size from the A treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
-#' 
 #' @keywords internal
 .main_lnVR <- function(
   Ctrl_sd,
@@ -73,17 +45,6 @@
 }
 
 
-#' Interaction effect: Log Variability Ratio
-#'
-#' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
-#' @param A_sd Standard deviation from the A treatment
-#' @param A_n Sample size from the A treatment
-#' @param B_sd Standard deviation from the B treatment 
-#' @param B_n Sample size from the B treatment 
-#' @param AB_sd Standard deviation from the interaction AxB treatment
-#' @param AB_n Sample size from the interaction AxB treatment
-#' 
 #' @keywords internal
 .interaction_lnVR <- function(
   Ctrl_sd,
