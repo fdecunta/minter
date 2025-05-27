@@ -18,7 +18,7 @@
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="articles/minter-docs.html">minter: Effect Size Calculations for Meta-Analysis</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="articles/minter-docs.html">Effect Size Calculations</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -54,7 +54,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Step 1: Compute effect sizes with minter</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fdecunta.github.io/minter/">minter</a></span><span class="op">)</span></span>
-<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/SMD.html">SMD</a></span><span class="op">(</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">SMD</span><span class="op">(</span></span>
 <span>  type <span class="op">=</span> <span class="st">"main"</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
 <span>  Ctrl_mean <span class="op">=</span> <span class="va">C_mean</span>, Ctrl_sd <span class="op">=</span> <span class="va">C_sd</span>, Ctrl_n <span class="op">=</span> <span class="va">C_n</span>,</span>
@@ -95,7 +95,7 @@
 <h3 id="id_21-smd-standardized-mean-difference">2.1. SMD (Standardized Mean Difference)<a class="anchor" aria-label="anchor" href="#id_21-smd-standardized-mean-difference"></a></h3>
 <p><strong>Signature:</strong></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/SMD.html">SMD</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu">SMD</span><span class="op">(</span></span>
 <span>  <span class="va">type</span>,</span>
 <span>  <span class="va">data</span>,</span>
 <span>  col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yi"</span>, <span class="st">"vi"</span><span class="op">)</span>,</span>
@@ -120,7 +120,7 @@
 <p><strong>Wrappers:</strong> - <code>SMD_ind(...)</code> — computes independent effect - <code>SMD_main(...)</code> — computes main effect - <code>SMD_inter(...)</code> — computes interaction effect</p>
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/SMD.html">SMD</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">SMD</span><span class="op">(</span></span>
 <span>  type <span class="op">=</span> <span class="st">"main"</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
 <span>  Ctrl_mean <span class="op">=</span> <span class="va">C_mean</span>, Ctrl_sd <span class="op">=</span> <span class="va">C_sd</span>, Ctrl_n <span class="op">=</span> <span class="va">C_n</span>,</span>
@@ -133,7 +133,7 @@
 <h3 id="id_22-lnrr-log-response-ratio">2.2. lnRR (Log Response Ratio)<a class="anchor" aria-label="anchor" href="#id_22-lnrr-log-response-ratio"></a></h3>
 <p><strong>Signature:</strong></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/lnRR.html">lnRR</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu">lnRR</span><span class="op">(</span></span>
 <span>  <span class="va">type</span>,</span>
 <span>  <span class="va">data</span>,</span>
 <span>  col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yi"</span>, <span class="st">"vi"</span><span class="op">)</span>,</span>
@@ -157,7 +157,7 @@
 <p><strong>Wrappers:</strong> - <code>lnRR_ind(...)</code> — computes independent effect - <code>lnRR_main(...)</code> — computes main effect - <code>lnRR_inter(...)</code> — computes interaction effect</p>
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lnRR.html">lnRR</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">lnRR</span><span class="op">(</span></span>
 <span>  type <span class="op">=</span> <span class="st">"inter"</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
 <span>  Ctrl_mean <span class="op">=</span> <span class="va">C_mean</span>, Ctrl_sd <span class="op">=</span> <span class="va">C_sd</span>, Ctrl_n <span class="op">=</span> <span class="va">C_n</span>,</span>
@@ -170,7 +170,7 @@
 <h3 id="id_23-lncvr-log-coefficient-of-variation-ratio">2.3. lnCVR (Log Coefficient of Variation Ratio)<a class="anchor" aria-label="anchor" href="#id_23-lncvr-log-coefficient-of-variation-ratio"></a></h3>
 <p><strong>Signature:</strong></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/lnCVR.html">lnCVR</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu">lnCVR</span><span class="op">(</span></span>
 <span>  <span class="va">type</span>,</span>
 <span>  <span class="va">data</span>,</span>
 <span>  col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yi"</span>, <span class="st">"vi"</span><span class="op">)</span>,</span>
@@ -194,7 +194,7 @@
 <p><strong>Wrappers:</strong> - <code>lnCVR_ind(...)</code> — computes independent effect - <code>lnCVR_main(...)</code> — computes main effect - <code>lnCVR_inter(...)</code> — computes interaction effect</p>
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lnCVR.html">lnCVR</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">lnCVR</span><span class="op">(</span></span>
 <span>  type <span class="op">=</span> <span class="st">"main"</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
 <span>  Ctrl_mean <span class="op">=</span> <span class="va">C_mean</span>, Ctrl_sd <span class="op">=</span> <span class="va">C_sd</span>, Ctrl_n <span class="op">=</span> <span class="va">C_n</span>,</span>
@@ -207,7 +207,7 @@
 <h3 id="id_24-lnvr-log-variation-ratio">2.4. lnVR (Log Variation Ratio)<a class="anchor" aria-label="anchor" href="#id_24-lnvr-log-variation-ratio"></a></h3>
 <p><strong>Signature:</strong></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/lnVR.html">lnVR</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu">lnVR</span><span class="op">(</span></span>
 <span>  <span class="va">type</span>,</span>
 <span>  <span class="va">data</span>,</span>
 <span>  col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yi"</span>, <span class="st">"vi"</span><span class="op">)</span>,</span>
@@ -227,7 +227,7 @@
 <p><strong>Wrappers:</strong> - <code>lnVR_ind(...)</code> — computes independent effect - <code>lnVR_main(...)</code> — computes main effect - <code>lnVR_inter(...)</code> — computes interaction effect</p>
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lnVR.html">lnVR</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">lnVR</span><span class="op">(</span></span>
 <span>  type <span class="op">=</span> <span class="st">"inter"</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
 <span>  Ctrl_sd <span class="op">=</span> <span class="va">C_sd</span>, Ctrl_n <span class="op">=</span> <span class="va">C_n</span>,</span>
@@ -515,7 +515,7 @@
 <span></span>
 <span><span class="co"># Compute SMD for a 2x2 factorial dataset</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">testing_data</span></span>
-<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/SMD.html">SMD</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"main"</span>, data <span class="op">=</span> <span class="va">data</span>, Ctrl_mean <span class="op">=</span> <span class="va">C_mean</span>, Ctrl_sd <span class="op">=</span> <span class="va">C_sd</span>, Ctrl_n <span class="op">=</span> <span class="va">C_n</span>, A_mean <span class="op">=</span> <span class="va">A_mean</span>, A_sd <span class="op">=</span> <span class="va">A_sd</span>, A_n <span class="op">=</span> <span class="va">A_n</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">SMD</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"main"</span>, data <span class="op">=</span> <span class="va">data</span>, Ctrl_mean <span class="op">=</span> <span class="va">C_mean</span>, Ctrl_sd <span class="op">=</span> <span class="va">C_sd</span>, Ctrl_n <span class="op">=</span> <span class="va">C_n</span>, A_mean <span class="op">=</span> <span class="va">A_mean</span>, A_sd <span class="op">=</span> <span class="va">A_sd</span>, A_n <span class="op">=</span> <span class="va">A_n</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Compute lnRR for repeated measures</span></span>
 <span><span class="va">time_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/time_lnRR.html">time_lnRR</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, t0_Ctrl_mean <span class="op">=</span> <span class="va">...</span>, t1_Ctrl_mean <span class="op">=</span> <span class="va">...</span>, Ctrl_n <span class="op">=</span> <span class="va">...</span>, Ctrl_cor <span class="op">=</span> <span class="va">...</span>, t0_Exp_mean <span class="op">=</span> <span class="va">...</span>, t1_Exp_mean <span class="op">=</span> <span class="va">...</span>, Exp_n <span class="op">=</span> <span class="va">...</span>, Exp_cor <span class="op">=</span> <span class="va">...</span><span class="op">)</span></span></code></pre></div>
@@ -582,7 +582,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

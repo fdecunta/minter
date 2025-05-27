@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>minter: Effect Size Calculations for Meta-Analysis • minter</title>
+<title>Effect Size Calculations • minter</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="minter: Effect Size Calculations for Meta-Analysis">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Effect Size Calculations">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -33,7 +33,7 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/minter-docs.html">minter: Effect Size Calculations for Meta-Analysis</a></li>
+<li><a class="dropdown-item" href="../articles/minter-docs.html">Effect Size Calculations</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -55,7 +55,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>minter: Effect Size Calculations for Meta-Analysis</h1>
+      <h1>Effect Size Calculations</h1>
             
       
 
@@ -101,14 +101,10 @@ Ratio</a></li>
 <h3 id="repeated-measures-effect-sizes">Repeated Measures Effect Sizes<a class="anchor" aria-label="anchor" href="#repeated-measures-effect-sizes"></a>
 </h3>
 <ul>
-<li><a href="#time_smd"><code>time_SMD</code> - Time-based Standardized
-Mean Difference</a></li>
-<li><a href="#time_lnrr"><code>time_lnRR</code> - Time-based Log
-Response Ratio</a></li>
-<li><a href="#time_lncvr"><code>time_lnCVR</code> - Time-based Log CV
-Ratio</a></li>
-<li><a href="#time_lnvr"><code>time_lnVR</code> - Time-based Log
-Variance Ratio</a></li>
+<li><a href="#time_smd"><code>time_SMD</code></a></li>
+<li><a href="#time_lnrr"><code>time_lnRR</code></a></li>
+<li><a href="#time_lncvr"><code>time_lnCVR</code></a></li>
+<li><a href="#time_lnvr"><code>time_lnVR</code></a></li>
 </ul>
 </div>
 </div>
@@ -150,63 +146,64 @@ designs where two factors (A and B) are manipulated.</p>
 <div class="section level3">
 <h3 id="smd">SMD - Standardized Mean Difference<a class="anchor" aria-label="anchor" href="#smd"></a>
 </h3>
-<p>Calculates the standardized mean difference (Hedges’ g) for factorial
-designs, accounting for small-sample bias. This effect size is
-appropriate when comparing group means on the same scale or when you
-want to standardize the difference.</p>
+<p>Calculates the standardized mean difference (Cohen’s d or Hedges’ g)
+for factorial designs. This effect size is appropriate when comparing
+group means on the same scale or when you want to standardize the
+difference.</p>
 <div class="section level4">
 <h4 id="effect-types">Effect Types<a class="anchor" aria-label="anchor" href="#effect-types"></a>
 </h4>
-<p>The package provides three specialized functions for different effect
-types:</p>
 <ul>
 <li>
-<strong><code><a href="../reference/SMD.html">SMD_ind()</a></code></strong>: Individual/simple effect -
-Compares a single treatment (A) to a control. Use this when you want to
-know the standardized difference between just one treatment and the
-control group.</li>
+<strong><code><a href="../reference/SMD_ind.html">SMD_ind()</a></code></strong>: Individual/simple effect -
+Compares a single treatment (A) to a control.</li>
 <li>
-<strong><code><a href="../reference/SMD.html">SMD_main()</a></code></strong>: Main effect - Measures the
-average effect of a factor (A) across all levels of another factor (B).
-Use this when you want to know the overall effect of a treatment,
-averaging across other experimental conditions.</li>
+<strong><code><a href="../reference/SMD_main.html">SMD_main()</a></code></strong>: Main effect - Measures the
+average effect of a factor (A) across all levels of another factor
+(B).</li>
 <li>
-<strong><code><a href="../reference/SMD.html">SMD_inter()</a></code></strong>: Interaction effect -
-Quantifies how the effect of one factor (A) depends on the level of
-another factor (B). Use this when you want to know if two factors
-interact (i.e., if their combined effect is different from the sum of
-their individual effects).</li>
+<strong><code><a href="../reference/SMD_inter.html">SMD_inter()</a></code></strong>: Interaction effect -
+Quantifies the effect of factor A when factor B is present.</li>
 </ul>
-<p>These specialized functions are the <em>recommended</em> way to
-calculate effects rather than using the general
-<code>SMD(type="...")</code> function.</p>
 </div>
 <div class="section level4">
 <h4 id="formula">Formula<a class="anchor" aria-label="anchor" href="#formula"></a>
 </h4>
-<p>For individual effects:</p>
+<div class="section level5">
+<h5 id="smd_ind">
+<code>SMD_ind()</code><a class="anchor" aria-label="anchor" href="#smd_ind"></a>
+</h5>
+<p>This function computes the individual or simple effect of A over the
+Control.</p>
+<p>It is the classic Standardized Mean Difference (SMD), which can also
+be computed with metafor’s <code><a href="https://wviechtb.github.io/metafor/reference/escalc.html" class="external-link">escalc()</a></code> function using
+<code>measure = "SMD"</code>.</p>
+<p>The individual Standardized Mean Difference is calculated as:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>=</mo><mfrac><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>−</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub></mfrac><mo>⋅</mo><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d_{ind} = \frac{\bar{X}_A - \bar{X}_{Ctrl}}{S_{pooled}} \cdot J(m)</annotation></semantics></math></p>
-<p>where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub><mo>=</mo><msqrt><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msubsup><mi>s</mi><mi>A</mi><mn>2</mn></msubsup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msubsup><mi>s</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>2</mn></mrow></mfrac></msqrt></mrow><annotation encoding="application/x-tex">S_{pooled} = \sqrt{\frac{(n_A-1)s_A^2 + (n_{Ctrl}-1)s_{Ctrl}^2}{n_A + n_{Ctrl} - 2}}</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mn>3</mn><mrow><mn>4</mn><mi>m</mi><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">J(m) = 1 - \frac{3}{4m-1}</annotation></semantics></math>
-with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">m = n_A + n_{Ctrl} - 2</annotation></semantics></math></p>
+<p>where:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub><mo>=</mo><msqrt><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msubsup><mi>s</mi><mi>A</mi><mn>2</mn></msubsup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msubsup><mi>s</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>2</mn></mrow></mfrac></msqrt></mrow><annotation encoding="application/x-tex">S_{pooled} = \sqrt{\frac{(n_A-1)s_A^2 + (n_{Ctrl}-1)s_{Ctrl}^2}{n_A + n_{Ctrl} - 2}}</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mn>3</mn><mrow><mn>4</mn><mi>m</mi><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">J(m) = 1 - \frac{3}{4m-1}</annotation></semantics></math></p>
+<p>with
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">m = n_A + n_{Ctrl} - 2</annotation></semantics></math></p>
+</div>
+<div class="section level5">
+<h5 id="smd_main">
+<code>SMD_main()</code><a class="anchor" aria-label="anchor" href="#smd_main"></a>
+</h5>
 <p>For main effects:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn></mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub></mfrac><mo>⋅</mo><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d_{main} = \frac{(\bar{X}_A + \bar{X}_{AB})/2 - (\bar{X}_{Ctrl} + \bar{X}_B)/2}{S_{pooled}} \cdot J(m)</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mn>2</mn><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub></mrow></mfrac><mo>⋅</mo><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d_{main} = \frac{(\bar{X}_A + \bar{X}_{AB}) - (\bar{X}_{B} + \bar{X}_{Ctrl})}{2S_{pooled}} \cdot J(m)</annotation></semantics></math></p>
 <p>where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub><annotation encoding="application/x-tex">S_{pooled}</annotation></semantics></math>
-is the pooled standard deviation for all four groups</p>
+is the pooled standard deviation for all four groups:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub><mo>=</mo><msqrt><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msubsup><mi>s</mi><mi>A</mi><mn>2</mn></msubsup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msubsup><mi>s</mi><mi>B</mi><mn>2</mn></msubsup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msubsup><mi>s</mi><mrow><mi>A</mi><mi>B</mi></mrow><mn>2</mn></msubsup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msubsup><mi>s</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mi>B</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>4</mn></mrow></mfrac></msqrt></mrow><annotation encoding="application/x-tex">S_{pooled} = \sqrt{\frac{(n_A-1)s_A^2 + (n_B-1)s_B^2 + (n_{AB}-1)s_{AB}^2 + (n_{Ctrl}-1)s_{Ctrl}^2}{n_A + n_B + n_{AB} + n_{Ctrl} - 4}}</annotation></semantics></math></p>
 <p>For interaction effects:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>=</mo><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>−</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub></mfrac><mo>⋅</mo><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d_{inter} = \frac{(\bar{X}_{AB} - \bar{X}_B) - (\bar{X}_A - \bar{X}_{Ctrl})}{S_{pooled}} \cdot J(m)</annotation></semantics></math></p>
+</div>
 </div>
 <div class="section level4">
 <h4 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a>
 </h4>
 <ul>
-<li>
-<code>type</code> <em>(character)</em>: Effect type to calculate -
-“ind”, “main”, or “inter”</li>
 <li>
 <code>data</code> <em>(data.frame)</em>: Input data frame</li>
 <li>
@@ -257,7 +254,7 @@ control):</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Simple effect by referring to column names in the data frame</span></span>
-<span><span class="va">result_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SMD.html">SMD_ind</a></span><span class="op">(</span></span>
+<span><span class="va">result_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SMD_ind.html">SMD_ind</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
 <span>  Ctrl_mean <span class="op">=</span> <span class="st">"Control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
 <span>  A_mean <span class="op">=</span> <span class="st">"TreatmentA_mean"</span>, A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span></span>
@@ -273,7 +270,7 @@ control):</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Main effect with all groups specified by column names</span></span>
-<span><span class="va">result_main</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SMD.html">SMD_main</a></span><span class="op">(</span></span>
+<span><span class="va">result_main</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SMD_main.html">SMD_main</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">factorial_data</span>,</span>
 <span>  Ctrl_mean <span class="op">=</span> <span class="st">"Control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
 <span>  A_mean <span class="op">=</span> <span class="st">"TreatmentA_mean"</span>, A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span>,</span>
@@ -283,7 +280,7 @@ control):</p>
 <p><strong>Interaction effect</strong> (A×B interaction):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Interaction effect without applying Hedges' correction</span></span>
-<span><span class="va">result_inter</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SMD.html">SMD_inter</a></span><span class="op">(</span></span>
+<span><span class="va">result_inter</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SMD_inter.html">SMD_inter</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">factorial_data</span>,</span>
 <span>  hedges_correction <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  Ctrl_mean <span class="op">=</span> <span class="st">"Control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
@@ -320,17 +317,17 @@ measurement scales.</p>
 types:</p>
 <ul>
 <li>
-<strong><code><a href="../reference/lnRR.html">lnRR_ind()</a></code></strong>: Individual/simple effect -
+<strong><code><a href="../reference/lnRR_ind.html">lnRR_ind()</a></code></strong>: Individual/simple effect -
 Compares a single treatment (A) to a control using the log ratio. Use
 this when you want to know the proportional difference between one
 treatment and the control group.</li>
 <li>
-<strong><code><a href="../reference/lnRR.html">lnRR_main()</a></code></strong>: Main effect - Measures
+<strong><code><a href="../reference/lnRR_main.html">lnRR_main()</a></code></strong>: Main effect - Measures
 the average proportional effect of a factor (A) across all levels of
 another factor (B). Use this when you want to know the overall
 proportional effect of a treatment.</li>
 <li>
-<strong><code><a href="../reference/lnRR.html">lnRR_inter()</a></code></strong>: Interaction effect -
+<strong><code><a href="../reference/lnRR_inter.html">lnRR_inter()</a></code></strong>: Interaction effect -
 Quantifies how the proportional effect of one factor (A) depends on the
 level of another factor (B). Use this when you want to know if two
 factors interact on a multiplicative scale.</li>
@@ -409,7 +406,7 @@ control):</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Simple log response ratio using column names</span></span>
-<span><span class="va">result_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnRR.html">lnRR_ind</a></span><span class="op">(</span></span>
+<span><span class="va">result_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnRR_ind.html">lnRR_ind</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
 <span>  Ctrl_mean <span class="op">=</span> <span class="st">"Control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
 <span>  A_mean <span class="op">=</span> <span class="st">"TreatmentA_mean"</span>, A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span></span>
@@ -425,7 +422,7 @@ control):</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Main effect with all groups specified by column names</span></span>
-<span><span class="va">result_main</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnRR.html">lnRR_main</a></span><span class="op">(</span></span>
+<span><span class="va">result_main</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnRR_main.html">lnRR_main</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">factorial_data</span>,</span>
 <span>  Ctrl_mean <span class="op">=</span> <span class="st">"Control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
 <span>  A_mean <span class="op">=</span> <span class="st">"TreatmentA_mean"</span>, A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span>,</span>
@@ -435,7 +432,7 @@ control):</p>
 <p><strong>Interaction effect</strong> (A×B interaction):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Interaction effect with custom column names</span></span>
-<span><span class="va">result_inter</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnRR.html">lnRR_inter</a></span><span class="op">(</span></span>
+<span><span class="va">result_inter</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnRR_inter.html">lnRR_inter</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">factorial_data</span>,</span>
 <span>  col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"effect"</span>, <span class="st">"variance"</span><span class="op">)</span>,  <span class="co"># Custom column names for output</span></span>
 <span>  append <span class="op">=</span> <span class="cn">FALSE</span>,                      <span class="co"># Return a new data frame</span></span>
@@ -471,14 +468,14 @@ comparing the variability of groups relative to their means.</p>
 types:</p>
 <ul>
 <li>
-<strong><code><a href="../reference/lnCVR.html">lnCVR_ind()</a></code></strong>: Individual/simple effect
+<strong><code><a href="../reference/lnCVR_ind.html">lnCVR_ind()</a></code></strong>: Individual/simple effect
 - Compares the CV of a single treatment (A) to a control.</li>
 <li>
-<strong><code><a href="../reference/lnCVR.html">lnCVR_main()</a></code></strong>: Main effect - Measures
+<strong><code><a href="../reference/lnCVR_main.html">lnCVR_main()</a></code></strong>: Main effect - Measures
 the overall effect of a factor on CV across levels of another
 factor.</li>
 <li>
-<strong><code><a href="../reference/lnCVR.html">lnCVR_inter()</a></code></strong>: Interaction effect -
+<strong><code><a href="../reference/lnCVR_inter.html">lnCVR_inter()</a></code></strong>: Interaction effect -
 Quantifies how the CV effect of one factor depends on the level of
 another factor.</li>
 </ul>
@@ -544,7 +541,7 @@ sample size for group AB (only for main/interaction effects)</li>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Individual effect using column names</span></span>
-<span><span class="va">result_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnCVR.html">lnCVR_ind</a></span><span class="op">(</span></span>
+<span><span class="va">result_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnCVR_ind.html">lnCVR_ind</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
 <span>  Ctrl_mean <span class="op">=</span> <span class="st">"Control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
 <span>  A_mean <span class="op">=</span> <span class="st">"TreatmentA_mean"</span>, A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span></span>
@@ -564,13 +561,13 @@ of groups independent of their means.</p>
 types:</p>
 <ul>
 <li>
-<strong><code><a href="../reference/lnVR.html">lnVR_ind()</a></code></strong>: Individual/simple effect -
+<strong><code><a href="../reference/lnVR_ind.html">lnVR_ind()</a></code></strong>: Individual/simple effect -
 Compares the variance of a treatment to a control.</li>
 <li>
-<strong><code><a href="../reference/lnVR.html">lnVR_main()</a></code></strong>: Main effect - Measures
+<strong><code><a href="../reference/lnVR_main.html">lnVR_main()</a></code></strong>: Main effect - Measures
 the overall effect of a factor on variance.</li>
 <li>
-<strong><code><a href="../reference/lnVR.html">lnVR_inter()</a></code></strong>: Interaction effect -
+<strong><code><a href="../reference/lnVR_inter.html">lnVR_inter()</a></code></strong>: Interaction effect -
 Quantifies interaction effects on variance.</li>
 </ul>
 </div>
@@ -633,7 +630,7 @@ group AB (only for main/interaction effects)</li>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Individual effect using column names</span></span>
-<span><span class="va">result_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnVR.html">lnVR_ind</a></span><span class="op">(</span></span>
+<span><span class="va">result_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnVR_ind.html">lnVR_ind</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">my_data</span>,</span>
 <span>  Ctrl_sd <span class="op">=</span> <span class="st">"Control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"Control_n"</span>,</span>
 <span>  A_sd <span class="op">=</span> <span class="st">"TreatmentA_sd"</span>, A_n <span class="op">=</span> <span class="st">"TreatmentA_n"</span></span>
@@ -822,7 +819,7 @@ comparing the relative change in variability.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
