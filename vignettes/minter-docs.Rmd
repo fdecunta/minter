@@ -1,5 +1,5 @@
 ---
-title: "minter: Effect Size Calculations for Meta-Analysis"
+title: "Effect Size Calculations"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{minter Documentation}
@@ -34,17 +34,17 @@ The **minter** package provides tools for calculating effect sizes used in meta-
 
 ### Factorial Design Effect Sizes
 
-* [`SMD` - Standardized Mean Difference](#smd)
-* [`lnRR` - Log Response Ratio](#lnrr)
-* [`lnCVR` - Log Coefficient of Variation Ratio](#lncvr)
-* [`lnVR` - Log Variance Ratio](#lnvr)
+-   [`SMD` - Standardized Mean Difference](#smd)
+-   [`lnRR` - Log Response Ratio](#lnrr)
+-   [`lnCVR` - Log Coefficient of Variation Ratio](#lncvr)
+-   [`lnVR` - Log Variance Ratio](#lnvr)
 
 ### Repeated Measures Effect Sizes
 
-* [`time_SMD` - Time-based Standardized Mean Difference](#time_smd)
-* [`time_lnRR` - Time-based Log Response Ratio](#time_lnrr)
-* [`time_lnCVR` - Time-based Log CV Ratio](#time_lncvr)
-* [`time_lnVR` - Time-based Log Variance Ratio](#time_lnvr)
+-   [`time_SMD`](#time_smd)
+-   [`time_lnRR`](#time_lnrr)
+-   [`time_lnCVR`](#time_lncvr)
+-   [`time_lnVR`](#time_lnvr)
 
 ## Introduction to Effect Sizes
 
@@ -52,14 +52,14 @@ Effect sizes quantify the magnitude of relationships between variables or the si
 
 The **minter** package implements two primary types of effect size calculations:
 
-1. **Factorial design effect sizes**: For experimental designs with two factors (2×2 designs)
-2. **Repeated measures effect sizes**: For time-based or before-after treatments
+1.  **Factorial design effect sizes**: For experimental designs with two factors (2×2 designs)
+2.  **Repeated measures effect sizes**: For time-based or before-after treatments
 
 Each function supports different types of effects:
 
-* `ind` - Individual/simple effects (comparing single treatments)
-* `main` - Main effects (average effect of a factor across levels of another factor)
-* `inter` - Interaction effects (how the effect of one factor depends on the level of another)
+-   `ind` - Individual/simple effects (comparing single treatments)
+-   `main` - Main effects (average effect of a factor across levels of another factor)
+-   `inter` - Interaction effects (how the effect of one factor depends on the level of another)
 
 ## Factorial Design Effect Sizes
 
@@ -67,31 +67,44 @@ These functions calculate effect sizes for standard 2×2 factorial designs where
 
 ### SMD - Standardized Mean Difference {#smd}
 
-Calculates the standardized mean difference (Hedges' g) for factorial designs, accounting for small-sample bias. This effect size is appropriate when comparing group means on the same scale or when you want to standardize the difference.
+Calculates the standardized mean difference (Cohen's d or Hedges' g) for factorial designs. This effect size is appropriate when comparing group means on the same scale or when you want to standardize the difference.
 
 #### Effect Types
 
-The package provides three specialized functions for different effect types:
-
-* **`SMD_ind()`**: Individual/simple effect - Compares a single treatment (A) to a control. Use this when you want to know the standardized difference between just one treatment and the control group.
-* **`SMD_main()`**: Main effect - Measures the average effect of a factor (A) across all levels of another factor (B). Use this when you want to know the overall effect of a treatment, averaging across other experimental conditions.
-* **`SMD_inter()`**: Interaction effect - Quantifies how the effect of one factor (A) depends on the level of another factor (B). Use this when you want to know if two factors interact (i.e., if their combined effect is different from the sum of their individual effects).
-
-These specialized functions are the *recommended* way to calculate effects rather than using the general `SMD(type="...")` function.
+-   **`SMD_ind()`**: Individual/simple effect - Compares a single treatment (A) to a control.
+-   **`SMD_main()`**: Main effect - Measures the average effect of a factor (A) across all levels of another factor (B).
+-   **`SMD_inter()`**: Interaction effect - Quantifies the effect of factor A when factor B is present.
 
 #### Formula
 
-For individual effects:
+##### `SMD_ind()`
+
+This function computes the individual or simple effect of A over the Control. 
+
+It is the classic Standardized Mean Difference (SMD), which can also be computed
+with metafor's `escalc()` function using `measure = "SMD"`.
+
+The individual Standardized Mean Difference is calculated as:
 
 $$d_{ind} = \frac{\bar{X}_A - \bar{X}_{Ctrl}}{S_{pooled}} \cdot J(m)$$
 
-where $S_{pooled} = \sqrt{\frac{(n_A-1)s_A^2 + (n_{Ctrl}-1)s_{Ctrl}^2}{n_A + n_{Ctrl} - 2}}$ and $J(m) = 1 - \frac{3}{4m-1}$ with $m = n_A + n_{Ctrl} - 2$
+where:
+
+$$S_{pooled} = \sqrt{\frac{(n_A-1)s_A^2 + (n_{Ctrl}-1)s_{Ctrl}^2}{n_A + n_{Ctrl} - 2}}$$
+
+$$J(m) = 1 - \frac{3}{4m-1}$$ 
+
+with $$m = n_A + n_{Ctrl} - 2$$
+
+##### `SMD_main()`
 
 For main effects:
 
-$$d_{main} = \frac{(\bar{X}_A + \bar{X}_{AB})/2 - (\bar{X}_{Ctrl} + \bar{X}_B)/2}{S_{pooled}} \cdot J(m)$$
+$$d_{main} = \frac{(\bar{X}_A + \bar{X}_{AB}) - (\bar{X}_{B} + \bar{X}_{Ctrl})}{2S_{pooled}} \cdot J(m)$$
 
-where $S_{pooled}$ is the pooled standard deviation for all four groups
+where $S_{pooled}$ is the pooled standard deviation for all four groups:
+
+$$S_{pooled} = \sqrt{\frac{(n_A-1)s_A^2 + (n_B-1)s_B^2 + (n_{AB}-1)s_{AB}^2 + (n_{Ctrl}-1)s_{Ctrl}^2}{n_A + n_B + n_{AB} + n_{Ctrl} - 4}}$$
 
 For interaction effects:
 
@@ -99,28 +112,27 @@ $$d_{inter} = \frac{(\bar{X}_{AB} - \bar{X}_B) - (\bar{X}_A - \bar{X}_{Ctrl})}{S
 
 #### Parameters
 
-* `type` *(character)*: Effect type to calculate - "ind", "main", or "inter"
-* `data` *(data.frame)*: Input data frame
-* `col_names` *(character[2])*: Names for output columns, default: `c("yi", "vi")`
-* `append` *(logical)*: If TRUE, append results to input data, default: TRUE
-* `hedges_correction` *(logical)*: Apply Hedges' small-sample bias correction, default: TRUE
-* `Ctrl_mean, Ctrl_sd, Ctrl_n`: Mean, standard deviation, and sample size for control group
-* `A_mean, A_sd, A_n`: Mean, standard deviation, and sample size for group A
-* `B_mean, B_sd, B_n`: Mean, standard deviation, and sample size for group B (only for main/interaction effects)
-* `AB_mean, AB_sd, AB_n`: Mean, standard deviation, and sample size for group AB (only for main/interaction effects)
+-   `data` *(data.frame)*: Input data frame
+-   `col_names` *(character[2])*: Names for output columns, default: `c("yi", "vi")`
+-   `append` *(logical)*: If TRUE, append results to input data, default: TRUE
+-   `hedges_correction` *(logical)*: Apply Hedges' small-sample bias correction, default: TRUE
+-   `Ctrl_mean, Ctrl_sd, Ctrl_n`: Mean, standard deviation, and sample size for control group
+-   `A_mean, A_sd, A_n`: Mean, standard deviation, and sample size for group A
+-   `B_mean, B_sd, B_n`: Mean, standard deviation, and sample size for group B (only for main/interaction effects)
+-   `AB_mean, AB_sd, AB_n`: Mean, standard deviation, and sample size for group AB (only for main/interaction effects)
 
 #### Returns
 
 A data frame with columns:
 
-* `yi`: Effect size (SMD value)
-* `vi`: Variance of the effect size
+-   `yi`: Effect size (SMD value)
+-   `vi`: Variance of the effect size
 
 #### Examples
 
 **Individual effect** (compare treatment A to control):
 
-```r
+``` r
 # Create a sample dataset
 my_data <- data.frame(
   Control_mean = 10.2, Control_sd = 2.1, Control_n = 25,
@@ -137,7 +149,7 @@ result_ind <- SMD_ind(
 
 **Main effect** (average effect of factor A):
 
-```r
+``` r
 # Create a sample dataset with all four treatment combinations
 factorial_data <- data.frame(
   Control_mean = 10.2, Control_sd = 2.1, Control_n = 25,
@@ -158,7 +170,7 @@ result_main <- SMD_main(
 
 **Interaction effect** (A×B interaction):
 
-```r
+``` r
 # Interaction effect without applying Hedges' correction
 result_inter <- SMD_inter(
   data = factorial_data,
@@ -172,8 +184,8 @@ result_inter <- SMD_inter(
 
 #### References
 
-* Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction between competition and predation: a meta-analysis of field experiments. *The American Naturalist*, 155(4), 435-453.
-* Morris, W. F., et al. (2007). Direct and interactive effects of enemies and mutualists on plant performance: a meta‐analysis. *Ecology*, 88(4), 1021-1029.
+-   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction between competition and predation: a meta-analysis of field experiments. *The American Naturalist*, 155(4), 435-453.
+-   Morris, W. F., et al. (2007). Direct and interactive effects of enemies and mutualists on plant performance: a meta‐analysis. *Ecology*, 88(4), 1021-1029.
 
 ### lnRR - Log Response Ratio {#lnrr}
 
@@ -183,9 +195,9 @@ Calculates the natural logarithm of the response ratio for factorial designs. Th
 
 The package provides three specialized functions for different effect types:
 
-* **`lnRR_ind()`**: Individual/simple effect - Compares a single treatment (A) to a control using the log ratio. Use this when you want to know the proportional difference between one treatment and the control group.
-* **`lnRR_main()`**: Main effect - Measures the average proportional effect of a factor (A) across all levels of another factor (B). Use this when you want to know the overall proportional effect of a treatment.
-* **`lnRR_inter()`**: Interaction effect - Quantifies how the proportional effect of one factor (A) depends on the level of another factor (B). Use this when you want to know if two factors interact on a multiplicative scale.
+-   **`lnRR_ind()`**: Individual/simple effect - Compares a single treatment (A) to a control using the log ratio. Use this when you want to know the proportional difference between one treatment and the control group.
+-   **`lnRR_main()`**: Main effect - Measures the average proportional effect of a factor (A) across all levels of another factor (B). Use this when you want to know the overall proportional effect of a treatment.
+-   **`lnRR_inter()`**: Interaction effect - Quantifies how the proportional effect of one factor (A) depends on the level of another factor (B). Use this when you want to know if two factors interact on a multiplicative scale.
 
 These specialized functions are the *recommended* way to calculate effects rather than using the general `lnRR(type="...")` function.
 
@@ -195,46 +207,43 @@ For individual effects:
 
 $$\ln RR_{ind} = \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)$$
 
-with variance 
-$$v_{ind} = \frac{s_A^2}{n_A\bar{X}_A^2} + \frac{s_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}$$
+with variance $$v_{ind} = \frac{s_A^2}{n_A\bar{X}_A^2} + \frac{s_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}$$
 
 For main effects:
 
 $$\ln RR_{main} = \ln\left(\frac{\bar{X}_A + \bar{X}_{AB}}{\bar{X}_{Ctrl} + \bar{X}_B}\right)$$
 
-with variance 
-$$v_{main} = \left(\frac{1}{\bar{X}_A + \bar{X}_{AB}}\right)^2 \left(\frac{s_A^2}{n_A} + \frac{s_{AB}^2}{n_{AB}}\right) + \left(\frac{1}{\bar{X}_{Ctrl} + \bar{X}_B}\right)^2 \left(\frac{s_{Ctrl}^2}{n_{Ctrl}} + \frac{s_B^2}{n_B}\right)$$
+with variance $$v_{main} = \left(\frac{1}{\bar{X}_A + \bar{X}_{AB}}\right)^2 \left(\frac{s_A^2}{n_A} + \frac{s_{AB}^2}{n_{AB}}\right) + \left(\frac{1}{\bar{X}_{Ctrl} + \bar{X}_B}\right)^2 \left(\frac{s_{Ctrl}^2}{n_{Ctrl}} + \frac{s_B^2}{n_B}\right)$$
 
 For interaction effects:
 
 $$\ln RR_{inter} = \ln\left(\frac{\bar{X}_{AB}}{\bar{X}_B}\right) - \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)$$
 
-with variance 
-$$v_{inter} = \frac{s_{AB}^2}{n_{AB}\bar{X}_{AB}^2} + \frac{s_A^2}{n_A\bar{X}_A^2} + \frac{s_B^2}{n_B\bar{X}_B^2} + \frac{s_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}$$
+with variance $$v_{inter} = \frac{s_{AB}^2}{n_{AB}\bar{X}_{AB}^2} + \frac{s_A^2}{n_A\bar{X}_A^2} + \frac{s_B^2}{n_B\bar{X}_B^2} + \frac{s_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}$$
 
 #### Parameters
 
-* `type` *(character)*: Effect type to calculate - "ind", "main", or "inter"
-* `data` *(data.frame)*: Input data frame
-* `col_names` *(character[2])*: Names for output columns, default: `c("yi", "vi")`
-* `append` *(logical)*: If TRUE, append results to input data, default: TRUE
-* `Ctrl_mean, Ctrl_sd, Ctrl_n`: Mean, standard deviation, and sample size for control group
-* `A_mean, A_sd, A_n`: Mean, standard deviation, and sample size for group A
-* `B_mean, B_sd, B_n`: Mean, standard deviation, and sample size for group B (only for main/interaction effects)
-* `AB_mean, AB_sd, AB_n`: Mean, standard deviation, and sample size for group AB (only for main/interaction effects)
+-   `type` *(character)*: Effect type to calculate - "ind", "main", or "inter"
+-   `data` *(data.frame)*: Input data frame
+-   `col_names` *(character[2])*: Names for output columns, default: `c("yi", "vi")`
+-   `append` *(logical)*: If TRUE, append results to input data, default: TRUE
+-   `Ctrl_mean, Ctrl_sd, Ctrl_n`: Mean, standard deviation, and sample size for control group
+-   `A_mean, A_sd, A_n`: Mean, standard deviation, and sample size for group A
+-   `B_mean, B_sd, B_n`: Mean, standard deviation, and sample size for group B (only for main/interaction effects)
+-   `AB_mean, AB_sd, AB_n`: Mean, standard deviation, and sample size for group AB (only for main/interaction effects)
 
 #### Returns
 
 A data frame with columns:
 
-* `yi`: Effect size (lnRR value)
-* `vi`: Variance of the effect size
+-   `yi`: Effect size (lnRR value)
+-   `vi`: Variance of the effect size
 
 #### Examples
 
 **Individual effect** (compare treatment A to control):
 
-```r
+``` r
 # Create a sample dataset
 my_data <- data.frame(
   Control_mean = 10.2, Control_sd = 2.1, Control_n = 25,
@@ -251,7 +260,7 @@ result_ind <- lnRR_ind(
 
 **Main effect** (average effect of factor A):
 
-```r
+``` r
 # Create a sample dataset with all four treatment combinations
 factorial_data <- data.frame(
   Control_mean = 10.2, Control_sd = 2.1, Control_n = 25,
@@ -272,7 +281,7 @@ result_main <- lnRR_main(
 
 **Interaction effect** (A×B interaction):
 
-```r
+``` r
 # Interaction effect with custom column names
 result_inter <- lnRR_inter(
   data = factorial_data,
@@ -287,8 +296,8 @@ result_inter <- lnRR_inter(
 
 #### References
 
-* Morris, W. F., et al. (2007). Direct and interactive effects of enemies and mutualists on plant performance: a meta‐analysis. *Ecology*, 88(4), 1021-1029.
-* Lajeunesse, M. J. (2011). On the meta‐analysis of response ratios for studies with correlated and multi‐group designs. *Ecology*, 92(11), 2049-2055.
+-   Morris, W. F., et al. (2007). Direct and interactive effects of enemies and mutualists on plant performance: a meta‐analysis. *Ecology*, 88(4), 1021-1029.
+-   Lajeunesse, M. J. (2011). On the meta‐analysis of response ratios for studies with correlated and multi‐group designs. *Ecology*, 92(11), 2049-2055.
 
 ### lnCVR - Log Coefficient of Variation Ratio {#lncvr}
 
@@ -298,9 +307,9 @@ Calculates the natural logarithm of the coefficient of variation ratio for facto
 
 The package provides three specialized functions for different effect types:
 
-* **`lnCVR_ind()`**: Individual/simple effect - Compares the CV of a single treatment (A) to a control.
-* **`lnCVR_main()`**: Main effect - Measures the overall effect of a factor on CV across levels of another factor.
-* **`lnCVR_inter()`**: Interaction effect - Quantifies how the CV effect of one factor depends on the level of another factor.
+-   **`lnCVR_ind()`**: Individual/simple effect - Compares the CV of a single treatment (A) to a control.
+-   **`lnCVR_main()`**: Main effect - Measures the overall effect of a factor on CV across levels of another factor.
+-   **`lnCVR_inter()`**: Interaction effect - Quantifies how the CV effect of one factor depends on the level of another factor.
 
 These specialized functions are the *recommended* way to calculate effects.
 
@@ -314,25 +323,25 @@ with appropriate variance calculations.
 
 #### Parameters
 
-* `type` *(character)*: Effect type to calculate - "ind", "main", or "inter"
-* `data` *(data.frame)*: Input data frame
-* `col_names` *(character[2])*: Names for output columns, default: `c("yi", "vi")`
-* `append` *(logical)*: If TRUE, append results to input data, default: TRUE
-* `Ctrl_mean, Ctrl_sd, Ctrl_n`: Mean, standard deviation, and sample size for control group
-* `A_mean, A_sd, A_n`: Mean, standard deviation, and sample size for group A
-* `B_mean, B_sd, B_n`: Mean, standard deviation, and sample size for group B (only for main/interaction effects)
-* `AB_mean, AB_sd, AB_n`: Mean, standard deviation, and sample size for group AB (only for main/interaction effects)
+-   `type` *(character)*: Effect type to calculate - "ind", "main", or "inter"
+-   `data` *(data.frame)*: Input data frame
+-   `col_names` *(character[2])*: Names for output columns, default: `c("yi", "vi")`
+-   `append` *(logical)*: If TRUE, append results to input data, default: TRUE
+-   `Ctrl_mean, Ctrl_sd, Ctrl_n`: Mean, standard deviation, and sample size for control group
+-   `A_mean, A_sd, A_n`: Mean, standard deviation, and sample size for group A
+-   `B_mean, B_sd, B_n`: Mean, standard deviation, and sample size for group B (only for main/interaction effects)
+-   `AB_mean, AB_sd, AB_n`: Mean, standard deviation, and sample size for group AB (only for main/interaction effects)
 
 #### Returns
 
 A data frame with columns:
 
-* `yi`: Effect size (lnCVR value)
-* `vi`: Variance of the effect size
+-   `yi`: Effect size (lnCVR value)
+-   `vi`: Variance of the effect size
 
 #### Examples
 
-```r
+``` r
 # Create a sample dataset
 my_data <- data.frame(
   Control_mean = 10.2, Control_sd = 2.1, Control_n = 25,
@@ -355,9 +364,9 @@ Calculates the natural logarithm of the variance ratio for factorial designs. Th
 
 The package provides three specialized functions for different effect types:
 
-* **`lnVR_ind()`**: Individual/simple effect - Compares the variance of a treatment to a control.
-* **`lnVR_main()`**: Main effect - Measures the overall effect of a factor on variance.
-* **`lnVR_inter()`**: Interaction effect - Quantifies interaction effects on variance.
+-   **`lnVR_ind()`**: Individual/simple effect - Compares the variance of a treatment to a control.
+-   **`lnVR_main()`**: Main effect - Measures the overall effect of a factor on variance.
+-   **`lnVR_inter()`**: Interaction effect - Quantifies interaction effects on variance.
 
 #### Formula
 
@@ -369,25 +378,25 @@ with appropriate variance calculations.
 
 #### Parameters
 
-* `type` *(character)*: Effect type to calculate - "ind", "main", or "inter"
-* `data` *(data.frame)*: Input data frame
-* `col_names` *(character[2])*: Names for output columns, default: `c("yi", "vi")`
-* `append` *(logical)*: If TRUE, append results to input data, default: TRUE
-* `Ctrl_sd, Ctrl_n`: Standard deviation and sample size for control group
-* `A_sd, A_n`: Standard deviation and sample size for group A
-* `B_sd, B_n`: Standard deviation and sample size for group B (only for main/interaction effects)
-* `AB_sd, AB_n`: Standard deviation and sample size for group AB (only for main/interaction effects)
+-   `type` *(character)*: Effect type to calculate - "ind", "main", or "inter"
+-   `data` *(data.frame)*: Input data frame
+-   `col_names` *(character[2])*: Names for output columns, default: `c("yi", "vi")`
+-   `append` *(logical)*: If TRUE, append results to input data, default: TRUE
+-   `Ctrl_sd, Ctrl_n`: Standard deviation and sample size for control group
+-   `A_sd, A_n`: Standard deviation and sample size for group A
+-   `B_sd, B_n`: Standard deviation and sample size for group B (only for main/interaction effects)
+-   `AB_sd, AB_n`: Standard deviation and sample size for group AB (only for main/interaction effects)
 
 #### Returns
 
 A data frame with columns:
 
-* `yi`: Effect size (lnVR value)
-* `vi`: Variance of the effect size
+-   `yi`: Effect size (lnVR value)
+-   `vi`: Variance of the effect size
 
 #### Examples
 
-```r
+``` r
 # Create a sample dataset
 my_data <- data.frame(
   Control_sd = 2.1, Control_n = 25,
@@ -418,29 +427,29 @@ where $S_{pooled}$ is the pooled standard deviation of the change scores.
 
 #### Parameters
 
-* `data` *(data.frame)*: Input data frame
-* `col_names` *(character[2])*: Names for output columns, default: `c("yi", "vi")`
-* `append` *(logical)*: If TRUE, append results to input data, default: TRUE
-* `hedges_correction` *(logical)*: Apply Hedges' small-sample bias correction, default: TRUE
-* `t0_Ctrl_mean, t0_Ctrl_sd`: Mean and SD for control at time 0
-* `t1_Ctrl_mean, t1_Ctrl_sd`: Mean and SD for control at time 1
-* `Ctrl_n`: Sample size for control group
-* `Ctrl_cor`: Correlation between control measurements at t0 and t1
-* `t0_Exp_mean, t0_Exp_sd`: Mean and SD for experimental at time 0
-* `t1_Exp_mean, t1_Exp_sd`: Mean and SD for experimental at time 1
-* `Exp_n`: Sample size for experimental group
-* `Exp_cor`: Correlation between experimental measurements at t0 and t1
+-   `data` *(data.frame)*: Input data frame
+-   `col_names` *(character[2])*: Names for output columns, default: `c("yi", "vi")`
+-   `append` *(logical)*: If TRUE, append results to input data, default: TRUE
+-   `hedges_correction` *(logical)*: Apply Hedges' small-sample bias correction, default: TRUE
+-   `t0_Ctrl_mean, t0_Ctrl_sd`: Mean and SD for control at time 0
+-   `t1_Ctrl_mean, t1_Ctrl_sd`: Mean and SD for control at time 1
+-   `Ctrl_n`: Sample size for control group
+-   `Ctrl_cor`: Correlation between control measurements at t0 and t1
+-   `t0_Exp_mean, t0_Exp_sd`: Mean and SD for experimental at time 0
+-   `t1_Exp_mean, t1_Exp_sd`: Mean and SD for experimental at time 1
+-   `Exp_n`: Sample size for experimental group
+-   `Exp_cor`: Correlation between experimental measurements at t0 and t1
 
 #### Returns
 
 A data frame with columns:
 
-* `yi`: Effect size (time_SMD value)
-* `vi`: Variance of the effect size
+-   `yi`: Effect size (time_SMD value)
+-   `vi`: Variance of the effect size
 
 #### Examples
 
-```r
+``` r
 # Create a sample dataset for repeated measures design
 time_data <- data.frame(
   t0_Control_mean = 10.2, t0_Control_sd = 2.1, 
@@ -469,21 +478,21 @@ Calculates the log response ratio for repeated measures designs, comparing the r
 
 #### Parameters
 
-* `data` *(data.frame)*: Input data frame
-* `col_names` *(character[2])*: Names for output columns, default: `c("yi", "vi")`
-* `append` *(logical)*: If TRUE, append results to input data, default: TRUE
-* `t0_Ctrl_mean, t0_Ctrl_sd`: Mean and SD for control at time 0
-* `t1_Ctrl_mean, t1_Ctrl_sd`: Mean and SD for control at time 1
-* `Ctrl_n`: Sample size for control group
-* `Ctrl_cor`: Correlation between control measurements at t0 and t1
-* `t0_Exp_mean, t0_Exp_sd`: Mean and SD for experimental at time 0
-* `t1_Exp_mean, t1_Exp_sd`: Mean and SD for experimental at time 1
-* `Exp_n`: Sample size for experimental group
-* `Exp_cor`: Correlation between experimental measurements at t0 and t1
+-   `data` *(data.frame)*: Input data frame
+-   `col_names` *(character[2])*: Names for output columns, default: `c("yi", "vi")`
+-   `append` *(logical)*: If TRUE, append results to input data, default: TRUE
+-   `t0_Ctrl_mean, t0_Ctrl_sd`: Mean and SD for control at time 0
+-   `t1_Ctrl_mean, t1_Ctrl_sd`: Mean and SD for control at time 1
+-   `Ctrl_n`: Sample size for control group
+-   `Ctrl_cor`: Correlation between control measurements at t0 and t1
+-   `t0_Exp_mean, t0_Exp_sd`: Mean and SD for experimental at time 0
+-   `t1_Exp_mean, t1_Exp_sd`: Mean and SD for experimental at time 1
+-   `Exp_n`: Sample size for experimental group
+-   `Exp_cor`: Correlation between experimental measurements at t0 and t1
 
 #### Examples
 
-```r
+``` r
 # Using the same time-based dataset
 # Calculate time-based log response ratio using column names
 result <- time_lnRR(

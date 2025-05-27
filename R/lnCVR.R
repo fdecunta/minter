@@ -1,15 +1,3 @@
-#' Simple Log Coefficient Of Variation Ratio
-#'
-#' TODO:
-#'
-#' @inheritParams .simple_lnRR
-#' @references
-#'
-#' Nakagawa, S., Poulin, R., Mengersen, K., Reinhold, K., Engqvist,
-#'     L., Lagisz, M., & Senior, A. M. (2015). Meta‐analysis of variation: 
-#'     ecological and evolutionary applications and beyond. Methods in
-#'     Ecology and Evolution, 6(2), 143-152.
-#'
 #' @keywords internal
 .simple_lnCVR <- function(
   Ctrl_mean,
@@ -35,18 +23,6 @@
 }
 
 
-#' Main Log Coefficient Of Variation Ration
-#' 
-#' From Nakagawa in prep.
-#' 
-#' TODO: this
-#' 
-#' @inheritParams .main_lnRR
-#'
-#' @references 
-#' 
-#'   Shinichi Nakagawa and Daniel Noble, personal communication.
-#' 
 #' @keywords internal
 .main_lnCVR <- function(
   Ctrl_mean,
@@ -113,16 +89,6 @@
 }
 
 
-#' Interaction Log Coefficient of Variation Ratio
-#'
-#' Method by Nakagawa (in prep.)
-#'
-#' @inheritParams .main_lnRR
-#' 
-#' @references 
-#' 
-#'   Shinichi Nakagawa and Daniel Noble, personal communication.
-#' 
 #' @keywords internal
 .interaction_lnCVR <- function(
   Ctrl_mean,

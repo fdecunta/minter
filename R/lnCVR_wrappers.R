@@ -1,5 +1,10 @@
-#' @rdname lnCVR
-#' @inherit lnCVR
+#' Individual Effect: Log Coefficient Of Variation Ratio
+#'
+#' Computes the Log of the Coefficient of Variation Ratio between Factor A
+#' and the Control treatment.
+#'
+#' See the package vignette for a detailed description of the formula.
+#'
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
@@ -15,6 +20,16 @@
 #' @param AB_mean Mean outcome from the interaction AxB treatment
 #' @param AB_sd Standard deviation from the interaction AxB treatment
 #' @param AB_n Sample size from the interaction AxB treatment
+#'
+#' @references
+#'
+#' Nakagawa, S., Poulin, R., Mengersen, K., Reinhold, K., Engqvist,
+#'     L., Lagisz, M., & Senior, A. M. (2015). Meta‐analysis of variation: 
+#'     ecological and evolutionary applications and beyond. Methods in
+#'     Ecology and Evolution, 6(2), 143-152.
+#'
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
+#' 
 #' @export
 lnCVR_ind <- function(
   data,
@@ -28,14 +43,19 @@ lnCVR_ind <- function(
   A_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(minter:::lnCVR)
+  call[[1L]] <- quote(.lnCVR)
   call$type <- "ind"
   eval(call, parent.frame())
 }
 
 
-#' @rdname lnCVR
-#' @inherit lnCVR
+#' Main Effect: Log Coefficient Of Variation Ration
+#' 
+#' Computes the main effect of Factor A across levels of Factor B
+#' in factorial experiments on the coefficient of variation.
+#'
+#' See the package vignette for a detailed description of the formula.
+#'
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
@@ -51,6 +71,9 @@ lnCVR_ind <- function(
 #' @param AB_mean Mean outcome from the interaction AxB treatment
 #' @param AB_sd Standard deviation from the interaction AxB treatment
 #' @param AB_n Sample size from the interaction AxB treatment
+#' 
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
+#'
 #' @export
 lnCVR_main <- function(
   data,
@@ -70,14 +93,19 @@ lnCVR_main <- function(
   AB_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(minter:::lnCVR)
+  call[[1L]] <- quote(.lnCVR)
   call$type <- "main"
   eval(call, parent.frame())
 }
 
 
-#' @rdname lnCVR
-#' @inherit lnCVR
+#' Interaction Effect: Log Coefficient of Variation Ratio
+#'
+#' Computes the interaction effect between Factors A and B
+#' in factorial experiments on the coefficient of variation ratio.
+#'
+#' See the package vignette for a detailed description of the formula.
+#'
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
@@ -93,6 +121,9 @@ lnCVR_main <- function(
 #' @param AB_mean Mean outcome from the interaction AxB treatment
 #' @param AB_sd Standard deviation from the interaction AxB treatment
 #' @param AB_n Sample size from the interaction AxB treatment
+#'
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
+#'
 #' @export
 lnCVR_inter <- function(
   data,
@@ -112,7 +143,7 @@ lnCVR_inter <- function(
   AB_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(minter:::lnCVR)
+  call[[1L]] <- quote(.lnCVR)
   call$type <- "inter"
   eval(call, parent.frame())
 }
@@ -124,8 +155,8 @@ lnCVR_inter <- function(
 #'
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
-#' @export
-lnCVR <- function(
+#' @keywords internal
+.lnCVR <- function(
   type,
   data,
   col_names = c("yi", "vi"),

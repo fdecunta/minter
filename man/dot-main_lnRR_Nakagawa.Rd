@@ -19,31 +19,6 @@
   AB_n
 )
 }
-\arguments{
-\item{Ctrl_mean}{Mean outcome from the Control treatment}
-
-\item{Ctrl_sd}{Standard deviation from the control treatment}
-
-\item{Ctrl_n}{Sample size from the control streatment}
-
-\item{A_mean}{Mean outcome from the A treatment}
-
-\item{A_sd}{Standard deviation from the A treatment}
-
-\item{A_n}{Sample size from the A treatment}
-
-\item{B_mean}{Mean outcome from the B treatment}
-
-\item{B_sd}{Standard deviation from the B treatment}
-
-\item{B_n}{Sample size from the B treatment}
-
-\item{AB_mean}{Mean outcome from the interaction AxB treatment}
-
-\item{AB_sd}{Standard deviation from the interaction AxB treatment}
-
-\item{AB_n}{Sample size from the interaction AxB treatment}
-}
 \description{
 Computes the main effect of a treatment in a 2-by-2 factorial design using
 the method proposed by Nakagawa (in prep.)

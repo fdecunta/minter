@@ -1,5 +1,25 @@
-#' @rdname SMD
-#' @inherit SMD
+#' Simple effect: Standardized Mean Difference 
+#'
+#' Computes the individual or simple effect of Factor A over the Control. 
+#' 
+#' It is the classic Standardized Mean Difference (SMD), which can also be computed
+#' with metafor's `escalc()` function using `measure = "SMD"`.
+#'
+#' See the package vignette for a detailed description of the formula.
+#' 
+#' @inheritParams lnRR_ind
+#' @param hedges_correction Boolean. If TRUE correct for small-sample bias. Default is TRUE.
+#'
+#' @references
+#'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
+#'     between competition and predation: a meta-analysis of field experiments.
+#'     The American Naturalist, 155(4), 435-453.
+#' 
+#'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
+#'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
+#'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
+#'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+#'
 #' @export
 SMD_ind <- function(
   data,
@@ -14,14 +34,32 @@ SMD_ind <- function(
   A_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(minter:::SMD)
+  call[[1L]] <- quote(.SMD)
   call$type <- "ind"
   eval(call, parent.frame())
 }
 
 
-#' @rdname SMD
-#' @inherit SMD
+#' Main effect: Standardized Mean Difference 
+#' 
+#' Computes the main effect of Factor A across levels of Factor B, analogous
+#' to the main effect in a factorial ANOVA. 
+#'
+#' See the package vignette for a detailed description of the formula.
+#'
+#' @inheritParams lnRR_main
+#' @param hedges_correction Boolean. If TRUE correct for small-sample bias. Default is TRUE.
+#' 
+#' @references 
+#'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
+#'     between competition and predation: a meta-analysis of field experiments.
+#'     The American Naturalist, 155(4), 435-453.
+#' 
+#'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
+#'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
+#'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
+#'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+#'
 #' @export
 SMD_main <- function(
   data,
@@ -42,14 +80,32 @@ SMD_main <- function(
   AB_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(minter:::SMD)
+  call[[1L]] <- quote(.SMD)
   call$type <- "main"
   eval(call, parent.frame())
 }
 
 
-#' @rdname SMD
-#' @inherit SMD
+#' Interaction effect: Standardized mean difference 
+#' 
+#' Computes the interaction effect between factors A and B in factorial
+#' data.
+#'
+#' See the package vignette for a detailed description of the formula.
+#' 
+#' @inheritParams lnRR_inter
+#' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE
+#' 
+#' @references 
+#'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
+#'     between competition and predation: a meta-analysis of field experiments.
+#'     The American Naturalist, 155(4), 435-453.
+#'
+#'   Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
+#'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
+#'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
+#'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+#'
 #' @export
 SMD_inter <- function(
   data,
@@ -70,7 +126,7 @@ SMD_inter <- function(
   AB_n
 ) {
   call <- match.call()
-  call[[1L]] <- quote(minter:::SMD)
+  call[[1L]] <- quote(.SMD)
   call$type <- "inter"
   eval(call, parent.frame())
 }
@@ -83,8 +139,8 @@ SMD_inter <- function(
 #'
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
-#' @export
-SMD <- function(
+#' @keywords internal
+.SMD <- function(
   type,
   data,
   col_names = c("yi", "vi"),
