@@ -33,10 +33,23 @@ SMD_ind <- function(
   A_sd,
   A_n
 ) {
-  call <- match.call()
-  call[[1L]] <- quote(.SMD)
-  call$type <- "ind"
-  eval(call, parent.frame())
+  .assert_args(col_names, append, data)
+  checkmate::assert_logical(hedges_correction, len = 1)
+
+  call_args <- as.list(match.call())[-1]
+
+  smd_args <- .get_columns(call_args[.SMD_args$ind], data)
+  smd_args$hedges_correction <- hedges_correction
+
+  df <- .compute_and_format(
+    effsize_func = ".simple_SMD",
+    effsize_args = smd_args,
+    data = data,
+    col_names = col_names,
+    append = append
+  )
+
+  return(df)
 }
 
 
@@ -79,11 +92,25 @@ SMD_main <- function(
   AB_sd,
   AB_n
 ) {
-  call <- match.call()
-  call[[1L]] <- quote(.SMD)
-  call$type <- "main"
-  eval(call, parent.frame())
+  .assert_args(col_names, append, data)
+  checkmate::assert_logical(hedges_correction, len = 1)
+
+  call_args <- as.list(match.call())[-1]
+
+  smd_args <- .get_columns(call_args[.SMD_args$main], data)
+  smd_args$hedges_correction <- hedges_correction
+
+  df <- .compute_and_format(
+    effsize_func = ".main_SMD",
+    effsize_args = smd_args,
+    data = data,
+    col_names = col_names,
+    append = append
+  )
+
+  return(df)
 }
+
 
 
 #' Interaction effect: Standardized mean difference 
@@ -125,54 +152,16 @@ SMD_inter <- function(
   AB_sd,
   AB_n
 ) {
-  call <- match.call()
-  call[[1L]] <- quote(.SMD)
-  call$type <- "inter"
-  eval(call, parent.frame())
-}
-
-
-#' @keywords internal
-.SMD <- function(
-  type,
-  data,
-  col_names = c("yi", "vi"),
-  append = TRUE,
-  hedges_correction = TRUE,
-  Ctrl_mean,
-  Ctrl_sd,
-  Ctrl_n,
-  A_mean,
-  A_sd,
-  A_n,
-  B_mean = NULL,
-  B_sd = NULL,
-  B_n = NULL,
-  AB_mean = NULL,
-  AB_sd = NULL,
-  AB_n = NULL
-) {
-  .assert_args(type, col_names, append, data)
+  .assert_args(col_names, append, data)
   checkmate::assert_logical(hedges_correction, len = 1)
-  
-  # Get args as a list
+
   call_args <- as.list(match.call())[-1]
 
-  smd_func <- switch(type,
-    ind = ".simple_SMD",
-    main = ".main_SMD",
-    inter = ".interaction_SMD"
-  )
-
-  smd_args <- switch(type,
-    ind = .get_columns(call_args[.SMD_args$ind], data),
-    main = .get_columns(call_args[.SMD_args$main], data),
-    inter = .get_columns(call_args[.SMD_args$main], data)  # Same args than 'main'
-  )
+  smd_args <- .get_columns(call_args[.SMD_args$main], data)  # Same arguments as main
   smd_args$hedges_correction <- hedges_correction
 
   df <- .compute_and_format(
-    effsize_func = smd_func,
+    effsize_func = ".interaction_SMD",
     effsize_args = smd_args,
     data = data,
     col_names = col_names,
@@ -187,18 +176,18 @@ SMD_inter <- function(
 .SMD_args <- list(
   ind = c(
     "Ctrl_mean",
-    "Ctrl_sd",  
-    "Ctrl_n",   
-    "A_mean",   
-    "A_sd",     
+    "Ctrl_sd",
+    "Ctrl_n",
+    "A_mean",
+    "A_sd",
     "A_n"
   ),
   main = c(
     "Ctrl_mean",
-    "Ctrl_sd",  
-    "Ctrl_n",   
-    "A_mean",   
-    "A_sd",     
+    "Ctrl_sd",
+    "Ctrl_n",
+    "A_mean",
+    "A_sd",
     "A_n",
     "B_mean",
     "B_sd",

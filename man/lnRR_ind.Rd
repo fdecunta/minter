@@ -36,10 +36,12 @@ lnRR_ind(
 \item{A_n}{Sample size from the experimental treatment}
 }
 \description{
-Computes the Log of the Response Ratio between
-Factor A and the Control treatment.
+Computes the individual or simple effect of Factor A over the Control.
 }
 \details{
+It is the classic Log Response Ratio (lnRR), which can also be computed
+with metafor's \code{escalc()} function using \code{measure = "ROM"}.
+
 See the package vignette for a detailed description of the formula.
 }
 \references{

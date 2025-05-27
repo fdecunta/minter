@@ -36,10 +36,21 @@ lnCVR_ind <- function(
   A_sd,
   A_n
 ) {
-  call <- match.call()
-  call[[1L]] <- quote(.lnCVR)
-  call$type <- "ind"
-  eval(call, parent.frame())
+  .assert_args(col_names, append, data)
+
+  call_args <- as.list(match.call())[-1]
+
+  lncvr_args <- .get_columns(call_args[.lnCVR_args$ind], data)
+
+  df <- .compute_and_format(
+    effsize_func = ".simple_lnCVR",
+    effsize_args = lncvr_args,
+    data = data,
+    col_names = col_names,
+    append = append
+  )
+
+  return(df)
 }
 
 
@@ -86,10 +97,21 @@ lnCVR_main <- function(
   AB_sd,
   AB_n
 ) {
-  call <- match.call()
-  call[[1L]] <- quote(.lnCVR)
-  call$type <- "main"
-  eval(call, parent.frame())
+  .assert_args(col_names, append, data)
+
+  call_args <- as.list(match.call())[-1]
+
+  lncvr_args <- .get_columns(call_args[.lnCVR_args$main], data)
+
+  df <- .compute_and_format(
+    effsize_func = ".main_lnCVR",
+    effsize_args = lncvr_args,
+    data = data,
+    col_names = col_names,
+    append = append
+  )
+
+  return(df)
 }
 
 
@@ -136,51 +158,16 @@ lnCVR_inter <- function(
   AB_sd,
   AB_n
 ) {
-  call <- match.call()
-  call[[1L]] <- quote(.lnCVR)
-  call$type <- "inter"
-  eval(call, parent.frame())
-}
+  .assert_args(col_names, append, data)
 
-
-#' @keywords internal
-.lnCVR <- function(
-  type,
-  data,
-  col_names = c("yi", "vi"),
-  append = TRUE,
-  Ctrl_mean,
-  Ctrl_sd,
-  Ctrl_n,
-  A_mean,
-  A_sd,
-  A_n,
-  B_mean = NULL,
-  B_sd = NULL,
-  B_n = NULL,
-  AB_mean = NULL,
-  AB_sd = NULL,
-  AB_n = NULL
-) {
-  .assert_args(type, col_names, append, data)
   call_args <- as.list(match.call())[-1]
 
-  lncvr_func <- switch(type,
-    ind = ".simple_lnCVR",
-    main = ".main_lnCVR",
-    inter = ".interaction_lnCVR"
-  )
-
-  lncvr_args <- switch(type,
-    ind = .get_columns(call_args[.lnCVR_requirements$ind], data),
-    main = .get_columns(call_args[.lnCVR_requirements$main], data),
-    inter = .get_columns(call_args[.lnCVR_requirements$main], data)   # Same args needed than main
-  )
+  lncvr_args <- .get_columns(call_args[.lnCVR_args$main], data)  # Same args as main
 
   df <- .compute_and_format(
-    data = data,
-    effsize_func = lncvr_func,
+    effsize_func = ".interaction_lnCVR",
     effsize_args = lncvr_args,
+    data = data,
     col_names = col_names,
     append = append
   )
@@ -189,11 +176,8 @@ lnCVR_inter <- function(
 }
 
 
-#' Columns required for computing each lnCVR
-#'
-#' There is no 'inter' because uses the same args than 'main'
 #' @keywords internal
-.lnCVR_requirements <- list(
+.lnCVR_args <- list(
   ind = c(
     "Ctrl_mean",
     "Ctrl_sd",

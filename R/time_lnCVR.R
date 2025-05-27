@@ -25,7 +25,7 @@ time_lnCVR <- function(
   Exp_n,
   Exp_cor
 ) {
-  .assert_args(type = "inter", col_names, append, data)
+  .assert_args(col_names, append, data)
   .assert_cor_value(Ctrl_cor, data)
   .assert_cor_value(Exp_cor, data)
 

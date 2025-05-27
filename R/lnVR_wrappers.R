@@ -31,10 +31,21 @@ lnVR_ind <- function(
   A_sd,
   A_n
 ) {
-  call <- match.call()
-  call[[1L]] <- quote(.lnVR)
-  call$type <- "ind"
-  eval(call, parent.frame())
+  .assert_args(col_names, append, data)
+
+  call_args <- as.list(match.call())[-1]
+
+  lnvr_args <- .get_columns(call_args[.lnVR_args$ind], data)
+
+  df <- .compute_and_format(
+    effsize_func = ".simple_lnVR",
+    effsize_args = lnvr_args,
+    data = data,
+    col_names = col_names,
+    append = append
+  )
+
+  return(df)
 }
 
 
@@ -73,10 +84,21 @@ lnVR_main <- function(
   AB_sd,
   AB_n
 ) {
-  call <- match.call()
-  call[[1L]] <- quote(.lnVR)
-  call$type <- "main"
-  eval(call, parent.frame())
+  .assert_args(col_names, append, data)
+
+  call_args <- as.list(match.call())[-1]
+
+  lnvr_args <- .get_columns(call_args[.lnVR_args$main], data)
+
+  df <- .compute_and_format(
+    effsize_func = ".main_lnVR",
+    effsize_args = lnvr_args,
+    data = data,
+    col_names = col_names,
+    append = append
+  )
+
+  return(df)
 }
 
 
@@ -115,48 +137,16 @@ lnVR_inter <- function(
   AB_sd,
   AB_n
 ) {
-  call <- match.call()
-  call[[1L]] <- quote(.lnVR)
-  call$type <- "inter"
-  eval(call, parent.frame())
-}
+  .assert_args(col_names, append, data)
 
-
-#' @keywords internal
-.lnVR <- function(
-  type,
-  data,
-  col_names = c("yi", "vi"),
-  append = TRUE,
-  Ctrl_sd,
-  Ctrl_n,
-  A_sd,
-  A_n,
-  B_sd = NULL,
-  B_n = NULL,
-  AB_sd = NULL,
-  AB_n = NULL
-) {
-  .assert_args(type, col_names, append, data)
   call_args <- as.list(match.call())[-1]
 
-  lnvr_func <- switch(type,
-    ind = ".simple_lnVR",
-    main = ".main_lnVR",
-    inter = ".interaction_lnVR"
-  )
-                 
-
-  lnvr_args <- switch(type,
-    ind = .get_columns(call_args[.lnVR_args$ind], data),
-    main = .get_columns(call_args[.lnVR_args$main], data),
-    inter = .get_columns(call_args[.lnVR_args$main], data)  # Use same data than inter
-  )
+  lnvr_args <- .get_columns(call_args[.lnVR_args$main], data)  # Same args as main
 
   df <- .compute_and_format(
-    data = data,
-    effsize_func = lnvr_func,
+    effsize_func = ".interaction_lnVR",
     effsize_args = lnvr_args,
+    data = data,
     col_names = col_names,
     append = append
   )
