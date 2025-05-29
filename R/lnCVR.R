@@ -137,7 +137,14 @@
     AB_n = AB_n
   )
 
-  inter_lnCVR <- log((AB_CV / B_CV) / (A_CV / Ctrl_CV))
+  inter_lnCVR <- log((AB_CV / B_CV) / (A_CV / Ctrl_CV)) +
+    0.5 * (
+           (1 / (2 * (AB_n - 1))) -
+           (1 / (2 * (A_n - 1))) +
+           (1 / (2 * (B_n - 1))) -
+           (1 / (2 * (Ctrl_n - 1)))
+    )
+  
 
   # This is the sum of the variances of each
   # Uses '[, 2]' becuase the second column is their sampling variance

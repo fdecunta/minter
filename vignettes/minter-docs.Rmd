@@ -94,7 +94,7 @@ where:
 
 
 $$
-S_{pooled} = \sqrt{\frac{(n_A-1)s_A^2 + (n_{Ctrl}-1)s_{Ctrl}^2}{n_A + n_{Ctrl} - 2}}
+S_{pooled} = \sqrt{\frac{(n_A-1)sd_A^2 + (n_{Ctrl}-1)sd_{Ctrl}^2}{n_A + n_{Ctrl} - 2}}
 $$
 
 The $J(m)$ is a correction for small-sample bias introduced by Hedges (**REF**). This is used
@@ -123,7 +123,7 @@ are now: $m = n_A + n_B + n_{AB} + n_{Ctrl} - 4$
 
 In this case $S_{pooled}$ is the pooled standard deviation for all four groups:
 
-$$S_{pooled} = \sqrt{\frac{(n_A-1)s_A^2 + (n_B-1)s_B^2 + (n_{AB}-1)s_{AB}^2 + (n_{Ctrl}-1)s_{Ctrl}^2}{n_A + n_B + n_{AB} + n_{Ctrl} - 4}}$$
+$$S_{pooled} = \sqrt{\frac{(n_A-1)sd_A^2 + (n_B-1)sd_B^2 + (n_{AB}-1)sd_{AB}^2 + (n_{Ctrl}-1)sd_{Ctrl}^2}{n_A + n_B + n_{AB} + n_{Ctrl} - 4}}$$
 Where the sampling variance is:
 
 $$
@@ -157,11 +157,7 @@ $$
 
 ### lnRR - Log Response Ratio {#lnrr}
 
-Calculates the natural logarithm of the response ratio for factorial designs. This effect size is appropriate when comparing the relative (proportional) differences between experimental groups, and is dimensionless, facilitating comparison across studies using different measurement scales.
-
-#### Formula
-
-##### `lnRR_ind()`
+#### `lnRR_ind()`
 
 For individual effects:
 
@@ -174,12 +170,12 @@ $$
 with variance 
 
 $$
-v_{ind} = \frac{s_A^2}{n_A\bar{X}_A^2} + \frac{s_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
+v_{ind} = \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
 $$
 
 
 
-##### `lnRR_main()`
+#### `lnRR_main()`
 
 For main effects:
 
@@ -191,12 +187,12 @@ $$
 with variance 
 
 $$
-v_{main} = \left(\frac{1}{\bar{X}_A + \bar{X}_{AB}}\right)^2 \left(\frac{s_A^2}{n_A} + \frac{s_{AB}^2}{n_{AB}}\right) + \left(\frac{1}{\bar{X}_{Ctrl} + \bar{X}_B}\right)^2 \left(\frac{s_{Ctrl}^2}{n_{Ctrl}} + \frac{s_B^2}{n_B}\right)
+v_{main} = \left(\frac{1}{\bar{X}_A + \bar{X}_{AB}}\right)^2 \left(\frac{sd_A^2}{n_A} + \frac{sd_{AB}^2}{n_{AB}}\right) + \left(\frac{1}{\bar{X}_{Ctrl} + \bar{X}_B}\right)^2 \left(\frac{sd_{Ctrl}^2}{n_{Ctrl}} + \frac{sd_B^2}{n_B}\right)
 $$
 
 
 
-##### `lnRR_inter()`
+#### `lnRR_inter()`
 
 For interaction effects:
 
@@ -208,8 +204,142 @@ $$
 with variance
 
 $$
-v_{inter} = \frac{s_{AB}^2}{n_{AB}\bar{X}_{AB}^2} + \frac{s_A^2}{n_A\bar{X}_A^2} + \frac{s_B^2}{n_B\bar{X}_B^2} + \frac{s_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
+v_{inter} = \frac{sd_{AB}^2}{n_{AB}\bar{X}_{AB}^2} + \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_B^2}{n_B\bar{X}_B^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
 $$
+
+
+### lnVR - Log of Variability Ratio
+
+#### `lnVR_ind()`
+
+
+$$
+lnVR_{ind} = \ln\left(\frac{sd_{A}}{sd_{Ctrl}}\right) +
+\frac{1}{2(n_{A} - 1)} -
+\frac{1}{2(n_{Ctrl} - 1)}
+$$
+
+$$
+var(lnVR_{ind}) = \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{Ctrl}- 1)}
+$$
+
+
+#### `lnVR_main()`
+
+
+$$
+lnVR_{main} = \frac{1}{2} \ln\left( \frac{sd_{AB} \cdot sd_{A}}{sd_{B} \cdot sd_{Ctrl}} \right) +
+\frac{1}{2} \left(
+  \frac{1}{2(n_{AB} - 1)} +
+  \frac{1}{2(n_{A} - 1)} -
+  \frac{1}{2(n_{B} - 1)} -
+  \frac{1}{2(n_{Ctrl} - 1)}
+\right)
+$$
+
+
+
+$$
+var(lnVRv_{main}) = \frac{1}{4} \left(
+  \frac{1}{2(n_{AB} - 1)} +
+  \frac{1}{2(n_{A} - 1)} +
+  \frac{1}{2(n_{B} - 1)} +
+  \frac{1}{2(n_{Ctrl} - 1)}
+\right)
+$$
+
+
+
+
+#### `lnVR_inter()`
+
+
+$$
+lnVR_{inter} = \ln\left( \frac{sd_{AB} / sd_{B}}{sd_{A} / sd_{Ctrl}} \right) +
+\frac{1}{2(n_{AB} - 1)} -
+\frac{1}{2(n_{A} - 1)} -
+\frac{1}{2(n_{B} - 1)} +
+\frac{1}{2(n_{Ctrl} - 1)}
+$$
+
+
+
+$$
+var(lnVRv_{inter}) =
+\frac{1}{2(n_{AB} - 1)} +
+\frac{1}{2(n_{A} - 1)} +
+\frac{1}{2(n_{B} - 1)} +
+\frac{1}{2(n_{Ctrl} - 1)}
+$$
+
+
+### lnCVR - Log of Coefficient of Variation Ratio
+
+In all this formulas, the CV is: $CV = sd / \bar{x}$
+
+
+#### `lnCVR_ind()`
+
+$$
+lnCVR_{ind} = \ln\left( \frac{CV_{A}}{CV_{Ctrl}} \right) +
+\frac{1}{2(n_{A} - 1)} -
+\frac{1}{2(n_{Ctrl} - 1)}
+$$
+
+
+
+
+$$
+var(lnCVR_{ind} = \log\left( \frac{CV_{A}}{CV_{Ctrl}} \right) +
+\frac{1}{2(n_{A} - 1)} -
+\frac{1}{2(n_{Ctrl} - 1)}
+$$
+
+
+
+#### `lnCVR_main()`
+
+
+$$
+lnCVR_{main} = \frac{1}{2} \ln\left( \frac{CV_{AB} \cdot CV_{A}}{CV_{B} \cdot CV_{Ctrl}} \right) +
+\frac{1}{2} \left(
+  \frac{1}{2(n_{AB} - 1)} +
+  \frac{1}{2(n_{A} - 1)} -
+  \frac{1}{2(n_{B} - 1)} -
+  \frac{1}{2(n_{Ctrl} - 1)}
+\right)
+$$
+
+
+
+$$
+var(lnCVR_{main}) = var(lnRR_{main}) + var(lnVR_{main})
+$$
+
+
+
+#### `lnCVR_inter()`
+
+
+$$
+lnCVR_{inter} = \log\left( \frac{CV_{AB} / CV_{B}}{CV_{A} / CV_{Ctrl}} \right) +
+\frac{1}{2} \left(
+  \frac{1}{2(n_{AB} - 1)} -
+  \frac{1}{2(n_{A} - 1)} +
+  \frac{1}{2(n_{B} - 1)} -
+  \frac{1}{2(n_{Ctrl} - 1)}
+\right)
+$$
+
+
+
+
+$$
+var(lnCVR_{inter}) = var(lnRR_{inter}) + var(lnVR_{inter})
+$$
+
+
+
 
 
 
