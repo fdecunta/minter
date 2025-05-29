@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   minter-docs: minter-docs.html
-last_built: 2025-05-28T18:51Z
+last_built: 2025-05-29T15:29Z
 urls:
   reference: https://fdecunta.github.io/minter/reference
   article: https://fdecunta.github.io/minter/articles
