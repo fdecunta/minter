@@ -6,8 +6,8 @@ Authors@R: c(
            comment = c(ORCID = "0009-0004-5774-1085")),
     person("Shinichi", "Nakagawa", email = "shinichi.nakagawa@ualberta.ca", role = "ctb"),
     person("Daniel", "Noble", email = "daniel.noble@anu.edu.au", role = "ctb")
-)
-Description: A collection of functions for computing effect sizes of interactions to be used un meta-analysis. 
+    )
+Description: A collection of functions for computing effect sizes of interactions to be used in meta-analysis. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
