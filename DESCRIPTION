@@ -1,9 +1,12 @@
 Package: minter
 Title: Effect sizes for Meta-analysis of interactions
 Version: 0.0.1
-Authors@R: 
-    person("Facundo", "Decunta", , "fdecunta@agro.uba.ar", role = c("aut", "cre"),
-           comment = c(ORCID = "0009-0004-5774-1085"))
+Authors@R: c(
+    person("Facundo", "Decunta", email = "fdecunta@agro.uba.ar", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0004-5774-1085")),
+    person("Shinichi", "Nakagawa", email = "shinichi.nakagawa@ualberta.ca", role = "ctb"),
+    person("Daniel", "Noble", email = "daniel.noble@anu.edu.au", role = "ctb")
+)
 Description: A collection of functions for computing effect sizes of interactions to be used un meta-analysis. 
 License: MIT + file LICENSE
 Encoding: UTF-8
