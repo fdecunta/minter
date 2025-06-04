@@ -1,0 +1,6 @@
+citEntry(entry = "Manual",
+         title = "minter: Effect sizes for Meta-analysis of interactions",
+         author = "Facundo Decunta",
+         year = 2025,
+         url = "https://fdecunta.github.io/minter/",
+         textVersion = "Facundo Decunta (2025). minter: Effect sizes for Meta-analysis of interactions. R package version 0.0.1. https://fdecunta.github.io/minter/")
