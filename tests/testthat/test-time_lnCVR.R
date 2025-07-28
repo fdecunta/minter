@@ -15,10 +15,10 @@ test_that(".time_interaction_lnCVR works fine", {
   )
 
   test_lnCVR <- -1.139434283
-#  test_lnCVRv <- TODO:
+  test_lnCVRv <- 0.1965567
 
   expect_equal(res$lnCVR, test_lnCVR, tolerance = 1e-6)
-#  expect_equal(res$lnCVRv, test_lnCVRv, tolerance = 1e-6)
+  expect_equal(res$lnCVRv, test_lnCVRv, tolerance = 1e-6)
 })
 
 
@@ -53,8 +53,8 @@ test_that(".time_interaction_lnCVR works fine", {
   )
 
   test_lnCVR <- -1.139434283
-#  test_lnCVRv <- TODO:
+  test_lnCVRv <- 0.1965567
 
   expect_equal(res$yi, test_lnCVR, tolerance = 1e-6)
-#  expect_equal(res$lnCVRv, test_lnCVRv, tolerance = 1e-6)
+  expect_equal(res$vi, test_lnCVRv, tolerance = 1e-6)
 })
