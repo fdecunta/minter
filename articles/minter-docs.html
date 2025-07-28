@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Effect Size Calculations • minter</title>
+<title>Effect Size Calculations with minter • minter</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Effect Size Calculations">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Effect Size Calculations with minter">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -33,7 +33,7 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/minter-docs.html">Effect Size Calculations</a></li>
+<li><a class="dropdown-item" href="../articles/minter-docs.html">Effect Size Calculations with minter</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -56,7 +56,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Effect Size Calculations</h1>
+      <h1>Effect Size Calculations with minter</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/fdecunta/minter/blob/main/vignettes/minter-docs.Rmd" class="external-link"><code>vignettes/minter-docs.Rmd</code></a></small>
@@ -65,341 +65,432 @@
 
     
     
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>The <strong>minter</strong> package provides tools for calculating
-effect sizes used in meta-analyses, focusing on factorial designs and
-repeated measures designs. This documentation explains each function,
-its parameters, and provides examples.</p>
-<p>The <strong>minter</strong> package implements two primary types of
-effect size calculations:</p>
-<ol style="list-style-type: decimal">
-<li>
-<strong>Factorial design effect sizes</strong>: For experimental
-designs with two factors (2×2 designs). There are three types of effect
-sizes that can be calculated in this designs:</li>
-</ol>
+effect sizes used in meta-analyses, with specialized support for
+factorial experimental designs and repeated measures studies. The
+package offers a consistent interface for computing various effect size
+metrics.</p>
+</div>
+<div class="section level2">
+<h2 id="key-features">Key Features<a class="anchor" aria-label="anchor" href="#key-features"></a>
+</h2>
+<p><strong>minter</strong> implements two primary categories of effect
+size calculations:</p>
+<div class="section level3">
+<h3 id="factorial-design-effect-sizes">1. Factorial Design Effect Sizes<a class="anchor" aria-label="anchor" href="#factorial-design-effect-sizes"></a>
+</h3>
+<p>For experimental designs with two factors (2×2 designs), supporting
+three types of comparisons:</p>
 <ul>
-<li>Individual/simple effects (comparing single treatments)</li>
-<li>Main effects (average effect of a factor across levels of another
-factor)</li>
-<li>Interaction effects (how the effect of one factor depends on the
-level of another)</li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
 <li>
-<strong>Repeated measures effect sizes</strong>: For time-based or
-before-after treatments.</li>
-</ol>
+<strong>Individual/Simple effects</strong>: Direct comparisons
+between single treatments</li>
+<li>
+<strong>Main effects</strong>: Average effect of one factor across
+levels of another factor<br>
+</li>
+<li>
+<strong>Interaction effects</strong>: How the effect of one factor
+depends on the level of another factor</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="repeated-measures-effect-sizes">2. Repeated Measures Effect Sizes<a class="anchor" aria-label="anchor" href="#repeated-measures-effect-sizes"></a>
+</h3>
+<p>For longitudinal studies examining treatment × time interactions in
+before-after or time-series designs.</p>
+</div>
+</div>
 <div class="section level2">
 <h2 id="quick-navigation">Quick Navigation<a class="anchor" aria-label="anchor" href="#quick-navigation"></a>
 </h2>
 <div class="section level3">
-<h3 id="factorial-design-effect-sizes">Factorial Design Effect Sizes<a class="anchor" aria-label="anchor" href="#factorial-design-effect-sizes"></a>
+<h3 id="factorial-design-functions">Factorial Design Functions<a class="anchor" aria-label="anchor" href="#factorial-design-functions"></a>
 </h3>
+<div class="section level4">
+<h4 id="standardized-mean-difference-smd">Standardized Mean Difference (SMD)<a class="anchor" aria-label="anchor" href="#standardized-mean-difference-smd"></a>
+</h4>
 <ul>
-<li>Standardized Mean Difference (SMD)
-<ul>
-<li><a href="#smd_ind"><code>SMD_ind</code> - Individual effect</a></li>
-<li><a href="#smd_main"><code>SMD_main</code> - Main effect</a></li>
-<li><a href="#smd_inter"><code>SMD_inter</code> - Interaction
-effect</a></li>
-</ul>
+<li>
+<a href="#smd_ind"><code>SMD_ind</code></a> - Individual/simple
+effect</li>
+<li>
+<a href="#smd_main"><code>SMD_main</code></a> - Main effect<br>
 </li>
-<li>Log of the Response Ratio (lnRR)
-<ul>
-<li><a href="#lnrr_ind"><code>lnRR_ind</code> - Individual
-effect</a></li>
-<li><a href="#lnrr_main"><code>lnRR_main</code> - Main effect</a></li>
-<li><a href="#lnrr_inter"><code>lnRR_inter</code> - Interaction
-effect</a></li>
-</ul>
-</li>
-<li>Log of the Variation Ratio (lnVR)
-<ul>
-<li><a href="#lnvr_ind"><code>lnVR_ind</code> - Individual
-effect</a></li>
-<li><a href="#lnvr_main"><code>lnVR_main</code> - Main effect</a></li>
-<li><a href="#lnvr_inter"><code>lnVR_inter</code> - Interaction
-effect</a></li>
-</ul>
-</li>
-<li>Log of the Coefficient of Variation Ratio (lnCVR)
-<ul>
-<li><a href="#lncvr_ind"><code>lnCVR_ind</code> - Individual
-effect</a></li>
-<li><a href="#lncvr_main"><code>lnCVR_main</code> - Main effect</a></li>
-<li><a href="#lncvr_inter"><code>lnCVR_inter</code> - Interaction
-effect</a></li>
-</ul>
-</li>
+<li>
+<a href="#smd_inter"><code>SMD_inter</code></a> - Interaction
+effect</li>
 </ul>
 </div>
+<div class="section level4">
+<h4 id="log-response-ratio-lnrr">Log Response Ratio (lnRR)<a class="anchor" aria-label="anchor" href="#log-response-ratio-lnrr"></a>
+</h4>
+<ul>
+<li>
+<a href="#lnrr_ind"><code>lnRR_ind</code></a> - Individual/simple
+effect</li>
+<li>
+<a href="#lnrr_main"><code>lnRR_main</code></a> - Main effect</li>
+<li>
+<a href="#lnrr_inter"><code>lnRR_inter</code></a> - Interaction
+effect</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="log-variation-ratio-lnvr">Log Variation Ratio (lnVR)<a class="anchor" aria-label="anchor" href="#log-variation-ratio-lnvr"></a>
+</h4>
+<ul>
+<li>
+<a href="#lnvr_ind"><code>lnVR_ind</code></a> - Individual/simple
+effect</li>
+<li>
+<a href="#lnvr_main"><code>lnVR_main</code></a> - Main effect</li>
+<li>
+<a href="#lnvr_inter"><code>lnVR_inter</code></a> - Interaction
+effect</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="log-coefficient-of-variation-ratio-lncvr">Log Coefficient of Variation Ratio (lnCVR)<a class="anchor" aria-label="anchor" href="#log-coefficient-of-variation-ratio-lncvr"></a>
+</h4>
+<ul>
+<li>
+<a href="#lncvr_ind"><code>lnCVR_ind</code></a> - Individual/simple
+effect</li>
+<li>
+<a href="#lncvr_main"><code>lnCVR_main</code></a> - Main effect</li>
+<li>
+<a href="#lncvr_inter"><code>lnCVR_inter</code></a> - Interaction
+effect</li>
+</ul>
+</div>
+</div>
 <div class="section level3">
-<h3 id="repeated-measures-effect-sizes">Repeated Measures Effect Sizes<a class="anchor" aria-label="anchor" href="#repeated-measures-effect-sizes"></a>
+<h3 id="repeated-measures-functions">Repeated Measures Functions<a class="anchor" aria-label="anchor" href="#repeated-measures-functions"></a>
 </h3>
 <ul>
-<li><a href="#time_smd"><code>time_SMD</code></a></li>
-<li><a href="#time_lnrr"><code>time_lnRR</code></a></li>
-<li><a href="#time_lncvr"><code>time_lnCVR</code></a></li>
-<li><a href="#time_lnvr"><code>time_lnVR</code></a></li>
+<li>
+<a href="#time_smd"><code>time_SMD</code></a> - Treatment × time
+interaction (SMD)</li>
+<li>
+<a href="#time_lnrr"><code>time_lnRR</code></a> - Treatment × time
+interaction (lnRR)</li>
+<li>
+<a href="#time_lnvr"><code>time_lnVR</code></a> - Treatment × time
+interaction (lnVR)</li>
+<li>
+<a href="#time_lncvr"><code>time_lnCVR</code></a> - Treatment × time
+interaction (lnCVR)</li>
 </ul>
+<hr>
 </div>
 </div>
 <div class="section level2">
 <h2 id="factorial-design-effect-sizes-1">Factorial Design Effect Sizes<a class="anchor" aria-label="anchor" href="#factorial-design-effect-sizes-1"></a>
 </h2>
 <p>These functions compute effect sizes for standard 2×2 factorial
-designs where two factors (A and B) are manipulated.</p>
-<p>Effect sizes for factorial meta-analysis appeared for the first time
-in Gurevitch et al. 2000. In this paper, the authors presented the idea
-of estimating effect sizes for factorial experiments analogous to the
-estimation of main and interaction effects in ANOVA. They done this for
-the Standardized Mean Difference, and the approach was later expanded
-for other kind of effect sizes.</p>
-<p>Recently, Shinichi Nakagawa and Daniel Noble derived different
-families of effect sizes for factorial experiments, like lnVR or lnCVR,
-and kindly shared those formulas.</p>
+designs where two factors (A and B) are manipulated, creating four
+treatment groups: Control, A alone, B alone, and AB combined.</p>
 <div class="section level3">
-<h3 id="smd">SMD - Standardized Mean Difference<a class="anchor" aria-label="anchor" href="#smd"></a>
+<h3 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
 </h3>
-<div class="section level4">
-<h4 id="smd_ind">
-<code>SMD_ind()</code><a class="anchor" aria-label="anchor" href="#smd_ind"></a>
-</h4>
-<p>This function computes the individual or simple effect of Factor A
-over the Control treatment.</p>
-<p>It is the classic Standardized Mean Difference (SMD), which can also
-be computed with metafor’s <code><a href="https://wviechtb.github.io/metafor/reference/escalc.html" class="external-link">escalc()</a></code> function using
+<p>Effect sizes for factorial meta-analysis were first introduced by
+Gurevitch et al. (2000), who presented methods for estimating main and
+interaction effects analogous to factorial ANOVA. Originally developed
+for Standardized Mean Difference, these approaches have been extended to
+other effect size families including response ratios and variability
+measures.</p>
+<p>Recent developments by Shinichi Nakagawa and Daniel Noble have
+expanded these methods to include lnVR and lnCVR effect sizes, providing
+researchers with comprehensive tools for meta-analyzing factorial
+experiments.</p>
+</div>
+<div class="section level3">
+<h3 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
+</h3>
+<p>We thank <strong>Shinichi Nakagawa</strong> and <strong>Daniel
+Noble</strong> for their theoretical contributions to factorial
+meta-analysis methodology and for generously sharing unpublished
+formulas.</p>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="smd">Standardized Mean Difference (SMD)<a class="anchor" aria-label="anchor" href="#smd"></a>
+</h2>
+<p>The Standardized Mean Difference measures the magnitude of treatment
+effects in standard deviation units, making it comparable across studies
+with different measurement scales.</p>
+<div class="section level3">
+<h3 id="smd_ind">Individual Effect: <code>SMD_ind()</code><a class="anchor" aria-label="anchor" href="#smd_ind"></a>
+</h3>
+<p>Computes the individual or simple effect of Factor A compared to
+Control. This is equivalent to the classic SMD that can be computed
+using metafor’s <code>escalc()</code> function with
 <code>measure = "SMD"</code>.</p>
-<p>The individual Standardized Mean Difference of Factor A is calculated
-as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>=</mo><mfrac><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>−</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub></mfrac><mo>⋅</mo><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-d_{ind} = \frac{\bar{X}_A - \bar{X}_{Ctrl}}{S_{pooled}} \cdot J(m)
-</annotation></semantics></math></p>
-<p>where:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub><mo>=</mo><msqrt><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>s</mi><msubsup><mi>d</mi><mi>A</mi><mn>2</mn></msubsup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>2</mn></mrow></mfrac></msqrt></mrow><annotation encoding="application/x-tex">
-S_{pooled} = \sqrt{\frac{(n_A-1)sd_A^2 + (n_{Ctrl}-1)sd_{Ctrl}^2}{n_A + n_{Ctrl} - 2}}
-</annotation></semantics></math></p>
-<p>The
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>=</mo><mfrac><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>−</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub></mfrac><mo>⋅</mo><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d_{ind} = \frac{\bar{X}_A - \bar{X}_{Ctrl}}{S_{pooled}} \cdot J(m)</annotation></semantics></math></p>
+<p>where the pooled standard deviation is:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub><mo>=</mo><msqrt><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>s</mi><msubsup><mi>d</mi><mi>A</mi><mn>2</mn></msubsup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>2</mn></mrow></mfrac></msqrt></mrow><annotation encoding="application/x-tex">S_{pooled} = \sqrt{\frac{(n_A-1)sd_A^2 + (n_{Ctrl}-1)sd_{Ctrl}^2}{n_A + n_{Ctrl} - 2}}</annotation></semantics></math></p>
+<p><strong>Small-sample bias correction:</strong> The
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">J(m)</annotation></semantics></math>
-is a correction for small-sample bias introduced by Hedges
-(<strong>REF</strong>). This is used by default in <code>minter</code>,
-but can be turned off with <code>hedges_correction = FALSE</code>.</p>
-<p>This factor is computed as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mn>3</mn><mrow><mn>4</mn><mi>m</mi><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">J(m) = 1 - \frac{3}{4m-1}</annotation></semantics></math></p>
-<p>with
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">m = n_A + n_{Ctrl} - 2</annotation></semantics></math></p>
-<p>And the sampling variance is:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>d</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><msub><mi>n</mi><mi>A</mi></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mfrac><mo>+</mo><mfrac><msup><mi>d</mi><mn>2</mn></msup><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-var(d_{ind}) = \frac{1}{n_A} + \frac{1}{n_{Ctrl}} + \frac{d^2}{2(n_A + n_{Ctrl})}
-</annotation></semantics></math></p>
+correction (Hedges correction) is applied by default but can be
+disabled:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mn>3</mn><mrow><mn>4</mn><mi>m</mi><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">J(m) = 1 - \frac{3}{4m-1}</annotation></semantics></math>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">m = n_A + n_{Ctrl} - 2</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>d</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><msub><mi>n</mi><mi>A</mi></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mfrac><mo>+</mo><mfrac><msup><mi>d</mi><mn>2</mn></msup><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">var(d_{ind}) = \frac{1}{n_A} + \frac{1}{n_{Ctrl}} + \frac{d^2}{2(n_A + n_{Ctrl})}</annotation></semantics></math></p>
 </div>
-<div class="section level4">
-<h4 id="smd_main">
-<code>SMD_main()</code><a class="anchor" aria-label="anchor" href="#smd_main"></a>
-</h4>
-<p>To compute the main effect of Factor A:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mn>2</mn><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub></mrow></mfrac><mo>⋅</mo><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d_{main} = \frac{(\bar{X}_A + \bar{X}_{AB}) - (\bar{X}_{B} + \bar{X}_{Ctrl})}{2S_{pooled}} \cdot J(m)</annotation></semantics></math></p>
-<p>The correction for small-sample bias
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>
-is the same shown above, but the degrees of freedom are now:
+<div class="section level3">
+<h3 id="smd_main">Main Effect: <code>SMD_main()</code><a class="anchor" aria-label="anchor" href="#smd_main"></a>
+</h3>
+<p>Computes the main effect of Factor A averaged across levels of Factor
+B, analogous to main effects in factorial ANOVA.</p>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mn>2</mn><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub></mrow></mfrac><mo>⋅</mo><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d_{main} = \frac{(\bar{X}_A + \bar{X}_{AB}) - (\bar{X}_{B} + \bar{X}_{Ctrl})}{2S_{pooled}} \cdot J(m)</annotation></semantics></math></p>
+<p><strong>Pooled standard deviation (four groups):</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub><mo>=</mo><msqrt><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>s</mi><msubsup><mi>d</mi><mi>A</mi><mn>2</mn></msubsup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>s</mi><msubsup><mi>d</mi><mi>B</mi><mn>2</mn></msubsup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>A</mi><mi>B</mi></mrow><mn>2</mn></msubsup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mi>B</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>4</mn></mrow></mfrac></msqrt></mrow><annotation encoding="application/x-tex">S_{pooled} = \sqrt{\frac{(n_A-1)sd_A^2 + (n_B-1)sd_B^2 + (n_{AB}-1)sd_{AB}^2 + (n_{Ctrl}-1)sd_{Ctrl}^2}{n_A + n_B + n_{AB} + n_{Ctrl} - 4}}</annotation></semantics></math></p>
+<p><strong>Degrees of freedom:</strong>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mi>B</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">m = n_A + n_B + n_{AB} + n_{Ctrl} - 4</annotation></semantics></math></p>
-<p>In this case
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub><annotation encoding="application/x-tex">S_{pooled}</annotation></semantics></math>
-is the pooled standard deviation for all four groups:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub><mo>=</mo><msqrt><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>s</mi><msubsup><mi>d</mi><mi>A</mi><mn>2</mn></msubsup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>s</mi><msubsup><mi>d</mi><mi>B</mi><mn>2</mn></msubsup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>A</mi><mi>B</mi></mrow><mn>2</mn></msubsup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mi>B</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>4</mn></mrow></mfrac></msqrt></mrow><annotation encoding="application/x-tex">S_{pooled} = \sqrt{\frac{(n_A-1)sd_A^2 + (n_B-1)sd_B^2 + (n_{AB}-1)sd_{AB}^2 + (n_{Ctrl}-1)sd_{Ctrl}^2}{n_A + n_B + n_{AB} + n_{Ctrl} - 4}}</annotation></semantics></math>
-Where the sampling variance is:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>d</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><msub><mi>n</mi><mi>A</mi></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mi>B</mi></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mfrac><mo>+</mo><mfrac><msubsup><mi>d</mi><mi>A</mi><mn>2</mn></msubsup><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mi>B</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-var(d_{main}) = \frac{1}{4} \left(
-\frac{1}{n_A} + \frac{1}{n_B} + \frac{1}{n_{AB}} + \frac{1}{n_{Ctrl}} +
-\frac{d_A^2}{2(n_A + n_B + n_{AB} + n_{Ctrl})}
-\right)
-</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>d</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><msub><mi>n</mi><mi>A</mi></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mi>B</mi></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mfrac><mo>+</mo><mfrac><msubsup><mi>d</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow><mn>2</mn></msubsup><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mi>B</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">var(d_{main}) = \frac{1}{4} \left(\frac{1}{n_A} + \frac{1}{n_B} + \frac{1}{n_{AB}} + \frac{1}{n_{Ctrl}} + \frac{d_{main}^2}{2(n_A + n_B + n_{AB} + n_{Ctrl})}\right)</annotation></semantics></math></p>
 </div>
-<div class="section level4">
-<h4 id="smd_inter">
-<code>SMD_inter()</code><a class="anchor" aria-label="anchor" href="#smd_inter"></a>
-</h4>
-<p>For interaction effects:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>=</mo><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>−</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub></mfrac><mo>⋅</mo><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d_{inter} = \frac{(\bar{X}_{AB} - \bar{X}_B) - (\bar{X}_A - \bar{X}_{Ctrl})}{S_{pooled}} \cdot J(m)</annotation></semantics></math></p>
+<div class="section level3">
+<h3 id="smd_inter">Interaction Effect: <code>SMD_inter()</code><a class="anchor" aria-label="anchor" href="#smd_inter"></a>
+</h3>
+<p>Computes the interaction between factors A and B, measuring how the
+effect of A depends on the level of B.</p>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>=</mo><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>−</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub></mfrac><mo>⋅</mo><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d_{inter} = \frac{(\bar{X}_{AB} - \bar{X}_B) - (\bar{X}_A - \bar{X}_{Ctrl})}{S_{pooled}} \cdot J(m)</annotation></semantics></math></p>
+<p>Uses the same four-group pooled standard deviation as the main
+effect.</p>
+<p><strong>Sampling variance:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>d</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><msub><mi>n</mi><mi>A</mi></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mi>B</mi></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mfrac><mo>+</mo><mfrac><msubsup><mi>d</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow><mn>2</mn></msubsup><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mi>B</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">var(d_{inter}) = \frac{1}{n_A} + \frac{1}{n_B} + \frac{1}{n_{AB}} + \frac{1}{n_{Ctrl}} + \frac{d_{inter}^2}{2(n_A + n_B + n_{AB} + n_{Ctrl})}</annotation></semantics></math></p>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="lnrr">Log Response Ratio (lnRR)<a class="anchor" aria-label="anchor" href="#lnrr"></a>
+</h2>
+<p>The Log Response Ratio measures proportional changes between
+treatments, providing intuitive interpretation.</p>
+<div class="section level3">
+<h3 id="lnrr_ind">Individual Effect: <code>lnRR_ind()</code><a class="anchor" aria-label="anchor" href="#lnrr_ind"></a>
+</h3>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>R</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\ln RR_{ind} = \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>R</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mi>A</mi><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>A</mi></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi><mn>2</mn></msubsup></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow></mfrac></mrow><annotation encoding="application/x-tex">var(\ln RR_{ind}) = \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}</annotation></semantics></math></p>
+</div>
+<div class="section level3">
+<h3 id="lnrr_main">Main Effect: <code>lnRR_main()</code><a class="anchor" aria-label="anchor" href="#lnrr_main"></a>
+</h3>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>R</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow></msub></mrow><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\ln RR_{main} = \ln\left(\frac{\bar{X}_A + \bar{X}_{AB}}{\bar{X}_{Ctrl} + \bar{X}_B}\right)</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>R</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mi>A</mi><mn>2</mn></msubsup></mrow><msub><mi>n</mi><mi>A</mi></msub></mfrac><mo>+</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>A</mi><mi>B</mi></mrow><mn>2</mn></msubsup></mrow><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mfrac><mo>+</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mi>B</mi><mn>2</mn></msubsup></mrow><msub><mi>n</mi><mi>B</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">var(\ln RR_{main}) = \left(\frac{1}{\bar{X}_A + \bar{X}_{AB}}\right)^2 \left(\frac{sd_A^2}{n_A} + \frac{sd_{AB}^2}{n_{AB}}\right) + \left(\frac{1}{\bar{X}_{Ctrl} + \bar{X}_B}\right)^2 \left(\frac{sd_{Ctrl}^2}{n_{Ctrl}} + \frac{sd_B^2}{n_B}\right)</annotation></semantics></math></p>
+</div>
+<div class="section level3">
+<h3 id="lnrr_inter">Interaction Effect: <code>lnRR_inter()</code><a class="anchor" aria-label="anchor" href="#lnrr_inter"></a>
+</h3>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>R</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow></msub><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\ln RR_{inter} = \ln\left(\frac{\bar{X}_{AB}}{\bar{X}_B}\right) - \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>R</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>A</mi><mi>B</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow><mn>2</mn></msubsup></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mi>A</mi><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>A</mi></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi><mn>2</mn></msubsup></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mi>B</mi><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>B</mi></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi><mn>2</mn></msubsup></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow></mfrac></mrow><annotation encoding="application/x-tex">var(\ln RR_{inter}) = \frac{sd_{AB}^2}{n_{AB}\bar{X}_{AB}^2} + \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_B^2}{n_B\bar{X}_B^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}</annotation></semantics></math></p>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="lnvr">Log Variation Ratio (lnVR)<a class="anchor" aria-label="anchor" href="#lnvr"></a>
+</h2>
+<p>The Log Variation Ratio compares variability between treatments,
+providing insights into how treatments affect response consistency.</p>
+<div class="section level3">
+<h3 id="lnvr_ind">Individual Effect: <code>lnVR_ind()</code><a class="anchor" aria-label="anchor" href="#lnvr_ind"></a>
+</h3>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>s</mi><msub><mi>d</mi><mi>A</mi></msub></mrow><mrow><mi>s</mi><msub><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\ln VR_{ind} = \ln\left(\frac{sd_{A}}{sd_{Ctrl}}\right) + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{Ctrl} - 1)}</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">var(\ln VR_{ind}) = \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}</annotation></semantics></math></p>
+</div>
+<div class="section level3">
+<h3 id="lnvr_main">Main Effect: <code>lnVR_main()</code><a class="anchor" aria-label="anchor" href="#lnvr_main"></a>
+</h3>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>V</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>s</mi><msub><mi>d</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>⋅</mo><mi>s</mi><msub><mi>d</mi><mi>A</mi></msub></mrow><mrow><mi>s</mi><msub><mi>d</mi><mi>B</mi></msub><mo>⋅</mo><mi>s</mi><msub><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\ln VR_{main} = \frac{1}{2} \ln\left( \frac{sd_{AB} \cdot sd_{A}}{sd_{B} \cdot sd_{Ctrl}} \right) + \frac{1}{2} \left( \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{B} - 1)} - \frac{1}{2(n_{Ctrl} - 1)} \right)</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>V</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">var(\ln VR_{main}) = \frac{1}{4} \left( \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)} \right)</annotation></semantics></math></p>
+</div>
+<div class="section level3">
+<h3 id="lnvr_inter">Interaction Effect: <code>lnVR_inter()</code><a class="anchor" aria-label="anchor" href="#lnvr_inter"></a>
+</h3>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>s</mi><msub><mi>d</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mi>/</mi><mi>s</mi><msub><mi>d</mi><mi>B</mi></msub></mrow><mrow><mi>s</mi><msub><mi>d</mi><mi>A</mi></msub><mi>/</mi><mi>s</mi><msub><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\ln VR_{inter} = \ln\left( \frac{sd_{AB} / sd_{B}}{sd_{A} / sd_{Ctrl}} \right) + \frac{1}{2(n_{AB} - 1)} - \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">var(\ln VR_{inter}) = \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}</annotation></semantics></math></p>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="lncvr">Log Coefficient of Variation Ratio (lnCVR)<a class="anchor" aria-label="anchor" href="#lncvr"></a>
+</h2>
+<p>The Log Coefficient of Variation Ratio combines information about
+both mean responses and variability by comparing coefficients of
+variation
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>V</mi><mo>=</mo><mi>s</mi><mi>d</mi><mi>/</mi><mover><mi>x</mi><mo accent="true">‾</mo></mover></mrow><annotation encoding="application/x-tex">CV = sd / \bar{x}</annotation></semantics></math>).</p>
+<div class="section level3">
+<h3 id="lncvr_ind">Individual Effect: <code>lnCVR_ind()</code><a class="anchor" aria-label="anchor" href="#lncvr_ind"></a>
+</h3>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>C</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>C</mi><msub><mi>V</mi><mi>A</mi></msub></mrow><mrow><mi>C</mi><msub><mi>V</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\ln CVR_{ind} = \ln\left( \frac{CV_{A}}{CV_{Ctrl}} \right) + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{Ctrl} - 1)}</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>C</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mi>A</mi><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>A</mi></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi><mn>2</mn></msubsup></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">var(\ln CVR_{ind}) = \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2} + \frac{1}{2(n_{Ctrl} - 1)} + \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{1}{2(n_A - 1)}</annotation></semantics></math></p>
+<p>This assumes no correlation between mean and variance (Nakagawa et
+al. 2015) and is computed as the sum of lnRR and lnVR variances.</p>
+</div>
+<div class="section level3">
+<h3 id="lncvr_main">Main Effect: <code>lnCVR_main()</code><a class="anchor" aria-label="anchor" href="#lncvr_main"></a>
+</h3>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>C</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>C</mi><msub><mi>V</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>⋅</mo><mi>C</mi><msub><mi>V</mi><mi>A</mi></msub></mrow><mrow><mi>C</mi><msub><mi>V</mi><mi>B</mi></msub><mo>⋅</mo><mi>C</mi><msub><mi>V</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\ln CVR_{main} = \frac{1}{2} \ln\left( \frac{CV_{AB} \cdot CV_{A}}{CV_{B} \cdot CV_{Ctrl}} \right) + \frac{1}{2} \left( \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{B} - 1)} - \frac{1}{2(n_{Ctrl} - 1)} \right)</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>C</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>R</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>V</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">var(\ln CVR_{main}) = var(\ln RR_{main}) + var(\ln VR_{main})</annotation></semantics></math></p>
+<p>This follows the assumption of no correlation between mean and
+variance.</p>
+</div>
+<div class="section level3">
+<h3 id="lncvr_inter">Interaction Effect: <code>lnCVR_inter()</code><a class="anchor" aria-label="anchor" href="#lncvr_inter"></a>
+</h3>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>C</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>C</mi><msub><mi>V</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mi>/</mi><mi>C</mi><msub><mi>V</mi><mi>B</mi></msub></mrow><mrow><mi>C</mi><msub><mi>V</mi><mi>A</mi></msub><mi>/</mi><mi>C</mi><msub><mi>V</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\ln CVR_{inter} = \ln\left( \frac{CV_{AB} / CV_{B}}{CV_{A} / CV_{Ctrl}} \right) + \frac{1}{2} \left( \frac{1}{2(n_{AB} - 1)} - \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} - \frac{1}{2(n_{Ctrl} - 1)} \right)</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>C</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>R</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">var(\ln CVR_{inter}) = var(\ln RR_{inter}) + var(\ln VR_{inter})</annotation></semantics></math></p>
+<p>This follows the assumption of no correlation between mean and
+variance.</p>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="repeated-measures-effect-sizes-1">Repeated Measures Effect Sizes<a class="anchor" aria-label="anchor" href="#repeated-measures-effect-sizes-1"></a>
+</h2>
+<p>These functions compute effect sizes for treatment × time
+interactions in longitudinal studies, comparing how experimental and
+control groups change over time.</p>
+<div class="section level3">
+<h3 id="time_smd">Treatment × Time SMD: <code>time_SMD()</code><a class="anchor" aria-label="anchor" href="#time_smd"></a>
+</h3>
+<p>Computes the standardized mean difference for the interaction between
+experimental treatment and time.</p>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mo>−</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mo>−</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub></mfrac><mo>⋅</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">d = \frac{((\bar{X}_{t1,Exp} - \bar{X}_{t1,Ctrl}) - (\bar{X}_{t0,Exp} - \bar{X}_{t0,Ctrl}))}{S_{pooled}} \cdot J</annotation></semantics></math></p>
+<p><strong>Time-specific pooled standard deviation:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub><mo>=</mo><msqrt><mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>s</mi><msubsup><mi>d</mi><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow><mn>2</mn></msubsup><mo>+</mo><mi>s</mi><msubsup><mi>d</mi><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>s</mi><msubsup><mi>d</mi><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup><mo>+</mo><mi>s</mi><msubsup><mi>d</mi><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></msqrt></mrow><annotation encoding="application/x-tex">S_{pooled} = \sqrt{\frac{((n_{Exp} - 1)(sd_{t0,Exp}^2 + sd_{t1,Exp}^2) + (n_{Ctrl} - 1)(sd_{t0,Ctrl}^2 + sd_{t1,Ctrl}^2))}{2(n_{Exp} + n_{Ctrl} - 2)}}</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>d</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>r</mi><mrow><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><msub><mi>n</mi><mrow><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub></mfrac><mo>+</mo><mfrac><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>r</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mfrac><mo>+</mo><mfrac><msup><mi>d</mi><mn>2</mn></msup><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">var(d) = \frac{2(1 - r_{Exp})}{n_{Exp}} + \frac{2(1 - r_{Ctrl})}{n_{Ctrl}} + \frac{d^2}{2(n_{Exp} + n_{Ctrl})}</annotation></semantics></math></p>
 <p>where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mrow><mi>p</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>d</mi></mrow></msub><annotation encoding="application/x-tex">S_{pooled}</annotation></semantics></math>
-is the pooled standard deviation for all four groups, calculated using
-the same formula than <a href="#smd_main">SMD_main()</a>.</p>
-<p>And the sampling variance is:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>d</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><msub><mi>n</mi><mi>A</mi></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mi>B</mi></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mfrac><mo>+</mo><mfrac><msubsup><mi>d</mi><mrow><mi>I</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow><mn>2</mn></msubsup><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>+</mo><msub><mi>n</mi><mi>B</mi></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>+</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-var(d_{inter}) = \frac{1}{n_A} + \frac{1}{n_B} + \frac{1}{n_{AB}} + \frac{1}{n_{Ctrl}} +
-\frac{d_{Inter}^2}{2(n_A + n_B + n_{AB} + n_{Ctrl})}
-</annotation></semantics></math></p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mrow><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><annotation encoding="application/x-tex">r_{Exp}</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><annotation encoding="application/x-tex">r_{Ctrl}</annotation></semantics></math>
+are the correlations between time points within each group.</p>
 </div>
-<div class="section level4">
-<h4 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h4>
+<div class="section level3">
+<h3 id="time_lnrr">Treatment × Time lnRR: <code>time_lnRR()</code><a class="anchor" aria-label="anchor" href="#time_lnrr"></a>
+</h3>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>R</mi><mi>R</mi><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mi>/</mi><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mi>/</mi><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\ln RR = \ln\left(\frac{\bar{X}_{t1,Exp} / \bar{X}_{t1,Ctrl}}{\bar{X}_{t0,Exp} / \bar{X}_{t0,Ctrl}}\right)</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>R</mi><mi>R</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mi>s</mi><msubsup><mi>d</mi><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow><mn>2</mn></msubsup><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow><mn>2</mn></msubsup><mo>+</mo><mi>s</mi><msubsup><mi>d</mi><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow><mn>2</mn></msubsup><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow><mn>2</mn></msubsup><mo>−</mo><mn>2</mn><msub><mi>r</mi><mrow><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mi>s</mi><msub><mi>d</mi><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mi>s</mi><msub><mi>d</mi><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mrow><msub><mi>n</mi><mrow><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow><mn>2</mn></msubsup><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow><mn>2</mn></msubsup></mrow></mfrac><mo>+</mo></mrow><annotation encoding="application/x-tex">var(\ln RR) = \frac{(sd_{t0,Exp}^2 \bar{X}_{t1,Exp}^2 + sd_{t1,Exp}^2 \bar{X}_{t0,Exp}^2 - 2r_{Exp} \bar{X}_{t0,Exp} \bar{X}_{t1,Exp} sd_{t0,Exp} sd_{t1,Exp})}{n_{Exp} \bar{X}_{t0,Exp}^2 \bar{X}_{t1,Exp}^2} +</annotation></semantics></math><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mi>s</mi><msubsup><mi>d</mi><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup><mo>+</mo><mi>s</mi><msubsup><mi>d</mi><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup><mo>−</mo><mn>2</mn><msub><mi>r</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mi>s</mi><msub><mi>d</mi><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mi>s</mi><msub><mi>d</mi><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mrow><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow></mfrac><annotation encoding="application/x-tex">\frac{(sd_{t0,Ctrl}^2 \bar{X}_{t1,Ctrl}^2 + sd_{t1,Ctrl}^2 \bar{X}_{t0,Ctrl}^2 - 2r_{Ctrl} \bar{X}_{t0,Ctrl} \bar{X}_{t1,Ctrl} sd_{t0,Ctrl} sd_{t1,Ctrl})}{n_{Ctrl} \bar{X}_{t0,Ctrl}^2 \bar{X}_{t1,Ctrl}^2}</annotation></semantics></math></p>
+</div>
+<div class="section level3">
+<h3 id="time_lnvr">Treatment × Time lnVR: <code>time_lnVR()</code><a class="anchor" aria-label="anchor" href="#time_lnvr"></a>
+</h3>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>V</mi><mi>R</mi><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>s</mi><msub><mi>d</mi><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mi>/</mi><mi>s</mi><msub><mi>d</mi><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow><mrow><mi>s</mi><msub><mi>d</mi><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mi>/</mi><mi>s</mi><msub><mi>d</mi><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\ln VR = \ln\left(\frac{sd_{t1,Exp} / sd_{t1,Ctrl}}{sd_{t0,Exp} / sd_{t0,Ctrl}}\right)</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>V</mi><mi>R</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msubsup><mi>r</mi><mrow><mi>E</mi><mi>x</mi><mi>p</mi></mrow><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mrow><msub><mi>n</mi><mrow><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mo>−</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msubsup><mi>r</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mrow><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">var(\ln VR) = \frac{(1 - r_{Exp}^2)}{n_{Exp} - 1} + \frac{(1 - r_{Ctrl}^2)}{n_{Ctrl} - 1}</annotation></semantics></math></p>
+</div>
+<div class="section level3">
+<h3 id="time_lncvr">Treatment × Time lnCVR: <code>time_lnCVR()</code><a class="anchor" aria-label="anchor" href="#time_lncvr"></a>
+</h3>
+<p><strong>Formula:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>C</mi><mi>V</mi><mi>R</mi><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>C</mi><msub><mi>V</mi><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mi>/</mi><mi>C</mi><msub><mi>V</mi><mrow><mi>t</mi><mn>1</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow><mrow><mi>C</mi><msub><mi>V</mi><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>E</mi><mi>x</mi><mi>p</mi></mrow></msub><mi>/</mi><mi>C</mi><msub><mi>V</mi><mrow><mi>t</mi><mn>0</mn><mo>,</mo><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\ln CVR = \ln\left(\frac{CV_{t1,Exp} / CV_{t1,Ctrl}}{CV_{t0,Exp} / CV_{t0,Ctrl}}\right)</annotation></semantics></math></p>
+<p><strong>Sampling variance:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>C</mi><mi>V</mi><mi>R</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>R</mi><mi>R</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>V</mi><mi>R</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">var(\ln CVR) = var(\ln RR) + var(\ln VR)</annotation></semantics></math></p>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="function-parameters">Function Parameters<a class="anchor" aria-label="anchor" href="#function-parameters"></a>
+</h2>
+<p>All functions share common parameters:</p>
 <ul>
-<li>Gurevitch, J., Morrison, J. A., &amp; Hedges, L. V. (2000). The
-interaction between competition and predation: a meta-analysis of field
-experiments. <em>The American Naturalist</em>, 155(4), 435-453.</li>
-<li>Morris, W. F., et al. (2007). Direct and interactive effects of
-enemies and mutualists on plant performance: a meta‐analysis.
-<em>Ecology</em>, 88(4), 1021-1029.</li>
+<li>
+<strong><code>data</code></strong>: Data frame containing the
+variables</li>
+<li>
+<strong><code>col_names</code></strong>: Vector of two strings
+naming the output columns (default: <code>c("yi", "vi")</code>)</li>
+<li>
+<strong><code>append</code></strong>: Logical, whether to append
+results to input data (default: <code>TRUE</code>)</li>
+</ul>
+<div class="section level3">
+<h3 id="factorial-design-parameters">Factorial Design Parameters<a class="anchor" aria-label="anchor" href="#factorial-design-parameters"></a>
+</h3>
+<ul>
+<li>
+<strong>Group statistics</strong>: <code>[Group]_mean</code>,
+<code>[Group]_sd</code>, <code>[Group]_n</code> for each group (Ctrl, A,
+B, AB)</li>
+<li>
+<strong><code>hedges_correction</code></strong>: Logical, apply
+small-sample bias correction (SMD only, default: <code>TRUE</code>)</li>
 </ul>
 </div>
-</div>
 <div class="section level3">
-<h3 id="lnrr">lnRR - Log Response Ratio<a class="anchor" aria-label="anchor" href="#lnrr"></a>
+<h3 id="repeated-measures-parameters">Repeated Measures Parameters<a class="anchor" aria-label="anchor" href="#repeated-measures-parameters"></a>
 </h3>
-<div class="section level4">
-<h4 id="lnrr_ind">
-<code>lnRR_ind()</code><a class="anchor" aria-label="anchor" href="#lnrr_ind"></a>
-</h4>
-<p>For individual effects:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>R</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-\ln RR_{ind} = \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)
-</annotation></semantics></math></p>
-<p>with variance</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>=</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mi>A</mi><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>A</mi></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi><mn>2</mn></msubsup></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-v_{ind} = \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
-</annotation></semantics></math></p>
-</div>
-<div class="section level4">
-<h4 id="lnrr_main">
-<code>lnRR_main()</code><a class="anchor" aria-label="anchor" href="#lnrr_main"></a>
-</h4>
-<p>For main effects:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>R</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow></msub></mrow><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-\ln RR_{main} = \ln\left(\frac{\bar{X}_A + \bar{X}_{AB}}{\bar{X}_{Ctrl} + \bar{X}_B}\right)
-</annotation></semantics></math></p>
-<p>with variance</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mi>A</mi><mn>2</mn></msubsup></mrow><msub><mi>n</mi><mi>A</mi></msub></mfrac><mo>+</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>A</mi><mi>B</mi></mrow><mn>2</mn></msubsup></mrow><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>+</mo><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mfrac><mo>+</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mi>B</mi><mn>2</mn></msubsup></mrow><msub><mi>n</mi><mi>B</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-v_{main} = \left(\frac{1}{\bar{X}_A + \bar{X}_{AB}}\right)^2 \left(\frac{sd_A^2}{n_A} + \frac{sd_{AB}^2}{n_{AB}}\right) + \left(\frac{1}{\bar{X}_{Ctrl} + \bar{X}_B}\right)^2 \left(\frac{sd_{Ctrl}^2}{n_{Ctrl}} + \frac{sd_B^2}{n_B}\right)
-</annotation></semantics></math></p>
-</div>
-<div class="section level4">
-<h4 id="lnrr_inter">
-<code>lnRR_inter()</code><a class="anchor" aria-label="anchor" href="#lnrr_inter"></a>
-</h4>
-<p>For interaction effects:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>R</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow></msub><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi></msub><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-\ln RR_{inter} = \ln\left(\frac{\bar{X}_{AB}}{\bar{X}_B}\right) - \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)
-</annotation></semantics></math></p>
-<p>with variance</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>=</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>A</mi><mi>B</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>A</mi><mi>B</mi></mrow><mn>2</mn></msubsup></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mi>A</mi><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>A</mi></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>A</mi><mn>2</mn></msubsup></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mi>B</mi><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mi>B</mi></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>B</mi><mn>2</mn></msubsup></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>s</mi><msubsup><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow><mrow><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><msubsup><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow><mn>2</mn></msubsup></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-v_{inter} = \frac{sd_{AB}^2}{n_{AB}\bar{X}_{AB}^2} + \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_B^2}{n_B\bar{X}_B^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
-</annotation></semantics></math></p>
+<ul>
+<li>
+<strong>Time-specific statistics</strong>:
+<code>t0_[Group]_mean</code>, <code>t0_[Group]_sd</code>,
+<code>t1_[Group]_mean</code>, <code>t1_[Group]_sd</code>
+</li>
+<li>
+<strong>Sample sizes</strong>: <code>[Group]_n</code> for each
+group</li>
+<li>
+<strong>Correlations</strong>: <code>[Group]_cor</code> -
+correlation between time points within each group</li>
+</ul>
+<hr>
 </div>
 </div>
-<div class="section level3">
-<h3 id="lnvr---log-of-variability-ratio">lnVR - Log of Variability Ratio<a class="anchor" aria-label="anchor" href="#lnvr---log-of-variability-ratio"></a>
-</h3>
-<div class="section level4">
-<h4 id="lnvr_ind">
-<code>lnVR_ind()</code><a class="anchor" aria-label="anchor" href="#lnvr_ind"></a>
-</h4>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>n</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>s</mi><msub><mi>d</mi><mi>A</mi></msub></mrow><mrow><mi>s</mi><msub><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-lnVR_{ind} = \ln\left(\frac{sd_{A}}{sd_{Ctrl}}\right) +
-\frac{1}{2(n_{A} - 1)} -
-\frac{1}{2(n_{Ctrl} - 1)}
-</annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mi>n</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-var(lnVR_{ind}) = \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{Ctrl}- 1)}
-</annotation></semantics></math></p>
-</div>
-<div class="section level4">
-<h4 id="lnvr_main">
-<code>lnVR_main()</code><a class="anchor" aria-label="anchor" href="#lnvr_main"></a>
-</h4>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>n</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>s</mi><msub><mi>d</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>⋅</mo><mi>s</mi><msub><mi>d</mi><mi>A</mi></msub></mrow><mrow><mi>s</mi><msub><mi>d</mi><mi>B</mi></msub><mo>⋅</mo><mi>s</mi><msub><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-lnVR_{main} = \frac{1}{2} \ln\left( \frac{sd_{AB} \cdot sd_{A}}{sd_{B} \cdot sd_{Ctrl}} \right) +
-\frac{1}{2} \left(
-  \frac{1}{2(n_{AB} - 1)} +
-  \frac{1}{2(n_{A} - 1)} -
-  \frac{1}{2(n_{B} - 1)} -
-  \frac{1}{2(n_{Ctrl} - 1)}
-\right)
-</annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mi>n</mi><mi>V</mi><mi>R</mi><msub><mi>v</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-var(lnVRv_{main}) = \frac{1}{4} \left(
-  \frac{1}{2(n_{AB} - 1)} +
-  \frac{1}{2(n_{A} - 1)} +
-  \frac{1}{2(n_{B} - 1)} +
-  \frac{1}{2(n_{Ctrl} - 1)}
-\right)
-</annotation></semantics></math></p>
-</div>
-<div class="section level4">
-<h4 id="lnvr_inter">
-<code>lnVR_inter()</code><a class="anchor" aria-label="anchor" href="#lnvr_inter"></a>
-</h4>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>n</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>s</mi><msub><mi>d</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mi>/</mi><mi>s</mi><msub><mi>d</mi><mi>B</mi></msub></mrow><mrow><mi>s</mi><msub><mi>d</mi><mi>A</mi></msub><mi>/</mi><mi>s</mi><msub><mi>d</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-lnVR_{inter} = \ln\left( \frac{sd_{AB} / sd_{B}}{sd_{A} / sd_{Ctrl}} \right) +
-\frac{1}{2(n_{AB} - 1)} -
-\frac{1}{2(n_{A} - 1)} -
-\frac{1}{2(n_{B} - 1)} +
-\frac{1}{2(n_{Ctrl} - 1)}
-</annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mi>n</mi><mi>V</mi><mi>R</mi><msub><mi>v</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-var(lnVRv_{inter}) =
-\frac{1}{2(n_{AB} - 1)} +
-\frac{1}{2(n_{A} - 1)} +
-\frac{1}{2(n_{B} - 1)} +
-\frac{1}{2(n_{Ctrl} - 1)}
-</annotation></semantics></math></p>
-</div>
-</div>
-<div class="section level3">
-<h3 id="lncvr---log-of-coefficient-of-variation-ratio">lnCVR - Log of Coefficient of Variation Ratio<a class="anchor" aria-label="anchor" href="#lncvr---log-of-coefficient-of-variation-ratio"></a>
-</h3>
-<p>In all this formulas, the CV is:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>V</mi><mo>=</mo><mi>s</mi><mi>d</mi><mi>/</mi><mover><mi>x</mi><mo accent="true">‾</mo></mover></mrow><annotation encoding="application/x-tex">CV = sd / \bar{x}</annotation></semantics></math></p>
-<div class="section level4">
-<h4 id="lncvr_ind">
-<code>lnCVR_ind()</code><a class="anchor" aria-label="anchor" href="#lncvr_ind"></a>
-</h4>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>n</mi><mi>C</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>C</mi><msub><mi>V</mi><mi>A</mi></msub></mrow><mrow><mi>C</mi><msub><mi>V</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-lnCVR_{ind} = \ln\left( \frac{CV_{A}}{CV_{Ctrl}} \right) +
-\frac{1}{2(n_{A} - 1)} -
-\frac{1}{2(n_{Ctrl} - 1)}
-</annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>l</mi><mi>n</mi><mi>C</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>=</mo><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>C</mi><msub><mi>V</mi><mi>A</mi></msub></mrow><mrow><mi>C</mi><msub><mi>V</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-var(lnCVR_{ind} = \log\left( \frac{CV_{A}}{CV_{Ctrl}} \right) +
-\frac{1}{2(n_{A} - 1)} -
-\frac{1}{2(n_{Ctrl} - 1)}
-</annotation></semantics></math></p>
-</div>
-<div class="section level4">
-<h4 id="lncvr_main">
-<code>lnCVR_main()</code><a class="anchor" aria-label="anchor" href="#lncvr_main"></a>
-</h4>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>n</mi><mi>C</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>C</mi><msub><mi>V</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>⋅</mo><mi>C</mi><msub><mi>V</mi><mi>A</mi></msub></mrow><mrow><mi>C</mi><msub><mi>V</mi><mi>B</mi></msub><mo>⋅</mo><mi>C</mi><msub><mi>V</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-lnCVR_{main} = \frac{1}{2} \ln\left( \frac{CV_{AB} \cdot CV_{A}}{CV_{B} \cdot CV_{Ctrl}} \right) +
-\frac{1}{2} \left(
-  \frac{1}{2(n_{AB} - 1)} +
-  \frac{1}{2(n_{A} - 1)} -
-  \frac{1}{2(n_{B} - 1)} -
-  \frac{1}{2(n_{Ctrl} - 1)}
-\right)
-</annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mi>n</mi><mi>C</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mi>n</mi><mi>R</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mi>n</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-var(lnCVR_{main}) = var(lnRR_{main}) + var(lnVR_{main})
-</annotation></semantics></math></p>
-</div>
-<div class="section level4">
-<h4 id="lncvr_inter">
-<code>lnCVR_inter()</code><a class="anchor" aria-label="anchor" href="#lncvr_inter"></a>
-</h4>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>n</mi><mi>C</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>=</mo><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>C</mi><msub><mi>V</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mi>/</mi><mi>C</mi><msub><mi>V</mi><mi>B</mi></msub></mrow><mrow><mi>C</mi><msub><mi>V</mi><mi>A</mi></msub><mi>/</mi><mi>C</mi><msub><mi>V</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>A</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>B</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>C</mi><mi>t</mi><mi>r</mi><mi>l</mi></mrow></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-lnCVR_{inter} = \log\left( \frac{CV_{AB} / CV_{B}}{CV_{A} / CV_{Ctrl}} \right) +
-\frac{1}{2} \left(
-  \frac{1}{2(n_{AB} - 1)} -
-  \frac{1}{2(n_{A} - 1)} +
-  \frac{1}{2(n_{B} - 1)} -
-  \frac{1}{2(n_{Ctrl} - 1)}
-\right)
-</annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mi>n</mi><mi>C</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mi>n</mi><mi>R</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>v</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mi>n</mi><mi>V</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-var(lnCVR_{inter}) = var(lnRR_{inter}) + var(lnVR_{inter})
-</annotation></semantics></math></p>
-</div>
-</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<ul>
+<li><p>Gurevitch, J., Morrison, J. A., &amp; Hedges, L. V. (2000). The
+interaction between competition and predation: a meta-analysis of field
+experiments. <em>The American Naturalist</em>, 155(4), 435-453.</p></li>
+<li><p>Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D.,
+Borowicz, V. A., Gilbert, G. S., … &amp; Vázquez, D. P. (2007). Direct
+and interactive effects of enemies and mutualists on plant performance:
+a meta‐analysis. <em>Ecology</em>, 88(4), 1021-1029.</p></li>
+<li><p>Nakagawa, S., Poulin, R., Mengersen, K., Reinhold, K., Engqvist,
+L., Lagisz, M., &amp; Senior, A. M. (2015). Meta‐analysis of variation:
+ecological and evolutionary applications and beyond. <em>Methods in
+Ecology and Evolution</em>, 6(2), 143-152.</p></li>
+<li><p>Lajeunesse, M. J. (2011). On the meta‐analysis of response ratios
+for studies with correlated and multi‐group designs. <em>Ecology</em>,
+92(11), 2049-2055.</p></li>
+</ul>
+<p><em>Personal communications: Shinichi Nakagawa and Daniel Noble for
+recent developments in factorial effect size calculations.</em></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
