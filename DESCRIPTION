@@ -1,6 +1,6 @@
 Package: minter
 Title: Effect sizes for Meta-analysis of interactions
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: c(
     person("Facundo", "Decunta", email = "fdecunta@agro.uba.ar", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0004-5774-1085")),
