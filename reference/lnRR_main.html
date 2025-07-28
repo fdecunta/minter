@@ -149,6 +149,31 @@ Neuroscience &amp; Biobehavioral Reviews, 135, 104554.
 https://doi.org/10.1016/j.neubiorev.2022.104554</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># Example data for 2x2 factorial design (Fertilization x Warming)</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  study_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,</span></span>
+<span class="r-in"><span>  control_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">12</span><span class="op">)</span>, control_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.0</span>, <span class="fl">2.5</span><span class="op">)</span>, control_n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">18</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  fertilization_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">16</span><span class="op">)</span>, fertilization_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.2</span>, <span class="fl">2.8</span><span class="op">)</span>, fertilization_n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">19</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  warming_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">11</span>, <span class="fl">13</span><span class="op">)</span>, warming_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.1</span>, <span class="fl">2.6</span><span class="op">)</span>, warming_n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">21</span>, <span class="fl">17</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  fert_warm_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">17</span>, <span class="fl">19</span><span class="op">)</span>, fert_warm_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.4</span>, <span class="fl">3.0</span><span class="op">)</span>, fert_warm_n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19</span>, <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Compute main effect of fertilization</span></span></span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">lnRR_main</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">data</span>,</span></span>
+<span class="r-in"><span>  Ctrl_mean <span class="op">=</span> <span class="st">"control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"control_n"</span>,</span></span>
+<span class="r-in"><span>  A_mean <span class="op">=</span> <span class="st">"fertilization_mean"</span>, A_sd <span class="op">=</span> <span class="st">"fertilization_sd"</span>, A_n <span class="op">=</span> <span class="st">"fertilization_n"</span>,</span></span>
+<span class="r-in"><span>  B_mean <span class="op">=</span> <span class="st">"warming_mean"</span>, B_sd <span class="op">=</span> <span class="st">"warming_sd"</span>, B_n <span class="op">=</span> <span class="st">"warming_n"</span>,</span></span>
+<span class="r-in"><span>  AB_mean <span class="op">=</span> <span class="st">"fert_warm_mean"</span>, AB_sd <span class="op">=</span> <span class="st">"fert_warm_sd"</span>, AB_n <span class="op">=</span> <span class="st">"fert_warm_n"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

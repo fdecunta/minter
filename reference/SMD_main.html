@@ -149,6 +149,30 @@ effects of enemies and mutualists on plant performance: a meta‐analysis.
 Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># Main effect of Mycorrhiza in 2x2 factorial design (AMF x Phosphorus)</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  study_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,</span></span>
+<span class="r-in"><span>  control_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12.4</span>, <span class="fl">15.1</span><span class="op">)</span>, control_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.8</span>, <span class="fl">3.2</span><span class="op">)</span>, control_n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">14</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  mycorrhizae_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18.7</span>, <span class="fl">21.3</span><span class="op">)</span>, mycorrhizae_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.4</span>, <span class="fl">3.9</span><span class="op">)</span>, mycorrhizae_n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">16</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  phosphorus_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14.9</span>, <span class="fl">17.8</span><span class="op">)</span>, phosphorus_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.1</span>, <span class="fl">3.6</span><span class="op">)</span>, phosphorus_n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">17</span>, <span class="fl">13</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  myco_phos_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">22.1</span>, <span class="fl">25.4</span><span class="op">)</span>, myco_phos_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.2</span>, <span class="fl">4.8</span><span class="op">)</span>, myco_phos_n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">15</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">SMD_main</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">data</span>,</span></span>
+<span class="r-in"><span>  Ctrl_mean <span class="op">=</span> <span class="st">"control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"control_n"</span>,</span></span>
+<span class="r-in"><span>  A_mean <span class="op">=</span> <span class="st">"mycorrhizae_mean"</span>, A_sd <span class="op">=</span> <span class="st">"mycorrhizae_sd"</span>, A_n <span class="op">=</span> <span class="st">"mycorrhizae_n"</span>,</span></span>
+<span class="r-in"><span>  B_mean <span class="op">=</span> <span class="st">"phosphorus_mean"</span>, B_sd <span class="op">=</span> <span class="st">"phosphorus_sd"</span>, B_n <span class="op">=</span> <span class="st">"phosphorus_n"</span>,</span></span>
+<span class="r-in"><span>  AB_mean <span class="op">=</span> <span class="st">"myco_phos_mean"</span>, AB_sd <span class="op">=</span> <span class="st">"myco_phos_sd"</span>, AB_n <span class="op">=</span> <span class="st">"myco_phos_n"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

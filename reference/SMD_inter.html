@@ -149,6 +149,30 @@ effects of enemies and mutualists on plant performance: a meta‐analysis.
 Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># Interaction effect in 2x2 factorial design (Salinity x Temperature)</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  study_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,</span></span>
+<span class="r-in"><span>  control_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">24.8</span>, <span class="fl">27.2</span><span class="op">)</span>, control_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.1</span>, <span class="fl">4.6</span><span class="op">)</span>, control_n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">16</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  salinity_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19.3</span>, <span class="fl">21.7</span><span class="op">)</span>, salinity_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.8</span>, <span class="fl">4.2</span><span class="op">)</span>, salinity_n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">17</span>, <span class="fl">18</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  temperature_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28.9</span>, <span class="fl">31.4</span><span class="op">)</span>, temperature_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.7</span>, <span class="fl">5.1</span><span class="op">)</span>, temperature_n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19</span>, <span class="fl">15</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  salt_temp_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15.2</span>, <span class="fl">17.8</span><span class="op">)</span>, salt_temp_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.1</span>, <span class="fl">3.5</span><span class="op">)</span>, salt_temp_n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">17</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">SMD_inter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">data</span>,</span></span>
+<span class="r-in"><span>  Ctrl_mean <span class="op">=</span> <span class="st">"control_mean"</span>, Ctrl_sd <span class="op">=</span> <span class="st">"control_sd"</span>, Ctrl_n <span class="op">=</span> <span class="st">"control_n"</span>,</span></span>
+<span class="r-in"><span>  A_mean <span class="op">=</span> <span class="st">"salinity_mean"</span>, A_sd <span class="op">=</span> <span class="st">"salinity_sd"</span>, A_n <span class="op">=</span> <span class="st">"salinity_n"</span>,</span></span>
+<span class="r-in"><span>  B_mean <span class="op">=</span> <span class="st">"temperature_mean"</span>, B_sd <span class="op">=</span> <span class="st">"temperature_sd"</span>, B_n <span class="op">=</span> <span class="st">"temperature_n"</span>,</span></span>
+<span class="r-in"><span>  AB_mean <span class="op">=</span> <span class="st">"salt_temp_mean"</span>, AB_sd <span class="op">=</span> <span class="st">"salt_temp_sd"</span>, AB_n <span class="op">=</span> <span class="st">"salt_temp_n"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
