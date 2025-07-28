@@ -13,9 +13,6 @@ coverage](https://codecov.io/gh/fdecunta/minter/graph/badge.svg)](https://app.co
 A collection of functions for computing effect sizes of interactions for
 meta-analysis.
 
-⚠️ **This package is under active development and not yet stable. Use
-with caution.**
-
 ## Installation
 
 You can install the development version of minter from

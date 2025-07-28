@@ -22,9 +22,6 @@ knitr::opts_chunk$set(
 
 A collection of functions for computing effect sizes of interactions for meta-analysis.
 
-⚠️ **This package is under active development and not yet stable. Use with caution.**
-
-
 ## Installation
 
 You can install the development version of minter from [GitHub](https://github.com/fdecunta/minter):
