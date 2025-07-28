@@ -94,4 +94,4 @@ res <- rma(yi, vi, ..., data = interaction_results)
 
 ## Acknowledgments
 
-We thank Shinichi Nakagawa and Daniel Noble for generously sharing their unpublished formulas for meta-analysis of interactions, which form the theoretical foundation of this package.
+We thank **Shinichi Nakagawa** and **Daniel Noble** for generously sharing their unpublished formulas for meta-analysis of interactions, which form the theoretical foundation of this package.
