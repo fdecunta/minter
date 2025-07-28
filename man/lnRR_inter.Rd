@@ -60,6 +60,29 @@ data.
 \details{
 See the package vignette for a detailed description of the formula.
 }
+\examples{
+\dontrun{
+# Example data for 2x2 factorial design (Predation x Competition)
+data <- data.frame(
+  study_id = 1:2,
+  control_mean = c(25, 28), control_sd = c(3.2, 3.8), control_n = c(15, 17),
+  predation_mean = c(18, 20), predation_sd = c(2.9, 3.1), predation_n = c(16, 18),
+  competition_mean = c(22, 24), competition_sd = c(3.0, 3.5), competition_n = c(14, 16),
+  pred_comp_mean = c(12, 15), pred_comp_sd = c(2.1, 2.6), pred_comp_n = c(15, 17)
+)
+
+# Compute interaction effect between predation and competition
+result <- lnRR_inter(
+  data = data,
+  Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+  A_mean = "predation_mean", A_sd = "predation_sd", A_n = "predation_n",
+  B_mean = "competition_mean", B_sd = "competition_sd", B_n = "competition_n",
+  AB_mean = "pred_comp_mean", AB_sd = "pred_comp_sd", AB_n = "pred_comp_n"
+)
+print(result)
+}
+
+}
 \references{
 Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
 Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive

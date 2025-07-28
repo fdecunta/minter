@@ -36,6 +36,28 @@ a Factor A and the Control treatment in factorial experiments.
 \details{
 See the package vignette for a detailed description of the formula.
 }
+\examples{
+\dontrun{
+# Example focusing on variability differences (Herbivory effect)
+data <- data.frame(
+  study_id = 1:3,
+  control_sd = c(2.1, 1.8, 2.5),
+  control_n = c(20, 22, 18),
+  herbivory_sd = c(3.2, 2.9, 3.8),
+  herbivory_n = c(21, 20, 19)
+)
+
+result <- lnVR_ind(
+  data = data,
+  Ctrl_sd = "control_sd",
+  Ctrl_n = "control_n",
+  A_sd = "herbivory_sd", 
+  A_n = "herbivory_n"
+)
+print(result)
+}
+
+}
 \references{
 Nakagawa, S., Poulin, R., Mengersen, K., Reinhold, K., Engqvist,
 L., Lagisz, M., & Senior, A. M. (2015). Meta‐analysis of variation:

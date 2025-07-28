@@ -54,6 +54,28 @@ to the main effect in a factorial ANOVA.
 \details{
 See the package vignette for a detailed description of the formula.
 }
+\examples{
+\dontrun{
+# Main effect of Mycorrhiza in 2x2 factorial design (AMF x Phosphorus)
+data <- data.frame(
+  study_id = 1:2,
+  control_mean = c(12.4, 15.1), control_sd = c(2.8, 3.2), control_n = c(16, 14),
+  mycorrhizae_mean = c(18.7, 21.3), mycorrhizae_sd = c(3.4, 3.9), mycorrhizae_n = c(15, 16),
+  phosphorus_mean = c(14.9, 17.8), phosphorus_sd = c(3.1, 3.6), phosphorus_n = c(17, 13),
+  myco_phos_mean = c(22.1, 25.4), myco_phos_sd = c(4.2, 4.8), myco_phos_n = c(14, 15)
+)
+
+result <- SMD_main(
+  data = data,
+  Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+  A_mean = "mycorrhizae_mean", A_sd = "mycorrhizae_sd", A_n = "mycorrhizae_n",
+  B_mean = "phosphorus_mean", B_sd = "phosphorus_sd", B_n = "phosphorus_n",
+  AB_mean = "myco_phos_mean", AB_sd = "myco_phos_sd", AB_n = "myco_phos_n"
+)
+print(result)
+}
+
+}
 \references{
 Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
 between competition and predation: a meta-analysis of field experiments.

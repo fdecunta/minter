@@ -42,6 +42,27 @@ and the Control treatment.
 \details{
 See the package vignette for a detailed description of the formula.
 }
+\examples{
+\dontrun{
+data <- data.frame(
+  study_id = 1:3,
+  control_mean = c(8.5, 12.3, 6.8),
+  control_sd = c(1.8, 2.9, 1.4),
+  control_n = c(18, 24, 16),
+  nutrient_mean = c(11.2, 16.7, 9.3),
+  nutrient_sd = c(3.1, 4.8, 2.7),
+  nutrient_n = c(19, 22, 17)
+)
+
+result <- lnCVR_ind(
+  data = data,
+  Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+  A_mean = "nutrient_mean", A_sd = "nutrient_sd", A_n = "nutrient_n"
+)
+print(result)
+}
+
+}
 \references{
 Nakagawa, S., Poulin, R., Mengersen, K., Reinhold, K., Engqvist,
 L., Lagisz, M., & Senior, A. M. (2015). Meta‐analysis of variation:

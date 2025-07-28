@@ -7,6 +7,45 @@
 #'
 #' @references 
 #'   Shinichi Nakagawa and Daniel Noble, personal communication.
+#'
+#' @examples
+#' \dontrun{
+#' # Pre-post design for standardized mean difference with time interaction (Conservation experiment)
+#' data <- data.frame(
+#'   study_id = 1:2,
+#'   pre_control_mean = c(18.3, 21.7), pre_control_sd = c(4.1, 4.8),
+#'   post_control_mean = c(18.8, 22.1), post_control_sd = c(4.2, 4.9),
+#'   control_n = c(16, 14),
+#'   pre_conservation_mean = c(18.1, 21.4), pre_conservation_sd = c(4.0, 4.7),
+#'   post_conservation_mean = c(26.7, 31.2), post_conservation_sd = c(5.8, 6.4),
+#'   conservation_n = c(15, 16)
+#' )
+#' 
+#' result <- time_SMD(
+#'   data = data,
+#'   t0_Ctrl_mean = "pre_control_mean", t0_Ctrl_sd = "pre_control_sd",
+#'   t1_Ctrl_mean = "post_control_mean", t1_Ctrl_sd = "post_control_sd",
+#'   Ctrl_n = "control_n", Ctrl_cor = 0.9,
+#'   t0_Exp_mean = "pre_conservation_mean", t0_Exp_sd = "pre_conservation_sd",
+#'   t1_Exp_mean = "post_conservation_mean", t1_Exp_sd = "post_conservation_sd",
+#'   Exp_n = "conservation_n", Exp_cor = 0.7,
+#'   hedges_correction = TRUE
+#' )
+#' print(result)
+#' 
+#' # Without Hedges' correction
+#' result_no_hedges <- time_SMD(
+#'   data = data,
+#'   t0_Ctrl_mean = "pre_control_mean", t0_Ctrl_sd = "pre_control_sd",
+#'   t1_Ctrl_mean = "post_control_mean", t1_Ctrl_sd = "post_control_sd",
+#'   Ctrl_n = "control_n", Ctrl_cor = 0.9,
+#'   t0_Exp_mean = "pre_conservation_mean", t0_Exp_sd = "pre_conservation_sd",
+#'   t1_Exp_mean = "post_conservation_mean", t1_Exp_sd = "post_conservation_sd",
+#'   Exp_n = "conservation_n", Exp_cor = 0.7,
+#'   hedges_correction = FALSE
+#' )
+#' print(result_no_hedges)
+#' }
 #' 
 #' @export
 time_SMD <- function(

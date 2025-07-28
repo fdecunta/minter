@@ -54,6 +54,28 @@ data.
 \details{
 See the package vignette for a detailed description of the formula.
 }
+\examples{
+\dontrun{
+# Interaction effect in 2x2 factorial design (Salinity x Temperature)
+data <- data.frame(
+  study_id = 1:2,
+  control_mean = c(24.8, 27.2), control_sd = c(4.1, 4.6), control_n = c(18, 16),
+  salinity_mean = c(19.3, 21.7), salinity_sd = c(3.8, 4.2), salinity_n = c(17, 18),
+  temperature_mean = c(28.9, 31.4), temperature_sd = c(4.7, 5.1), temperature_n = c(19, 15),
+  salt_temp_mean = c(15.2, 17.8), salt_temp_sd = c(3.1, 3.5), salt_temp_n = c(16, 17)
+)
+
+result <- SMD_inter(
+  data = data,
+  Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+  A_mean = "salinity_mean", A_sd = "salinity_sd", A_n = "salinity_n",
+  B_mean = "temperature_mean", B_sd = "temperature_sd", B_n = "temperature_n",
+  AB_mean = "salt_temp_mean", AB_sd = "salt_temp_sd", AB_n = "salt_temp_n"
+)
+print(result)
+}
+
+}
 \references{
 Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
 between competition and predation: a meta-analysis of field experiments.

@@ -27,6 +27,32 @@
 #'     studies with correlated and multi‐group designs. Ecology, 92(11), 2049-2055.
 #'     https://doi.org/10.1890/11-0423.1
 #'
+#' @examples
+#' \dontrun{
+#' # Example data for simple comparison (Drought vs Control)
+#' data <- data.frame(
+#'   study_id = 1:3,
+#'   control_mean = c(10, 15, 12),
+#'   control_sd = c(2.1, 3.2, 2.8),
+#'   control_n = c(20, 25, 18),
+#'   drought_mean = c(12, 18, 14),
+#'   drought_sd = c(2.3, 3.5, 3.1),
+#'   drought_n = c(22, 24, 20)
+#' )
+#' 
+#' # Compute individual effect of drought vs control
+#' result <- lnRR_ind(
+#'   data = data,
+#'   Ctrl_mean = "control_mean",
+#'   Ctrl_sd = "control_sd", 
+#'   Ctrl_n = "control_n",
+#'   A_mean = "drought_mean",
+#'   A_sd = "drought_sd",
+#'   A_n = "drought_n"
+#' )
+#' print(result)
+#' }
+#'
 #' @export
 lnRR_ind <- function(
   data,
@@ -95,6 +121,28 @@ lnRR_ind <- function(
 #'     Neuroscience & Biobehavioral Reviews, 135, 104554.
 #'     https://doi.org/10.1016/j.neubiorev.2022.104554 
 #'
+#' @examples
+#' \dontrun{
+#' # Example data for 2x2 factorial design (Fertilization x Warming)
+#' data <- data.frame(
+#'   study_id = 1:2,
+#'   control_mean = c(10, 12), control_sd = c(2.0, 2.5), control_n = c(20, 18),
+#'   fertilization_mean = c(15, 16), fertilization_sd = c(2.2, 2.8), fertilization_n = c(20, 19),
+#'   warming_mean = c(11, 13), warming_sd = c(2.1, 2.6), warming_n = c(21, 17),
+#'   fert_warm_mean = c(17, 19), fert_warm_sd = c(2.4, 3.0), fert_warm_n = c(19, 20)
+#' )
+#' 
+#' # Compute main effect of fertilization
+#' result <- lnRR_main(
+#'   data = data,
+#'   Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+#'   A_mean = "fertilization_mean", A_sd = "fertilization_sd", A_n = "fertilization_n",
+#'   B_mean = "warming_mean", B_sd = "warming_sd", B_n = "warming_n",
+#'   AB_mean = "fert_warm_mean", AB_sd = "fert_warm_sd", AB_n = "fert_warm_n"
+#' )
+#' print(result)
+#' }
+#'
 #' @export
 lnRR_main <- function(
   data,
@@ -159,6 +207,28 @@ lnRR_main <- function(
 #'     Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 #'     effects of enemies and mutualists on plant performance: a meta‐analysis. 
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+#'
+#' @examples
+#' \dontrun{
+#' # Example data for 2x2 factorial design (Predation x Competition)
+#' data <- data.frame(
+#'   study_id = 1:2,
+#'   control_mean = c(25, 28), control_sd = c(3.2, 3.8), control_n = c(15, 17),
+#'   predation_mean = c(18, 20), predation_sd = c(2.9, 3.1), predation_n = c(16, 18),
+#'   competition_mean = c(22, 24), competition_sd = c(3.0, 3.5), competition_n = c(14, 16),
+#'   pred_comp_mean = c(12, 15), pred_comp_sd = c(2.1, 2.6), pred_comp_n = c(15, 17)
+#' )
+#' 
+#' # Compute interaction effect between predation and competition
+#' result <- lnRR_inter(
+#'   data = data,
+#'   Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+#'   A_mean = "predation_mean", A_sd = "predation_sd", A_n = "predation_n",
+#'   B_mean = "competition_mean", B_sd = "competition_sd", B_n = "competition_n",
+#'   AB_mean = "pred_comp_mean", AB_sd = "pred_comp_sd", AB_n = "pred_comp_n"
+#' )
+#' print(result)
+#' }
 #'
 #' @export
 lnRR_inter <- function(

@@ -56,6 +56,48 @@ time_lnRR(
 \description{
 Log Response Ratio: Interaction Between Treatment and Time
 }
+\examples{
+\dontrun{
+# Pre-post design with treatment and control groups (Restoration experiment)
+data <- data.frame(
+  study_id = 1:2,
+  pre_control_mean = c(8.4, 10.2),     # Control before restoration
+  pre_control_sd = c(1.8, 2.1),
+  post_control_mean = c(8.9, 10.7),    # Control after restoration period
+  post_control_sd = c(1.9, 2.2),
+  control_n = c(22, 18),
+  pre_restoration_mean = c(8.6, 10.1), # Restoration sites before
+  pre_restoration_sd = c(1.9, 2.0),
+  post_restoration_mean = c(15.3, 17.8), # Restoration sites after
+  post_restoration_sd = c(3.2, 3.7),
+  restoration_n = c(20, 19)
+)
+
+result <- time_lnRR(
+  data = data,
+  t0_Ctrl_mean = "pre_control_mean", t0_Ctrl_sd = "pre_control_sd",
+  t1_Ctrl_mean = "post_control_mean", t1_Ctrl_sd = "post_control_sd",
+  Ctrl_n = "control_n", Ctrl_cor = 0.7,  # Correlation within control sites
+  t0_Exp_mean = "pre_restoration_mean", t0_Exp_sd = "pre_restoration_sd",
+  t1_Exp_mean = "post_restoration_mean", t1_Exp_sd = "post_restoration_sd", 
+  Exp_n = "restoration_n", Exp_cor = 0.6   # Correlation within restoration sites
+)
+print(result)
+
+# Using different correlations for each study
+result2 <- time_lnRR(
+  data = data,
+  t0_Ctrl_mean = "pre_control_mean", t0_Ctrl_sd = "pre_control_sd",
+  t1_Ctrl_mean = "post_control_mean", t1_Ctrl_sd = "post_control_sd",
+  Ctrl_n = "control_n", Ctrl_cor = c(0.6, 0.8),
+  t0_Exp_mean = "pre_restoration_mean", t0_Exp_sd = "pre_restoration_sd",
+  t1_Exp_mean = "post_restoration_mean", t1_Exp_sd = "post_restoration_sd", 
+  Exp_n = "restoration_n", Exp_cor = c(0.5, 0.7)
+)
+print(result2)
+}
+
+}
 \references{
 Shinichi Nakagawa and Daniel Noble, personal communication.
 }

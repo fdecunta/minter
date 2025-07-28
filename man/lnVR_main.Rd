@@ -48,6 +48,28 @@ across levels of Factor B.
 \details{
 See the package vignette for a detailed description of the formula.
 }
+\examples{
+\dontrun{
+# Example for main effect in 2x2 factorial focusing on variability (Fire x Grazing)
+data <- data.frame(
+  study_id = 1:2,
+  control_sd = c(2.0, 2.3), control_n = c(20, 18),
+  fire_sd = c(2.8, 3.1), fire_n = c(19, 20),
+  grazing_sd = c(2.2, 2.5), grazing_n = c(21, 17),
+  fire_grazing_sd = c(3.5, 3.8), fire_grazing_n = c(18, 19)
+)
+
+result <- lnVR_main(
+  data = data,
+  Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+  A_sd = "fire_sd", A_n = "fire_n",
+  B_sd = "grazing_sd", B_n = "grazing_n",
+  AB_sd = "fire_grazing_sd", AB_n = "fire_grazing_n"
+)
+print(result)
+}
+
+}
 \author{
 Facundo Decunta - fdecunta@agro.uba.ar
 }

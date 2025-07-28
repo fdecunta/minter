@@ -60,6 +60,28 @@ in factorial experiments on the coefficient of variation.
 \details{
 See the package vignette for a detailed description of the formula.
 }
+\examples{
+\dontrun{
+# main effect logCVR for Irrigation 
+data <- data.frame(
+  study_id = 1:2,
+  control_mean = c(14.2, 16.8), control_sd = c(2.8, 3.1), control_n = c(16, 14),
+  irrigation_mean = c(19.5, 22.1), irrigation_sd = c(5.2, 5.8), irrigation_n = c(15, 16),
+  co2_mean = c(16.8, 19.4), co2_sd = c(3.1, 3.6), co2_n = c(17, 13),
+  irrigation_co2_mean = c(24.3, 27.9), irrigation_co2_sd = c(6.8, 7.4), irrigation_co2_n = c(14, 15)
+)
+
+result <- lnCVR_main(
+  data = data,
+  Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+  A_mean = "irrigation_mean", A_sd = "irrigation_sd", A_n = "irrigation_n",
+  B_mean = "co2_mean", B_sd = "co2_sd", B_n = "co2_n", 
+  AB_mean = "irrigation_co2_mean", AB_sd = "irrigation_co2_sd", AB_n = "irrigation_co2_n"
+)
+print(result)
+}
+
+}
 \author{
 Facundo Decunta - fdecunta@agro.uba.ar
 }

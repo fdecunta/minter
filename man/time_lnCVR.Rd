@@ -56,6 +56,32 @@ time_lnCVR(
 \description{
 Log Coefficient of Variation Ratio: Interaction Between Treatment and Time
 }
+\examples{
+\dontrun{
+# Pre-post design for coefficient of variation changes over time (Disturbance experiment)
+data <- data.frame(
+  study_id = 1:2,
+  pre_control_mean = c(12.8, 15.4), pre_control_sd = c(2.6, 3.1),
+  post_control_mean = c(13.2, 15.9), post_control_sd = c(2.7, 3.2),
+  control_n = c(20, 18),
+  pre_disturbed_mean = c(12.9, 15.2), pre_disturbed_sd = c(2.5, 3.0),
+  post_disturbed_mean = c(8.7, 10.1), post_disturbed_sd = c(3.8, 4.3),
+  disturbed_n = c(19, 21)
+)
+
+result <- time_lnCVR(
+  data = data,
+  t0_Ctrl_mean = "pre_control_mean", t0_Ctrl_sd = "pre_control_sd",
+  t1_Ctrl_mean = "post_control_mean", t1_Ctrl_sd = "post_control_sd",
+  Ctrl_n = "control_n", Ctrl_cor = 0.8,
+  t0_Exp_mean = "pre_disturbed_mean", t0_Exp_sd = "pre_disturbed_sd",
+  t1_Exp_mean = "post_disturbed_mean", t1_Exp_sd = "post_disturbed_sd",
+  Exp_n = "disturbed_n", Exp_cor = 0.5
+)
+print(result)
+}
+
+}
 \references{
 Shinichi Nakagawa and Daniel Noble, personal communication.
 }

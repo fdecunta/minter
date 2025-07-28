@@ -47,6 +47,39 @@ with metafor's \code{escalc()} function using \code{measure = "SMD"}.
 
 See the package vignette for a detailed description of the formula.
 }
+\examples{
+\dontrun{
+# Individual effect with Hedges' correction (Pollination exclusion)
+data <- data.frame(
+  study_id = 1:3,
+  control_mean = c(45.2, 52.8, 38.9),
+  control_sd = c(8.1, 11.2, 7.3),
+  control_n = c(18, 23, 16),
+  pollinator_exclusion_mean = c(28.7, 35.4, 22.1),
+  pollinator_exclusion_sd = c(6.8, 9.1, 5.9),
+  pollinator_exclusion_n = c(20, 22, 18)
+)
+
+# With Hedges' correction (default)
+result <- SMD_ind(
+  data = data,
+  Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+  A_mean = "pollinator_exclusion_mean", A_sd = "pollinator_exclusion_sd", A_n = "pollinator_exclusion_n",
+  hedges_correction = TRUE
+)
+print(result)
+
+# Without Hedges' correction
+result_no_hedges <- SMD_ind(
+  data = data,
+  Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+  A_mean = "pollinator_exclusion_mean", A_sd = "pollinator_exclusion_sd", A_n = "pollinator_exclusion_n",
+  hedges_correction = FALSE
+)
+print(result_no_hedges)
+}
+
+}
 \references{
 Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
 between competition and predation: a meta-analysis of field experiments.

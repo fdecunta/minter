@@ -44,6 +44,33 @@ with metafor's \code{escalc()} function using \code{measure = "ROM"}.
 
 See the package vignette for a detailed description of the formula.
 }
+\examples{
+\dontrun{
+# Example data for simple comparison (Drought vs Control)
+data <- data.frame(
+  study_id = 1:3,
+  control_mean = c(10, 15, 12),
+  control_sd = c(2.1, 3.2, 2.8),
+  control_n = c(20, 25, 18),
+  drought_mean = c(12, 18, 14),
+  drought_sd = c(2.3, 3.5, 3.1),
+  drought_n = c(22, 24, 20)
+)
+
+# Compute individual effect of drought vs control
+result <- lnRR_ind(
+  data = data,
+  Ctrl_mean = "control_mean",
+  Ctrl_sd = "control_sd", 
+  Ctrl_n = "control_n",
+  A_mean = "drought_mean",
+  A_sd = "drought_sd",
+  A_n = "drought_n"
+)
+print(result)
+}
+
+}
 \references{
 Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
 Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive

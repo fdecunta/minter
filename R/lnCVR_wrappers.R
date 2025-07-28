@@ -23,6 +23,26 @@
 #'     Ecology and Evolution, 6(2), 143-152.
 #'
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
+#'
+#' @examples
+#' \dontrun{
+#' data <- data.frame(
+#'   study_id = 1:3,
+#'   control_mean = c(8.5, 12.3, 6.8),
+#'   control_sd = c(1.8, 2.9, 1.4),
+#'   control_n = c(18, 24, 16),
+#'   nutrient_mean = c(11.2, 16.7, 9.3),
+#'   nutrient_sd = c(3.1, 4.8, 2.7),
+#'   nutrient_n = c(19, 22, 17)
+#' )
+#' 
+#' result <- lnCVR_ind(
+#'   data = data,
+#'   Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+#'   A_mean = "nutrient_mean", A_sd = "nutrient_sd", A_n = "nutrient_n"
+#' )
+#' print(result)
+#' }
 #' 
 #' @export
 lnCVR_ind <- function(
@@ -78,6 +98,27 @@ lnCVR_ind <- function(
 #' @param AB_n Sample size from the interaction AxB treatment
 #' 
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
+#'
+#' @examples
+#' \dontrun{
+#' # main effect logCVR for Irrigation 
+#' data <- data.frame(
+#'   study_id = 1:2,
+#'   control_mean = c(14.2, 16.8), control_sd = c(2.8, 3.1), control_n = c(16, 14),
+#'   irrigation_mean = c(19.5, 22.1), irrigation_sd = c(5.2, 5.8), irrigation_n = c(15, 16),
+#'   co2_mean = c(16.8, 19.4), co2_sd = c(3.1, 3.6), co2_n = c(17, 13),
+#'   irrigation_co2_mean = c(24.3, 27.9), irrigation_co2_sd = c(6.8, 7.4), irrigation_co2_n = c(14, 15)
+#' )
+#' 
+#' result <- lnCVR_main(
+#'   data = data,
+#'   Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+#'   A_mean = "irrigation_mean", A_sd = "irrigation_sd", A_n = "irrigation_n",
+#'   B_mean = "co2_mean", B_sd = "co2_sd", B_n = "co2_n", 
+#'   AB_mean = "irrigation_co2_mean", AB_sd = "irrigation_co2_sd", AB_n = "irrigation_co2_n"
+#' )
+#' print(result)
+#' }
 #'
 #' @export
 lnCVR_main <- function(
@@ -139,6 +180,27 @@ lnCVR_main <- function(
 #' @param AB_n Sample size from the interaction AxB treatment
 #'
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
+#'
+#' @examples
+#' \dontrun{
+#' # Interaction effect logCVR (Light x Nutrients)
+#' data <- data.frame(
+#'   study_id = 1:2,
+#'   control_mean = c(7.3, 8.9), control_sd = c(1.4, 1.7), control_n = c(20, 18),
+#'   light_mean = c(12.8, 14.2), light_sd = c(3.1, 3.5), light_n = c(19, 20),
+#'   nutrients_mean = c(9.6, 11.1), nutrients_sd = c(1.9, 2.2), nutrients_n = c(21, 17),
+#'   light_nutrients_mean = c(18.4, 20.7), light_nutrients_sd = c(4.8, 5.3), light_nutrients_n = c(18, 19)
+#' )
+#' 
+#' result <- lnCVR_inter(
+#'   data = data,
+#'   Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+#'   A_mean = "light_mean", A_sd = "light_sd", A_n = "light_n",
+#'   B_mean = "nutrients_mean", B_sd = "nutrients_sd", B_n = "nutrients_n",
+#'   AB_mean = "light_nutrients_mean", AB_sd = "light_nutrients_sd", AB_n = "light_nutrients_n"
+#' )
+#' print(result)
+#' }
 #'
 #' @export
 lnCVR_inter <- function(
