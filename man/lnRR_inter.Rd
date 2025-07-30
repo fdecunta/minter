@@ -61,8 +61,6 @@ data.
 See the package vignette for a detailed description of the formula.
 }
 \examples{
-\dontrun{
-# Example data for 2x2 factorial design (Predation x Competition)
 data <- data.frame(
   study_id = 1:2,
   control_mean = c(25, 28), control_sd = c(3.2, 3.8), control_n = c(15, 17),
@@ -79,8 +77,6 @@ result <- lnRR_inter(
   B_mean = "competition_mean", B_sd = "competition_sd", B_n = "competition_n",
   AB_mean = "pred_comp_mean", AB_sd = "pred_comp_sd", AB_n = "pred_comp_n"
 )
-print(result)
-}
 
 }
 \references{

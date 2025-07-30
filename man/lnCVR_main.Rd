@@ -61,8 +61,6 @@ in factorial experiments on the coefficient of variation.
 See the package vignette for a detailed description of the formula.
 }
 \examples{
-\dontrun{
-# main effect logCVR for Irrigation 
 data <- data.frame(
   study_id = 1:2,
   control_mean = c(14.2, 16.8), control_sd = c(2.8, 3.1), control_n = c(16, 14),
@@ -78,8 +76,6 @@ result <- lnCVR_main(
   B_mean = "co2_mean", B_sd = "co2_sd", B_n = "co2_n", 
   AB_mean = "irrigation_co2_mean", AB_sd = "irrigation_co2_sd", AB_n = "irrigation_co2_n"
 )
-print(result)
-}
 
 }
 \author{

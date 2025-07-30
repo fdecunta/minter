@@ -45,8 +45,6 @@ with metafor's \code{escalc()} function using \code{measure = "ROM"}.
 See the package vignette for a detailed description of the formula.
 }
 \examples{
-\dontrun{
-# Example data for simple comparison (Drought vs Control)
 data <- data.frame(
   study_id = 1:3,
   control_mean = c(10, 15, 12),
@@ -67,8 +65,6 @@ result <- lnRR_ind(
   A_sd = "drought_sd",
   A_n = "drought_n"
 )
-print(result)
-}
 
 }
 \references{

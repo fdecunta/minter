@@ -57,8 +57,6 @@ time_lnRR(
 Log Response Ratio: Interaction Between Treatment and Time
 }
 \examples{
-\dontrun{
-# Pre-post design with treatment and control groups (Restoration experiment)
 data <- data.frame(
   study_id = 1:2,
   pre_control_mean = c(8.4, 10.2),     # Control before restoration
@@ -82,7 +80,6 @@ result <- time_lnRR(
   t1_Exp_mean = "post_restoration_mean", t1_Exp_sd = "post_restoration_sd", 
   Exp_n = "restoration_n", Exp_cor = 0.6   # Correlation within restoration sites
 )
-print(result)
 
 # Using different correlations for each study
 result2 <- time_lnRR(
@@ -94,8 +91,6 @@ result2 <- time_lnRR(
   t1_Exp_mean = "post_restoration_mean", t1_Exp_sd = "post_restoration_sd", 
   Exp_n = "restoration_n", Exp_cor = c(0.5, 0.7)
 )
-print(result2)
-}
 
 }
 \references{

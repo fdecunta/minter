@@ -49,7 +49,6 @@ the log of the variability ratio.
 See the package vignette for a detailed description of the formula.
 }
 \examples{
-\dontrun{
 # Example for interaction effect in 2x2 factorial focusing on variability (Drought x Temperature)
 data <- data.frame(
   study_id = 1:2,
@@ -66,8 +65,6 @@ result <- lnVR_inter(
   B_sd = "temperature_sd", B_n = "temperature_n",
   AB_sd = "drought_temp_sd", AB_n = "drought_temp_n"
 )
-print(result)
-}
 
 }
 \author{

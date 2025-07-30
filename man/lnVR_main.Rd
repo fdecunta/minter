@@ -49,7 +49,6 @@ across levels of Factor B.
 See the package vignette for a detailed description of the formula.
 }
 \examples{
-\dontrun{
 # Example for main effect in 2x2 factorial focusing on variability (Fire x Grazing)
 data <- data.frame(
   study_id = 1:2,
@@ -66,8 +65,6 @@ result <- lnVR_main(
   B_sd = "grazing_sd", B_n = "grazing_n",
   AB_sd = "fire_grazing_sd", AB_n = "fire_grazing_n"
 )
-print(result)
-}
 
 }
 \author{

@@ -61,7 +61,6 @@ in factorial experiments on the coefficient of variation ratio.
 See the package vignette for a detailed description of the formula.
 }
 \examples{
-\dontrun{
 # Interaction effect logCVR (Light x Nutrients)
 data <- data.frame(
   study_id = 1:2,
@@ -94,8 +93,6 @@ result <- lnCVR_inter(
   AB_sd = "light_nutrients_sd",
   AB_n = "light_nutrients_n"
 )
-print(result)
-}
 
 }
 \author{

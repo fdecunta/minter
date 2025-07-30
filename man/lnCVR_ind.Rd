@@ -43,7 +43,6 @@ and the Control treatment.
 See the package vignette for a detailed description of the formula.
 }
 \examples{
-\dontrun{
 data <- data.frame(
   study_id = 1:3,
   control_mean = c(8.5, 12.3, 6.8),
@@ -59,8 +58,6 @@ result <- lnCVR_ind(
   Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
   A_mean = "nutrient_mean", A_sd = "nutrient_sd", A_n = "nutrient_n"
 )
-print(result)
-}
 
 }
 \references{

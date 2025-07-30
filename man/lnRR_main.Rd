@@ -61,7 +61,6 @@ to the main effect in a factorial ANOVA.
 See the package vignette for a detailed description of the formula.
 }
 \examples{
-\dontrun{
 # Example data for 2x2 factorial design (Fertilization x Warming)
 data <- data.frame(
   study_id = 1:2,
@@ -79,8 +78,6 @@ result <- lnRR_main(
   B_mean = "warming_mean", B_sd = "warming_sd", B_n = "warming_n",
   AB_mean = "fert_warm_mean", AB_sd = "fert_warm_sd", AB_n = "fert_warm_n"
 )
-print(result)
-}
 
 }
 \references{

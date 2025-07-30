@@ -60,7 +60,6 @@ time_SMD(
 Standardized Mean Difference: Interaction Between Treatment and Time
 }
 \examples{
-\dontrun{
 # Pre-post design for standardized mean difference with time interaction (Conservation experiment)
 data <- data.frame(
   study_id = 1:2,
@@ -82,7 +81,6 @@ result <- time_SMD(
   Exp_n = "conservation_n", Exp_cor = 0.7,
   hedges_correction = TRUE
 )
-print(result)
 
 # Without Hedges' correction
 result_no_hedges <- time_SMD(
@@ -95,8 +93,6 @@ result_no_hedges <- time_SMD(
   Exp_n = "conservation_n", Exp_cor = 0.7,
   hedges_correction = FALSE
 )
-print(result_no_hedges)
-}
 
 }
 \references{

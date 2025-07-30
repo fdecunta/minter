@@ -39,8 +39,6 @@ with metafor's \code{escalc()} function using \code{measure = "SMD"}.
 See the package vignette for a detailed description of the formula.
 }
 \examples{
-\dontrun{
-# Individual effect with Hedges' correction (Pollination exclusion)
 data <- data.frame(
   study_id = 1:3,
   control_mean = c(45.2, 52.8, 38.9),
@@ -62,7 +60,6 @@ result <- SMD_ind(
   A_n = "pollinator_exclusion_n",
   hedges_correction = TRUE
 )
-print(result)
 
 # Without Hedges' correction
 result_no_hedges <- SMD_ind(
@@ -75,8 +72,6 @@ result_no_hedges <- SMD_ind(
   A_n = "pollinator_exclusion_n",
   hedges_correction = FALSE
 )
-print(result_no_hedges)
-}
 
 }
 \references{

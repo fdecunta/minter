@@ -64,7 +64,6 @@ to the main effect in a factorial ANOVA.
 See the package vignette for a detailed description of the formula.
 }
 \examples{
-\dontrun{
 # Main effect of Mycorrhiza in 2x2 factorial design (AMF x Phosphorus)
 data <- data.frame(
   study_id = 1:2,
@@ -81,8 +80,6 @@ result <- SMD_main(
   B_mean = "phosphorus_mean", B_sd = "phosphorus_sd", B_n = "phosphorus_n",
   AB_mean = "myco_phos_mean", AB_sd = "myco_phos_sd", AB_n = "myco_phos_n"
 )
-print(result)
-}
 
 }
 \references{

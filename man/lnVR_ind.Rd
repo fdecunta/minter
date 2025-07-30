@@ -37,7 +37,6 @@ a Factor A and the Control treatment in factorial experiments.
 See the package vignette for a detailed description of the formula.
 }
 \examples{
-\dontrun{
 # Example focusing on variability differences (Herbivory effect)
 data <- data.frame(
   study_id = 1:3,
@@ -54,8 +53,6 @@ result <- lnVR_ind(
   A_sd = "herbivory_sd", 
   A_n = "herbivory_n"
 )
-print(result)
-}
 
 }
 \references{

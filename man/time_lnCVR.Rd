@@ -57,7 +57,6 @@ time_lnCVR(
 Log Coefficient of Variation Ratio: Interaction Between Treatment and Time
 }
 \examples{
-\dontrun{
 # Pre-post design for coefficient of variation changes over time (Disturbance experiment)
 data <- data.frame(
   study_id = 1:2,
@@ -78,8 +77,6 @@ result <- time_lnCVR(
   t1_Exp_mean = "post_disturbed_mean", t1_Exp_sd = "post_disturbed_sd",
   Exp_n = "disturbed_n", Exp_cor = 0.5
 )
-print(result)
-}
 
 }
 \references{

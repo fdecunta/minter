@@ -64,8 +64,6 @@ data.
 See the package vignette for a detailed description of the formula.
 }
 \examples{
-\dontrun{
-# Interaction effect in 2x2 factorial design (Salinity x Temperature)
 data <- data.frame(
   study_id = 1:2,
   control_mean = c(24.8, 27.2), control_sd = c(4.1, 4.6), control_n = c(18, 16),
@@ -81,8 +79,6 @@ result <- SMD_inter(
   B_mean = "temperature_mean", B_sd = "temperature_sd", B_n = "temperature_n",
   AB_mean = "salt_temp_mean", AB_sd = "salt_temp_sd", AB_n = "salt_temp_n"
 )
-print(result)
-}
 
 }
 \references{
