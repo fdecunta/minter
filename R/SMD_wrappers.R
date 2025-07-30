@@ -36,8 +36,12 @@
 #' # With Hedges' correction (default)
 #' result <- SMD_ind(
 #'   data = data,
-#'   Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
-#'   A_mean = "pollinator_exclusion_mean", A_sd = "pollinator_exclusion_sd", A_n = "pollinator_exclusion_n",
+#'   Ctrl_mean = "control_mean",
+#'   Ctrl_sd = "control_sd",
+#'   Ctrl_n = "control_n",
+#'   A_mean = "pollinator_exclusion_mean",
+#'   A_sd = "pollinator_exclusion_sd",
+#'   A_n = "pollinator_exclusion_n",
 #'   hedges_correction = TRUE
 #' )
 #' print(result)
@@ -45,8 +49,12 @@
 #' # Without Hedges' correction
 #' result_no_hedges <- SMD_ind(
 #'   data = data,
-#'   Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
-#'   A_mean = "pollinator_exclusion_mean", A_sd = "pollinator_exclusion_sd", A_n = "pollinator_exclusion_n",
+#'   Ctrl_mean = "control_mean",
+#'   Ctrl_sd = "control_sd",
+#'   Ctrl_n = "control_n",
+#'   A_mean = "pollinator_exclusion_mean",
+#'   A_sd = "pollinator_exclusion_sd",
+#'   A_n = "pollinator_exclusion_n",
 #'   hedges_correction = FALSE
 #' )
 #' print(result_no_hedges)

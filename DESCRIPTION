@@ -1,5 +1,5 @@
 Package: minter
-Title: Effect sizes for Meta-analysis of interactions
+Title: Effect Sizes for Factorial Experiments in Meta-Analysis
 Version: 0.1.0
 Authors@R: c(
     person("Facundo", "Decunta", email = "fdecunta@agro.uba.ar", role = c("aut", "cre"),
@@ -7,7 +7,7 @@ Authors@R: c(
     person("Shinichi", "Nakagawa", email = "shinichi.nakagawa@ualberta.ca", role = c("ctb")),
     person("Daniel", "Noble", email = "daniel.noble@anu.edu.au", role = c("ctb"))
     )
-Description: A collection of functions for computing effect sizes of interactions to be used in meta-analysis. 
+Description: Functions for computing effect sizes and their sampling variances for factorial experimental designs commonly used in ecological and biological meta-analyses.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
