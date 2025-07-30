@@ -8,7 +8,6 @@
 #'   Shinichi Nakagawa and Daniel Noble, personal communication.
 #'
 #' @examples
-#' \dontrun{
 #' # Pre-post design for coefficient of variation changes over time (Disturbance experiment)
 #' data <- data.frame(
 #'   study_id = 1:2,
@@ -29,8 +28,6 @@
 #'   t1_Exp_mean = "post_disturbed_mean", t1_Exp_sd = "post_disturbed_sd",
 #'   Exp_n = "disturbed_n", Exp_cor = 0.5
 #' )
-#' print(result)
-#' }
 #'
 #' @export
 time_lnCVR <- function(

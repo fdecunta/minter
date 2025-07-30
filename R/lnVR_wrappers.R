@@ -22,7 +22,6 @@
 #'     Ecology and Evolution, 6(2), 143-152.
 #'
 #' @examples
-#' \dontrun{
 #' # Example focusing on variability differences (Herbivory effect)
 #' data <- data.frame(
 #'   study_id = 1:3,
@@ -39,8 +38,6 @@
 #'   A_sd = "herbivory_sd", 
 #'   A_n = "herbivory_n"
 #' )
-#' print(result)
-#' }
 #'
 #' @export
 lnVR_ind <- function(
@@ -92,7 +89,6 @@ lnVR_ind <- function(
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
 #' @examples
-#' \dontrun{
 #' # Example for main effect in 2x2 factorial focusing on variability (Fire x Grazing)
 #' data <- data.frame(
 #'   study_id = 1:2,
@@ -109,8 +105,6 @@ lnVR_ind <- function(
 #'   B_sd = "grazing_sd", B_n = "grazing_n",
 #'   AB_sd = "fire_grazing_sd", AB_n = "fire_grazing_n"
 #' )
-#' print(result)
-#' }
 #'
 #' @export
 lnVR_main <- function(
@@ -166,7 +160,6 @@ lnVR_main <- function(
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
 #' @examples
-#' \dontrun{
 #' # Example for interaction effect in 2x2 factorial focusing on variability (Drought x Temperature)
 #' data <- data.frame(
 #'   study_id = 1:2,
@@ -183,8 +176,6 @@ lnVR_main <- function(
 #'   B_sd = "temperature_sd", B_n = "temperature_n",
 #'   AB_sd = "drought_temp_sd", AB_n = "drought_temp_n"
 #' )
-#' print(result)
-#' }
 #'
 #' @export
 lnVR_inter <- function(

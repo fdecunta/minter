@@ -25,7 +25,6 @@
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
 #' @examples
-#' \dontrun{
 #' data <- data.frame(
 #'   study_id = 1:3,
 #'   control_mean = c(8.5, 12.3, 6.8),
@@ -41,8 +40,6 @@
 #'   Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
 #'   A_mean = "nutrient_mean", A_sd = "nutrient_sd", A_n = "nutrient_n"
 #' )
-#' print(result)
-#' }
 #' 
 #' @export
 lnCVR_ind <- function(
@@ -100,8 +97,6 @@ lnCVR_ind <- function(
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
 #' @examples
-#' \dontrun{
-#' # main effect logCVR for Irrigation 
 #' data <- data.frame(
 #'   study_id = 1:2,
 #'   control_mean = c(14.2, 16.8), control_sd = c(2.8, 3.1), control_n = c(16, 14),
@@ -117,8 +112,6 @@ lnCVR_ind <- function(
 #'   B_mean = "co2_mean", B_sd = "co2_sd", B_n = "co2_n", 
 #'   AB_mean = "irrigation_co2_mean", AB_sd = "irrigation_co2_sd", AB_n = "irrigation_co2_n"
 #' )
-#' print(result)
-#' }
 #'
 #' @export
 lnCVR_main <- function(
@@ -182,7 +175,6 @@ lnCVR_main <- function(
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
 #' @examples
-#' \dontrun{
 #' # Interaction effect logCVR (Light x Nutrients)
 #' data <- data.frame(
 #'   study_id = 1:2,
@@ -215,8 +207,6 @@ lnCVR_main <- function(
 #'   AB_sd = "light_nutrients_sd",
 #'   AB_n = "light_nutrients_n"
 #' )
-#' print(result)
-#' }
 #'
 #' @export
 lnCVR_inter <- function(

@@ -21,8 +21,6 @@
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
 #'
 #' @examples
-#' \dontrun{
-#' # Individual effect with Hedges' correction (Pollination exclusion)
 #' data <- data.frame(
 #'   study_id = 1:3,
 #'   control_mean = c(45.2, 52.8, 38.9),
@@ -44,7 +42,6 @@
 #'   A_n = "pollinator_exclusion_n",
 #'   hedges_correction = TRUE
 #' )
-#' print(result)
 #' 
 #' # Without Hedges' correction
 #' result_no_hedges <- SMD_ind(
@@ -57,8 +54,6 @@
 #'   A_n = "pollinator_exclusion_n",
 #'   hedges_correction = FALSE
 #' )
-#' print(result_no_hedges)
-#' }
 #'
 #' @export
 SMD_ind <- function(
@@ -114,7 +109,6 @@ SMD_ind <- function(
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
 #'
 #' @examples
-#' \dontrun{
 #' # Main effect of Mycorrhiza in 2x2 factorial design (AMF x Phosphorus)
 #' data <- data.frame(
 #'   study_id = 1:2,
@@ -131,8 +125,6 @@ SMD_ind <- function(
 #'   B_mean = "phosphorus_mean", B_sd = "phosphorus_sd", B_n = "phosphorus_n",
 #'   AB_mean = "myco_phos_mean", AB_sd = "myco_phos_sd", AB_n = "myco_phos_n"
 #' )
-#' print(result)
-#' }
 #'
 #' @export
 SMD_main <- function(
@@ -194,8 +186,6 @@ SMD_main <- function(
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
 #'
 #' @examples
-#' \dontrun{
-#' # Interaction effect in 2x2 factorial design (Salinity x Temperature)
 #' data <- data.frame(
 #'   study_id = 1:2,
 #'   control_mean = c(24.8, 27.2), control_sd = c(4.1, 4.6), control_n = c(18, 16),
@@ -211,8 +201,6 @@ SMD_main <- function(
 #'   B_mean = "temperature_mean", B_sd = "temperature_sd", B_n = "temperature_n",
 #'   AB_mean = "salt_temp_mean", AB_sd = "salt_temp_sd", AB_n = "salt_temp_n"
 #' )
-#' print(result)
-#' }
 #'
 #' @export
 SMD_inter <- function(

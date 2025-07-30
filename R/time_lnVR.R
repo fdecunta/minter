@@ -18,8 +18,6 @@
 #'   Shinichi Nakagawa and Daniel Noble, personal communication.
 #'
 #' @examples
-#' \dontrun{
-#' # Pre-post design focusing on variability changes over time (Invasion experiment)
 #' data <- data.frame(
 #'   study_id = 1:2,
 #'   pre_control_sd = c(2.1, 2.4),
@@ -37,8 +35,6 @@
 #'   t0_Exp_sd = "pre_invaded_sd", t1_Exp_sd = "post_invaded_sd",
 #'   Exp_n = "invaded_n", Exp_cor = 0.4
 #' )
-#' print(result)
-#' }
 #'
 #' @export
 time_lnVR <- function(

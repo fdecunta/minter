@@ -28,8 +28,6 @@
 #'     https://doi.org/10.1890/11-0423.1
 #'
 #' @examples
-#' \dontrun{
-#' # Example data for simple comparison (Drought vs Control)
 #' data <- data.frame(
 #'   study_id = 1:3,
 #'   control_mean = c(10, 15, 12),
@@ -50,8 +48,6 @@
 #'   A_sd = "drought_sd",
 #'   A_n = "drought_n"
 #' )
-#' print(result)
-#' }
 #'
 #' @export
 lnRR_ind <- function(
@@ -122,7 +118,6 @@ lnRR_ind <- function(
 #'     https://doi.org/10.1016/j.neubiorev.2022.104554 
 #'
 #' @examples
-#' \dontrun{
 #' # Example data for 2x2 factorial design (Fertilization x Warming)
 #' data <- data.frame(
 #'   study_id = 1:2,
@@ -140,8 +135,6 @@ lnRR_ind <- function(
 #'   B_mean = "warming_mean", B_sd = "warming_sd", B_n = "warming_n",
 #'   AB_mean = "fert_warm_mean", AB_sd = "fert_warm_sd", AB_n = "fert_warm_n"
 #' )
-#' print(result)
-#' }
 #'
 #' @export
 lnRR_main <- function(
@@ -209,8 +202,6 @@ lnRR_main <- function(
 #'     Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
 #'
 #' @examples
-#' \dontrun{
-#' # Example data for 2x2 factorial design (Predation x Competition)
 #' data <- data.frame(
 #'   study_id = 1:2,
 #'   control_mean = c(25, 28), control_sd = c(3.2, 3.8), control_n = c(15, 17),
@@ -227,8 +218,6 @@ lnRR_main <- function(
 #'   B_mean = "competition_mean", B_sd = "competition_sd", B_n = "competition_n",
 #'   AB_mean = "pred_comp_mean", AB_sd = "pred_comp_sd", AB_n = "pred_comp_n"
 #' )
-#' print(result)
-#' }
 #'
 #' @export
 lnRR_inter <- function(
