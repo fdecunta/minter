@@ -5,4 +5,4 @@ bibentry(bibtype = "Manual",
                    person("Shinichi", "Nakagawa", role = "ctb")),
          year = 2025,
          url = "https://fdecunta.github.io/minter/",
-         textVersion = "Facundo Decunta, Daniel Noble, Shinichi Nakagawa (2025). minter: Effect sizes for Factorial Meta-analysis. R package version 0.0.1. https://fdecunta.github.io/minter/")
+         textVersion = "Facundo Decunta, Daniel Noble, Shinichi Nakagawa (2025). minter: Effect sizes for Factorial Meta-analysis. R package version 0.1.0. https://fdecunta.github.io/minter/")
