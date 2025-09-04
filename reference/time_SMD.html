@@ -72,7 +72,7 @@
 
 
 <dt id="arg-col-names">col_names<a class="anchor" aria-label="anchor" href="#arg-col-names"></a></dt>
-<dd><p>Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.</p></dd>
+<dd><p>Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.</p></dd>
 
 
 <dt id="arg-append">append<a class="anchor" aria-label="anchor" href="#arg-append"></a></dt>
@@ -131,6 +131,12 @@
 <dd><p>Number or numeric vector. Correlation between the means of the experimental group at t0 and t1</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A data frame containing the effect sizes and their sampling variance.
+By default, the columns are named <code>yi</code> (effect size) and <code>vi</code> (sampling variance).
+If <code>append = TRUE</code>, the results are appended to the input <code>data</code>; otherwise, only the computed effect size columns are returned.</p>
+    </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Shinichi Nakagawa and Daniel Noble, personal communication.</p>
