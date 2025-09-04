@@ -1,8 +1,8 @@
 bibentry(bibtype = "Manual",
-         title = "minter: Effect sizes for Factorial Meta-analysis",
+         title = "minter: Effect Sizes for Meta-Analysis of Interactions from Factorial Experiments",
          author = c(person("Facundo", "Decunta", role = c("aut", "cre")),
                    person("Daniel", "Noble", role = "ctb"),
                    person("Shinichi", "Nakagawa", role = "ctb")),
          year = 2025,
          url = "https://fdecunta.github.io/minter/",
-         textVersion = "Facundo Decunta, Daniel Noble, Shinichi Nakagawa (2025). minter: Effect sizes for Factorial Meta-analysis. R package version 0.1.0. https://fdecunta.github.io/minter/")
+         textVersion = "Facundo Decunta (2025). minter: Effect Sizes for Meta-Analysis of Interactions from Factorial Experiments. R package version 0.1.0. https://fdecunta.github.io/minter/")
