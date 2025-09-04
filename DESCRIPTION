@@ -1,5 +1,5 @@
 Package: minter
-Title: Effect Sizes for Factorial Experiments in Meta-Analysis
+Title: Effect Sizes for Meta-Analysis of Interactions from Factorial Experiments
 Version: 0.1.0
 Authors@R: c(
     person("Facundo", "Decunta", email = "fdecunta@agro.uba.ar", role = c("aut", "cre"),
@@ -7,7 +7,7 @@ Authors@R: c(
     person("Shinichi", "Nakagawa", email = "shinichi.nakagawa@ualberta.ca", role = c("ctb")),
     person("Daniel", "Noble", email = "daniel.noble@anu.edu.au", role = c("ctb"))
     )
-Description: Functions for computing effect sizes and their sampling variances for factorial experimental designs commonly used in ecological and biological meta-analyses.
+Description: Compute effect sizes and their sampling variances from factorial experimental designs. The package supports calculation of simple effects, overall effects, and interaction effects for use in factorial meta-analyses. See Gurevitch et al. (2000) <doi:10.1086/303337>, Morris et al. (2007) <doi:10.1890/06-0442>, Lajeunesse (2011) <doi:10.1890/11-0423.1> and Macartney et al. (2022) <doi:10.1016/j.neubiorev.2022.104554>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
