@@ -3,6 +3,8 @@
 #' @inheritParams time_lnRR
 #' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE.
 #'
+#' @inherit lnRR_ind return
+#'
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
 #' @references 

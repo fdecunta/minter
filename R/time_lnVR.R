@@ -1,7 +1,7 @@
 #' Log of Variability Ratio: Interaction Between Treatment and Time
 #'
 #' @param data Data frame containing the variables used.
-#' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
+#' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
 #' @param t0_Ctrl_sd Standard deviation from the control group at time 0
 #' @param t1_Ctrl_sd Standard deviation from the control group at time 1
@@ -11,6 +11,8 @@
 #' @param t1_Exp_sd Standard deviation from the experimental group at time 1
 #' @param Exp_n Sample size of the experimental group
 #' @param Exp_cor Number or numeric vector. Correlation between the means of the experimental group at t0 and t1
+#'
+#' @inherit lnRR_ind return
 #'
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'

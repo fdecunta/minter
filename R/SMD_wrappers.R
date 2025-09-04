@@ -10,6 +10,10 @@
 #' @inheritParams lnRR_ind
 #' @param hedges_correction Boolean. If TRUE correct for small-sample bias. Default is TRUE.
 #'
+#' @inherit lnRR_ind return
+#'
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
+#'
 #' @references
 #'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
 #'     between competition and predation: a meta-analysis of field experiments.
@@ -97,6 +101,10 @@ SMD_ind <- function(
 #'
 #' @inheritParams lnRR_main
 #' @param hedges_correction Boolean. If TRUE correct for small-sample bias. Default is TRUE.
+#'
+#' @inherit lnRR_ind return
+#'
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
 #' 
 #' @references 
 #'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction
@@ -174,6 +182,10 @@ SMD_main <- function(
 #' 
 #' @inheritParams lnRR_inter
 #' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE
+#'
+#' @inherit lnRR_ind return
+#'
+#' @author Facundo Decunta - fdecunta@agro.uba.ar
 #' 
 #' @references 
 #'   Gurevitch, J., Morrison, J. A., & Hedges, L. V. (2000). The interaction

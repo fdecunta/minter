@@ -44,6 +44,11 @@
 
 \item{Exp_cor}{Correlation between the means of the experimental group at t0 and t1}
 }
+\value{
+A data frame containing the effect sizes and their sampling variance.
+By default, the columns are named \code{yi} (effect size) and \code{vi} (sampling variance).
+If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
+}
 \description{
 Log Coefficient of Variation Ratio: Interaction Between Experimental Treatment and Time
 }

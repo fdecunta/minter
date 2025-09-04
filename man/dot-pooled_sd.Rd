@@ -18,7 +18,7 @@
 \arguments{
 \item{Ctrl_sd}{Standard deviation from the control treatment}
 
-\item{Ctrl_n}{Sample size from the control streatment}
+\item{Ctrl_n}{Sample size from the control treatment}
 
 \item{A_sd}{Standard deviation from the A treatment}
 

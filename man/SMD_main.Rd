@@ -26,7 +26,7 @@ SMD_main(
 \arguments{
 \item{data}{Data frame containing the variables used.}
 
-\item{col_names}{Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.}
+\item{col_names}{Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.}
 
 \item{append}{Logical. Append the results to \code{data}. Default is TRUE}
 
@@ -36,7 +36,7 @@ SMD_main(
 
 \item{Ctrl_sd}{Standard deviation from the control treatment}
 
-\item{Ctrl_n}{Sample size from the control streatment}
+\item{Ctrl_n}{Sample size from the control treatment}
 
 \item{A_mean}{Mean outcome from the A treatment}
 
@@ -55,6 +55,11 @@ SMD_main(
 \item{AB_sd}{Standard deviation from the interaction AxB treatment}
 
 \item{AB_n}{Sample size from the interaction AxB treatment}
+}
+\value{
+A data frame containing the effect sizes and their sampling variance.
+By default, the columns are named \code{yi} (effect size) and \code{vi} (sampling variance).
+If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
 Computes the main effect of Factor A across levels of Factor B, analogous
@@ -91,4 +96,7 @@ Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
 Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 effects of enemies and mutualists on plant performance: a meta‐analysis.
 Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+}
+\author{
+Facundo Decunta - fdecunta@agro.uba.ar
 }

@@ -19,7 +19,7 @@ lnRR_ind(
 \arguments{
 \item{data}{Data frame containing the variables used.}
 
-\item{col_names}{Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.}
+\item{col_names}{Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.}
 
 \item{append}{Logical. Append the results to \code{data}. Default is TRUE}
 
@@ -27,13 +27,18 @@ lnRR_ind(
 
 \item{Ctrl_sd}{Standard deviation from the control treatment}
 
-\item{Ctrl_n}{Sample size from the control streatment}
+\item{Ctrl_n}{Sample size from the control treatment}
 
 \item{A_mean}{Mean outcome from the experimental treatment}
 
 \item{A_sd}{Standard deviation from the experimental treatment}
 
 \item{A_n}{Sample size from the experimental treatment}
+}
+\value{
+A data frame containing the effect sizes and their sampling variance.
+By default, the columns are named \code{yi} (effect size) and \code{vi} (sampling variance).
+If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
 Computes the individual or simple effect of Factor A over the Control.
@@ -76,4 +81,7 @@ Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
 Lajeunesse, M. J. (2011). On the meta‐analysis of response ratios for
 studies with correlated and multi‐group designs. Ecology, 92(11), 2049-2055.
 https://doi.org/10.1890/11-0423.1
+}
+\author{
+Facundo Decunta - fdecunta@agro.uba.ar
 }

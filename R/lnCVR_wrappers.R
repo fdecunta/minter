@@ -6,17 +6,18 @@
 #' See the package vignette for a detailed description of the formula.
 #'
 #' @param data Data frame containing the variables used.
-#' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
+#' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
 #' @param Ctrl_mean Mean outcome from the Control treatment
 #' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
+#' @param Ctrl_n Sample size from the control treatment
 #' @param A_mean Mean outcome from the treatment
 #' @param A_sd Standard deviation from the treatment
 #' @param A_n Sample size from the treatment
 #'
-#' @references
+#' @inherit lnRR_ind return
 #'
+#' @references
 #' Nakagawa, S., Poulin, R., Mengersen, K., Reinhold, K., Engqvist,
 #'     L., Lagisz, M., & Senior, A. M. (2015). Meta‐analysis of variation: 
 #'     ecological and evolutionary applications and beyond. Methods in
@@ -79,11 +80,11 @@ lnCVR_ind <- function(
 #' See the package vignette for a detailed description of the formula.
 #'
 #' @param data Data frame containing the variables used.
-#' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
+#' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
 #' @param Ctrl_mean Mean outcome from the Control treatment
 #' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
+#' @param Ctrl_n Sample size from the control treatment
 #' @param A_mean Mean outcome from the treatment
 #' @param A_sd Standard deviation from the treatment
 #' @param A_n Sample size from the treatment
@@ -93,6 +94,8 @@ lnCVR_ind <- function(
 #' @param AB_mean Mean outcome from the interaction AxB treatment
 #' @param AB_sd Standard deviation from the interaction AxB treatment
 #' @param AB_n Sample size from the interaction AxB treatment
+#'
+#' @inherit lnRR_ind return
 #' 
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
@@ -157,11 +160,11 @@ lnCVR_main <- function(
 #' See the package vignette for a detailed description of the formula.
 #'
 #' @param data Data frame containing the variables used.
-#' @param col_names Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.
+#' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
 #' @param Ctrl_mean Mean outcome from the Control treatment
 #' @param Ctrl_sd Standard deviation from the control treatment
-#' @param Ctrl_n Sample size from the control streatment
+#' @param Ctrl_n Sample size from the control treatment
 #' @param A_mean Mean outcome from the treatment
 #' @param A_sd Standard deviation from the treatment
 #' @param A_n Sample size from the treatment
@@ -171,6 +174,8 @@ lnCVR_main <- function(
 #' @param AB_mean Mean outcome from the interaction AxB treatment
 #' @param AB_sd Standard deviation from the interaction AxB treatment
 #' @param AB_n Sample size from the interaction AxB treatment
+#'
+#' @inherit lnRR_ind return
 #'
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'

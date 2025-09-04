@@ -19,7 +19,7 @@ lnCVR_ind(
 \arguments{
 \item{data}{Data frame containing the variables used.}
 
-\item{col_names}{Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.}
+\item{col_names}{Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.}
 
 \item{append}{Logical. Append the results to \code{data}. Default is TRUE}
 
@@ -27,13 +27,18 @@ lnCVR_ind(
 
 \item{Ctrl_sd}{Standard deviation from the control treatment}
 
-\item{Ctrl_n}{Sample size from the control streatment}
+\item{Ctrl_n}{Sample size from the control treatment}
 
 \item{A_mean}{Mean outcome from the treatment}
 
 \item{A_sd}{Standard deviation from the treatment}
 
 \item{A_n}{Sample size from the treatment}
+}
+\value{
+A data frame containing the effect sizes and their sampling variance.
+By default, the columns are named \code{yi} (effect size) and \code{vi} (sampling variance).
+If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
 Computes the Log of the Coefficient of Variation Ratio between Factor A

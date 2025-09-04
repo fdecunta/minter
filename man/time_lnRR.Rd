@@ -25,7 +25,7 @@ time_lnRR(
 \arguments{
 \item{data}{Data frame containing the variables used.}
 
-\item{col_names}{Vector of two strings to name the output columns for the effect size and it's sampling variance. Default is 'yi' and 'vi'.}
+\item{col_names}{Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.}
 
 \item{append}{Logical. Append the results to \code{data}. Default is TRUE}
 
@@ -52,6 +52,11 @@ time_lnRR(
 \item{Exp_n}{Sample size of the experimental group}
 
 \item{Exp_cor}{Number or numeric vector. Correlation between the means of the experimental group at t0 and t1}
+}
+\value{
+A data frame containing the effect sizes and their sampling variance.
+By default, the columns are named \code{yi} (effect size) and \code{vi} (sampling variance).
+If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
 Log Response Ratio: Interaction Between Treatment and Time

@@ -2,6 +2,8 @@
 #'
 #' @inheritParams time_lnRR
 #'
+#' @inherit lnRR_ind return
+#'
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
 #' @references 
@@ -88,6 +90,8 @@ time_lnCVR <- function(
 #' Log Coefficient of Variation Ratio: Interaction Between Experimental Treatment and Time
 #' 
 #' @inheritParams .time_interaction_lnRR
+#'
+#' @inherit lnRR_ind return
 #'
 #' @keywords internal
 .time_interaction_lnCVR <- function(

@@ -25,7 +25,7 @@
 
 \item{Ctrl_sd}{Standard deviation from the control treatment}
 
-\item{Ctrl_n}{Sample size from the control streatment}
+\item{Ctrl_n}{Sample size from the control treatment}
 
 \item{A_mean}{Mean outcome from the treatment}
 
@@ -46,6 +46,11 @@
 \item{AB_n}{Sample size from the interaction AxB treatment}
 
 \item{hedges_correction}{Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE}
+}
+\value{
+A data frame containing the effect sizes and their sampling variance.
+By default, the columns are named \code{yi} (effect size) and \code{vi} (sampling variance).
+If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
 Computes the interaction effect between factors A and B in factorial
@@ -81,5 +86,8 @@ Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz, V. A.,
 Gilbert, G. S., ... & Vázquez, D. P. (2007). Direct and interactive
 effects of enemies and mutualists on plant performance: a meta‐analysis.
 Ecology, 88(4), 1021-1029. https://doi.org/10.1890/06-0442
+}
+\author{
+Facundo Decunta - fdecunta@agro.uba.ar
 }
 \keyword{internal}
