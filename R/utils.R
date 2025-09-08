@@ -56,10 +56,13 @@
 
 
 .get_columns <- function(columns_list, data) {
-  # Find and extract the columns from columns list in data
-  # Make some validation in the middle
+  # Find and extract the columns from columns_list in data
+
+  # NAs are required columns missing
   if (any(is.na(names(columns_list)))) {
-    stop(sprintf(".get_columns(). Some required arguments were not in call_args"), call. = FALSE)
+    fun_name <- as.character(sys.call(-1)[[1]])
+    stop(sprintf("Some required numeric arguments are missing. See ?%s", fun_name),
+         call. = FALSE)
   }
   
   return_cols <- list()
@@ -88,7 +91,7 @@
 
 .assert_column_exists <- function(col_name, data) {
   if (!(col_name %in% names(data))) {
-    stop(sprintf("the column %s doesn't exist.", col_name), call. = FALSE)
+    stop(sprintf("the column %s doesn't exists.", col_name), call. = FALSE)
   }
 }
 

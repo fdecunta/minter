@@ -66,6 +66,16 @@ test_that(".get_columns throws errors when columns are not numeric", {
 })
 
 
+test_that(".get_columns throws errors when column does't exits", {
+  foo <- data.frame(aaa = c(1:5),
+		    ccc = LETTERS[1:5],
+		    eee = rep(TRUE, 5))
+  bad_colname <- list(some_chars = substitute(bbb))
+
+  expect_error(.get_columns(bad_colname, foo))
+})
+
+
 test_that(".assert_cor_value throws errors when values are not between -1 and 1", {
   df <- data.frame(foo = c("a", "b", "c"))
 
@@ -102,12 +112,55 @@ test_that(".has_infinite detects Inf and -Inf in dataframes", {
 
 
 test_that(".infinite_to_NA transforms infinites into NAs", {
-   df <- data.frame(foo = c(10, Inf, 10, -Inf))
-   expected_df <- data.frame(foo = c(10, NA, 10, NA))
+  df <- data.frame(foo = c(10, Inf, 10, -Inf))
+  expected_df <- data.frame(foo = c(10, NA, 10, NA))
+ 
+  expect_warning(.infinite_to_NA(df))
+ 
+  # Avoid warning to store new_df. If not, a warning will arise in test
+  suppressWarnings(new_df <- .infinite_to_NA(df))
+  expect_equal(new_df, expected_df)
+})
 
-   expect_warning(.infinite_to_NA(df))
 
-   # Avoid warning to store new_df. If not, a warning will arise in test
-   suppressWarnings(new_df <- .infinite_to_NA(df))
-   expect_equal(new_df, expected_df)
+test_that(".compute_and_format warns about infinite values", {
+  studies <- data.frame(
+    Ctrl_mean = c(12.3, 0),
+    Ctrl_sd   = c(2.1, 3.2),
+    Ctrl_n    = c(22, 24),
+    Fert_mean = c(18.5, 21.3),
+    Fert_sd   = c(3.1, 4.1),
+    Fert_n    = c(22, 25)
+  )
+
+  expect_warning(
+    res <- lnRR_ind(
+      data = studies,
+      Ctrl_mean = "Ctrl_mean", Ctrl_sd = "Ctrl_sd", Ctrl_n = "Ctrl_n",
+      A_mean = "Fert_mean", A_sd = "Fert_sd", A_n = "Fert_n"
+    )
+  )
+
+  expect_true(any(is.na(res$yi)))
+})
+
+
+test_that(".get_columns throws error when required column is missing", {
+  studies <- data.frame(
+    Ctrl_mean = c(12.3, 0),
+    Ctrl_sd   = c(2.1, 3.2),
+    Ctrl_n    = c(22, 24),
+    Fert_mean = c(18.5, 21.3),
+    Fert_sd   = c(3.1, 4.1),
+    Fert_n    = c(22, 25)
+  )
+
+  # Missing 'Ctrl_mean'
+  expect_error(
+    lnRR_ind(
+      data = studies,
+      Ctrl_sd = "Ctrl_sd", Ctrl_n = "Ctrl_n",
+      A_mean = "Fert_mean", A_sd = "Fert_sd", A_n = "Fert_n"
+    )
+  )
 })
