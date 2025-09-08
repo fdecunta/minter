@@ -16,7 +16,7 @@
 
 
 #' @keywords internal
-.main_lnRR <- function(
+.main_lnRR_Morris <- function(
   Ctrl_mean,
   Ctrl_sd,
   Ctrl_n,
@@ -34,7 +34,7 @@
   main_lnRR <- log(A_mean + AB_mean) - log(Ctrl_mean + B_mean)
 
   main_lnRRv <- (1 / (A_mean    + AB_mean))^2 * (A_sd^2    / A_n    + AB_sd^2 / AB_n) +
-	              (1 / (Ctrl_mean + B_mean ))^2 * (Ctrl_sd^2 / Ctrl_n + B_sd^2  / B_n)
+                (1 / (Ctrl_mean + B_mean ))^2 * (Ctrl_sd^2 / Ctrl_n + B_sd^2  / B_n)
   
   return(data.frame(main_lnRR, main_lnRRv)) 
 }

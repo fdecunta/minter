@@ -94,6 +94,7 @@ lnRR_ind <- function(
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
+#' @param method Method to compute lnRR. Can be either "nakagawa" or "morris". Default is "nakagawa".
 #' @param Ctrl_mean Mean outcome from the Control treatment
 #' @param Ctrl_sd Standard deviation from the control treatment
 #' @param Ctrl_n Sample size from the control treatment
@@ -151,6 +152,7 @@ lnRR_main <- function(
   data,
   col_names = c("yi", "vi"),
   append = TRUE,
+  method = "nakagawa", 
   Ctrl_mean,
   Ctrl_sd,
   Ctrl_n,
@@ -165,13 +167,16 @@ lnRR_main <- function(
   AB_n
 ) {
   .assert_args(col_names, append, data)
+  checkmate::assert_choice(method, choices = c("nakagawa", "morris"))
 
   call_args <- as.list(match.call())[-1]
 
   lnrr_args <- .get_columns(call_args[.lnRR_args$main], data)
 
+  func_name <- if (method == "nakagawa") ".main_lnRR_Nakagawa" else ".main_lnRR_Morris"
+
   df <- .compute_and_format(
-    effsize_func = ".main_lnRR",
+    effsize_func = func_name,
     effsize_args = lnrr_args,
     data = data,
     col_names = col_names,

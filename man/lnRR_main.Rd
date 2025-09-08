@@ -8,6 +8,7 @@ lnRR_main(
   data,
   col_names = c("yi", "vi"),
   append = TRUE,
+  method = "nakagawa",
   Ctrl_mean,
   Ctrl_sd,
   Ctrl_n,
@@ -28,6 +29,8 @@ lnRR_main(
 \item{col_names}{Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.}
 
 \item{append}{Logical. Append the results to \code{data}. Default is TRUE}
+
+\item{method}{Method to compute lnRR. Can be either "nakagawa" or "morris". Default is "nakagawa".}
 
 \item{Ctrl_mean}{Mean outcome from the Control treatment}
 

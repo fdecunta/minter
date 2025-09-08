@@ -45,8 +45,7 @@
   AB_CV <- AB_sd / AB_mean
 
   # Also need lnRR and lnVR for the sampling variance
-  # NOTE: Here lnRR uses Morris' method. Can use Nakagawa's
-  main_lnRR <- .main_lnRR(
+  main_lnRR <- .main_lnRR_Nakagawa(
     Ctrl_mean = Ctrl_mean, 
     Ctrl_sd = Ctrl_sd,
     Ctrl_n = Ctrl_n,

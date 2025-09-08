@@ -23,10 +23,11 @@ test_that("lnRR function works fine with 'ind' effect size", {
 })
 
 
-test_that("lnRR function works fine with 'main' effect size", {
+test_that("lnRR function works fine with 'main' effect size using Morris method", {
   # This is main effect of factor A
   res <- lnRR_main(
     data = testing_data,
+    method = "morris",
     col_names = c("main_lnRR", "main_lnRRv"),
     Ctrl_mean = C_mean,
     Ctrl_sd = C_sd,

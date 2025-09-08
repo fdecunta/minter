@@ -48,11 +48,7 @@ test_that("lnCVR works fine with 'main' effects", {
   # Computed manually
   test_lnCVR <- 0.69314718
 
-  # NOTE: The sampling variance for lnCVR is calculated as the sum
-  # of the sampling variances of lnRR and lnVR.
-  # Here, the sampling var of lnRR is calculated using Morris' method,
-  # but can use Nakagawa's as well
-  test_lnCVRv <- 0.0855555
+  test_lnCVRv <- 0.1121962
 
   # Compute with function
   res <- lnCVR_main(

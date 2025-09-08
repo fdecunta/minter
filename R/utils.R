@@ -19,7 +19,8 @@
   checkmate::assert_choice(effsize_func, choices = c(
     ### lnRR ###
     ".simple_lnRR",
-    ".main_lnRR",
+    ".main_lnRR_Nakagawa",
+    ".main_lnRR_Morris",
     ".interaction_lnRR",
     ### lnVR ###
     ".simple_lnVR",

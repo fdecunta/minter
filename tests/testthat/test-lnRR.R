@@ -22,8 +22,8 @@ test_that("Simple lnRR is correctly computed", {
 })
 
 
-test_that("The main lnRR is correctly computed", {
-  res <- with(testing_data, .main_lnRR(
+test_that("The main lnRR is correctly computed with Morris method", {
+  res <- with(testing_data, .main_lnRR_Morris(
     Ctrl_mean = C_mean,
     Ctrl_sd = C_sd,
     Ctrl_n = C_n,
