@@ -64,7 +64,8 @@
     col_name <- as.character(columns_list[[arg]])
   
     .assert_column_exists(col_name, data)
-    .assert_is_numeric(data[[col_name]])
+    .assert_is_numeric(col_name, data)
+    .assert_no_NA(col_name, data)
     return_cols[[arg]] <- data[[col_name]]
   }
 
@@ -72,16 +73,25 @@
 }
 
 
-.assert_column_exists <- function(column, data) {
-  if (!(column %in% names(data))) {
-    stop(sprintf("the column %s doesn't exist.", column), call. = FALSE)
+.assert_column_exists <- function(col_name, data) {
+  if (!(col_name %in% names(data))) {
+    stop(sprintf("the column %s doesn't exist.", col_name), call. = FALSE)
   }
 }
 
 
-.assert_is_numeric <- function(column) {
+.assert_is_numeric <- function(col_name, data) {
+  column = data[[col_name]]
   if (!is.numeric(column)) {
-    stop(sprintf("the column %s is not numeric.", column), call. = FALSE)
+    stop(sprintf("the column %s is not numeric.", col_name), call. = FALSE)
+  }
+}
+
+
+.assert_no_NA <- function(col_name, data) {
+  column = data[[col_name]]
+  if (anyNA(column)) {
+    stop(sprintf("the column %s has NAs.", col_name), call. = FALSE)
   }
 }
 

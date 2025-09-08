@@ -1,20 +1,30 @@
-test_that(".assert_is_numeric works", {
-  some_numbers <- c(1:10)
-  some_strings <- LETTERS
-  some_factors <- as.factor(letters)
-
-  expect_no_error(.assert_is_numeric(some_numbers))  
-  expect_error(.assert_is_numeric(some_strings))
-  expect_error(.assert_is_numeric(some_factors))
-})
-
-
 test_that(".assert_column_exists works", {
   foo <- data.frame(aaa = c(1:5),
 		    bbb = c(1:5))
 
   expect_no_error(.assert_column_exists("aaa", foo))
   expect_error(.assert_column_exists("zzz", foo))
+})
+
+
+test_that(".assert_is_numeric works", {
+  df <- data.frame(
+      some_numbers = c(1:10),
+      some_strings = LETTERS[1:10],
+      some_factors <- as.factor(letters[1:10])
+  )
+
+  expect_no_error(.assert_is_numeric("some_numbers", df))  
+  expect_error(.assert_is_numeric("some_strings", df))
+  expect_error(.assert_is_numeric("some_factors", df))
+})
+
+
+test_that(".assert_no_NA throws error when NA is present", {
+   df <- data.frame(good_col = c(10, 20, 30), bad_col = c(10, NA, 30))
+
+   expect_no_error(.assert_no_NA("good_col", df))
+   expect_error(.assert_no_NA("bad_col", df))
 })
 
 
@@ -65,3 +75,6 @@ test_that(".assert_cor_value throws error when length is not 1 or equal to len(d
   expect_no_error(.assert_cor_value(good_vector, df))
   expect_no_error(.assert_cor_value(another_good, df))
 })
+
+
+
