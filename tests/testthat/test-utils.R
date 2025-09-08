@@ -28,6 +28,19 @@ test_that(".assert_no_NA throws error when NA is present", {
 })
 
 
+test_that(".assert_positive throws error when zeros or negatives are present", {
+   df <- data.frame(
+       good_col = c(10, 20, 30), 
+       zero_col = c(0, 20, 30),
+       negative_col = c(-1, 20, 30)
+   )
+
+   expect_no_error(.assert_positive("good_col", df))
+   expect_error(.assert_positive("zero_col", df))
+   expect_error(.assert_positive("negative_col", df))
+})
+
+
 test_that(".get_columns works by passing column name as symbols", {
   foo <- data.frame(aaa = c(1:5),
 		    bbb = c(5:9))
@@ -77,4 +90,24 @@ test_that(".assert_cor_value throws error when length is not 1 or equal to len(d
 })
 
 
+test_that(".has_infinite detects Inf and -Inf in dataframes", {
+  good_df <- data.frame(foo = c(1, 2, 3))
+  pos_inf <- data.frame(foo = c(1, Inf, 3))
+  neg_inf <- data.frame(foo = c(1, 2, -Inf))
 
+  expect_false(.has_infinite(good_df))
+  expect_true(.has_infinite(pos_inf))
+  expect_true(.has_infinite(neg_inf))
+})
+
+
+test_that(".infinite_to_NA transforms infinites into NAs", {
+   df <- data.frame(foo = c(10, Inf, 10, -Inf))
+   expected_df <- data.frame(foo = c(10, NA, 10, NA))
+
+   expect_warning(.infinite_to_NA(df))
+
+   # Avoid warning to store new_df. If not, a warning will arise in test
+   suppressWarnings(new_df <- .infinite_to_NA(df))
+   expect_equal(new_df, expected_df)
+})

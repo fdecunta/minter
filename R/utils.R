@@ -43,6 +43,10 @@
   df <- do.call(effsize_func, effsize_args)
   names(df) <- col_names
 
+  if (.has_infinite(df)) {
+    df <- .infinite_to_NA(df)
+  }
+
   if (append) {
     df <- cbind(data, df)
   }
@@ -66,6 +70,15 @@
     .assert_column_exists(col_name, data)
     .assert_is_numeric(col_name, data)
     .assert_no_NA(col_name, data)
+    
+    # If column is sample sizes (e.g., Ctrl_n)
+    if (endsWith(arg, "_n")) {
+      tryCatch(
+        .assert_positive(col_name, data),
+        error = function(e) stop(e$message, "\nSample sizes must be positive values.", call. = FALSE)
+      )
+    }
+
     return_cols[[arg]] <- data[[col_name]]
   }
 
@@ -96,6 +109,14 @@
 }
 
 
+.assert_positive <- function(col_name, data) {
+  column = data[[col_name]]
+  if (any(column <= 0)) {
+    stop(sprintf("the column %s has zeros or negative values", col_name), call. = FALSE)
+  }
+}
+
+
 .assert_args <- function(col_names, append, data) {
   checkmate::assert_character(col_names, len = 2)
   checkmate::assert_logical(append, len = 1)
@@ -120,4 +141,20 @@
       deparse(substitute(x)), length(x)
     ), call. = FALSE)
   }
+}
+
+
+.has_infinite <- function(x) {
+  return(any(is.infinite(unlist(x))))
+}
+
+
+.infinite_to_NA <- function(df) {
+  df_replaced <- lapply(df, function(x) { 
+           replace(x, is.infinite(x), NA)
+  })
+  warning("Some effect sizes resulted in infinite values (division by zero). These values were recoded as NA.",
+          call. = FALSE)
+
+  return(as.data.frame(df_replaced))
 }
