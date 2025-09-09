@@ -13,7 +13,7 @@ test_that("Pooled sampling variance is computed correctly", {
     AB_n = 5
   )
 
-  test_S2 <- 5.0249  # Page 227 from The Handbook of Meta Analysis ... Borensetin et al. 2009
+  test_S2 <- 5.0249  # Page 227 from The Handbook of Meta Analysis (Borensetin et al. 2009)
   res_S2 <- .pooled_sd(
     Ctrl_sd = 4.5,
     Ctrl_n = 50,

@@ -79,3 +79,43 @@ test_that("SMD of the interaction between Experimental Treatment and Time is wor
   expect_equal(res$yi, test_SMD, tolerance = 1e-6)
   expect_equal(res$vi, test_SMDv, tolerance = 1e-6)
 })
+
+
+test_that("tim_SMD works fine with Hedge's correction", {
+  df <- data.frame(
+    t0_Ctrl_mean = 10,
+    t0_Ctrl_sd = 5, 
+    t1_Ctrl_mean = 12,
+    t1_Ctrl_sd = 6,
+    Ctrl_n = 5,
+    t0_Exp_mean = 12,
+    t0_Exp_sd = 2,
+    t1_Exp_mean = 20,
+    t1_Exp_sd = 4,
+    Exp_n = 5
+  )
+
+  res <- time_SMD(
+    data = df,
+    hedges_correction = TRUE,
+    t0_Ctrl_mean = t0_Ctrl_mean,
+    t0_Ctrl_sd = t0_Ctrl_sd,
+    t1_Ctrl_mean = t1_Ctrl_mean,
+    t1_Ctrl_sd = t1_Ctrl_sd,
+    Ctrl_n = Ctrl_n,
+    Ctrl_cor = 0.5,
+    t0_Exp_mean = t0_Exp_mean,
+    t0_Exp_sd = t0_Exp_sd,
+    t1_Exp_mean = t1_Exp_mean,
+    t1_Exp_sd = t1_Exp_sd,
+    Exp_n = Exp_n,
+    Exp_cor = 0.5
+  )
+
+  # Computed manually 
+  test_SMD <- 1.204301
+  test_SMDv <- 0.4725171
+
+  expect_equal(res$yi, test_SMD, tolerance = 1e-6)
+  expect_equal(res$vi, test_SMDv, tolerance = 1e-6)
+})
