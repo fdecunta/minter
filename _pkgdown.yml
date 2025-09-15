@@ -1,20 +1,17 @@
 url: https://fdecunta.github.io/minter/
 title: minter
-
 template:
   bootstrap: 5
   bootswatch: lumen
-
 reference:
-  - title: "Effect sizes for 2-by-2 factorials"
-    contents:
-      - starts_with("lnRR_")
-      - starts_with("lnVR_")
-      - starts_with("lnCVR_")
-      - starts_with("SMD_")
-
-  - title: "Effect sizes for repeated measures of a treatment"
-    contents: starts_with("time_")
-
+- title: Effect sizes for 2-by-2 factorials
+  contents:
+  - starts_with("lnRR_")
+  - starts_with("lnVR_")
+  - starts_with("lnCVR_")
+  - starts_with("SMD_")
+- title: Effect sizes for repeated measures of a treatment
+  contents: starts_with("time_")
 news:
-  one_page: true
+  one_page: yes
+
