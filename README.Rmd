@@ -21,10 +21,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-Factorial designs help us understand synergies and antagonisms between ecological factors.
-However, meta-analyses of factorial experiments are rare in ecology, likely because extracting effect sizes from factorial data is not straightforward.
-
-`minter` is an R package that simplifies this process by providing functions to extract different effect sizes from factorial data, enabling researchers to conduct meta-analyses of interactions between factors.
+Effect sizes for meta-analysis of interactions. A collection of functions for computing effect sizes from factorial experiments.
 
 ## Installation
 

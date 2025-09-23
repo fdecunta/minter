@@ -11,15 +11,8 @@ coverage](https://codecov.io/gh/fdecunta/minter/graph/badge.svg)](https://app.co
 
 <!-- badges: end -->
 
-Factorial designs help us understand synergies and antagonisms between
-ecological factors. However, meta-analyses of factorial experiments are
-rare in ecology, likely because extracting effect sizes from factorial
-data is not straightforward.
-
-`minter` is an R package that simplifies this process by providing
-functions to extract different effect sizes from factorial data,
-enabling researchers to conduct meta-analyses of interactions between
-factors.
+Effect sizes for meta-analysis of interactions. A collection of
+functions for computing effect sizes from factorial experiments.
 
 ## Installation
 
@@ -75,18 +68,18 @@ res <- rma(yi, vi, ..., data = interaction_results)
 
 ## Effect Size Measures
 
--   **lnRR**: Log Response Ratio - proportional effects
--   **SMD**: Standardized Mean Difference - standardized effects  
--   **lnVR**: Log Variability Ratio - effects on variability
--   **lnCVR**: Log Coefficient of Variation Ratio - effects on relative
-    variability
+- **lnRR**: Log Response Ratio - proportional effects
+- **SMD**: Standardized Mean Difference - standardized effects  
+- **lnVR**: Log Variability Ratio - effects on variability
+- **lnCVR**: Log Coefficient of Variation Ratio - effects on relative
+  variability
 
 ## Effect Types
 
--   **Individual**: Simple treatment vs. control
--   **Main**: Overall effect across levels of another factor
--   **Interaction**: Does one factor’s effect depend on another?
--   **Time**: Treatment × time interactions for repeated measures
+- **Individual**: Simple treatment vs. control
+- **Main**: Overall effect across levels of another factor
+- **Interaction**: Does one factor’s effect depend on another?
+- **Time**: Treatment × time interactions for repeated measures
 
 ## Acknowledgments
 
