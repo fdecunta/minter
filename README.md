@@ -20,7 +20,10 @@ functions for computing effect sizes from factorial experiments.
 devtools::install_github("fdecunta/minter")
 ```
 
-## Example: Fertilization × Drought Interactions
+## Example
+
+Imagine you need to estimate the effect size of the interaction between
+fertilization × drought on plant biomass:
 
 ``` r
 library(minter)
