@@ -18,12 +18,20 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/fdecunta/minter/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fdecunta/minter/actions/workflows/R-CMD-check.yaml) [![Codecov test coverage](https://codecov.io/gh/fdecunta/minter/graph/badge.svg)](https://app.codecov.io/gh/fdecunta/minter)
-
+[![CRAN status](https://www.r-pkg.org/badges/version/minter)](https://CRAN.R-project.org/package=minter)
 <!-- badges: end -->
 
 Effect sizes for meta-analysis of interactions. A collection of functions for computing effect sizes from factorial experiments.
 
 ## Installation
+
+From CRAN:
+
+```{r, eval=FALSE}
+install.packages("minter")
+```
+
+From GitHub repo:
 
 ```{r, eval=FALSE}
 devtools::install_github("fdecunta/minter")

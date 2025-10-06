@@ -8,13 +8,22 @@
 [![R-CMD-check](https://github.com/fdecunta/minter/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fdecunta/minter/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/fdecunta/minter/graph/badge.svg)](https://app.codecov.io/gh/fdecunta/minter)
-
+[![CRAN
+status](https://www.r-pkg.org/badges/version/minter)](https://CRAN.R-project.org/package=minter)
 <!-- badges: end -->
 
 Effect sizes for meta-analysis of interactions. A collection of
 functions for computing effect sizes from factorial experiments.
 
 ## Installation
+
+From CRAN:
+
+``` r
+install.packages("minter")
+```
+
+From GitHub repo:
 
 ``` r
 devtools::install_github("fdecunta/minter")
@@ -71,18 +80,18 @@ res <- rma(yi, vi, ..., data = interaction_results)
 
 ## Effect Size Measures
 
-- **lnRR**: Log Response Ratio - proportional effects
-- **SMD**: Standardized Mean Difference - standardized effects  
-- **lnVR**: Log Variability Ratio - effects on variability
-- **lnCVR**: Log Coefficient of Variation Ratio - effects on relative
-  variability
+-   **lnRR**: Log Response Ratio - proportional effects
+-   **SMD**: Standardized Mean Difference - standardized effects  
+-   **lnVR**: Log Variability Ratio - effects on variability
+-   **lnCVR**: Log Coefficient of Variation Ratio - effects on relative
+    variability
 
 ## Effect Types
 
-- **Individual**: Simple treatment vs. control
-- **Main**: Overall effect across levels of another factor
-- **Interaction**: Does one factor’s effect depend on another?
-- **Time**: Treatment × time interactions for repeated measures
+-   **Individual**: Simple treatment vs. control
+-   **Main**: Overall effect across levels of another factor
+-   **Interaction**: Does one factor’s effect depend on another?
+-   **Time**: Treatment × time interactions for repeated measures
 
 ## Acknowledgments
 

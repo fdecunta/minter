@@ -1,9 +1,9 @@
-pandoc: 3.1.11.1
+pandoc: 2.17.1.1
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   minter-docs: minter-docs.html
-last_built: 2025-09-23T00:28Z
+last_built: 2025-10-06T19:03Z
 urls:
   reference: https://fdecunta.github.io/minter/reference
   article: https://fdecunta.github.io/minter/articles
