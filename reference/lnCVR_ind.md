@@ -1,0 +1,101 @@
+# Individual Effect: Log Coefficient Of Variation Ratio
+
+Computes the Log of the Coefficient of Variation Ratio between Factor A
+and the Control treatment.
+
+## Usage
+
+``` r
+lnCVR_ind(
+  data,
+  col_names = c("yi", "vi"),
+  append = TRUE,
+  Ctrl_mean,
+  Ctrl_sd,
+  Ctrl_n,
+  A_mean,
+  A_sd,
+  A_n
+)
+```
+
+## Arguments
+
+- data:
+
+  Data frame containing the variables used.
+
+- col_names:
+
+  Vector of two strings to name the output columns for the effect size
+  and its sampling variance. Default is 'yi' and 'vi'.
+
+- append:
+
+  Logical. Append the results to `data`. Default is TRUE
+
+- Ctrl_mean:
+
+  Mean outcome from the Control treatment
+
+- Ctrl_sd:
+
+  Standard deviation from the control treatment
+
+- Ctrl_n:
+
+  Sample size from the control treatment
+
+- A_mean:
+
+  Mean outcome from the treatment
+
+- A_sd:
+
+  Standard deviation from the treatment
+
+- A_n:
+
+  Sample size from the treatment
+
+## Value
+
+A data frame containing the effect sizes and their sampling variance. By
+default, the columns are named `yi` (effect size) and `vi` (sampling
+variance). If `append = TRUE`, the results are appended to the input
+`data`; otherwise, only the computed effect size columns are returned.
+
+## Details
+
+See the package vignette for a detailed description of the formula.
+
+## References
+
+Nakagawa, S., Poulin, R., Mengersen, K., Reinhold, K., Engqvist, L.,
+Lagisz, M., & Senior, A. M. (2015). Meta‐analysis of variation:
+ecological and evolutionary applications and beyond. Methods in Ecology
+and Evolution, 6(2), 143-152.
+
+## Author
+
+Facundo Decunta - fdecunta@agro.uba.ar
+
+## Examples
+
+``` r
+data <- data.frame(
+  study_id = 1:3,
+  control_mean = c(8.5, 12.3, 6.8),
+  control_sd = c(1.8, 2.9, 1.4),
+  control_n = c(18, 24, 16),
+  nutrient_mean = c(11.2, 16.7, 9.3),
+  nutrient_sd = c(3.1, 4.8, 2.7),
+  nutrient_n = c(19, 22, 17)
+)
+
+result <- lnCVR_ind(
+  data = data,
+  Ctrl_mean = "control_mean", Ctrl_sd = "control_sd", Ctrl_n = "control_n",
+  A_mean = "nutrient_mean", A_sd = "nutrient_sd", A_n = "nutrient_n"
+)
+```

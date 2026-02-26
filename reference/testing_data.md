@@ -1,0 +1,68 @@
+# Fake factorial dataset with pre-computed effect sizes
+
+This dataset contains fake data from 2×2 factorial experiments with four
+treatment groups: Control (C), Factor A, Factor B, and the combination
+AB (A and B together). It includes means, standard deviations, and
+sample sizes for each group, as well as pre-computed effect sizes: log
+response ratio (lnRR), standardized mean difference (SMD), and their
+variances, for the main effects of A, B, and the interaction (AB).
+
+## Usage
+
+``` r
+testing_data
+```
+
+## Format
+
+A data frame with 10 rows and 24 columns:
+
+- C_n, C_mean, C_sd:
+
+  Sample size, mean, and SD of the Control group
+
+- A_n, A_mean, A_sd:
+
+  Sample size, mean, and SD of the A treatment
+
+- B_n, B_mean, B_sd:
+
+  Sample size, mean, and SD of the B treatment
+
+- AB_n, AB_mean, AB_sd:
+
+  Sample size, mean, and SD of the AB (A and B combined) treatment
+
+- A_main_lnRR, A_main_lnRRv:
+
+  Log response ratio for main effect A and its variance
+
+- B_main_lnRR, B_main_lnRRv:
+
+  Log response ratio for main effect B and its variance
+
+- AB_main_lnRR, AB_main_lnRRv:
+
+  Log response ratio for the AB interaction and its variance
+
+- A_main_SMD, A_main_SMDv:
+
+  Standardized mean difference (Hedges' g) for main effect A and its
+  variance
+
+- B_main_SMD, B_main_SMDv:
+
+  Standardized mean difference for main effect B and its variance
+
+- AB_main_SMD, AB_main_SMDv:
+
+  Standardized mean difference for the AB interaction and its variance
+
+## Source
+
+Fake.
+
+## Details
+
+This dataset is intended for validating functions that compute or test
+effect sizes in meta-analysis workflows involving factorial designs.

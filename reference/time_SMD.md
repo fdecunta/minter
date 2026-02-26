@@ -1,0 +1,149 @@
+# Standardized Mean Difference: Interaction Between Treatment and Time
+
+Standardized Mean Difference: Interaction Between Treatment and Time
+
+## Usage
+
+``` r
+time_SMD(
+  data,
+  col_names = c("yi", "vi"),
+  append = TRUE,
+  hedges_correction = TRUE,
+  t0_Ctrl_mean,
+  t0_Ctrl_sd,
+  t1_Ctrl_mean,
+  t1_Ctrl_sd,
+  Ctrl_n,
+  Ctrl_cor,
+  t0_Exp_mean,
+  t0_Exp_sd,
+  t1_Exp_mean,
+  t1_Exp_sd,
+  Exp_n,
+  Exp_cor
+)
+```
+
+## Arguments
+
+- data:
+
+  Data frame containing the variables used.
+
+- col_names:
+
+  Vector of two strings to name the output columns for the effect size
+  and its sampling variance. Default is 'yi' and 'vi'.
+
+- append:
+
+  Logical. Append the results to `data`. Default is TRUE
+
+- hedges_correction:
+
+  Logical. Apply or not Hedges' correction for small-sample bias.
+  Default is TRUE.
+
+- t0_Ctrl_mean:
+
+  Sample mean from the control group at time 0
+
+- t0_Ctrl_sd:
+
+  Standard deviation from the control group at time 0
+
+- t1_Ctrl_mean:
+
+  Sample mean from the control group at time 1
+
+- t1_Ctrl_sd:
+
+  Standard deviation from the control group at time 1
+
+- Ctrl_n:
+
+  Sample size of the control group
+
+- Ctrl_cor:
+
+  Number or numeric vector. Correlation between the means of the control
+  group at t0 and t1
+
+- t0_Exp_mean:
+
+  Sample mean from the experimental group at time 0
+
+- t0_Exp_sd:
+
+  Standard deviation from the experimental group at time 0
+
+- t1_Exp_mean:
+
+  Sample mean from the experimental group at time 1
+
+- t1_Exp_sd:
+
+  Standard deviation from the experimental group at time 1
+
+- Exp_n:
+
+  Sample size of the experimental group
+
+- Exp_cor:
+
+  Number or numeric vector. Correlation between the means of the
+  experimental group at t0 and t1
+
+## Value
+
+A data frame containing the effect sizes and their sampling variance. By
+default, the columns are named `yi` (effect size) and `vi` (sampling
+variance). If `append = TRUE`, the results are appended to the input
+`data`; otherwise, only the computed effect size columns are returned.
+
+## References
+
+Shinichi Nakagawa and Daniel Noble, personal communication.
+
+## Author
+
+Facundo Decunta - fdecunta@agro.uba.ar
+
+## Examples
+
+``` r
+# Pre-post design for standardized mean difference with time interaction (Conservation experiment)
+data <- data.frame(
+  study_id = 1:2,
+  pre_control_mean = c(18.3, 21.7), pre_control_sd = c(4.1, 4.8),
+  post_control_mean = c(18.8, 22.1), post_control_sd = c(4.2, 4.9),
+  control_n = c(16, 14),
+  pre_conservation_mean = c(18.1, 21.4), pre_conservation_sd = c(4.0, 4.7),
+  post_conservation_mean = c(26.7, 31.2), post_conservation_sd = c(5.8, 6.4),
+  conservation_n = c(15, 16)
+)
+
+result <- time_SMD(
+  data = data,
+  t0_Ctrl_mean = "pre_control_mean", t0_Ctrl_sd = "pre_control_sd",
+  t1_Ctrl_mean = "post_control_mean", t1_Ctrl_sd = "post_control_sd",
+  Ctrl_n = "control_n", Ctrl_cor = 0.9,
+  t0_Exp_mean = "pre_conservation_mean", t0_Exp_sd = "pre_conservation_sd",
+  t1_Exp_mean = "post_conservation_mean", t1_Exp_sd = "post_conservation_sd",
+  Exp_n = "conservation_n", Exp_cor = 0.7,
+  hedges_correction = TRUE
+)
+
+# Without Hedges' correction
+result_no_hedges <- time_SMD(
+  data = data,
+  t0_Ctrl_mean = "pre_control_mean", t0_Ctrl_sd = "pre_control_sd",
+  t1_Ctrl_mean = "post_control_mean", t1_Ctrl_sd = "post_control_sd",
+  Ctrl_n = "control_n", Ctrl_cor = 0.9,
+  t0_Exp_mean = "pre_conservation_mean", t0_Exp_sd = "pre_conservation_sd",
+  t1_Exp_mean = "post_conservation_mean", t1_Exp_sd = "post_conservation_sd",
+  Exp_n = "conservation_n", Exp_cor = 0.7,
+  hedges_correction = FALSE
+)
+```
