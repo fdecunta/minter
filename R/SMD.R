@@ -186,6 +186,13 @@
 #' 
 #' @keywords internal
 .j_correction <- function(m) {
+  if (any(m <= 0)) {
+    stop(
+      "Degrees of freedom `m` must be > 0 for the Hedges correction. ",
+      "Check that all group sample sizes are >= 2.",
+      call. = FALSE
+    )
+  }
   j <- 1 - (3 / ((4 * m) - 1))
   return(j)
 }
