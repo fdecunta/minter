@@ -88,13 +88,13 @@ res <- rma(yi, vi, ..., data = interaction_results)
 
 ## Effect Types
 
--   **Individual**: Simple treatment vs. control
+-   **Individual**: Simple treatment vs. control, the classic effect
+    size
 -   **Main**: Overall effect across levels of another factor
 -   **Interaction**: Does one factor’s effect depend on another?
 -   **Time**: Treatment × time interactions for repeated measures
 
 ## Acknowledgments
 
-We thank **Shinichi Nakagawa** and **Daniel Noble** for generously
-sharing their unpublished formulas for meta-analysis of interactions,
-which form the theoretical foundation of this package.
+Thanks to Shinichi Nakagawa and Daniel Noble for generously sharing
+their formulas for meta-analysis of interactions.
