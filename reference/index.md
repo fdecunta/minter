@@ -21,7 +21,7 @@
 - [`lnCVR_main()`](https://fdecunta.github.io/minter/reference/lnCVR_main.md)
   : Main Effect: Log Coefficient Of Variation Ration
 - [`SMD_ind()`](https://fdecunta.github.io/minter/reference/SMD_ind.md)
-  : Simple effect: Standardized Mean Difference
+  : Individual effect: Standardized Mean Difference
 - [`SMD_inter()`](https://fdecunta.github.io/minter/reference/SMD_inter.md)
   : Interaction effect: Standardized mean difference
 - [`SMD_main()`](https://fdecunta.github.io/minter/reference/SMD_main.md)

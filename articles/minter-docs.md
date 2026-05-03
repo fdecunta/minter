@@ -1,68 +1,60 @@
-# Effect Size Calculations with minter
+# Effect Sizes Formulas
 
-## Overview
+## Introduction
 
-The **minter** package provides tools for calculating effect sizes used
-in meta-analyses, with specialized support for factorial experimental
-designs and repeated measures studies. The package offers a consistent
-interface for computing various effect size metrics.
+The **minter** package is a collection of functions for calculating
+effect sizes. Specifically, effect sizes from both factorial
+experimental designs and repeated measures studies. For both design
+types, there are different possible measures: two for differences in
+means (standardized mean difference and log response ratio), and two for
+differences in variance (log variation ratio and log coefficient of
+variation ratio).
 
-## Key Features
+Typical effect sizes compare two values, the treatments vs the control.
+However, factorial experiments allows to compute different contrasts:
 
-**minter** implements two primary categories of effect size
-calculations:
-
-### 1. Factorial Design Effect Sizes
-
-For experimental designs with two factors (2×2 designs), supporting
-three types of comparisons:
-
-- **Individual/Simple effects**: Direct comparisons between single
-  treatments
+- **Individual effects**: Direct comparisons between single treatments,
+  the classic effect size.
 - **Main effects**: Average effect of one factor across levels of
-  another factor  
+  another factor, analogous to main effect in ANOVA.  
 - **Interaction effects**: How the effect of one factor depends on the
-  level of another factor
+  level of another factor.
 
-### 2. Repeated Measures Effect Sizes
-
-For longitudinal studies examining treatment × time interactions in
-before-after or time-series designs.
+For repeated measures, the only possible effect size allows to compute
+the treatment × time interactions.
 
 ## Quick Navigation
 
-### Factorial Design Functions
-
 #### Standardized Mean Difference (SMD)
 
-- [`SMD_ind`](#smd_ind) - Individual/simple effect
-- [`SMD_main`](#smd_main) - Main effect  
-- [`SMD_inter`](#smd_inter) - Interaction effect
+- [`SMD_ind`](#smd_ind)
+- [`SMD_main`](#smd_main)
+- [`SMD_inter`](#smd_inter)
 
 #### Log Response Ratio (lnRR)
 
-- [`lnRR_ind`](#lnrr_ind) - Individual/simple effect
-- [`lnRR_main`](#lnrr_main) - Main effect
-- [`lnRR_inter`](#lnrr_inter) - Interaction effect
+- [`lnRR_ind`](#lnrr_ind)
+- [`lnRR_main`](#lnrr_main)
+- [`lnRR_inter`](#lnrr_inter)
 
 #### Log Variation Ratio (lnVR)
 
-- [`lnVR_ind`](#lnvr_ind) - Individual/simple effect
-- [`lnVR_main`](#lnvr_main) - Main effect
-- [`lnVR_inter`](#lnvr_inter) - Interaction effect
+- [`lnVR_ind`](#lnvr_ind)
+- [`lnVR_main`](#lnvr_main)
+- [`lnVR_inter`](#lnvr_inter)
 
 #### Log Coefficient of Variation Ratio (lnCVR)
 
-- [`lnCVR_ind`](#lncvr_ind) - Individual/simple effect
-- [`lnCVR_main`](#lncvr_main) - Main effect
-- [`lnCVR_inter`](#lncvr_inter) - Interaction effect
+- [`lnCVR_ind`](#lncvr_ind)
+- [`lnCVR_main`](#lncvr_main)
+- [`lnCVR_inter`](#lncvr_inter)
 
 ### Repeated Measures Functions
 
-- [`time_SMD`](#time_smd) - Treatment × time interaction (SMD)
-- [`time_lnRR`](#time_lnrr) - Treatment × time interaction (lnRR)
-- [`time_lnVR`](#time_lnvr) - Treatment × time interaction (lnVR)
-- [`time_lnCVR`](#time_lncvr) - Treatment × time interaction (lnCVR)
+- [`time_SMD`](#time_smd)
+- [`time_lnRR`](#time_lnrr)
+- [`time_lnVR`](#time_lnvr)
+- [`time_lnCVR`](#time_lncvr)
 
 ------------------------------------------------------------------------
 
@@ -72,8 +64,6 @@ These functions compute effect sizes for standard 2×2 factorial designs
 where two factors (A and B) are manipulated, creating four treatment
 groups: Control, A alone, B alone, and AB combined.
 
-### Background
-
 Effect sizes for factorial meta-analysis were first introduced by
 Gurevitch et al. (2000), who presented methods for estimating main and
 interaction effects analogous to factorial ANOVA. Originally developed
@@ -81,100 +71,15 @@ for Standardized Mean Difference, these approaches have been extended to
 other effect size families including response ratios and variability
 measures.
 
-Recent developments by Shinichi Nakagawa and Daniel Noble have expanded
-these methods to include lnVR and lnCVR effect sizes, providing
-researchers with comprehensive tools for meta-analyzing factorial
-experiments.
-
-### Acknowledgments
-
-We thank **Shinichi Nakagawa** and **Daniel Noble** for their
-theoretical contributions to factorial meta-analysis methodology and for
-generously sharing unpublished formulas.
-
-------------------------------------------------------------------------
-
-## Standardized Mean Difference (SMD)
-
-The Standardized Mean Difference measures the magnitude of treatment
-effects in standard deviation units, making it comparable across studies
-with different measurement scales.
-
-### Individual Effect: `SMD_ind()`
-
-Computes the individual or simple effect of Factor A compared to
-Control. This is equivalent to the classic SMD that can be computed
-using metafor’s `escalc()` function with `measure = "SMD"`.
-
-**Formula:**
-``` math
-d_{ind} = \frac{\bar{X}_A - \bar{X}_{Ctrl}}{S_{pooled}} \cdot J(m)
-```
-
-where the pooled standard deviation is:
-``` math
-S_{pooled} = \sqrt{\frac{(n_A-1)sd_A^2 + (n_{Ctrl}-1)sd_{Ctrl}^2}{n_A + n_{Ctrl} - 2}}
-```
-
-**Small-sample bias correction:** The $`J(m)`$ correction (Hedges
-correction) is applied by default but can be disabled:
-``` math
-J(m) = 1 - \frac{3}{4m-1}
-```
-where $`m = n_A + n_{Ctrl} - 2`$
-
-**Sampling variance:**
-``` math
-var(d_{ind}) = \frac{1}{n_A} + \frac{1}{n_{Ctrl}} + \frac{d^2}{2(n_A + n_{Ctrl})}
-```
-
-### Main Effect: `SMD_main()`
-
-Computes the main effect of Factor A averaged across levels of Factor B,
-analogous to main effects in factorial ANOVA.
-
-**Formula:**
-``` math
-d_{main} = \frac{(\bar{X}_A + \bar{X}_{AB}) - (\bar{X}_{B} + \bar{X}_{Ctrl})}{2S_{pooled}} \cdot J(m)
-```
-
-**Pooled standard deviation (four groups):**
-``` math
-S_{pooled} = \sqrt{\frac{(n_A-1)sd_A^2 + (n_B-1)sd_B^2 + (n_{AB}-1)sd_{AB}^2 + (n_{Ctrl}-1)sd_{Ctrl}^2}{n_A + n_B + n_{AB} + n_{Ctrl} - 4}}
-```
-
-**Degrees of freedom:** $`m = n_A + n_B + n_{AB} + n_{Ctrl} - 4`$
-
-**Sampling variance:**
-``` math
-var(d_{main}) = \frac{1}{4} \left(\frac{1}{n_A} + \frac{1}{n_B} + \frac{1}{n_{AB}} + \frac{1}{n_{Ctrl}} + \frac{d_{main}^2}{2(n_A + n_B + n_{AB} + n_{Ctrl})}\right)
-```
-
-### Interaction Effect: `SMD_inter()`
-
-Computes the interaction between factors A and B, measuring how the
-effect of A depends on the level of B.
-
-**Formula:**
-``` math
-d_{inter} = \frac{(\bar{X}_{AB} - \bar{X}_B) - (\bar{X}_A - \bar{X}_{Ctrl})}{S_{pooled}} \cdot J(m)
-```
-
-Uses the same four-group pooled standard deviation as the main effect.
-
-**Sampling variance:**
-``` math
-var(d_{inter}) = \frac{1}{n_A} + \frac{1}{n_B} + \frac{1}{n_{AB}} + \frac{1}{n_{Ctrl}} + \frac{d_{inter}^2}{2(n_A + n_B + n_{AB} + n_{Ctrl})}
-```
-
 ------------------------------------------------------------------------
 
 ## Log Response Ratio (lnRR)
 
-The Log Response Ratio measures proportional changes between treatments,
-providing intuitive interpretation.
+### `lnRR_ind()`
 
-### Individual Effect: `lnRR_ind()`
+Computes the individual effect of Factor A compared to Control. This is
+equivalent to the classic lnRR that can be computed using metafor’s
+`escalc()` function with `measure = "ROM"`.
 
 **Formula:**
 ``` math
@@ -186,7 +91,7 @@ providing intuitive interpretation.
 var(\ln RR_{ind}) = \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
 ```
 
-### Main Effect: `lnRR_main()`
+### `lnRR_main()`
 
 **Formula:**
 ``` math
@@ -198,7 +103,7 @@ var(\ln RR_{ind}) = \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\
 var(\ln RR_{main}) = \left(\frac{1}{\bar{X}_A + \bar{X}_{AB}}\right)^2 \left(\frac{sd_A^2}{n_A} + \frac{sd_{AB}^2}{n_{AB}}\right) + \left(\frac{1}{\bar{X}_{Ctrl} + \bar{X}_B}\right)^2 \left(\frac{sd_{Ctrl}^2}{n_{Ctrl}} + \frac{sd_B^2}{n_B}\right)
 ```
 
-### Interaction Effect: `lnRR_inter()`
+### `lnRR_inter()`
 
 **Formula:**
 ``` math
@@ -214,10 +119,7 @@ var(\ln RR_{inter}) = \frac{sd_{AB}^2}{n_{AB}\bar{X}_{AB}^2} + \frac{sd_A^2}{n_A
 
 ## Log Variation Ratio (lnVR)
 
-The Log Variation Ratio compares variability between treatments,
-providing insights into how treatments affect response consistency.
-
-### Individual Effect: `lnVR_ind()`
+### `lnVR_ind()`
 
 **Formula:**
 ``` math
@@ -229,7 +131,7 @@ providing insights into how treatments affect response consistency.
 var(\ln VR_{ind}) = \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}
 ```
 
-### Main Effect: `lnVR_main()`
+### `lnVR_main()`
 
 **Formula:**
 ``` math
@@ -241,7 +143,7 @@ var(\ln VR_{ind}) = \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}
 var(\ln VR_{main}) = \frac{1}{4} \left( \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)} \right)
 ```
 
-### Interaction Effect: `lnVR_inter()`
+### `lnVR_inter()`
 
 **Formula:**
 ``` math
@@ -261,7 +163,7 @@ The Log Coefficient of Variation Ratio combines information about both
 mean responses and variability by comparing coefficients of variation
 ($`CV = sd / \bar{x}`$).
 
-### Individual Effect: `lnCVR_ind()`
+### `lnCVR_ind()`
 
 **Formula:**
 ``` math
@@ -274,7 +176,7 @@ $`var(\ln CVR_{ind}) = \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2} + \frac{1}{2
 This assumes no correlation between mean and variance (Nakagawa et
 al. 2015) and is computed as the sum of lnRR and lnVR variances.
 
-### Main Effect: `lnCVR_main()`
+### `lnCVR_main()`
 
 **Formula:**
 ``` math
@@ -286,7 +188,7 @@ $`var(\ln CVR_{main}) = var(\ln RR_{main}) + var(\ln VR_{main})`$
 
 This follows the assumption of no correlation between mean and variance.
 
-### Interaction Effect: `lnCVR_inter()`
+### `lnCVR_inter()`
 
 **Formula:**
 ``` math
@@ -306,10 +208,7 @@ These functions compute effect sizes for treatment × time interactions
 in longitudinal studies, comparing how experimental and control groups
 change over time.
 
-### Treatment × Time SMD: `time_SMD()`
-
-Computes the standardized mean difference for the interaction between
-experimental treatment and time.
+### `time_SMD()`
 
 **Formula:**
 ``` math
@@ -329,7 +228,7 @@ var(d) = \frac{2(1 - r_{Exp})}{n_{Exp}} + \frac{2(1 - r_{Ctrl})}{n_{Ctrl}} + \fr
 where $`r_{Exp}`$ and $`r_{Ctrl}`$ are the correlations between time
 points within each group.
 
-### Treatment × Time lnRR: `time_lnRR()`
+### `time_lnRR()`
 
 **Formula:**
 ``` math
@@ -344,7 +243,7 @@ var(\ln RR) = \frac{(sd_{t0,Exp}^2 \bar{X}_{t1,Exp}^2 + sd_{t1,Exp}^2 \bar{X}_{t
 \frac{(sd_{t0,Ctrl}^2 \bar{X}_{t1,Ctrl}^2 + sd_{t1,Ctrl}^2 \bar{X}_{t0,Ctrl}^2 - 2r_{Ctrl} \bar{X}_{t0,Ctrl} \bar{X}_{t1,Ctrl} sd_{t0,Ctrl} sd_{t1,Ctrl})}{n_{Ctrl} \bar{X}_{t0,Ctrl}^2 \bar{X}_{t1,Ctrl}^2}
 ```
 
-### Treatment × Time lnVR: `time_lnVR()`
+### `time_lnVR()`
 
 **Formula:**
 ``` math
@@ -354,7 +253,7 @@ var(\ln RR) = \frac{(sd_{t0,Exp}^2 \bar{X}_{t1,Exp}^2 + sd_{t1,Exp}^2 \bar{X}_{t
 **Sampling variance:**
 $`var(\ln VR) = \frac{(1 - r_{Exp}^2)}{n_{Exp} - 1} + \frac{(1 - r_{Ctrl}^2)}{n_{Ctrl} - 1}`$
 
-### Treatment × Time lnCVR: `time_lnCVR()`
+### `time_lnCVR()`
 
 **Formula:**
 ``` math

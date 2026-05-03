@@ -2,5 +2,5 @@
 
 ### All vignettes
 
-- [Effect Size Calculations with
-  minter](https://fdecunta.github.io/minter/articles/minter-docs.md):
+- [Effect Sizes
+  Formulas](https://fdecunta.github.io/minter/articles/minter-docs.md):
