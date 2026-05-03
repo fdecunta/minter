@@ -2,7 +2,7 @@
 % Please edit documentation in R/SMD.R
 \name{.simple_SMD}
 \alias{.simple_SMD}
-\title{Simple effect: Standardized Mean Difference}
+\title{Individual effect: Standardized Mean Difference}
 \usage{
 .simple_SMD(
   Ctrl_mean,
@@ -35,13 +35,26 @@ By default, the columns are named \code{yi} (effect size) and \code{vi} (samplin
 If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
-Computes the individual or simple effect of Factor A over the Control.
+Computes the effect of Factor A over the Control.
 }
 \details{
 It is the classic Standardized Mean Difference (SMD), which can also be computed
 with metafor's \code{escalc()} function using \code{measure = "SMD"}.
 
-See the package vignette for a detailed description of the formula.
+The SMD of Factor A over the Control is computed as:
+
+\deqn{d_{ind} = \frac{\bar{X}_A - \bar{X}_{Ctrl}}{S_{pooled}} \cdot J(m)}
+
+where the pooled standard deviation is:
+\deqn{S_{pooled} = \sqrt{\frac{(n_A-1)sd_A^2 + (n_{Ctrl}-1)sd_{Ctrl}^2}{n_A + n_{Ctrl} - 2}}}
+
+And the Hedges correction:
+\deqn{J(m) = 1 - \frac{3}{4m-1}}
+with :
+\deqn{m = n_A + n_{Ctrl} - 2}
+
+The sampling variance is:
+\deqn{var(d_{ind}) = \frac{1}{n_A} + \frac{1}{n_{Ctrl}} + \frac{d^2}{2(n_A + n_{Ctrl})}}
 }
 \examples{
 data <- data.frame(

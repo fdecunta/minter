@@ -66,7 +66,21 @@ Computes the main effect of Factor A across levels of Factor B, analogous
 to the main effect in a factorial ANOVA.
 }
 \details{
-See the package vignette for a detailed description of the formula.
+The main SMD of Factor A is computed as:
+
+\deqn{d_{main} = \frac{(\bar{X}_A + \bar{X}_{AB}) - (\bar{X}_{B} + \bar{X}_{Ctrl})}{2S_{pooled}} \cdot J(m)}
+
+With the pooled standard deviation:
+\deqn{S_{pooled} = \sqrt{\frac{(n_A-1)sd_A^2 + (n_B-1)sd_B^2 + (n_{AB}-1)sd_{AB}^2 + (n_{Ctrl}-1)sd_{Ctrl}^2}{n_A + n_B + n_{AB} + n_{Ctrl} - 4}}}
+
+And the Hedges correction as:
+\deqn{J(m) = 1 - \frac{3}{4m-1}}
+
+with:
+\deqn{m = n_A + n_B + n_{AB} + n_{Ctrl} - 4}
+
+The sampling variance is computed as:
+\deqn{var(d_{main}) = \frac{1}{4} \left(\frac{1}{n_A} + \frac{1}{n_B} + \frac{1}{n_{AB}} + \frac{1}{n_{Ctrl}} + \frac{d_{main}^2}{2(n_A + n_B + n_{AB} + n_{Ctrl})}\right)}
 }
 \examples{
 # Main effect of Mycorrhiza in 2x2 factorial design (AMF x Phosphorus)
