@@ -80,19 +80,18 @@ res <- rma(yi, vi, ..., data = interaction_results)
 
 ## Effect Size Measures
 
--   **lnRR**: Log Response Ratio - proportional effects
--   **SMD**: Standardized Mean Difference - standardized effects  
--   **lnVR**: Log Variability Ratio - effects on variability
--   **lnCVR**: Log Coefficient of Variation Ratio - effects on relative
-    variability
+- **lnRR**: Log Response Ratio - proportional effects
+- **SMD**: Standardized Mean Difference - standardized effects  
+- **lnVR**: Log Variability Ratio - effects on variability
+- **lnCVR**: Log Coefficient of Variation Ratio - effects on relative
+  variability
 
 ## Effect Types
 
--   **Individual**: Simple treatment vs. control, the classic effect
-    size
--   **Main**: Overall effect across levels of another factor
--   **Interaction**: Does one factor’s effect depend on another?
--   **Time**: Treatment × time interactions for repeated measures
+- **Individual**: Simple treatment vs. control, the classic effect size
+- **Main**: Overall effect across levels of another factor
+- **Interaction**: Does one factor’s effect depend on another?
+- **Time**: Treatment × time interactions for repeated measures
 
 ## Acknowledgments
 
