@@ -8,12 +8,14 @@ functions for computing effect sizes from factorial experiments.
 From CRAN:
 
 ``` r
+
 install.packages("minter")
 ```
 
 From GitHub repo:
 
 ``` r
+
 devtools::install_github("fdecunta/minter")
 ```
 
@@ -23,6 +25,7 @@ Imagine you need to estimate the effect size of the interaction between
 fertilization × drought on plant biomass:
 
 ``` r
+
 library(minter)
 
 # Dummy data from 8 studies examining fertilization × drought on plant biomass

@@ -1,5 +1,9 @@
 # Changelog
 
+## minter 0.1.1
+
+- Fix bug in lnCVR formula.
+
 ## minter 0.1.0
 
 CRAN release: 2025-10-06
