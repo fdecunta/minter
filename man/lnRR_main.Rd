@@ -67,6 +67,11 @@ to the main effect in a factorial ANOVA.
 }
 \details{
 See the package vignette for a detailed description of the formula.
+
+\strong{Formulas:}
+\deqn{lnRR_{ind} = \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)}
+
+\deqn{var(lnRR_{ind}) = \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}}
 }
 \examples{
 # Example data for 2x2 factorial design (Fertilization x Warming)

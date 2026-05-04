@@ -2,7 +2,7 @@
 % Please edit documentation in R/lnRR_wrappers.R
 \name{lnRR_ind}
 \alias{lnRR_ind}
-\title{Simple effect: Log Response Ratio}
+\title{Individual effect: Log Response Ratio}
 \usage{
 lnRR_ind(
   data,
@@ -47,7 +47,12 @@ Computes the individual or simple effect of Factor A over the Control.
 It is the classic Log Response Ratio (lnRR), which can also be computed
 with metafor's \code{escalc()} function using \code{measure = "ROM"}.
 
-See the package vignette for a detailed description of the formula.
+The log response ratio of Factor A over Control is computed as:
+
+\strong{Formulas:}
+\deqn{lnRR_{ind} = \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)}
+
+\deqn{var(lnRR_{ind}) = \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}}
 }
 \examples{
 data <- data.frame(

@@ -1,11 +1,16 @@
-#' Simple effect: Log Response Ratio
+#' Individual effect: Log Response Ratio
 #'
 #' Computes the individual or simple effect of Factor A over the Control. 
 #' 
 #' It is the classic Log Response Ratio (lnRR), which can also be computed
 #' with metafor's `escalc()` function using `measure = "ROM"`.
 #'
-#' See the package vignette for a detailed description of the formula.
+#' The log response ratio of Factor A over Control is computed as:
+#'
+#' **Formulas:**
+#' \deqn{lnRR_{ind} = \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)}
+#' 
+#' \deqn{var(lnRR_{ind}) = \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}}
 #' 
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.
@@ -91,6 +96,12 @@ lnRR_ind <- function(
 #' to the main effect in a factorial ANOVA. 
 #'
 #' See the package vignette for a detailed description of the formula.
+#'
+#' **Formulas:**
+#' \deqn{lnRR_{ind} = \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)}
+#' 
+#' \deqn{var(lnRR_{ind}) = \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}}
+#' 
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
