@@ -75,34 +75,6 @@ measures.
 
 ## Log Response Ratio (lnRR)
 
-### `lnRR_ind()`
-
-Computes the individual effect of Factor A compared to Control. This is
-equivalent to the classic lnRR that can be computed using metafor’s
-`escalc()` function with `measure = "ROM"`.
-
-**Formula:**
-``` math
-\ln RR_{ind} = \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)
-```
-
-**Sampling variance:**
-``` math
-var(\ln RR_{ind}) = \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
-```
-
-### `lnRR_main()`
-
-**Formula:**
-``` math
-\ln RR_{main} = \ln\left(\frac{\bar{X}_A + \bar{X}_{AB}}{\bar{X}_{Ctrl} + \bar{X}_B}\right)
-```
-
-**Sampling variance:**
-``` math
-var(\ln RR_{main}) = \left(\frac{1}{\bar{X}_A + \bar{X}_{AB}}\right)^2 \left(\frac{sd_A^2}{n_A} + \frac{sd_{AB}^2}{n_{AB}}\right) + \left(\frac{1}{\bar{X}_{Ctrl} + \bar{X}_B}\right)^2 \left(\frac{sd_{Ctrl}^2}{n_{Ctrl}} + \frac{sd_B^2}{n_B}\right)
-```
-
 ### `lnRR_inter()`
 
 **Formula:**

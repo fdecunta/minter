@@ -105,6 +105,12 @@ variance). If `append = TRUE`, the results are appended to the input
 
 See the package vignette for a detailed description of the formula.
 
+**Formulas:** \$\$lnRR\_{ind} =
+\ln\left(\frac{\bar{X}\_A}{\bar{X}\_{Ctrl}}\right)\$\$
+
+\$\$var(lnRR\_{ind}) = \frac{sd_A^2}{n_A\bar{X}\_A^2} +
+\frac{sd\_{Ctrl}^2}{n\_{Ctrl}\bar{X}\_{Ctrl}^2}\$\$
+
 ## References
 
 Morris, W. F., Hufbauer, R. A., Agrawal, A. A., Bever, J. D., Borowicz,

@@ -1,4 +1,4 @@
-# Simple effect: Log Response Ratio
+# Individual effect: Log Response Ratio
 
 Computes the individual or simple effect of Factor A over the Control.
 
@@ -69,7 +69,13 @@ variance). If `append = TRUE`, the results are appended to the input
 It is the classic Log Response Ratio (lnRR), which can also be computed
 with metafor's `escalc()` function using `measure = "ROM"`.
 
-See the package vignette for a detailed description of the formula.
+The log response ratio of Factor A over Control is computed as:
+
+**Formulas:** \$\$lnRR\_{ind} =
+\ln\left(\frac{\bar{X}\_A}{\bar{X}\_{Ctrl}}\right)\$\$
+
+\$\$var(lnRR\_{ind}) = \frac{sd_A^2}{n_A\bar{X}\_A^2} +
+\frac{sd\_{Ctrl}^2}{n\_{Ctrl}\bar{X}\_{Ctrl}^2}\$\$
 
 ## References
 

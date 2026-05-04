@@ -94,7 +94,7 @@ their formulas for meta-analysis of interactions.
 ## Effect sizes for 2-by-2 factorials
 
 - [`lnRR_ind()`](https://fdecunta.github.io/minter/reference/lnRR_ind.md)
-  : Simple effect: Log Response Ratio
+  : Individual effect: Log Response Ratio
 - [`lnRR_inter()`](https://fdecunta.github.io/minter/reference/lnRR_inter.md)
   : Interaction effect: Log Response Ratio
 - [`lnRR_main()`](https://fdecunta.github.io/minter/reference/lnRR_main.md)
