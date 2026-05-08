@@ -1,5 +1,9 @@
 #' Log Coefficient of Variation Ratio: Interaction Between Treatment and Time
 #'
+#' \deqn{lnCVR = \ln\left(\frac{CV_{t1.Exp} / CV_{t1.Ctrl}}{CV_{t0.Exp} / CV_{t0.Ctrl}}\right)}
+#' 
+#' \deqn{var(lnCVR) = var(lnRR) + var(lnVR)}
+#'
 #' @inheritParams time_lnRR
 #'
 #' @inherit lnRR_ind return

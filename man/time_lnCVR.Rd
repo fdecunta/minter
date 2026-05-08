@@ -59,7 +59,10 @@ By default, the columns are named \code{yi} (effect size) and \code{vi} (samplin
 If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
-Log Coefficient of Variation Ratio: Interaction Between Treatment and Time
+\deqn{lnCVR = \ln\left(\frac{CV_{t1.Exp} / CV_{t1.Ctrl}}{CV_{t0.Exp} / CV_{t0.Ctrl}}\right)}
+}
+\details{
+\deqn{var(lnCVR) = var(lnRR) + var(lnVR)}
 }
 \examples{
 # Pre-post design for coefficient of variation changes over time (Disturbance experiment)

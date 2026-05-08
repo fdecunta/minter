@@ -1,5 +1,9 @@
 #' Log of Variability Ratio: Interaction Between Treatment and Time
 #'
+#' \deqn{\lnVR = \ln\left(\frac{sd_{t1,Exp} / sd_{t1,Ctrl}}{sd_{t0,Exp} / sd_{t0,Ctrl}}\right)}
+#' 
+#' \deqn{var(\ln VR) = \frac{(1 - r_{Exp}^2)}{n_{Exp} - 1} + \frac{(1 - r_{Ctrl}^2)}{n_{Ctrl} - 1}}
+#'
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE

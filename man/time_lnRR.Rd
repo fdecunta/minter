@@ -59,7 +59,11 @@ By default, the columns are named \code{yi} (effect size) and \code{vi} (samplin
 If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
-Log Response Ratio: Interaction Between Treatment and Time
+\deqn{lnRR = \ln\left(\frac{\bar{X}_{t1,Exp} / \bar{X}_{t1,Ctrl}}{\bar{X}_{t0,Exp} / \bar{X}_{t0,Ctrl}}\right)}
+}
+\details{
+\deqn{var(\ln RR) = \frac{(sd_{t0,Exp}^2 \bar{X}_{t1,Exp}^2 + sd_{t1,Exp}^2 \bar{X}_{t0,Exp}^2 - 2r_{Exp} \bar{X}_{t0,Exp} \bar{X}_{t1,Exp} sd_{t0,Exp} sd_{t1,Exp})}{n_{Exp} \bar{X}_{t0,Exp}^2 \bar{X}_{t1,Exp}^2} +}
+\deqn{\frac{(sd_{t0,Ctrl}^2 \bar{X}_{t1,Ctrl}^2 + sd_{t1,Ctrl}^2 \bar{X}_{t0,Ctrl}^2 - 2r_{Ctrl} \bar{X}_{t0,Ctrl} \bar{X}_{t1,Ctrl} sd_{t0,Ctrl} sd_{t1,Ctrl})}{n_{Ctrl} \bar{X}_{t0,Ctrl}^2 \bar{X}_{t1,Ctrl}^2}}
 }
 \examples{
 data <- data.frame(

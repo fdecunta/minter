@@ -5,14 +5,30 @@ template:
   bootswatch: lumen
   math-rendering: mathjax
 reference:
-- title: Effect sizes for 2-by-2 factorials
+- title: SMD - Standardized Mean Difference
   contents:
-  - starts_with("lnRR_")
-  - starts_with("lnVR_")
-  - starts_with("lnCVR_")
-  - starts_with("SMD_")
-- title: Effect sizes for repeated measures of a treatment
-  contents: starts_with("time_")
+  - SMD_ind
+  - SMD_main
+  - SMD_inter
+  - time_SMD
+- title: lnRR - Log Response Ratio
+  contents:
+  - lnRR_ind
+  - lnRR_main
+  - lnRR_inter
+  - time_lnRR
+- title: lnVR - Log Variation Ratio
+  contents:
+  - lnVR_ind
+  - lnVR_main
+  - lnVR_inter
+  - time_lnVR
+- title: lnCVR - Log Coefficient of Variation Ratio
+  contents:
+  - lnCVR_ind
+  - lnCVR_main
+  - lnCVR_inter
+  - time_lnCVR
 news:
   one_page: yes
 

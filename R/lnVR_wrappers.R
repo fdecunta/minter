@@ -3,6 +3,10 @@
 #' Computes the Log of the Variability Ratio between
 #' a Factor A and the Control treatment in factorial experiments.
 #'
+#' \deqn{lnVR_{ind} = \ln\left(\frac{sd_{A}}{sd_{Ctrl}}\right) + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{Ctrl} - 1)}}
+#' 
+#' \deqn{var(\lnVR_{ind}) = \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}}
+#'
 #' See the package vignette for a detailed description of the formula.
 #'
 #' @param data Data frame containing the variables used.
@@ -74,8 +78,10 @@ lnVR_ind <- function(
 #' Computes the overral log of the variability ratio for Factor A
 #' across levels of Factor B. 
 #'
-#' See the package vignette for a detailed description of the formula.
-#' 
+#' \deqn{lnVR_{main} = \frac{1}{2} \ln\left( \frac{sd_{AB} \cdot sd_{A}}{sd_{B} \cdot sd_{Ctrl}} \right) + \frac{1}{2} \left( \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{B} - 1)} - \frac{1}{2(n_{Ctrl} - 1)} \right)}
+#'
+#' \deqn{var(\ln VR_{main}) = \frac{1}{4} \left( \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)} \right)}
+#'
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.
 #' @param append Logical. Append the results to \code{data}. Default is TRUE
@@ -146,6 +152,10 @@ lnVR_main <- function(
 #'
 #' Computes the interaction of Factors A and B measured as 
 #' the log of the variability ratio.
+#'
+#' \deqn{lnVR_{inter} = \ln\left( \frac{sd_{AB} / sd_{B}}{sd_{A} / sd_{Ctrl}} \right) + \frac{1}{2(n_{AB} - 1)} - \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}}
+#'
+#' \deqn{var(\lnVR_{inter}) = \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}}
 #'
 #' See the package vignette for a detailed description of the formula.
 #'

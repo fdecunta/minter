@@ -45,7 +45,11 @@ Computes the Log of the Coefficient of Variation Ratio between Factor A
 and the Control treatment.
 }
 \details{
-See the package vignette for a detailed description of the formula.
+\deqn{lnCVR_{ind} = \ln\left( \frac{CV_{A}}{CV_{Ctrl}} \right) + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{Ctrl} - 1)}}
+
+\deqn{var(lnCVR_{ind}) = \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2} + \frac{1}{2(n_{Ctrl} - 1)} + \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{1}{2(n_A - 1)}}
+
+This assumes no correlation between mean and variance (Nakagawa et al. 2015) and is computed as the sum of lnRR and lnVR variances.
 }
 \examples{
 data <- data.frame(

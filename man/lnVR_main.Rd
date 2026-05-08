@@ -51,7 +51,9 @@ Computes the overral log of the variability ratio for Factor A
 across levels of Factor B.
 }
 \details{
-See the package vignette for a detailed description of the formula.
+\deqn{lnVR_{main} = \frac{1}{2} \ln\left( \frac{sd_{AB} \cdot sd_{A}}{sd_{B} \cdot sd_{Ctrl}} \right) + \frac{1}{2} \left( \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{B} - 1)} - \frac{1}{2(n_{Ctrl} - 1)} \right)}
+
+\deqn{var(\ln VR_{main}) = \frac{1}{4} \left( \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)} \right)}
 }
 \examples{
 # Example for main effect in 2x2 factorial focusing on variability (Fire x Grazing)

@@ -1,5 +1,15 @@
 #' Standardized Mean Difference: Interaction Between Treatment and Time
 #'
+#' \deqn{d = \frac{(\bar{X}_{t1{,}Exp} - \bar{X}_{t1{,}Ctrl}) - (\bar{X}_{t0{,}Exp} - \bar{X}_{t0{,}Ctrl})}{S_{pooled}} \cdot J}
+#'
+#' Pooled standard deviation:
+#' \deqn{S_{pooled} = \sqrt{\frac{((n_{Exp} - 1)(sd_{t0,Exp}^2 + sd_{t1,Exp}^2) + (n_{Ctrl} - 1)(sd_{t0,Ctrl}^2 + sd_{t1,Ctrl}^2))}{2(n_{Exp} + n_{Ctrl} - 2)}}}
+#'
+#' Sampling variance:
+#' \deqn{var(d) = \frac{2(1 - r_{Exp})}{n_{Exp}} + \frac{2(1 - r_{Ctrl})}{n_{Ctrl}} + \frac{d^2}{2(n_{Exp} + n_{Ctrl})}}
+#'
+#' where \eqn{r_{Exp}} and \eqn{r_{Ctrl}} are the correlations between time points within each group.
+#'
 #' @inheritParams time_lnRR
 #' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE.
 #'

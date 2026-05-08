@@ -47,7 +47,10 @@ By default, the columns are named \code{yi} (effect size) and \code{vi} (samplin
 If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
-Log of Variability Ratio: Interaction Between Treatment and Time
+\deqn{\lnVR = \ln\left(\frac{sd_{t1,Exp} / sd_{t1,Ctrl}}{sd_{t0,Exp} / sd_{t0,Ctrl}}\right)}
+}
+\details{
+\deqn{var(\ln VR) = \frac{(1 - r_{Exp}^2)}{n_{Exp} - 1} + \frac{(1 - r_{Ctrl}^2)}{n_{Ctrl} - 1}}
 }
 \examples{
 data <- data.frame(

@@ -63,7 +63,11 @@ Computes the interaction effect between Factors A and B
 in factorial experiments on the coefficient of variation ratio.
 }
 \details{
-See the package vignette for a detailed description of the formula.
+\deqn{lnCVR_{inter} = \ln\left( \frac{CV_{AB} / CV_{B}}{CV_{A} / CV_{Ctrl}} \right) + \frac{1}{2} \left( \frac{1}{2(n_{AB} - 1)} - \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} - \frac{1}{2(n_{Ctrl} - 1)} \right)}
+
+\deqn{var(lnCVR_{inter}) = var(\ln RR_{inter}) + var(\ln VR_{inter})}
+
+This follows the assumption of no correlation between mean and variance.
 }
 \examples{
 # Interaction effect logCVR (Light x Nutrients)
