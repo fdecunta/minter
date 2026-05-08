@@ -1,6 +1,6 @@
 #' Standardized Mean Difference: Interaction Between Treatment and Time
 #'
-#' \deqn{d = \frac{(\bar{X}_{t1{,}Exp} - \bar{X}_{t1{,}Ctrl}) - (\bar{X}_{t0{,}Exp} - \bar{X}_{t0{,}Ctrl})}{S_{pooled}} \cdot J}
+#' \deqn{d = \frac{(\bar{X}_{t1,Exp} - \bar{X}_{t1,Ctrl}) - (\bar{X}_{t0,Exp} - \bar{X}_{t0,Ctrl})}{S_{pooled}} \cdot J}
 #'
 #' Pooled standard deviation:
 #' \deqn{S_{pooled} = \sqrt{\frac{((n_{Exp} - 1)(sd_{t0,Exp}^2 + sd_{t1,Exp}^2) + (n_{Ctrl} - 1)(sd_{t0,Ctrl}^2 + sd_{t1,Ctrl}^2))}{2(n_{Exp} + n_{Ctrl} - 2)}}}
