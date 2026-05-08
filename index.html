@@ -57,7 +57,22 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>Effect sizes for meta-analysis of interactions. A collection of functions for computing effect sizes from factorial experiments.</p>
+<p>The <strong>minter</strong> package is a collection of functions for calculating effect sizes for meta-analysis of interactions.</p>
+<p>The interaction can be between two factors (2-by-2 factorials) or between a factor and time (repeated measures experiments). For both design types, four effect size measures are available:</p>
+<ul>
+<li><p>lnRR: Log Response Ratio</p></li>
+<li><p>SMD: Standardized Mean Difference</p></li>
+<li><p>lnVR: Log Variability Ratio</p></li>
+<li><p>lnCVR: Log Coefficient of Variation Ratio</p></li>
+</ul>
+<p>Typical effect sizes compare two values, the treatment vs. the control. However, factorial experiments allow computing different contrasts (and <strong>minter</strong> has functions for each):</p>
+<ul>
+<li><p>Individual effects: Direct comparisons between single treatments, the classic effect size.</p></li>
+<li><p>Main effects: Average effect of one factor across levels of another factor, analogous to the main effect in ANOVA.</p></li>
+<li><p>Interaction effects: How the effect of one factor depends on the level of another factor.</p></li>
+</ul>
+<p>For repeated measures experiments, the effect size quantifies the interaction between a factor and time.</p>
+<p>See <a href="https://fdecunta.github.io/minter/reference/index.html">References</a> for more.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -71,7 +86,7 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>Imagine you need to estimate the effect size of the interaction between fertilization × drought on plant biomass:</p>
+<p>Suppose you need to estimate the effect size of the interaction between fertilization × drought on plant biomass:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fdecunta.github.io/minter/">minter</a></span><span class="op">)</span></span>
 <span></span>
@@ -116,38 +131,9 @@
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">rma</span><span class="op">(</span><span class="va">yi</span>, <span class="va">vi</span>, <span class="va">...</span>, data <span class="op">=</span> <span class="va">interaction_results</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="effect-size-measures">Effect Size Measures<a class="anchor" aria-label="anchor" href="#effect-size-measures"></a>
-</h2>
-<ul>
-<li>
-<strong>lnRR</strong>: Log Response Ratio - proportional effects</li>
-<li>
-<strong>SMD</strong>: Standardized Mean Difference - standardized effects<br>
-</li>
-<li>
-<strong>lnVR</strong>: Log Variability Ratio - effects on variability</li>
-<li>
-<strong>lnCVR</strong>: Log Coefficient of Variation Ratio - effects on relative variability</li>
-</ul>
-</div>
-<div class="section level2">
-<h2 id="effect-types">Effect Types<a class="anchor" aria-label="anchor" href="#effect-types"></a>
-</h2>
-<ul>
-<li>
-<strong>Individual</strong>: Simple treatment vs. control, the classic effect size</li>
-<li>
-<strong>Main</strong>: Overall effect across levels of another factor</li>
-<li>
-<strong>Interaction</strong>: Does one factor’s effect depend on another?</li>
-<li>
-<strong>Time</strong>: Treatment × time interactions for repeated measures</li>
-</ul>
-</div>
-<div class="section level2">
 <h2 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
 </h2>
-<p>Thanks to Shinichi Nakagawa and Daniel Noble for generously sharing their formulas for meta-analysis of interactions.</p>
+<p>Thanks to Shinichi Nakagawa and Daniel Noble for generously sharing their formulas.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

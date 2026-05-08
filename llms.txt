@@ -1,7 +1,38 @@
 # minter ![](reference/figures/minter_logo.png)
 
-Effect sizes for meta-analysis of interactions. A collection of
-functions for computing effect sizes from factorial experiments.
+The **minter** package is a collection of functions for calculating
+effect sizes for meta-analysis of interactions.
+
+The interaction can be between two factors (2-by-2 factorials) or
+between a factor and time (repeated measures experiments). For both
+design types, four effect size measures are available:
+
+- lnRR: Log Response Ratio
+
+- SMD: Standardized Mean Difference
+
+- lnVR: Log Variability Ratio
+
+- lnCVR: Log Coefficient of Variation Ratio
+
+Typical effect sizes compare two values, the treatment vs. the control.
+However, factorial experiments allow computing different contrasts (and
+**minter** has functions for each):
+
+- Individual effects: Direct comparisons between single treatments, the
+  classic effect size.
+
+- Main effects: Average effect of one factor across levels of another
+  factor, analogous to the main effect in ANOVA.
+
+- Interaction effects: How the effect of one factor depends on the level
+  of another factor.
+
+For repeated measures experiments, the effect size quantifies the
+interaction between a factor and time.
+
+See [References](https://fdecunta.github.io/minter/reference/index.html)
+for more.
 
 ## Installation
 
@@ -21,7 +52,7 @@ devtools::install_github("fdecunta/minter")
 
 ## Example
 
-Imagine you need to estimate the effect size of the interaction between
+Suppose you need to estimate the effect size of the interaction between
 fertilization × drought on plant biomass:
 
 ``` r
@@ -69,25 +100,10 @@ library(metafor)
 res <- rma(yi, vi, ..., data = interaction_results)
 ```
 
-## Effect Size Measures
-
-- **lnRR**: Log Response Ratio - proportional effects
-- **SMD**: Standardized Mean Difference - standardized effects  
-- **lnVR**: Log Variability Ratio - effects on variability
-- **lnCVR**: Log Coefficient of Variation Ratio - effects on relative
-  variability
-
-## Effect Types
-
-- **Individual**: Simple treatment vs. control, the classic effect size
-- **Main**: Overall effect across levels of another factor
-- **Interaction**: Does one factor’s effect depend on another?
-- **Time**: Treatment × time interactions for repeated measures
-
 ## Acknowledgments
 
 Thanks to Shinichi Nakagawa and Daniel Noble for generously sharing
-their formulas for meta-analysis of interactions.
+their formulas.
 
 # Package index
 
