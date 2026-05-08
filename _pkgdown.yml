@@ -3,6 +3,7 @@ title: minter
 template:
   bootstrap: 5
   bootswatch: lumen
+  math-rendering: mathjax
 reference:
 - title: Effect sizes for 2-by-2 factorials
   contents:
