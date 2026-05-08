@@ -16,16 +16,6 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-The **minter** package is a collection of functions for calculating effect sizes. Specifically, effect sizes from both factorial experimental designs and repeated measures studies. For both design types, there are different possible measures: two for differences in means (standardized mean difference and log response ratio), and two for differences in variance (log variation ratio and log coefficient of variation ratio). 
-
-Typical effect sizes compare two values, the treatments vs the control. However, factorial experiments allows to compute different contrasts:
-
-- **Individual effects**: Direct comparisons between single treatments, the classic effect size. 
-- **Main effects**: Average effect of one factor across levels of another factor, analogous to main effect in ANOVA.  
-- **Interaction effects**: How the effect of one factor depends on the level of another factor.
-
-For repeated measures, the only possible effect size allows to compute the treatment × time interactions.
-
 ## Quick Navigation
 
 #### Standardized Mean Difference (SMD)
