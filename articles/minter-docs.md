@@ -56,15 +56,14 @@ measures.
 
 ### `lnRR_inter()`
 
-**Formula:**
-``` math
-\ln RR_{inter} = \ln\left(\frac{\bar{X}_{AB}}{\bar{X}_B}\right) - \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)
-```
+**Formula:** \\\ln RR\_{inter} =
+\ln\left(\frac{\bar{X}\_{AB}}{\bar{X}\_B}\right) -
+\ln\left(\frac{\bar{X}\_A}{\bar{X}\_{Ctrl}}\right)\\
 
-**Sampling variance:**
-``` math
-var(\ln RR_{inter}) = \frac{sd_{AB}^2}{n_{AB}\bar{X}_{AB}^2} + \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_B^2}{n_B\bar{X}_B^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
-```
+**Sampling variance:** \\var(\ln RR\_{inter}) =
+\frac{sd\_{AB}^2}{n\_{AB}\bar{X}\_{AB}^2} +
+\frac{sd_A^2}{n_A\bar{X}\_A^2} + \frac{sd_B^2}{n_B\bar{X}\_B^2} +
+\frac{sd\_{Ctrl}^2}{n\_{Ctrl}\bar{X}\_{Ctrl}^2}\\
 
 ------------------------------------------------------------------------
 
@@ -72,39 +71,34 @@ var(\ln RR_{inter}) = \frac{sd_{AB}^2}{n_{AB}\bar{X}_{AB}^2} + \frac{sd_A^2}{n_A
 
 ### `lnVR_ind()`
 
-**Formula:**
-``` math
-\ln VR_{ind} = \ln\left(\frac{sd_{A}}{sd_{Ctrl}}\right) + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{Ctrl} - 1)}
-```
+**Formula:** \\\ln VR\_{ind} =
+\ln\left(\frac{sd\_{A}}{sd\_{Ctrl}}\right) + \frac{1}{2(n\_{A} - 1)} -
+\frac{1}{2(n\_{Ctrl} - 1)}\\
 
-**Sampling variance:**
-``` math
-var(\ln VR_{ind}) = \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}
-```
+**Sampling variance:** \\var(\ln VR\_{ind}) = \frac{1}{2(n\_{A} - 1)} +
+\frac{1}{2(n\_{Ctrl} - 1)}\\
 
 ### `lnVR_main()`
 
-**Formula:**
-``` math
-\ln VR_{main} = \frac{1}{2} \ln\left( \frac{sd_{AB} \cdot sd_{A}}{sd_{B} \cdot sd_{Ctrl}} \right) + \frac{1}{2} \left( \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{B} - 1)} - \frac{1}{2(n_{Ctrl} - 1)} \right)
-```
+**Formula:** \\\ln VR\_{main} = \frac{1}{2} \ln\left( \frac{sd\_{AB}
+\cdot sd\_{A}}{sd\_{B} \cdot sd\_{Ctrl}} \right) + \frac{1}{2} \left(
+\frac{1}{2(n\_{AB} - 1)} + \frac{1}{2(n\_{A} - 1)} - \frac{1}{2(n\_{B} -
+1)} - \frac{1}{2(n\_{Ctrl} - 1)} \right)\\
 
-**Sampling variance:**
-``` math
-var(\ln VR_{main}) = \frac{1}{4} \left( \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)} \right)
-```
+**Sampling variance:** \\var(\ln VR\_{main}) = \frac{1}{4} \left(
+\frac{1}{2(n\_{AB} - 1)} + \frac{1}{2(n\_{A} - 1)} + \frac{1}{2(n\_{B} -
+1)} + \frac{1}{2(n\_{Ctrl} - 1)} \right)\\
 
 ### `lnVR_inter()`
 
-**Formula:**
-``` math
-\ln VR_{inter} = \ln\left( \frac{sd_{AB} / sd_{B}}{sd_{A} / sd_{Ctrl}} \right) + \frac{1}{2(n_{AB} - 1)} - \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}
-```
+**Formula:** \\\ln VR\_{inter} = \ln\left( \frac{sd\_{AB} /
+sd\_{B}}{sd\_{A} / sd\_{Ctrl}} \right) + \frac{1}{2(n\_{AB} - 1)} -
+\frac{1}{2(n\_{A} - 1)} - \frac{1}{2(n\_{B} - 1)} +
+\frac{1}{2(n\_{Ctrl} - 1)}\\
 
-**Sampling variance:**
-``` math
-var(\ln VR_{inter}) = \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}
-```
+**Sampling variance:** \\var(\ln VR\_{inter}) = \frac{1}{2(n\_{AB} -
+1)} + \frac{1}{2(n\_{A} - 1)} + \frac{1}{2(n\_{B} - 1)} +
+\frac{1}{2(n\_{Ctrl} - 1)}\\
 
 ------------------------------------------------------------------------
 
@@ -112,42 +106,41 @@ var(\ln VR_{inter}) = \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} + \frac{1
 
 The Log Coefficient of Variation Ratio combines information about both
 mean responses and variability by comparing coefficients of variation
-($`CV = sd / \bar{x}`$).
+(\\CV = sd / \bar{x}\\).
 
 ### `lnCVR_ind()`
 
-**Formula:**
-``` math
-\ln CVR_{ind} = \ln\left( \frac{CV_{A}}{CV_{Ctrl}} \right) + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{Ctrl} - 1)}
-```
+**Formula:** \\\ln CVR\_{ind} = \ln\left( \frac{CV\_{A}}{CV\_{Ctrl}}
+\right) + \frac{1}{2(n\_{A} - 1)} - \frac{1}{2(n\_{Ctrl} - 1)}\\
 
-**Sampling variance:**
-$`var(\ln CVR_{ind}) = \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2} + \frac{1}{2(n_{Ctrl} - 1)} + \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{1}{2(n_A - 1)}`$
+**Sampling variance:** \\var(\ln CVR\_{ind}) =
+\frac{sd\_{Ctrl}^2}{n\_{Ctrl}\bar{X}\_{Ctrl}^2} + \frac{1}{2(n\_{Ctrl} -
+1)} + \frac{sd_A^2}{n_A\bar{X}\_A^2} + \frac{1}{2(n_A - 1)}\\
 
 This assumes no correlation between mean and variance (Nakagawa et
 al. 2015) and is computed as the sum of lnRR and lnVR variances.
 
 ### `lnCVR_main()`
 
-**Formula:**
-``` math
-\ln CVR_{main} = \frac{1}{2} \ln\left( \frac{CV_{AB} \cdot CV_{A}}{CV_{B} \cdot CV_{Ctrl}} \right) + \frac{1}{2} \left( \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{B} - 1)} - \frac{1}{2(n_{Ctrl} - 1)} \right)
-```
+**Formula:** \\\ln CVR\_{main} = \frac{1}{2} \ln\left( \frac{CV\_{AB}
+\cdot CV\_{A}}{CV\_{B} \cdot CV\_{Ctrl}} \right) + \frac{1}{2} \left(
+\frac{1}{2(n\_{AB} - 1)} + \frac{1}{2(n\_{A} - 1)} - \frac{1}{2(n\_{B} -
+1)} - \frac{1}{2(n\_{Ctrl} - 1)} \right)\\
 
-**Sampling variance:**
-$`var(\ln CVR_{main}) = var(\ln RR_{main}) + var(\ln VR_{main})`$
+**Sampling variance:** \\var(\ln CVR\_{main}) = var(\ln RR\_{main}) +
+var(\ln VR\_{main})\\
 
 This follows the assumption of no correlation between mean and variance.
 
 ### `lnCVR_inter()`
 
-**Formula:**
-``` math
-\ln CVR_{inter} = \ln\left( \frac{CV_{AB} / CV_{B}}{CV_{A} / CV_{Ctrl}} \right) + \frac{1}{2} \left( \frac{1}{2(n_{AB} - 1)} - \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} - \frac{1}{2(n_{Ctrl} - 1)} \right)
-```
+**Formula:** \\\ln CVR\_{inter} = \ln\left( \frac{CV\_{AB} /
+CV\_{B}}{CV\_{A} / CV\_{Ctrl}} \right) + \frac{1}{2} \left(
+\frac{1}{2(n\_{AB} - 1)} - \frac{1}{2(n\_{A} - 1)} + \frac{1}{2(n\_{B} -
+1)} - \frac{1}{2(n\_{Ctrl} - 1)} \right)\\
 
-**Sampling variance:**
-$`var(\ln CVR_{inter}) = var(\ln RR_{inter}) + var(\ln VR_{inter})`$
+**Sampling variance:** \\var(\ln CVR\_{inter}) = var(\ln RR\_{inter}) +
+var(\ln VR\_{inter})\\
 
 This follows the assumption of no correlation between mean and variance.
 
@@ -161,60 +154,48 @@ change over time.
 
 ### `time_SMD()`
 
-**Formula:**
-``` math
-d = \frac{((\bar{X}_{t1,Exp} - \bar{X}_{t1,Ctrl}) - (\bar{X}_{t0,Exp} - \bar{X}_{t0,Ctrl}))}{S_{pooled}} \cdot J
-```
+**Formula:** \\d = \frac{((\bar{X}\_{t1,Exp} - \bar{X}\_{t1,Ctrl}) -
+(\bar{X}\_{t0,Exp} - \bar{X}\_{t0,Ctrl}))}{S\_{pooled}} \cdot J\\
 
-**Time-specific pooled standard deviation:**
-``` math
-S_{pooled} = \sqrt{\frac{((n_{Exp} - 1)(sd_{t0,Exp}^2 + sd_{t1,Exp}^2) + (n_{Ctrl} - 1)(sd_{t0,Ctrl}^2 + sd_{t1,Ctrl}^2))}{2(n_{Exp} + n_{Ctrl} - 2)}}
-```
+**Time-specific pooled standard deviation:** \\S\_{pooled} =
+\sqrt{\frac{((n\_{Exp} - 1)(sd\_{t0,Exp}^2 + sd\_{t1,Exp}^2) +
+(n\_{Ctrl} - 1)(sd\_{t0,Ctrl}^2 + sd\_{t1,Ctrl}^2))}{2(n\_{Exp} +
+n\_{Ctrl} - 2)}}\\
 
-**Sampling variance:**
-``` math
-var(d) = \frac{2(1 - r_{Exp})}{n_{Exp}} + \frac{2(1 - r_{Ctrl})}{n_{Ctrl}} + \frac{d^2}{2(n_{Exp} + n_{Ctrl})}
-```
+**Sampling variance:** \\var(d) = \frac{2(1 - r\_{Exp})}{n\_{Exp}} +
+\frac{2(1 - r\_{Ctrl})}{n\_{Ctrl}} + \frac{d^2}{2(n\_{Exp} +
+n\_{Ctrl})}\\
 
-where $`r_{Exp}`$ and $`r_{Ctrl}`$ are the correlations between time
+where \\r\_{Exp}\\ and \\r\_{Ctrl}\\ are the correlations between time
 points within each group.
 
 ### `time_lnRR()`
 
-**Formula:**
-``` math
-\ln RR = \ln\left(\frac{\bar{X}_{t1,Exp} / \bar{X}_{t1,Ctrl}}{\bar{X}_{t0,Exp} / \bar{X}_{t0,Ctrl}}\right)
-```
+**Formula:** \\\ln RR = \ln\left(\frac{\bar{X}\_{t1,Exp} /
+\bar{X}\_{t1,Ctrl}}{\bar{X}\_{t0,Exp} / \bar{X}\_{t0,Ctrl}}\right)\\
 
-**Sampling variance:**
-``` math
-var(\ln RR) = \frac{(sd_{t0,Exp}^2 \bar{X}_{t1,Exp}^2 + sd_{t1,Exp}^2 \bar{X}_{t0,Exp}^2 - 2r_{Exp} \bar{X}_{t0,Exp} \bar{X}_{t1,Exp} sd_{t0,Exp} sd_{t1,Exp})}{n_{Exp} \bar{X}_{t0,Exp}^2 \bar{X}_{t1,Exp}^2} +
-```
-``` math
-\frac{(sd_{t0,Ctrl}^2 \bar{X}_{t1,Ctrl}^2 + sd_{t1,Ctrl}^2 \bar{X}_{t0,Ctrl}^2 - 2r_{Ctrl} \bar{X}_{t0,Ctrl} \bar{X}_{t1,Ctrl} sd_{t0,Ctrl} sd_{t1,Ctrl})}{n_{Ctrl} \bar{X}_{t0,Ctrl}^2 \bar{X}_{t1,Ctrl}^2}
-```
+**Sampling variance:** \\var(\ln RR) = \frac{(sd\_{t0,Exp}^2
+\bar{X}\_{t1,Exp}^2 + sd\_{t1,Exp}^2 \bar{X}\_{t0,Exp}^2 - 2r\_{Exp}
+\bar{X}\_{t0,Exp} \bar{X}\_{t1,Exp} sd\_{t0,Exp} sd\_{t1,Exp})}{n\_{Exp}
+\bar{X}\_{t0,Exp}^2 \bar{X}\_{t1,Exp}^2} +\\ \\\frac{(sd\_{t0,Ctrl}^2
+\bar{X}\_{t1,Ctrl}^2 + sd\_{t1,Ctrl}^2 \bar{X}\_{t0,Ctrl}^2 - 2r\_{Ctrl}
+\bar{X}\_{t0,Ctrl} \bar{X}\_{t1,Ctrl} sd\_{t0,Ctrl}
+sd\_{t1,Ctrl})}{n\_{Ctrl} \bar{X}\_{t0,Ctrl}^2 \bar{X}\_{t1,Ctrl}^2}\\
 
 ### `time_lnVR()`
 
-**Formula:**
-``` math
-\ln VR = \ln\left(\frac{sd_{t1,Exp} / sd_{t1,Ctrl}}{sd_{t0,Exp} / sd_{t0,Ctrl}}\right)
-```
+**Formula:** \\\ln VR = \ln\left(\frac{sd\_{t1,Exp} /
+sd\_{t1,Ctrl}}{sd\_{t0,Exp} / sd\_{t0,Ctrl}}\right)\\
 
-**Sampling variance:**
-$`var(\ln VR) = \frac{(1 - r_{Exp}^2)}{n_{Exp} - 1} + \frac{(1 - r_{Ctrl}^2)}{n_{Ctrl} - 1}`$
+**Sampling variance:** \\var(\ln VR) = \frac{(1 -
+r\_{Exp}^2)}{n\_{Exp} - 1} + \frac{(1 - r\_{Ctrl}^2)}{n\_{Ctrl} - 1}\\
 
 ### `time_lnCVR()`
 
-**Formula:**
-``` math
-\ln CVR = \ln\left(\frac{CV_{t1,Exp} / CV_{t1,Ctrl}}{CV_{t0,Exp} / CV_{t0,Ctrl}}\right)
-```
+**Formula:** \\\ln CVR = \ln\left(\frac{CV\_{t1,Exp} /
+CV\_{t1,Ctrl}}{CV\_{t0,Exp} / CV\_{t0,Ctrl}}\right)\\
 
-**Sampling variance:**
-``` math
-var(\ln CVR) = var(\ln RR) + var(\ln VR)
-```
+**Sampling variance:** \\var(\ln CVR) = var(\ln RR) + var(\ln VR)\\
 
 ------------------------------------------------------------------------
 
