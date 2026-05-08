@@ -77,6 +77,13 @@ variance). If `append = TRUE`, the results are appended to the input
 
 ## Details
 
+\$\$lnVR\_{inter} = \ln\left( \frac{sd\_{AB} / sd\_{B}}{sd\_{A} /
+sd\_{Ctrl}} \right) + \frac{1}{2(n\_{AB} - 1)} - \frac{1}{2(n\_{A} -
+1)} - \frac{1}{2(n\_{B} - 1)} + \frac{1}{2(n\_{Ctrl} - 1)}\$\$
+
+\$\$var(\lnVR\_{inter}) = \frac{1}{2(n\_{AB} - 1)} + \frac{1}{2(n\_{A} -
+1)} + \frac{1}{2(n\_{B} - 1)} + \frac{1}{2(n\_{Ctrl} - 1)}\$\$
+
 See the package vignette for a detailed description of the formula.
 
 ## Author

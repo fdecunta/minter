@@ -1,6 +1,6 @@
 # Standardized Mean Difference: Interaction Between Treatment and Time
 
-Standardized Mean Difference: Interaction Between Treatment and Time
+d = ((X*t1,Exp - X*t1,Ctrl) - (X*t0,Exp - X*t0,Ctrl))S_pooled J
 
 ## Usage
 
@@ -101,6 +101,19 @@ A data frame containing the effect sizes and their sampling variance. By
 default, the columns are named `yi` (effect size) and `vi` (sampling
 variance). If `append = TRUE`, the results are appended to the input
 `data`; otherwise, only the computed effect size columns are returned.
+
+## Details
+
+Pooled standard deviation: \$\$S\_{pooled} = \sqrt{\frac{((n\_{Exp} -
+1)(sd\_{t0,Exp}^2 + sd\_{t1,Exp}^2) + (n\_{Ctrl} - 1)(sd\_{t0,Ctrl}^2 +
+sd\_{t1,Ctrl}^2))}{2(n\_{Exp} + n\_{Ctrl} - 2)}}\$\$
+
+Sampling variance: \$\$var(d) = \frac{2(1 - r\_{Exp})}{n\_{Exp}} +
+\frac{2(1 - r\_{Ctrl})}{n\_{Ctrl}} + \frac{d^2}{2(n\_{Exp} +
+n\_{Ctrl})}\$\$
+
+where \\r\_{Exp}\\ and \\r\_{Ctrl}\\ are the correlations between time
+points within each group.
 
 ## References
 

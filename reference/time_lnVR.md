@@ -1,6 +1,7 @@
 # Log of Variability Ratio: Interaction Between Treatment and Time
 
-Log of Variability Ratio: Interaction Between Treatment and Time
+\$\$\lnVR = \ln\left(\frac{sd\_{t1,Exp} / sd\_{t1,Ctrl}}{sd\_{t0,Exp} /
+sd\_{t0,Ctrl}}\right)\$\$
 
 ## Usage
 
@@ -75,6 +76,11 @@ A data frame containing the effect sizes and their sampling variance. By
 default, the columns are named `yi` (effect size) and `vi` (sampling
 variance). If `append = TRUE`, the results are appended to the input
 `data`; otherwise, only the computed effect size columns are returned.
+
+## Details
+
+\$\$var(\ln VR) = \frac{(1 - r\_{Exp}^2)}{n\_{Exp} - 1} + \frac{(1 -
+r\_{Ctrl}^2)}{n\_{Ctrl} - 1}\$\$
 
 ## References
 

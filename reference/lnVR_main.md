@@ -77,7 +77,14 @@ variance). If `append = TRUE`, the results are appended to the input
 
 ## Details
 
-See the package vignette for a detailed description of the formula.
+\$\$lnVR\_{main} = \frac{1}{2} \ln\left( \frac{sd\_{AB} \cdot
+sd\_{A}}{sd\_{B} \cdot sd\_{Ctrl}} \right) + \frac{1}{2} \left(
+\frac{1}{2(n\_{AB} - 1)} + \frac{1}{2(n\_{A} - 1)} - \frac{1}{2(n\_{B} -
+1)} - \frac{1}{2(n\_{Ctrl} - 1)} \right)\$\$
+
+\$\$var(\ln VR\_{main}) = \frac{1}{4} \left( \frac{1}{2(n\_{AB} - 1)} +
+\frac{1}{2(n\_{A} - 1)} + \frac{1}{2(n\_{B} - 1)} +
+\frac{1}{2(n\_{Ctrl} - 1)} \right)\$\$
 
 ## Author
 

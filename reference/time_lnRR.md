@@ -1,6 +1,7 @@
 # Log Response Ratio: Interaction Between Treatment and Time
 
-Log Response Ratio: Interaction Between Treatment and Time
+\$\$lnRR = \ln\left(\frac{\bar{X}\_{t1,Exp} /
+\bar{X}\_{t1,Ctrl}}{\bar{X}\_{t0,Exp} / \bar{X}\_{t0,Ctrl}}\right)\$\$
 
 ## Usage
 
@@ -95,6 +96,17 @@ A data frame containing the effect sizes and their sampling variance. By
 default, the columns are named `yi` (effect size) and `vi` (sampling
 variance). If `append = TRUE`, the results are appended to the input
 `data`; otherwise, only the computed effect size columns are returned.
+
+## Details
+
+\$\$var(\ln RR) = \frac{(sd\_{t0,Exp}^2 \bar{X}\_{t1,Exp}^2 +
+sd\_{t1,Exp}^2 \bar{X}\_{t0,Exp}^2 - 2r\_{Exp} \bar{X}\_{t0,Exp}
+\bar{X}\_{t1,Exp} sd\_{t0,Exp} sd\_{t1,Exp})}{n\_{Exp}
+\bar{X}\_{t0,Exp}^2 \bar{X}\_{t1,Exp}^2} +\$\$
+\$\$\frac{(sd\_{t0,Ctrl}^2 \bar{X}\_{t1,Ctrl}^2 + sd\_{t1,Ctrl}^2
+\bar{X}\_{t0,Ctrl}^2 - 2r\_{Ctrl} \bar{X}\_{t0,Ctrl} \bar{X}\_{t1,Ctrl}
+sd\_{t0,Ctrl} sd\_{t1,Ctrl})}{n\_{Ctrl} \bar{X}\_{t0,Ctrl}^2
+\bar{X}\_{t1,Ctrl}^2}\$\$
 
 ## References
 

@@ -97,7 +97,15 @@ variance). If `append = TRUE`, the results are appended to the input
 
 ## Details
 
-See the package vignette for a detailed description of the formula.
+\$\$lnCVR\_{inter} = \ln\left( \frac{CV\_{AB} / CV\_{B}}{CV\_{A} /
+CV\_{Ctrl}} \right) + \frac{1}{2} \left( \frac{1}{2(n\_{AB} - 1)} -
+\frac{1}{2(n\_{A} - 1)} + \frac{1}{2(n\_{B} - 1)} -
+\frac{1}{2(n\_{Ctrl} - 1)} \right)\$\$
+
+\$\$var(lnCVR\_{inter}) = var(\ln RR\_{inter}) + var(\ln
+VR\_{inter})\$\$
+
+This follows the assumption of no correlation between mean and variance.
 
 ## Author
 

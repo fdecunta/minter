@@ -1,7 +1,7 @@
 # Log Coefficient of Variation Ratio: Interaction Between Treatment and Time
 
-Log Coefficient of Variation Ratio: Interaction Between Treatment and
-Time
+\$\$lnCVR = \ln\left(\frac{CV\_{t1.Exp} / CV\_{t1.Ctrl}}{CV\_{t0.Exp} /
+CV\_{t0.Ctrl}}\right)\$\$
 
 ## Usage
 
@@ -96,6 +96,10 @@ A data frame containing the effect sizes and their sampling variance. By
 default, the columns are named `yi` (effect size) and `vi` (sampling
 variance). If `append = TRUE`, the results are appended to the input
 `data`; otherwise, only the computed effect size columns are returned.
+
+## Details
+
+\$\$var(lnCVR) = var(lnRR) + var(lnVR)\$\$
 
 ## References
 

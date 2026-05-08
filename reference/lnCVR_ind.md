@@ -67,7 +67,15 @@ variance). If `append = TRUE`, the results are appended to the input
 
 ## Details
 
-See the package vignette for a detailed description of the formula.
+\$\$lnCVR\_{ind} = \ln\left( \frac{CV\_{A}}{CV\_{Ctrl}} \right) +
+\frac{1}{2(n\_{A} - 1)} - \frac{1}{2(n\_{Ctrl} - 1)}\$\$
+
+\$\$var(lnCVR\_{ind}) =
+\frac{sd\_{Ctrl}^2}{n\_{Ctrl}\bar{X}\_{Ctrl}^2} + \frac{1}{2(n\_{Ctrl} -
+1)} + \frac{sd_A^2}{n_A\bar{X}\_A^2} + \frac{1}{2(n_A - 1)}\$\$
+
+This assumes no correlation between mean and variance (Nakagawa et al.
+2015) and is computed as the sum of lnRR and lnVR variances.
 
 ## References
 
