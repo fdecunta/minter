@@ -88,21 +88,22 @@ variance). If `append = TRUE`, the results are appended to the input
 
 The main SMD of Factor A is computed as:
 
-\$\$d\_{main} = \frac{(\bar{X}\_A + \bar{X}\_{AB}) - (\bar{X}\_{B} +
-\bar{X}\_{Ctrl})}{2S\_{pooled}} \cdot J(m)\$\$
+\$\$ d\_{main} = \frac{ (\bar{X}\_A + \bar{X}\_{AB}) - (\bar{X}\_{B} +
+\bar{X}\_{Ctrl}) }{2S\_{pooled}} \cdot J(m) \$\$
 
-With the pooled standard deviation: \$\$S\_{pooled} =
-\sqrt{\frac{(n_A-1)sd_A^2 + (n_B-1)sd_B^2 + (n\_{AB}-1)sd\_{AB}^2 +
-(n\_{Ctrl}-1)sd\_{Ctrl}^2}{n_A + n_B + n\_{AB} + n\_{Ctrl} - 4}}\$\$
+With the pooled standard deviation: \$\$ S\_{pooled} = \sqrt{ \frac{
+(n_A-1)sd_A^2 + (n_B-1)sd_B^2 + (n\_{AB}-1)sd\_{AB}^2 +
+(n\_{Ctrl}-1)sd\_{Ctrl}^2 }{ n_A + n_B + n\_{AB} + n\_{Ctrl} - 4 } }
+\$\$
 
 And the Hedges correction as: \$\$J(m) = 1 - \frac{3}{4m-1}\$\$
 
 with: \$\$m = n_A + n_B + n\_{AB} + n\_{Ctrl} - 4\$\$
 
-The sampling variance is computed as: \$\$var(d\_{main}) = \frac{1}{4}
-\left(\frac{1}{n_A} + \frac{1}{n_B} + \frac{1}{n\_{AB}} +
+The sampling variance is computed as: \$\$ var(d\_{main}) = \frac{1}{4}
+\left\[ \frac{1}{n_A} + \frac{1}{n_B} + \frac{1}{n\_{AB}} +
 \frac{1}{n\_{Ctrl}} + \frac{d\_{main}^2}{2(n_A + n_B + n\_{AB} +
-n\_{Ctrl})}\right)\$\$
+n\_{Ctrl})} \right\] \$\$
 
 ## References
 

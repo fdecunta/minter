@@ -81,10 +81,8 @@ variance). If `append = TRUE`, the results are appended to the input
 sd\_{Ctrl}} \right) + \frac{1}{2(n\_{AB} - 1)} - \frac{1}{2(n\_{A} -
 1)} - \frac{1}{2(n\_{B} - 1)} + \frac{1}{2(n\_{Ctrl} - 1)}\$\$
 
-\$\$var(\lnVR\_{inter}) = \frac{1}{2(n\_{AB} - 1)} + \frac{1}{2(n\_{A} -
+\$\$var(lnVR\_{inter}) = \frac{1}{2(n\_{AB} - 1)} + \frac{1}{2(n\_{A} -
 1)} + \frac{1}{2(n\_{B} - 1)} + \frac{1}{2(n\_{Ctrl} - 1)}\$\$
-
-See the package vignette for a detailed description of the formula.
 
 ## Author
 

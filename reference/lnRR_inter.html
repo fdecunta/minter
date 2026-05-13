@@ -139,7 +139,16 @@ If <code>append = TRUE</code>, the results are appended to the input <code>data<
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>See the package vignette for a detailed description of the formula.</p>
+    <p>$$
+  lnRR_{inter} = (\ln\bar{X}_{AB} - \ln\bar{X}_B) -
+    (\ln\bar{X}_A -\ln\bar{X}_{Ctrl})
+$$</p>
+<p>$$
+  var(lnRR_{inter}) = \frac{sd_{AB}^2}{n_{AB}\bar{X}_{AB}^2} +
+    \frac{sd_A^2}{n_A\bar{X}_A^2} +
+    \frac{sd_B^2}{n_B\bar{X}_B^2} +
+    \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
+$$</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>

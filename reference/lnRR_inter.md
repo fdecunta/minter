@@ -97,7 +97,12 @@ variance). If `append = TRUE`, the results are appended to the input
 
 ## Details
 
-See the package vignette for a detailed description of the formula.
+\$\$ lnRR\_{inter} = (\ln\bar{X}\_{AB} - \ln\bar{X}\_B) - (\ln\bar{X}\_A
+-\ln\bar{X}\_{Ctrl}) \$\$
+
+\$\$ var(lnRR\_{inter}) = \frac{sd\_{AB}^2}{n\_{AB}\bar{X}\_{AB}^2} +
+\frac{sd_A^2}{n_A\bar{X}\_A^2} + \frac{sd_B^2}{n_B\bar{X}\_B^2} +
+\frac{sd\_{Ctrl}^2}{n\_{Ctrl}\bar{X}\_{Ctrl}^2} \$\$
 
 ## References
 

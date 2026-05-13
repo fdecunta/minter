@@ -60,18 +60,18 @@ computed with metafor's `escalc()` function using `measure = "SMD"`.
 
 The SMD of Factor A over the Control is computed as:
 
-\$\$d\_{ind} = \frac{\bar{X}\_A - \bar{X}\_{Ctrl}}{S\_{pooled}} \cdot
-J(m)\$\$
+\$\$ d\_{ind} = \frac{\bar{X}\_A - \bar{X}\_{Ctrl}}{S\_{pooled}} \cdot
+J(m) \$\$
 
-where the pooled standard deviation is: \$\$S\_{pooled} =
+where the pooled standard deviation is: \$\$ S\_{pooled} =
 \sqrt{\frac{(n_A-1)sd_A^2 + (n\_{Ctrl}-1)sd\_{Ctrl}^2}{n_A + n\_{Ctrl} -
-2}}\$\$
+2}} \$\$
 
 And the Hedges correction: \$\$J(m) = 1 - \frac{3}{4m-1}\$\$ with :
 \$\$m = n_A + n\_{Ctrl} - 2\$\$
 
-The sampling variance is: \$\$var(d\_{ind}) = \frac{1}{n_A} +
-\frac{1}{n\_{Ctrl}} + \frac{d^2}{2(n_A + n\_{Ctrl})}\$\$
+The sampling variance is: \$\$ var(d\_{ind}) = \frac{1}{n_A} +
+\frac{1}{n\_{Ctrl}} + \frac{d^2}{2(n_A + n\_{Ctrl})} \$\$
 
 ## References
 

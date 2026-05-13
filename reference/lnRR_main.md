@@ -103,13 +103,25 @@ variance). If `append = TRUE`, the results are appended to the input
 
 ## Details
 
-See the package vignette for a detailed description of the formula.
+There are two ways of computing the lnRR. One is the original method
+used by Morris et al. 2007, and the other is the one proposed by
+Shinichi Nakagawa (in prep). Default method is 'nakagawa':
 
-**Formulas:** \$\$lnRR\_{ind} =
-\ln\left(\frac{\bar{X}\_A}{\bar{X}\_{Ctrl}}\right)\$\$
+**Nakagawa formula** \$\$ lnRR\_{main} = \frac{1}{2}
+\ln(\frac{\bar{X}\_A\bar{X}\_{AB}}{\bar{X}\_B\bar{X}\_{Ctrl}}) \$\$
 
-\$\$var(lnRR\_{ind}) = \frac{sd_A^2}{n_A\bar{X}\_A^2} +
-\frac{sd\_{Ctrl}^2}{n\_{Ctrl}\bar{X}\_{Ctrl}^2}\$\$
+\$\$ var(lnRR\_{main}) = \frac{1}{4} ( \frac{sd_A^2}{n_A\bar{X}\_A^2} +
+\frac{sd_B^2}{n_B\bar{X}\_B^2} +
+\frac{sd\_{AB}^2}{n\_{AB}\bar{X}\_{AB}^2} +
+\frac{sd\_{Ctrl}^2}{n\_{Ctrl}\bar{X}\_{Ctrl}^2} ) \$\$
+
+**Morris formula** \$\$ lnRR\_{main} = \ln(\frac{\bar{X}\_A +
+\bar{X}\_{AB}}{\bar{X}\_B + \bar{X}\_{Ctrl}}) \$\$
+
+\$\$ var(lnRR\_{main}) = (\frac{1}{\bar{X}\_A + \bar{X}\_{AB}})^2
+(\frac{sd_A^2}{n_A} + \frac{sd\_{AB}^2}{n\_{AB}}) +
+(\frac{1}{\bar{X}\_B + \bar{X}\_{Ctrl}})^2 (\frac{sd_B^2}{n_B} +
+\frac{sd\_{Ctrl}^2}{n\_{Ctrl}}) \$\$
 
 ## References
 

@@ -1,7 +1,7 @@
 # Standardized Mean Difference: Interaction Between Treatment and Time
 
-\$\$d = \frac{(\bar{X}\_{t1{,}Exp} - \bar{X}\_{t1{,}Ctrl}) -
-(\bar{X}\_{t0{,}Exp} - \bar{X}\_{t0{,}Ctrl})}{S\_{pooled}} \cdot J\$\$
+\$\$d = \frac{(\bar{X}\_{t1,Exp} - \bar{X}\_{t1,Ctrl}) -
+(\bar{X}\_{t0,Exp} - \bar{X}\_{t0,Ctrl})}{S\_{pooled}} \cdot J\$\$
 
 ## Usage
 

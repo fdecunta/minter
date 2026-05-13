@@ -105,12 +105,13 @@ variance). If `append = TRUE`, the results are appended to the input
 
 The interaction is computed as:
 
-\$\$d\_{inter} = \frac{(\bar{X}\_{AB} - \bar{X}\_B) - (\bar{X}\_A -
-\bar{X}\_{Ctrl})}{S\_{pooled}} \cdot J(m)\$\$
+\$\$ d\_{inter} = \frac{ (\bar{X}\_{AB} - \bar{X}\_B) - (\bar{X}\_A -
+\bar{X}\_{Ctrl}) }{S\_{pooled}} \cdot J(m) \$\$
 
-With the pooled standard deviation: \$\$S\_{pooled} =
-\sqrt{\frac{(n_A-1)sd_A^2 + (n_B-1)sd_B^2 + (n\_{AB}-1)sd\_{AB}^2 +
-(n\_{Ctrl}-1)sd\_{Ctrl}^2}{n_A + n_B + n\_{AB} + n\_{Ctrl} - 4}}\$\$
+With the pooled standard deviation: \$\$ S\_{pooled} = \sqrt{ \frac{
+(n_A-1)sd_A^2 + (n_B-1)sd_B^2 + (n\_{AB}-1)sd\_{AB}^2 +
+(n\_{Ctrl}-1)sd\_{Ctrl}^2 }{ n_A + n_B + n\_{AB} + n\_{Ctrl} - 4 } }
+\$\$
 
 And the Hedges correction as: \$\$J(m) = 1 - \frac{3}{4m-1}\$\$
 
@@ -118,9 +119,9 @@ with: \$\$m = n_A + n_B + n\_{AB} + n\_{Ctrl} - 4\$\$
 
 The sampling variance is computed as:
 
-\$\$var(d\_{inter}) = \frac{1}{n_A} + \frac{1}{n_B} +
+\$\$ var(d\_{inter}) = \frac{1}{n_A} + \frac{1}{n_B} +
 \frac{1}{n\_{AB}} + \frac{1}{n\_{Ctrl}} + \frac{d\_{inter}^2}{2(n_A +
-n_B + n\_{AB} + n\_{Ctrl})}\$\$
+n_B + n\_{AB} + n\_{Ctrl})} \$\$
 
 ## References
 
