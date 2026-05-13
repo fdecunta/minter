@@ -53,9 +53,7 @@ the log of the variability ratio.
 \details{
 \deqn{lnVR_{inter} = \ln\left( \frac{sd_{AB} / sd_{B}}{sd_{A} / sd_{Ctrl}} \right) + \frac{1}{2(n_{AB} - 1)} - \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}}
 
-\deqn{var(\lnVR_{inter}) = \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}}
-
-See the package vignette for a detailed description of the formula.
+\deqn{var(lnVR_{inter}) = \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}}
 }
 \examples{
 # Example for interaction effect in 2x2 factorial focusing on variability (Drought x Temperature)

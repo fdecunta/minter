@@ -41,7 +41,7 @@ a Factor A and the Control treatment in factorial experiments.
 \details{
 \deqn{lnVR_{ind} = \ln\left(\frac{sd_{A}}{sd_{Ctrl}}\right) + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{Ctrl} - 1)}}
 
-\deqn{var(\lnVR_{ind}) = \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}}
+\deqn{var(lnVR_{ind}) = \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{Ctrl} - 1)}}
 
 See the package vignette for a detailed description of the formula.
 }

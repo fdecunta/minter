@@ -66,12 +66,33 @@ Computes the main effect of Factor A across levels of Factor B, analogous
 to the main effect in a factorial ANOVA.
 }
 \details{
-See the package vignette for a detailed description of the formula.
+There are two ways of computing the lnRR. One is the original method used by Morris et al. 2007, and the other is the one proposed by Shinichi Nakagawa (in prep). Default method is 'nakagawa':
 
-\strong{Formulas:}
-\deqn{lnRR_{ind} = \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)}
+\strong{Nakagawa formula}
+\deqn{
+  lnRR_{main} = \frac{1}{2} \ln(\frac{\bar{X}_A\bar{X}_{AB}}{\bar{X}_B\bar{X}_{Ctrl}})
+}
 
-\deqn{var(lnRR_{ind}) = \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}}
+\deqn{
+  var(lnRR_{main}) = \frac{1}{4} (
+  \frac{sd_A^2}{n_A\bar{X}_A^2} +
+  \frac{sd_B^2}{n_B\bar{X}_B^2} +
+  \frac{sd_{AB}^2}{n_{AB}\bar{X}_{AB}^2} +
+  \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
+  )
+}
+
+\strong{Morris formula}
+\deqn{
+  lnRR_{main} = \ln(\frac{\bar{X}_A + \bar{X}_{AB}}{\bar{X}_B + \bar{X}_{Ctrl}})
+}
+
+\deqn{
+  var(lnRR_{main}) = (\frac{1}{\bar{X}_A + \bar{X}_{AB}})^2 
+  (\frac{sd_A^2}{n_A} + \frac{sd_{AB}^2}{n_{AB}}) + 
+  (\frac{1}{\bar{X}_B + \bar{X}_{Ctrl}})^2 
+  (\frac{sd_B^2}{n_B} + \frac{sd_{Ctrl}^2}{n_{Ctrl}}) 
+}
 }
 \examples{
 # Example data for 2x2 factorial design (Fertilization x Warming)

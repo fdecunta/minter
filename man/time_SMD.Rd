@@ -62,7 +62,7 @@ By default, the columns are named \code{yi} (effect size) and \code{vi} (samplin
 If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
-\deqn{d = \frac{(\bar{X}_{t1{,}Exp} - \bar{X}_{t1{,}Ctrl}) - (\bar{X}_{t0{,}Exp} - \bar{X}_{t0{,}Ctrl})}{S_{pooled}} \cdot J}
+\deqn{d = \frac{(\bar{X}_{t1,Exp} - \bar{X}_{t1,Ctrl}) - (\bar{X}_{t0,Exp} - \bar{X}_{t0,Ctrl})}{S_{pooled}} \cdot J}
 }
 \details{
 Pooled standard deviation:

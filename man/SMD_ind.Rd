@@ -52,10 +52,14 @@ with metafor's \code{escalc()} function using \code{measure = "SMD"}.
 
 The SMD of Factor A over the Control is computed as:
 
-\deqn{d_{ind} = \frac{\bar{X}_A - \bar{X}_{Ctrl}}{S_{pooled}} \cdot J(m)}
+\deqn{
+  d_{ind} = \frac{\bar{X}_A - \bar{X}_{Ctrl}}{S_{pooled}} \cdot J(m)
+}
 
 where the pooled standard deviation is:
-\deqn{S_{pooled} = \sqrt{\frac{(n_A-1)sd_A^2 + (n_{Ctrl}-1)sd_{Ctrl}^2}{n_A + n_{Ctrl} - 2}}}
+\deqn{
+  S_{pooled} = \sqrt{\frac{(n_A-1)sd_A^2 + (n_{Ctrl}-1)sd_{Ctrl}^2}{n_A + n_{Ctrl} - 2}}
+}
 
 And the Hedges correction:
 \deqn{J(m) = 1 - \frac{3}{4m-1}}
@@ -63,7 +67,9 @@ with :
 \deqn{m = n_A + n_{Ctrl} - 2}
 
 The sampling variance is:
-\deqn{var(d_{ind}) = \frac{1}{n_A} + \frac{1}{n_{Ctrl}} + \frac{d^2}{2(n_A + n_{Ctrl})}}
+\deqn{
+  var(d_{ind}) = \frac{1}{n_A} + \frac{1}{n_{Ctrl}} + \frac{d^2}{2(n_A + n_{Ctrl})}
+}
 }
 \examples{
 data <- data.frame(

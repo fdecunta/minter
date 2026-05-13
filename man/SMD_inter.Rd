@@ -68,10 +68,26 @@ data.
 \details{
 The interaction is computed as:
 
-\deqn{d_{inter} = \frac{(\bar{X}_{AB} - \bar{X}_B) - (\bar{X}_A - \bar{X}_{Ctrl})}{S_{pooled}} \cdot J(m)}
+\deqn{
+  d_{inter} = \frac{
+    (\bar{X}_{AB} - \bar{X}_B) - (\bar{X}_A - \bar{X}_{Ctrl})
+    }{S_{pooled}}
+    \cdot J(m)
+}
 
 With the pooled standard deviation:
-\deqn{S_{pooled} = \sqrt{\frac{(n_A-1)sd_A^2 + (n_B-1)sd_B^2 + (n_{AB}-1)sd_{AB}^2 + (n_{Ctrl}-1)sd_{Ctrl}^2}{n_A + n_B + n_{AB} + n_{Ctrl} - 4}}}
+\deqn{
+  S_{pooled} = \sqrt{
+    \frac{
+      (n_A-1)sd_A^2 +
+      (n_B-1)sd_B^2 +
+      (n_{AB}-1)sd_{AB}^2 +
+      (n_{Ctrl}-1)sd_{Ctrl}^2
+    }{
+      n_A + n_B + n_{AB} + n_{Ctrl} - 4
+    }
+  }
+}
 
 And the Hedges correction as:
 \deqn{J(m) = 1 - \frac{3}{4m-1}}
@@ -81,7 +97,13 @@ with:
 
 The sampling variance is computed as:
 
-\deqn{var(d_{inter}) = \frac{1}{n_A} + \frac{1}{n_B} + \frac{1}{n_{AB}} + \frac{1}{n_{Ctrl}} + \frac{d_{inter}^2}{2(n_A + n_B + n_{AB} + n_{Ctrl})}}
+\deqn{
+  var(d_{inter}) = \frac{1}{n_A} +
+    \frac{1}{n_B} +
+    \frac{1}{n_{AB}} +
+    \frac{1}{n_{Ctrl}} +
+    \frac{d_{inter}^2}{2(n_A + n_B + n_{AB} + n_{Ctrl})}
+}
 }
 \examples{
 data <- data.frame(

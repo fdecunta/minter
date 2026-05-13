@@ -95,12 +95,34 @@ lnRR_ind <- function(
 #' Computes the main effect of Factor A across levels of Factor B, analogous
 #' to the main effect in a factorial ANOVA. 
 #'
-#' See the package vignette for a detailed description of the formula.
+#' There are two ways of computing the lnRR. One is the original method used by Morris et al. 2007, and the other is the one proposed by Shinichi Nakagawa (in prep). Default method is 'nakagawa':
 #'
-#' **Formulas:**
-#' \deqn{lnRR_{ind} = \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)}
+#' **Nakagawa formula**
+#' \deqn{
+#'   lnRR_{main} = \frac{1}{2} \ln(\frac{\bar{X}_A\bar{X}_{AB}}{\bar{X}_B\bar{X}_{Ctrl}})
+#' }
 #' 
-#' \deqn{var(lnRR_{ind}) = \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}}
+#' \deqn{
+#'   var(lnRR_{main}) = \frac{1}{4} (
+#'   \frac{sd_A^2}{n_A\bar{X}_A^2} +
+#'   \frac{sd_B^2}{n_B\bar{X}_B^2} +
+#'   \frac{sd_{AB}^2}{n_{AB}\bar{X}_{AB}^2} +
+#'   \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
+#'   )
+#' }
+#'
+#'
+#' **Morris formula**
+#' \deqn{
+#'   lnRR_{main} = \ln(\frac{\bar{X}_A + \bar{X}_{AB}}{\bar{X}_B + \bar{X}_{Ctrl}})
+#' }
+#'
+#' \deqn{
+#'   var(lnRR_{main}) = (\frac{1}{\bar{X}_A + \bar{X}_{AB}})^2 
+#'   (\frac{sd_A^2}{n_A} + \frac{sd_{AB}^2}{n_{AB}}) + 
+#'   (\frac{1}{\bar{X}_B + \bar{X}_{Ctrl}})^2 
+#'   (\frac{sd_B^2}{n_B} + \frac{sd_{Ctrl}^2}{n_{Ctrl}}) 
+#' }
 #' 
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.
@@ -203,9 +225,17 @@ lnRR_main <- function(
 #' Computes the interaction effect between factors A and B in factorial
 #' data.
 #'
-#' \deqn{lnRR_{inter} = \ln\left(\frac{\bar{X}_{AB}}{\bar{X}_B}\right) - \ln\left(\frac{\bar{X}_A}{\bar{X}_{Ctrl}}\right)}
+#' \deqn{
+#'   lnRR_{inter} = (\ln\bar{X}_{AB} - \ln\bar{X}_B) -
+#'     (\ln\bar{X}_A -\ln\bar{X}_{Ctrl})
+#' }
 #'
-#' \deqn{var(lnRR_{inter}) = \frac{sd_{AB}^2}{n_{AB}\bar{X}_{AB}^2} + \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{sd_B^2}{n_B\bar{X}_B^2} + \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}}
+#' \deqn{
+#'   var(lnRR_{inter}) = \frac{sd_{AB}^2}{n_{AB}\bar{X}_{AB}^2} +
+#'     \frac{sd_A^2}{n_A\bar{X}_A^2} +
+#'     \frac{sd_B^2}{n_B\bar{X}_B^2} +
+#'     \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
+#' }
 #' 
 #' @param data Data frame containing the variables used.
 #' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.

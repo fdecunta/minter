@@ -63,7 +63,17 @@ Computes the interaction effect between factors A and B in factorial
 data.
 }
 \details{
-See the package vignette for a detailed description of the formula.
+\deqn{
+  lnRR_{inter} = (\ln\bar{X}_{AB} - \ln\bar{X}_B) -
+    (\ln\bar{X}_A -\ln\bar{X}_{Ctrl})
+}
+
+\deqn{
+  var(lnRR_{inter}) = \frac{sd_{AB}^2}{n_{AB}\bar{X}_{AB}^2} +
+    \frac{sd_A^2}{n_A\bar{X}_A^2} +
+    \frac{sd_B^2}{n_B\bar{X}_B^2} +
+    \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2}
+}
 }
 \examples{
 data <- data.frame(
