@@ -3,9 +3,17 @@
 #' Computes the Log of the Coefficient of Variation Ratio between Factor A
 #' and the Control treatment.
 #'
-#' \deqn{lnCVR_{ind} = \ln\left( \frac{CV_{A}}{CV_{Ctrl}} \right) + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{Ctrl} - 1)}}
+#' \deqn{
+#'   lnCVR_{ind} = \ln\left( \frac{CV_{A}}{CV_{Ctrl}} \right) +
+#'     \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{Ctrl} - 1)}
+#' }
 #'
-#' \deqn{var(lnCVR_{ind}) = \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2} + \frac{1}{2(n_{Ctrl} - 1)} + \frac{sd_A^2}{n_A\bar{X}_A^2} + \frac{1}{2(n_A - 1)}}
+#' \deqn{
+#'   var(lnCVR_{ind}) = \frac{sd_{Ctrl}^2}{n_{Ctrl}\bar{X}_{Ctrl}^2} +
+#'     \frac{1}{2(n_{Ctrl} - 1)} +
+#'     \frac{sd_A^2}{n_A\bar{X}_A^2} +
+#'     \frac{1}{2(n_A - 1)}
+#' }
 #'
 #' This assumes no correlation between mean and variance (Nakagawa et al. 2015) and is computed as the sum of lnRR and lnVR variances.
 #'
@@ -81,7 +89,15 @@ lnCVR_ind <- function(
 #' Computes the main effect of Factor A across levels of Factor B
 #' in factorial experiments on the coefficient of variation.
 #'
-#' \deqn{lnCVR_{main} = \frac{1}{2} \ln\left( \frac{CV_{AB} \cdot CV_{A}}{CV_{B} \cdot CV_{Ctrl}} \right) + \frac{1}{2} \left( \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{B} - 1)} - \frac{1}{2(n_{Ctrl} - 1)} \right)}
+#' \deqn{
+#'  lnCVR_{main} = \frac{1}{2} \ln\left(\frac{CV_{AB}CV_{A}}{CV_{B}CV_{Ctrl}} \right) +
+#'    \frac{1}{2} \left( 
+#'      \frac{1}{2(n_{AB} - 1)} +
+#'      \frac{1}{2(n_{A} - 1)} -
+#'      \frac{1}{2(n_{B} - 1)} -
+#'      \frac{1}{2(n_{Ctrl} - 1)}
+#'     \right)
+#' }
 #' 
 #' \deqn{var(\ln CVR_{main}) = var(\ln RR_{main}) + var(\ln VR_{main})}
 #'
@@ -165,9 +181,17 @@ lnCVR_main <- function(
 #' Computes the interaction effect between Factors A and B
 #' in factorial experiments on the coefficient of variation ratio.
 #'
-#' \deqn{lnCVR_{inter} = \ln\left( \frac{CV_{AB} / CV_{B}}{CV_{A} / CV_{Ctrl}} \right) + \frac{1}{2} \left( \frac{1}{2(n_{AB} - 1)} - \frac{1}{2(n_{A} - 1)} + \frac{1}{2(n_{B} - 1)} - \frac{1}{2(n_{Ctrl} - 1)} \right)}
+#' \deqn{
+#'   lnCVR_{inter} = \ln\left( \frac{CV_{AB} / CV_{B}}{CV_{A} / CV_{Ctrl}} \right) +
+#'     \frac{1}{2(n_{AB} - 1)} - 
+#'     \frac{1}{2(n_{A} - 1)} -
+#'     \frac{1}{2(n_{B} - 1)} +
+#'     \frac{1}{2(n_{Ctrl} - 1)}
+#' }
 #'
-#' \deqn{var(lnCVR_{inter}) = var(\ln RR_{inter}) + var(\ln VR_{inter})}
+#' \deqn{
+#'   var(lnCVR_{inter}) = var(\ln RR_{inter}) + var(\ln VR_{inter})
+#' }
 #'
 #'This follows the assumption of no correlation between mean and variance.
 #'

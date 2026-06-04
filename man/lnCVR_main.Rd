@@ -63,7 +63,15 @@ Computes the main effect of Factor A across levels of Factor B
 in factorial experiments on the coefficient of variation.
 }
 \details{
-\deqn{lnCVR_{main} = \frac{1}{2} \ln\left( \frac{CV_{AB} \cdot CV_{A}}{CV_{B} \cdot CV_{Ctrl}} \right) + \frac{1}{2} \left( \frac{1}{2(n_{AB} - 1)} + \frac{1}{2(n_{A} - 1)} - \frac{1}{2(n_{B} - 1)} - \frac{1}{2(n_{Ctrl} - 1)} \right)}
+\deqn{
+ lnCVR_{main} = \frac{1}{2} \ln\left(\frac{CV_{AB}CV_{A}}{CV_{B}CV_{Ctrl}} \right) +
+   \frac{1}{2} \left( 
+     \frac{1}{2(n_{AB} - 1)} +
+     \frac{1}{2(n_{A} - 1)} -
+     \frac{1}{2(n_{B} - 1)} -
+     \frac{1}{2(n_{Ctrl} - 1)}
+    \right)
+}
 
 \deqn{var(\ln CVR_{main}) = var(\ln RR_{main}) + var(\ln VR_{main})}
 
