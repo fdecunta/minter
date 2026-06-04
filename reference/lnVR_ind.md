@@ -57,13 +57,11 @@ variance). If `append = TRUE`, the results are appended to the input
 
 ## Details
 
-\$\$lnVR\_{ind} = \ln\left(\frac{sd\_{A}}{sd\_{Ctrl}}\right) +
-\frac{1}{2(n\_{A} - 1)} - \frac{1}{2(n\_{Ctrl} - 1)}\$\$
+\$\$ lnVR\_{ind} = \ln\left(\frac{sd\_{A}}{sd\_{Ctrl}}\right) +
+\frac{1}{2(n\_{A} - 1)} - \frac{1}{2(n\_{Ctrl} - 1)} \$\$
 
-\$\$var(lnVR\_{ind}) = \frac{1}{2(n\_{A} - 1)} + \frac{1}{2(n\_{Ctrl} -
-1)}\$\$
-
-See the package vignette for a detailed description of the formula.
+\$\$ var(lnVR\_{ind}) = \frac{1}{2(n\_{A} - 1)} + \frac{1}{2(n\_{Ctrl} -
+1)} \$\$
 
 ## References
 

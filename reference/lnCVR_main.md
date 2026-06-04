@@ -97,10 +97,10 @@ variance). If `append = TRUE`, the results are appended to the input
 
 ## Details
 
-\$\$lnCVR\_{main} = \frac{1}{2} \ln\left( \frac{CV\_{AB} \cdot
-CV\_{A}}{CV\_{B} \cdot CV\_{Ctrl}} \right) + \frac{1}{2} \left(
-\frac{1}{2(n\_{AB} - 1)} + \frac{1}{2(n\_{A} - 1)} - \frac{1}{2(n\_{B} -
-1)} - \frac{1}{2(n\_{Ctrl} - 1)} \right)\$\$
+\$\$ lnCVR\_{main} = \frac{1}{2}
+\ln\left(\frac{CV\_{AB}CV\_{A}}{CV\_{B}CV\_{Ctrl}} \right) + \frac{1}{2}
+\left( \frac{1}{2(n\_{AB} - 1)} + \frac{1}{2(n\_{A} - 1)} -
+\frac{1}{2(n\_{B} - 1)} - \frac{1}{2(n\_{Ctrl} - 1)} \right) \$\$
 
 \$\$var(\ln CVR\_{main}) = var(\ln RR\_{main}) + var(\ln VR\_{main})\$\$
 

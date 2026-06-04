@@ -77,14 +77,14 @@ variance). If `append = TRUE`, the results are appended to the input
 
 ## Details
 
-\$\$lnVR\_{main} = \frac{1}{2} \ln\left( \frac{sd\_{AB} \cdot
-sd\_{A}}{sd\_{B} \cdot sd\_{Ctrl}} \right) + \frac{1}{2} \left(
+\$\$ lnVR\_{main} = \frac{1}{2} \ln\left(
+\frac{sd\_{AB}sd\_{A}}{sd\_{B}sd\_{Ctrl}} \right) + \frac{1}{2} \left(
 \frac{1}{2(n\_{AB} - 1)} + \frac{1}{2(n\_{A} - 1)} - \frac{1}{2(n\_{B} -
-1)} - \frac{1}{2(n\_{Ctrl} - 1)} \right)\$\$
+1)} - \frac{1}{2(n\_{Ctrl} - 1)} \right) \$\$
 
-\$\$var(lnVR\_{main}) = \frac{1}{4} \left( \frac{1}{2(n\_{AB} - 1)} +
+\$\$ var(lnVR\_{main}) = \frac{1}{4} \left( \frac{1}{2(n\_{AB} - 1)} +
 \frac{1}{2(n\_{A} - 1)} + \frac{1}{2(n\_{B} - 1)} +
-\frac{1}{2(n\_{Ctrl} - 1)} \right)\$\$
+\frac{1}{2(n\_{Ctrl} - 1)} \right) \$\$
 
 ## Author
 
