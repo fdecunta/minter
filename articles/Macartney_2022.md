@@ -509,14 +509,15 @@ Macartney, E. L., Lagisz, M., & Nakagawa, S. (2022). The relative
 benefits of environmental enrichment on learning and memory are greater
 when stressed: a meta-analysis of interactions in rodents. *Neuroscience
 & Biobehavioral Reviews*, 137, 104636.
-<https://doi.org/10.1016/j.neubiorev.2022.104636>
+<https://doi.org/10.1016/j.neubiorev.2022.104554>
 
 Nakagawa, S., Yang, Y., Macartney, E. L., Spake, R., & Lagisz, M.
 (2023). Quantitative evidence synthesis: a practical guide on
 meta-analysis, meta-regression, and publication bias tests for
 environmental sciences. Environmental Evidence, 12(1), 8.
+<https://doi.org/10.1186/s13750-023-00301-6>
 
 Nakagawa, S., Lagisz, M., O’Dea, R. E., Rutkowska, J., Yang, Y., Noble,
 D. W., & Senior, A. M. (2021). The orchard plot: cultivating a forest
 plot for use in ecology, evolution, and beyond. Research Synthesis
-Methods, 12(1), 4-12.
+Methods, 12(1), 4-12. <https://doi.org/10.1002/jrsm.1424>
