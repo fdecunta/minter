@@ -72,7 +72,9 @@ variance). If `append = TRUE`, the results are appended to the input
 ## Details
 
 It is the classic Standardized Mean Difference (SMD), which can also be
-computed with metafor's `escalc()` function using `measure = "SMD"`.
+computed with metafor's
+[`escalc()`](https://wviechtb.github.io/metafor/reference/escalc.html)
+function using `measure = "SMD"`.
 
 The SMD of Factor A over the Control is computed as:
 

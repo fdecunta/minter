@@ -67,7 +67,9 @@ variance). If `append = TRUE`, the results are appended to the input
 ## Details
 
 It is the classic Log Response Ratio (lnRR), which can also be computed
-with metafor's `escalc()` function using `measure = "ROM"`.
+with metafor's
+[`escalc()`](https://wviechtb.github.io/metafor/reference/escalc.html)
+function using `measure = "ROM"`.
 
 The log response ratio of Factor A over Control is computed as:
 

@@ -2,5 +2,5 @@
 
 ### All vignettes
 
-- [Effect Sizes
-  Formulas](https://fdecunta.github.io/minter/articles/minter-docs.md):
+- [Log response ratio example: Macartney et al.
+  2022](https://fdecunta.github.io/minter/articles/Macartney_2022.md):
