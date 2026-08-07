@@ -1,7 +1,6 @@
 # Log Response Ratio: Interaction Between Treatment and Time
 
-\$\$lnRR = \ln\left(\frac{\bar{X}\_{t1,Exp} /
-\bar{X}\_{t1,Ctrl}}{\bar{X}\_{t0,Exp} / \bar{X}\_{t0,Ctrl}}\right)\$\$
+Log Response Ratio: Interaction Between Treatment and Time
 
 ## Usage
 
@@ -90,23 +89,30 @@ time_lnRR(
   Number or numeric vector. Correlation between the means of the
   experimental group at t0 and t1
 
+  **Formulas** \$\$ lnRR\_{f \cdot t} = \ln\left(\frac{\bar{X}\_{t1,Exp}
+  / \bar{X}\_{t1,Ctrl}}{\bar{X}\_{t0,Exp} / \bar{X}\_{t0,Ctrl}}\right)
+  \$\$
+
+  \$\$ var(\ln \mathrm{RR}\_{f \cdot t}) =
+  \frac{sd\_{t0,\mathrm{Exp}}^2}{n\_{Exp}
+  \bar{x}\_{t0,\mathrm{Exp}}^2} +
+  \frac{sd\_{t1,\mathrm{Exp}}^2}{n\_{Exp}
+  \bar{x}\_{t1,\mathrm{Exp}}^2} - 2 r\_{\mathrm{Exp},t0t1}
+  \frac{sd\_{t0,\mathrm{Exp}} sd\_{t1,\mathrm{Exp}}}{n\_{Exp}
+  \bar{x}\_{t0,\mathrm{Exp}} \bar{x}\_{t1,\mathrm{Exp}}} +
+  \frac{sd\_{t0,\mathrm{Ctrl}}^2}{n\_{Ctrl}
+  \bar{x}\_{t0,\mathrm{Ctrl}}^2} +
+  \frac{sd\_{t1,\mathrm{Ctrl}}^2}{n\_{Ctrl}
+  \bar{x}\_{t1,\mathrm{Ctrl}}^2} - 2 r\_{\mathrm{Ctrl},t0t1}
+  \frac{sd\_{t0,\mathrm{Ctrl}} sd\_{t1,\mathrm{Ctrl}}}{n\_{Ctrl}
+  \bar{x}\_{t0,\mathrm{Ctrl}} \bar{x}\_{t1,\mathrm{Ctrl}}} \$\$
+
 ## Value
 
 A data frame containing the effect sizes and their sampling variance. By
 default, the columns are named `yi` (effect size) and `vi` (sampling
 variance). If `append = TRUE`, the results are appended to the input
 `data`; otherwise, only the computed effect size columns are returned.
-
-## Details
-
-\$\$var(\ln RR) = \frac{(sd\_{t0,Exp}^2 \bar{X}\_{t1,Exp}^2 +
-sd\_{t1,Exp}^2 \bar{X}\_{t0,Exp}^2 - 2r\_{Exp} \bar{X}\_{t0,Exp}
-\bar{X}\_{t1,Exp} sd\_{t0,Exp} sd\_{t1,Exp})}{n\_{Exp}
-\bar{X}\_{t0,Exp}^2 \bar{X}\_{t1,Exp}^2} +\$\$
-\$\$\frac{(sd\_{t0,Ctrl}^2 \bar{X}\_{t1,Ctrl}^2 + sd\_{t1,Ctrl}^2
-\bar{X}\_{t0,Ctrl}^2 - 2r\_{Ctrl} \bar{X}\_{t0,Ctrl} \bar{X}\_{t1,Ctrl}
-sd\_{t0,Ctrl} sd\_{t1,Ctrl})}{n\_{Ctrl} \bar{X}\_{t0,Ctrl}^2
-\bar{X}\_{t1,Ctrl}^2}\$\$
 
 ## References
 
