@@ -43,13 +43,6 @@ From CRAN:
 install.packages("minter")
 ```
 
-From GitHub repo:
-
-``` r
-
-devtools::install_github("fdecunta/minter")
-```
-
 ## Example
 
 Suppose you need to estimate the effect size of the interaction between
