@@ -16,7 +16,7 @@
   col_names,
   append
 ) {
-  checkmate::assert_choice(effsize_func, choices = c(
+  choices = c(
     ### lnRR ###
     ".simple_lnRR",
     ".main_lnRR_Nakagawa",
@@ -39,8 +39,9 @@
     ".time_interaction_lnVR",
     ".time_interaction_lnCVR",
     ".time_interaction_SMD"
-    )
   )
+
+  effsize_func <- match.arg(effsize_func, choices)
   df <- do.call(effsize_func, effsize_args)
   names(df) <- col_names
 
@@ -120,33 +121,39 @@
   }
 }
 
-
 .assert_args <- function(col_names, append, data) {
-  checkmate::assert_character(col_names, len = 2)
-  checkmate::assert_logical(append, len = 1)
-  checkmate::assert_data_frame(data)
-}
+  if (!is.character(col_names) || length(col_names) != 2L || anyNA(col_names)) {
+    stop("`col_names` must be a character vector of length 2 with no missing values.", call. = FALSE)
+  }
 
+  if (!is.logical(append) || length(append) != 1L || is.na(append)) {
+    stop("`append` must be TRUE or FALSE.", call. = FALSE)
+  }
+
+  if (!is.data.frame(data)) {
+    stop("`data` must be a data frame.", call. = FALSE)
+  }
+}
 
 .assert_cor_value <- function(x, data) {
-  # Check if x is a valid correlation value that ranges between -1 and 1
-  if (!checkmate::test_numeric(x, lower = -1, upper = 1)) {
+  x_name <- deparse1(substitute(x))
+
+  if (!is.numeric(x) || anyNA(x) || !all(x >= -1 & x <= 1)) {
     stop(sprintf(
-      "Correlation values must be between -1 and 1, but some values in %s are out of range.",
-      deparse(substitute(x))
+      "Correlation values must be non-missing numeric values between -1 and 1, but some values in %s are invalid.",
+      x_name
     ), call. = FALSE)
   }
 
-  # Check if x is a number or a vector of length of data
-  if (!(checkmate::test_numeric(x, len = nrow(data)) ||
-        checkmate::test_numeric(x, len = 1))) {
+  n <- NROW(data)
+
+  if (!(length(x) == 1L || length(x) == n)) {
     stop(sprintf(
       "length of %s must be 1 or equal to data, but is %d",
-      deparse(substitute(x)), length(x)
+      x_name, length(x)
     ), call. = FALSE)
   }
 }
-
 
 .has_infinite <- function(x) {
   return(any(is.infinite(unlist(x))))

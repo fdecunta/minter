@@ -200,7 +200,7 @@ lnRR_main <- function(
   AB_n
 ) {
   .assert_args(col_names, append, data)
-  checkmate::assert_choice(method, choices = c("nakagawa", "morris"))
+  method <- match.arg(method, c("nakagawa", "morris"))
 
   call_args <- as.list(match.call())[-1]
 

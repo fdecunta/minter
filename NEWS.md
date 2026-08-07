@@ -1,7 +1,5 @@
 # minter 0.2.0
 
-# minter 0.3.0
-
 * Removed dependency on `checkmate`.
 * Add formulas in documentation
 

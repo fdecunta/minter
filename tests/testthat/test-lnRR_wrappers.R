@@ -69,3 +69,27 @@ test_that("lnRR function works fine with 'inter' effect size", {
   expect_equal(res$inter_lnRR, testing_data$AB_main_lnRR, tolerance = 1e-6)
   expect_equal(res$inter_lnRRv, testing_data$AB_main_lnRRv, tolerance = 1e-6)
 })
+
+
+test_that("lnRR_wrapper fails with bad method", {
+  expect_error(
+  lnRR_main(
+    data = testing_data,
+    method = "foo",
+    col_names = c("main_lnRR", "main_lnRRv"),
+    Ctrl_mean = C_mean,
+    Ctrl_sd = C_sd,
+    Ctrl_n = C_n,
+    A_mean = A_mean,
+    A_sd = A_sd,
+    A_n = A_n,
+    B_mean = B_mean,
+    B_sd = B_sd,
+    B_n = B_n,
+    AB_mean = AB_mean,
+    AB_sd = AB_sd,
+    AB_n = AB_n
+  ))
+})
+
+  

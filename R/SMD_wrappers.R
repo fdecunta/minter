@@ -92,7 +92,9 @@ SMD_ind <- function(
   A_n
 ) {
   .assert_args(col_names, append, data)
-  checkmate::assert_logical(hedges_correction, len = 1)
+  if (!is.logical(hedges_correction) || length(hedges_correction) != 1L || is.na(hedges_correction)) {
+    stop("`hedges_correction` must be TRUE or FALSE.", call. = FALSE)
+  }
 
   call_args <- as.list(match.call())[-1]
 
@@ -213,7 +215,9 @@ SMD_main <- function(
   AB_n
 ) {
   .assert_args(col_names, append, data)
-  checkmate::assert_logical(hedges_correction, len = 1)
+  if (!is.logical(hedges_correction) || length(hedges_correction) != 1L || is.na(hedges_correction)) {
+    stop("`hedges_correction` must be TRUE or FALSE.", call. = FALSE)
+  }
 
   call_args <- as.list(match.call())[-1]
 
@@ -331,7 +335,9 @@ SMD_inter <- function(
   AB_n
 ) {
   .assert_args(col_names, append, data)
-  checkmate::assert_logical(hedges_correction, len = 1)
+  if (!is.logical(hedges_correction) || length(hedges_correction) != 1L || is.na(hedges_correction)) {
+    stop("`hedges_correction` must be TRUE or FALSE.", call. = FALSE)
+  }
 
   call_args <- as.list(match.call())[-1]
 

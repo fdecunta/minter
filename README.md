@@ -14,8 +14,8 @@ status](https://www.r-pkg.org/badges/version/minter)](https://CRAN.R-project.org
 Downloads](https://cranlogs.r-pkg.org/badges/grand-total/minter?color=blue)](https://CRAN.R-project.org/package=minter)
 <!-- badges: end -->
 
-The **minter** package is a collection of functions for calculating
-effect sizes for meta-analysis of interactions.
+**minter** is a collection of functions for calculating effect sizes for
+meta-analysis of interactions.
 
 The interaction can be between two factors (2-by-2 factorials) or
 between a factor and time (repeated measures experiments). For both
