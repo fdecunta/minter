@@ -53,12 +53,6 @@ From CRAN:
 install.packages("minter")
 ```
 
-From GitHub repo:
-
-```{r, eval=FALSE}
-devtools::install_github("fdecunta/minter")
-```
-
 ## Example
 
 Suppose you need to estimate the effect size of the interaction between fertilization × drought on plant biomass:
