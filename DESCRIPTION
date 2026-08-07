@@ -1,6 +1,6 @@
 Package: minter
 Title: Effect Sizes for Meta-Analysis of Interactions from Factorial Experiments
-Version: 0.1.1
+Version: 0.2.0
 Authors@R: c(
     person("Facundo", "Decunta", email = "fdecunta@agro.uba.ar", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0004-5774-1085")),
@@ -13,8 +13,6 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 URL: https://fdecunta.github.io/minter/
 BugReports: https://github.com/fdecunta/minter/issues
-Imports:
-    checkmate
 Depends: 
     R (>= 3.5)
 LazyData: true
