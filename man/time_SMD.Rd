@@ -62,14 +62,21 @@ By default, the columns are named \code{yi} (effect size) and \code{vi} (samplin
 If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
-\deqn{d = \frac{(\bar{X}_{t1,Exp} - \bar{X}_{t1,Ctrl}) - (\bar{X}_{t0,Exp} - \bar{X}_{t0,Ctrl})}{S_{pooled}} \cdot J}
+Standardized Mean Difference: Interaction Between Treatment and Time
 }
 \details{
+\strong{Formulas}
+\deqn{
+ d_{f:t} = \frac{(\bar{X}_{t1,Exp} - \bar{X}_{t1,Ctrl}) - (\bar{X}_{t0,Exp} - \bar{X}_{t0,Ctrl})}{S_{pooled}} \cdot J
+ }
+
 Pooled standard deviation:
-\deqn{S_{pooled} = \sqrt{\frac{((n_{Exp} - 1)(sd_{t0,Exp}^2 + sd_{t1,Exp}^2) + (n_{Ctrl} - 1)(sd_{t0,Ctrl}^2 + sd_{t1,Ctrl}^2))}{2(n_{Exp} + n_{Ctrl} - 2)}}}
+\deqn{
+   S_{pooled} = \sqrt{\frac{(n_{Exp} - 1)(sd_{t0,Exp}^2 + sd_{t1,Exp}^2) + (n_{Ctrl} - 1)(sd_{t0,Ctrl}^2 + sd_{t1,Ctrl}^2)}{2(n_{Exp} + n_{Ctrl} - 2)}}
+}
 
 Sampling variance:
-\deqn{var(d) = \frac{2(1 - r_{Exp})}{n_{Exp}} + \frac{2(1 - r_{Ctrl})}{n_{Ctrl}} + \frac{d^2}{2(n_{Exp} + n_{Ctrl})}}
+\deqn{var(d_{f:t}) = \frac{2(1 - r_{Exp})}{n_{Exp}} + \frac{2(1 - r_{Ctrl})}{n_{Ctrl}} + \frac{d^2}{2(n_{Exp} + n_{Ctrl})}}
 
 where \eqn{r_{Exp}} and \eqn{r_{Ctrl}} are the correlations between time points within each group.
 }

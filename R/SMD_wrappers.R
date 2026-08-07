@@ -26,11 +26,20 @@
 #'   var(d_{ind}) = \frac{1}{n_A} + \frac{1}{n_{Ctrl}} + \frac{d^2}{2(n_A + n_{Ctrl})}
 #' }
 #' 
-#' @inheritParams lnRR_ind
+#' @param data Data frame containing the variables used.
+#' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.
+#' @param append Logical. Append the results to \code{data}. Default is TRUE
+#' @param Ctrl_mean Mean outcome from the Control treatment
+#' @param Ctrl_sd Standard deviation from the control treatment
+#' @param Ctrl_n Sample size from the control treatment
+#' @param A_mean Mean outcome from the experimental treatment
+#' @param A_sd Standard deviation from the experimental treatment
+#' @param A_n Sample size from the experimental treatment
 #' @param hedges_correction Boolean. If TRUE correct for small-sample bias. Default is TRUE.
-#'
-#' @inherit lnRR_ind return
-#'
+#' @return A data frame containing the effect sizes and their sampling variance.
+#'   By default, the columns are named `yi` (effect size) and `vi` (sampling variance). 
+#'   If `append = TRUE`, the results are appended to the input `data`; otherwise, only the computed effect size columns are returned.
+#
 #' @author Facundo Decunta - fdecunta@agro.uba.ar
 #'
 #' @references

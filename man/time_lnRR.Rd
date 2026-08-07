@@ -51,7 +51,22 @@ time_lnRR(
 
 \item{Exp_n}{Sample size of the experimental group}
 
-\item{Exp_cor}{Number or numeric vector. Correlation between the means of the experimental group at t0 and t1}
+\item{Exp_cor}{Number or numeric vector. Correlation between the means of the experimental group at t0 and t1
+
+\strong{Formulas}
+\deqn{
+  lnRR_{f \cdot t} = \ln\left(\frac{\bar{X}_{t1,Exp} / \bar{X}_{t1,Ctrl}}{\bar{X}_{t0,Exp} / \bar{X}_{t0,Ctrl}}\right)
+}
+
+\deqn{
+  var(\ln \mathrm{RR}_{f \cdot t}) =
+    \frac{sd_{t0,\mathrm{Exp}}^2}{n_{Exp} \bar{x}_{t0,\mathrm{Exp}}^2} +
+    \frac{sd_{t1,\mathrm{Exp}}^2}{n_{Exp} \bar{x}_{t1,\mathrm{Exp}}^2} -
+    2 r_{\mathrm{Exp},t0t1} \frac{sd_{t0,\mathrm{Exp}} sd_{t1,\mathrm{Exp}}}{n_{Exp} \bar{x}_{t0,\mathrm{Exp}} \bar{x}_{t1,\mathrm{Exp}}} +
+    \frac{sd_{t0,\mathrm{Ctrl}}^2}{n_{Ctrl} \bar{x}_{t0,\mathrm{Ctrl}}^2} +
+    \frac{sd_{t1,\mathrm{Ctrl}}^2}{n_{Ctrl} \bar{x}_{t1,\mathrm{Ctrl}}^2} -
+    2 r_{\mathrm{Ctrl},t0t1} \frac{sd_{t0,\mathrm{Ctrl}} sd_{t1,\mathrm{Ctrl}}}{n_{Ctrl} \bar{x}_{t0,\mathrm{Ctrl}} \bar{x}_{t1,\mathrm{Ctrl}}}
+}}
 }
 \value{
 A data frame containing the effect sizes and their sampling variance.
@@ -59,11 +74,7 @@ By default, the columns are named \code{yi} (effect size) and \code{vi} (samplin
 If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
-\deqn{lnRR = \ln\left(\frac{\bar{X}_{t1,Exp} / \bar{X}_{t1,Ctrl}}{\bar{X}_{t0,Exp} / \bar{X}_{t0,Ctrl}}\right)}
-}
-\details{
-\deqn{var(\ln RR) = \frac{(sd_{t0,Exp}^2 \bar{X}_{t1,Exp}^2 + sd_{t1,Exp}^2 \bar{X}_{t0,Exp}^2 - 2r_{Exp} \bar{X}_{t0,Exp} \bar{X}_{t1,Exp} sd_{t0,Exp} sd_{t1,Exp})}{n_{Exp} \bar{X}_{t0,Exp}^2 \bar{X}_{t1,Exp}^2} +}
-\deqn{\frac{(sd_{t0,Ctrl}^2 \bar{X}_{t1,Ctrl}^2 + sd_{t1,Ctrl}^2 \bar{X}_{t0,Ctrl}^2 - 2r_{Ctrl} \bar{X}_{t0,Ctrl} \bar{X}_{t1,Ctrl} sd_{t0,Ctrl} sd_{t1,Ctrl})}{n_{Ctrl} \bar{X}_{t0,Ctrl}^2 \bar{X}_{t1,Ctrl}^2}}
+Log Response Ratio: Interaction Between Treatment and Time
 }
 \examples{
 data <- data.frame(

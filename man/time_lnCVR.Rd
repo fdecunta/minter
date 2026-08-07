@@ -51,7 +51,15 @@ time_lnCVR(
 
 \item{Exp_n}{Sample size of the experimental group}
 
-\item{Exp_cor}{Number or numeric vector. Correlation between the means of the experimental group at t0 and t1}
+\item{Exp_cor}{Number or numeric vector. Correlation between the means of the experimental group at t0 and t1
+
+\strong{Formulas}
+
+\deqn{
+  lnCVR_{f:t} = \ln\left(\frac{CV_{t1,Exp} / CV_{t1,Ctrl}}{CV_{t0,Exp} / CV_{t0,Ctrl}}\right)
+}
+
+\deqn{var(lnCVR_{f:t}) = var(lnRR_{f:t}) + var(lnVR_{f:t})}}
 }
 \value{
 A data frame containing the effect sizes and their sampling variance.
@@ -59,10 +67,7 @@ By default, the columns are named \code{yi} (effect size) and \code{vi} (samplin
 If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
-\deqn{lnCVR = \ln\left(\frac{CV_{t1.Exp} / CV_{t1.Ctrl}}{CV_{t0.Exp} / CV_{t0.Ctrl}}\right)}
-}
-\details{
-\deqn{var(lnCVR) = var(lnRR) + var(lnVR)}
+Log Coefficient of Variation Ratio: Interaction Between Treatment and Time
 }
 \examples{
 # Pre-post design for coefficient of variation changes over time (Disturbance experiment)

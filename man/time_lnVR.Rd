@@ -39,7 +39,12 @@ time_lnVR(
 
 \item{Exp_n}{Sample size of the experimental group}
 
-\item{Exp_cor}{Number or numeric vector. Correlation between the means of the experimental group at t0 and t1}
+\item{Exp_cor}{Number or numeric vector. Correlation between the means of the experimental group at t0 and t1
+
+\strong{Formulas}
+\deqn{
+  lnVR = \ln\left(\frac{sd_{t1,Exp} / sd_{t1,Ctrl}}{sd_{t0,Exp} / sd_{t0,Ctrl}}\right)}
+\deqn{var(\ln VR) = \frac{(1 - r_{Exp,t0t1}^2)}{n_{Exp} - 1} + \frac{(1 - r_{Ctrl,t0t1}^2)}{n_{Ctrl} - 1}}}
 }
 \value{
 A data frame containing the effect sizes and their sampling variance.
@@ -47,10 +52,7 @@ By default, the columns are named \code{yi} (effect size) and \code{vi} (samplin
 If \code{append = TRUE}, the results are appended to the input \code{data}; otherwise, only the computed effect size columns are returned.
 }
 \description{
-\deqn{\lnVR = \ln\left(\frac{sd_{t1,Exp} / sd_{t1,Ctrl}}{sd_{t0,Exp} / sd_{t0,Ctrl}}\right)}
-}
-\details{
-\deqn{var(\ln VR) = \frac{(1 - r_{Exp}^2)}{n_{Exp} - 1} + \frac{(1 - r_{Ctrl}^2)}{n_{Ctrl} - 1}}
+Log of Variability Ratio: Interaction Between Treatment and Time
 }
 \examples{
 data <- data.frame(

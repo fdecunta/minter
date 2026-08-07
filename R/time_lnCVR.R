@@ -1,10 +1,28 @@
 #' Log Coefficient of Variation Ratio: Interaction Between Treatment and Time
 #'
-#' \deqn{lnCVR = \ln\left(\frac{CV_{t1.Exp} / CV_{t1.Ctrl}}{CV_{t0.Exp} / CV_{t0.Ctrl}}\right)}
-#' 
-#' \deqn{var(lnCVR) = var(lnRR) + var(lnVR)}
+#' @param data Data frame containing the variables used.
+#' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.
+#' @param append Logical. Append the results to \code{data}. Default is TRUE
+#' @param t0_Ctrl_mean Sample mean from the control group at time 0
+#' @param t0_Ctrl_sd Standard deviation from the control group at time 0
+#' @param t1_Ctrl_mean Sample mean from the control group at time 1
+#' @param t1_Ctrl_sd Standard deviation from the control group at time 1
+#' @param Ctrl_n Sample size of the control group
+#' @param Ctrl_cor Number or numeric vector. Correlation between the means of the control group at t0 and t1
+#' @param t0_Exp_mean Sample mean from the experimental group at time 0
+#' @param t0_Exp_sd Standard deviation from the experimental group at time 0
+#' @param t1_Exp_mean Sample mean from the experimental group at time 1
+#' @param t1_Exp_sd Standard deviation from the experimental group at time 1
+#' @param Exp_n Sample size of the experimental group
+#' @param Exp_cor Number or numeric vector. Correlation between the means of the experimental group at t0 and t1
 #'
-#' @inheritParams time_lnRR
+#' **Formulas**
+#'
+#' \deqn{
+#'   lnCVR_{f:t} = \ln\left(\frac{CV_{t1,Exp} / CV_{t1,Ctrl}}{CV_{t0,Exp} / CV_{t0,Ctrl}}\right)
+#' }
+#' 
+#' \deqn{var(lnCVR_{f:t}) = var(lnRR_{f:t}) + var(lnVR_{f:t})}
 #'
 #' @inherit lnRR_ind return
 #'

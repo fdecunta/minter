@@ -1,17 +1,38 @@
 #' Standardized Mean Difference: Interaction Between Treatment and Time
 #'
-#' \deqn{d = \frac{(\bar{X}_{t1,Exp} - \bar{X}_{t1,Ctrl}) - (\bar{X}_{t0,Exp} - \bar{X}_{t0,Ctrl})}{S_{pooled}} \cdot J}
+#' @param data Data frame containing the variables used.
+#' @param col_names Vector of two strings to name the output columns for the effect size and its sampling variance. Default is 'yi' and 'vi'.
+#' @param append Logical. Append the results to \code{data}. Default is TRUE
+#' @param t0_Ctrl_mean Sample mean from the control group at time 0
+#' @param t0_Ctrl_sd Standard deviation from the control group at time 0
+#' @param t1_Ctrl_mean Sample mean from the control group at time 1
+#' @param t1_Ctrl_sd Standard deviation from the control group at time 1
+#' @param Ctrl_n Sample size of the control group
+#' @param Ctrl_cor Number or numeric vector. Correlation between the means of the control group at t0 and t1
+#' @param t0_Exp_mean Sample mean from the experimental group at time 0
+#' @param t0_Exp_sd Standard deviation from the experimental group at time 0
+#' @param t1_Exp_mean Sample mean from the experimental group at time 1
+#' @param t1_Exp_sd Standard deviation from the experimental group at time 1
+#' @param Exp_n Sample size of the experimental group
+#' @param Exp_cor Number or numeric vector. Correlation between the means of the experimental group at t0 and t1
+#' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE.
+#'
+#' @details
+#' **Formulas**
+#' \deqn{
+#'  d_{f:t} = \frac{(\bar{X}_{t1,Exp} - \bar{X}_{t1,Ctrl}) - (\bar{X}_{t0,Exp} - \bar{X}_{t0,Ctrl})}{S_{pooled}} \cdot J
+#'  }
 #'
 #' Pooled standard deviation:
-#' \deqn{S_{pooled} = \sqrt{\frac{((n_{Exp} - 1)(sd_{t0,Exp}^2 + sd_{t1,Exp}^2) + (n_{Ctrl} - 1)(sd_{t0,Ctrl}^2 + sd_{t1,Ctrl}^2))}{2(n_{Exp} + n_{Ctrl} - 2)}}}
+#' \deqn{
+#'    S_{pooled} = \sqrt{\frac{(n_{Exp} - 1)(sd_{t0,Exp}^2 + sd_{t1,Exp}^2) + (n_{Ctrl} - 1)(sd_{t0,Ctrl}^2 + sd_{t1,Ctrl}^2)}{2(n_{Exp} + n_{Ctrl} - 2)}}
+#' }
 #'
 #' Sampling variance:
-#' \deqn{var(d) = \frac{2(1 - r_{Exp})}{n_{Exp}} + \frac{2(1 - r_{Ctrl})}{n_{Ctrl}} + \frac{d^2}{2(n_{Exp} + n_{Ctrl})}}
+#' \deqn{var(d_{f:t}) = \frac{2(1 - r_{Exp})}{n_{Exp}} + \frac{2(1 - r_{Ctrl})}{n_{Ctrl}} + \frac{d^2}{2(n_{Exp} + n_{Ctrl})}}
 #'
 #' where \eqn{r_{Exp}} and \eqn{r_{Ctrl}} are the correlations between time points within each group.
 #'
-#' @inheritParams time_lnRR
-#' @param hedges_correction Logical. Apply or not Hedges' correction for small-sample bias. Default is TRUE.
 #'
 #' @inherit lnRR_ind return
 #'
