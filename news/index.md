@@ -1,5 +1,10 @@
 # Changelog
 
+## minter 0.2.0
+
+- Removed dependency on `checkmate`.
+- Add formulas in documentation
+
 ## minter 0.1.1
 
 CRAN release: 2026-05-03
