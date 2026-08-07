@@ -10,6 +10,8 @@
 coverage](https://codecov.io/gh/fdecunta/minter/graph/badge.svg)](https://app.codecov.io/gh/fdecunta/minter)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/minter)](https://CRAN.R-project.org/package=minter)
+[![CRAN
+Downloads](https://cranlogs.r-pkg.org/badges/grand-total/minter?color=blue)](https://CRAN.R-project.org/package=minter)
 <!-- badges: end -->
 
 The **minter** package is a collection of functions for calculating

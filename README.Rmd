@@ -16,9 +16,9 @@ knitr::opts_chunk$set(
 # minter <img src="man/figures/minter_logo.png" align="right" width="120"/>
 
 <!-- badges: start -->
-
 [![R-CMD-check](https://github.com/fdecunta/minter/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fdecunta/minter/actions/workflows/R-CMD-check.yaml) [![Codecov test coverage](https://codecov.io/gh/fdecunta/minter/graph/badge.svg)](https://app.codecov.io/gh/fdecunta/minter)
 [![CRAN status](https://www.r-pkg.org/badges/version/minter)](https://CRAN.R-project.org/package=minter)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/minter?color=blue)](https://CRAN.R-project.org/package=minter)
 <!-- badges: end -->
 
 The **minter** package is a collection of functions for calculating effect sizes for meta-analysis of interactions.
