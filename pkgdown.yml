@@ -3,7 +3,7 @@ pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   articles/Macartney_2022: Macartney_2022.html
-last_built: 2026-08-13T16:10Z
+last_built: 2026-08-13T16:40Z
 urls:
   reference: https://fdecunta.github.io/minter/reference
   article: https://fdecunta.github.io/minter/articles
