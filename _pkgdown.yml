@@ -1,5 +1,7 @@
 url: https://fdecunta.github.io/minter/
 title: minter
+home:
+  title: "minter: effect sizes for meta-analysis of interactions"
 template:
   bootstrap: 5
   bootswatch: lumen
