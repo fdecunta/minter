@@ -53,9 +53,11 @@ From CRAN:
 install.packages("minter")
 ```
 
-## Example
+## Examples
 
-Suppose you need to estimate the effect size of the interaction between fertilization × drought on plant biomass:
+For a real example, see the article recreating the results from [Macartney et al. 2022](https://fdecunta.github.io/minter/articles/Macartney_2022.html)	
+
+For a quick example, suppose you need to estimate the effect size of the interaction between fertilization × drought on plant biomass:
 
 ```{r, eval=FALSE}
 library(minter)
