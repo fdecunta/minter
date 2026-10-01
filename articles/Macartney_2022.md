@@ -34,7 +34,7 @@ library(metafor)
 #> Loading required package: metadat
 #> Loading required package: numDeriv
 #> 
-#> Loading the 'metafor' package (version 5.0-1). For an
+#> Loading the 'metafor' package (version 5.2-1). For an
 #> introduction to the package please type: help(metafor)
 library(ggplot2)
 ```
